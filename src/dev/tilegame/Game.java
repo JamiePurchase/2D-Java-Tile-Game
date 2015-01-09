@@ -18,6 +18,9 @@ public class Game implements Runnable
 	private BufferStrategy bs;
 	private Graphics g;
 	
+	// Temp
+	int x = 1;
+	
 	// States
 	private State stateGame, stateMenu, stateTitle;
 
@@ -33,7 +36,7 @@ public class Game implements Runnable
 		display = new Display(title, width, height);
 		Assets.init();
 		initStates();
-		State.setState(stateMenu);
+		State.setState(stateTitle);
 	}
 	
 	private void initStates()

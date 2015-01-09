@@ -1,9 +1,11 @@
 package dev.tilegame.gfx;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 
 public class Assets
 {
 	// Interface
+	public static BufferedImage uiCursor1, uiCursor2, uiCursor3;
 	public static BufferedImage uiLogoAP;
 	
 	// Sprites
@@ -15,6 +17,9 @@ public class Assets
 	// Textures
 	public static BufferedImage txtGrass, txtTree;
 	
+	// Fonts
+	public static Font fontStandard, fontOption, fontHint;
+	
 	public static void init()
 	{
 		initInterface();
@@ -24,8 +29,21 @@ public class Assets
 	
 	public static void initInterface()
 	{
+		// Cursor Sheet
+		Spritesheet sheetCursor = new Spritesheet(ImageLoader.loadImage("/interface/cursor.png"));
+		
+		// Cursor Images
+		uiCursor1 = sheetCursor.crop(0, 0, 32, 32);
+		uiCursor2 = sheetCursor.crop(32, 0, 32, 32);
+		uiCursor3 = sheetCursor.crop(64, 0, 32, 32);
+		
 		// Logo AP
 		uiLogoAP = ImageLoader.loadImage("/interface/logoAP.png");
+		
+		// Fonts
+		fontStandard = new Font("Times New Roman", Font.PLAIN, 26);
+		fontOption = new Font("Times New Roman", Font.PLAIN, 32);
+		fontHint = new Font("Times New Roman", Font.ITALIC, 22);
 	}
 	
 	public static void initSprites()

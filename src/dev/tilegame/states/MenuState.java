@@ -1,6 +1,6 @@
 package dev.tilegame.states;
 import dev.tilegame.gfx.Assets;
-
+import dev.tilegame.gfx.Drawing;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -52,17 +52,8 @@ public class MenuState extends State
 	
 	public void renderInformation(Graphics g)
 	{
-		// Shadow
-		g.setColor(Color.gray);
-		g.fillRect(20, 475, 770, 110);
-		
-		// Background
-		g.setColor(Color.black);
-		g.fillRect(15, 470, 770, 110);
-		
-		// Border
-		g.setColor(Color.white);
-		g.drawRect(15, 470, 770, 110);
+		// Frame
+		Drawing.drawFrame(g, 15, 470, 770, 110);
 		
 		// Text
 		g.setFont(Assets.fontStandard);
@@ -82,21 +73,21 @@ public class MenuState extends State
 	
 	public void renderOption(Graphics g, int id, String option, int x, int y)
 	{
-		// Shadow
-		g.setColor(Color.gray);
-		g.fillRect(x+5, y+5, 200, 50);
-		
-		// Background
-		g.setColor(Color.black);
-		if(id==menuPos){g.setColor(Color.gray);}
-		g.fillRect(x, y, 200, 50);
-		
-		// Border
-		g.setColor(Color.white);
-		g.drawRect(x, y, 200, 50);
+		// Frame
+		Drawing.drawFrame(g, x, y, 200, 50);
+	
+		// Highlighted
+		if(id==menuPos)
+		{
+			g.setColor(Color.gray);
+			g.fillRect(x, y, 200, 50);
+			g.setColor(Color.white);
+			g.drawRect(x, y, 200, 50);
+		}
 		
 		// Text
 		g.setFont(Assets.fontOption);
+		g.setColor(Color.white);
 		g.drawString(option, x+25, y+35);
 	}
 }
