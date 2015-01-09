@@ -1,6 +1,6 @@
 # 2D-Java-Tile-Game
-My first journey into the world of Java.
+My first journey into the world of Java!
 
-Weekend project to create a basic 2D tile-based game in Java.
+This is a weekend project to create a basic 2D tile-based game. Everything has been written from scratch (from creating a basic JFrame, to making a canvas, rendering graphics, etc...). Look inside the src directory for my scripts.
 
-Look inside the src directory for the scripts.
+Inspiration from CodeNMore on youtube - https://www.youtube.com/channel/UCaM7SQvF5q9sz4NgL16PNRA
