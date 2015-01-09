@@ -1,7 +1,5 @@
 package dev.tilegame.states;
 import dev.tilegame.gfx.Assets;
-
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class GameState extends State

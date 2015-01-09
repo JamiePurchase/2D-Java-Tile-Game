@@ -1,5 +1,4 @@
 package dev.tilegame;
-import dev.tilegame.display.Display;
 
 public class Launcher
 {

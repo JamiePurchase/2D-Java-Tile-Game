@@ -1,16 +1,12 @@
 package dev.tilegame;
 import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
-import dev.tilegame.gfx.Spritesheet;
-import dev.tilegame.gfx.ImageLoader;
 import dev.tilegame.states.State;
 import dev.tilegame.states.GameState;
 import dev.tilegame.states.MenuState;
 import dev.tilegame.states.TitleState;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 public class Game implements Runnable
 {
@@ -23,9 +19,7 @@ public class Game implements Runnable
 	private Graphics g;
 	
 	// States
-	private State stateGame;
-	private State stateMenu;
-	private State stateTitle;
+	private State stateGame, stateMenu, stateTitle;
 
 	public Game(String title, int width, int height)
 	{
@@ -38,10 +32,15 @@ public class Game implements Runnable
 	{
 		display = new Display(title, width, height);
 		Assets.init();
+		initStates();
+		State.setState(stateMenu);
+	}
+	
+	private void initStates()
+	{
 		stateGame = new GameState();
 		stateMenu = new MenuState();
 		stateTitle = new TitleState();
-		State.setState(stateTitle);
 	}
 	
 	private void tick()
