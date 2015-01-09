@@ -1,7 +1,16 @@
 package dev.tilegame;
 import dev.tilegame.display.Display;
+import dev.tilegame.gfx.Assets;
+import dev.tilegame.gfx.Spritesheet;
+import dev.tilegame.gfx.ImageLoader;
+import dev.tilegame.states.State;
+import dev.tilegame.states.GameState;
+import dev.tilegame.states.MenuState;
+import dev.tilegame.states.TitleState;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Game implements Runnable
 {
@@ -12,6 +21,11 @@ public class Game implements Runnable
 	private boolean running = false;
 	private BufferStrategy bs;
 	private Graphics g;
+	
+	// States
+	private State stateGame;
+	private State stateMenu;
+	private State stateTitle;
 
 	public Game(String title, int width, int height)
 	{
@@ -23,11 +37,19 @@ public class Game implements Runnable
 	private void init()
 	{
 		display = new Display(title, width, height);
+		Assets.init();
+		stateGame = new GameState();
+		stateMenu = new MenuState();
+		stateTitle = new TitleState();
+		State.setState(stateTitle);
 	}
 	
 	private void tick()
 	{
-		
+		if(State.getState() != null)
+		{
+			State.getState().tick();
+		}
 	}
 	
 	private void render()
@@ -42,10 +64,14 @@ public class Game implements Runnable
 		
 		// Graphics start
 		g = bs.getDrawGraphics();
+		g.clearRect(0, 0, width, height);
 		
 		// Graphics draw
-		g.fillRect(0, 0, width, height);
-		
+		if(State.getState() != null)
+		{
+			State.getState().render(g);
+		}
+
 		// Graphics done
 		bs.show();
 		g.dispose();
@@ -53,14 +79,38 @@ public class Game implements Runnable
 	
 	public void run()
 	{
+		// Render speed
+		int fps = 60;
+		double timePerTick = 1000000000 / fps;
+		double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
+		
 		// Create window
 		init();
 		
 		// Main game loop
 		while(running)
 		{
-			tick();
-			render();
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			timer += now - lastTime;
+			lastTime = now;
+			if(delta >= 1)
+			{
+				tick();
+				render();
+				ticks++;
+				delta--;
+			}
+			if(timer >= 1000000000)
+			{
+				System.out.println("Ticks and Frames: " + ticks);
+				ticks = 0;
+				timer = 0;
+			}
 		}
 		
 		// End game
