@@ -8,6 +8,7 @@ import dev.tilegame.states.MenuState;
 import dev.tilegame.states.TitleState;
 
 import java.awt.Graphics;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JPanel;
@@ -22,6 +23,9 @@ public class Game extends JPanel implements Runnable
 	public static String stateChange = "none";
 	private BufferStrategy bs;
 	private Graphics g;
+	
+	// Temp
+	public static boolean menuDown = false;
 	
 	// States
 	private State stateGame, stateIntro, stateMenu, stateTitle;
@@ -40,7 +44,6 @@ public class Game extends JPanel implements Runnable
 		initStates();
 		//State.setState(stateTitle);
 		State.setState(stateIntro);
-		this.addKeyListener(Assets.entPlayer);
 	}
 
 	private void initStates()

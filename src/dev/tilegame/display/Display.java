@@ -1,8 +1,11 @@
 package dev.tilegame.display;
+import dev.tilegame.Keyboard;
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Display
 {
@@ -28,6 +31,12 @@ public class Display
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		
+		// Create a JPanel
+		JPanel panel = new JPanel();
+        panel.addKeyListener(new Keyboard());
+        frame.add(panel);
+        panel.requestFocusInWindow();
 		
 		// Create the canvas
 		canvas = new Canvas();

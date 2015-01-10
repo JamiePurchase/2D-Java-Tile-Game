@@ -1,6 +1,8 @@
 package dev.tilegame.states;
+import dev.tilegame.Keyboard;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Drawing;
+
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -17,7 +19,16 @@ public class TitleState extends State
 	
 	public void tick()
 	{
-		
+		if(Keyboard.getKeyPressed()=="Up" && menuPos>1)
+		{
+			menuPos = menuPos - 1;
+			Keyboard.setKeyDone();
+		}
+		if(Keyboard.getKeyPressed()=="Down" && menuPos<menuMax)
+		{
+			menuPos = menuPos + 1;
+			Keyboard.setKeyDone();
+		}
 	}
 	
 	public void render(Graphics g)
