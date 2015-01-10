@@ -34,9 +34,7 @@ public class Assets
 	
 	// Textures
 	public static BufferedImage txtGrass, txtTree;
-	
-	// Boards
-	public static Board brdTest;
+	public static BufferedImage txtFence1L, txtFence1M, txtFence1MS, txtFence1R;
 	
 	// Fonts
 	public static Font fontStandard, fontOption, fontHint;
@@ -46,13 +44,7 @@ public class Assets
 		initInterface();
 		initSprites();
 		initTextures();
-		initBoards();
 		initEntities();
-	}
-	
-	public static void initBoards()
-	{
-		brdTest = new Board("Test");
 	}
 	
 	public static void initEntities()
@@ -135,17 +127,17 @@ public class Assets
 		Spritesheet sheetAnna = new Spritesheet(ImageLoader.loadImage("/sprites/npcAnna.png"));
 		
 		// Player Images
-		npcAnnaN = sheetPlayer.crop(32, 96, 32, 32);
-		npcAnnaE = sheetPlayer.crop(32, 64, 32, 32);
-		npcAnnaS = sheetPlayer.crop(32, 0, 32, 32);
-		npcAnnaW = sheetPlayer.crop(32, 32, 32, 32);
+		npcAnnaN = sheetAnna.crop(32, 96, 32, 32);
+		npcAnnaE = sheetAnna.crop(32, 64, 32, 32);
+		npcAnnaS = sheetAnna.crop(32, 0, 32, 32);
+		npcAnnaW = sheetAnna.crop(32, 32, 32, 32);
 		
 		// Garnet Sheet
 		Spritesheet sheetGarnet = new Spritesheet(ImageLoader.loadImage("/sprites/garnet.png"));
 		
-		// Player Images
-		itemGarnet1 = sheetPlayer.crop(0, 0, 32, 32);
-		itemGarnet2 = sheetPlayer.crop(32, 0, 32, 32);
+		// Garnet Images
+		itemGarnet1 = sheetGarnet.crop(0, 0, 32, 32);
+		itemGarnet2 = sheetGarnet.crop(32, 0, 32, 32);
 	}
 	
 	public static void initTextures()
@@ -156,6 +148,10 @@ public class Assets
 		// World Images
 		txtGrass = sheetWorld.crop(0, 0, 32, 32);
 		txtTree = sheetWorld.crop(32, 0, 32, 32);
+		txtFence1L = sheetWorld.crop(64, 0, 32, 32);
+		txtFence1M = sheetWorld.crop(96, 0, 32, 32);
+		txtFence1MS = sheetWorld.crop(128, 0, 32, 32);
+		txtFence1R = sheetWorld.crop(160, 0, 32, 32);
 	}
 
 }

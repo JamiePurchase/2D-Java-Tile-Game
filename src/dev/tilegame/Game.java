@@ -1,11 +1,13 @@
 package dev.tilegame;
 import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
+import dev.tilegame.gfx.Board;
 import dev.tilegame.states.State;
 import dev.tilegame.states.GameState;
 import dev.tilegame.states.IntroState;
 import dev.tilegame.states.MenuState;
 import dev.tilegame.states.TitleState;
+import dev.tilegame.world.Board01;
 
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
@@ -24,6 +26,7 @@ public class Game extends JPanel implements Runnable
 	private BufferStrategy bs;
 	private Graphics g;
 	public static boolean chat = false;
+	public static Board world;
 	
 	// States
 	private State stateGame, stateIntro, stateMenu, stateTitle;
@@ -40,7 +43,7 @@ public class Game extends JPanel implements Runnable
 		display = new Display(title, width, height);
 		Assets.init();
 		initStates();
-		//State.setState(stateTitle);
+		initWorld();
 		State.setState(stateIntro);
 	}
 
@@ -50,6 +53,15 @@ public class Game extends JPanel implements Runnable
 		stateIntro = new IntroState();
 		stateMenu = new MenuState();
 		stateTitle = new TitleState();
+	}
+	
+	private void initWorld()
+	{
+		world = new Board();
+		Board01 boardLoader = new Board01();
+		
+		// Debug
+		System.out.println("TileImage[1][1] = " + world.getTileImage(1, 1));
 	}
 	
 	private void tick()

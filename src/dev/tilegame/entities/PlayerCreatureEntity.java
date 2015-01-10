@@ -106,13 +106,27 @@ public class PlayerCreatureEntity extends CreatureEntity
 		{
 			State.setStateChange("Menu");
 		}
+		if(Keyboard.getKeyPressed()=="Space")
+		{
+			int checkPosX = getPositionX();
+			int checkPosY = getPositionY();
+			if(getDirection()=="N"){checkPosY -= 1;}
+			if(getDirection()=="E"){checkPosX += 1;}
+			if(getDirection()=="S"){checkPosY += 1;}
+			if(getDirection()=="W"){checkPosX -= 1;}
+			if(Game.world.getTileEntity(checkPosX, checkPosY)>0)
+			{
+				Game.chat = true;
+				System.out.println("Speak to Anna");
+			}
+		}
 		if(Keyboard.getKeyPressed()=="Up")
 		{
 			if(getPositionY()>1)
 			{
 				int newPosX = getPositionX();
 				int newPosY = getPositionY() - 1;
-				if(Assets.brdTest.getTileType(newPosX, newPosY)==0)
+				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("N");
 				}
@@ -122,11 +136,11 @@ public class PlayerCreatureEntity extends CreatureEntity
 		}
 		if(Keyboard.getKeyPressed()=="Down")
 		{
-			if(getPositionY()<Assets.brdTest.getGridHeight())
+			if(getPositionY()<Game.world.getGridHeight())
 			{
 				int newPosX = getPositionX();
 				int newPosY = getPositionY() + 1;
-				if(Assets.brdTest.getTileType(newPosX, newPosY)==0)
+				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("S");
 				}
@@ -140,7 +154,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			{
 				int newPosX = getPositionX() - 1;
 				int newPosY = getPositionY();
-				if(Assets.brdTest.getTileType(newPosX, newPosY)==0)
+				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("W");
 				}
@@ -150,11 +164,11 @@ public class PlayerCreatureEntity extends CreatureEntity
 		}
 		if(Keyboard.getKeyPressed()=="Right")
 		{
-			if(getPositionX()<Assets.brdTest.getGridWidth())
+			if(getPositionX()<Game.world.getGridWidth())
 			{
 				int newPosX = getPositionX() + 1;
 				int newPosY = getPositionY();
-				if(Assets.brdTest.getTileType(newPosX, newPosY)==0)
+				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("E");
 				}

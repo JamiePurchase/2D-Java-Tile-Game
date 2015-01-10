@@ -4,39 +4,14 @@ import java.awt.image.BufferedImage;
 
 public class Board
 {
-	private static String[ ][ ] tileImage = new String[25][17];
-	private static int[ ][ ] tileType = new int[25][17];
+	private static String[ ][ ] tileImage = new String[26][18];
+	private static int[ ][ ] tileType = new int[26][18];
 	private static int gridWidth;
 	private static int gridHeight;
 	
-	public Board(String template)
+	public Board()
 	{
-		// Temp
-		if(template=="Test")
-		{
-			gridWidth = 10;
-			gridHeight = 10;
-			tileInit();
-			setTile(1, 1, "Tree", 1);
-			setTile(2, 1, "Tree", 1);
-			setTile(3, 1, "Tree", 1);
-			setTile(4, 1, "Tree", 1);
-			setTile(5, 1, "Tree", 1);
-			setTile(6, 1, "Tree", 1);
-			setTile(7, 1, "Tree", 1);
-			setTile(8, 1, "Tree", 1);
-			setTile(9, 1, "Tree", 1);
-			setTile(10, 1, "Tree", 1);
-			setTile(2, 1, "Tree", 1);
-			setTile(3, 1, "Tree", 1);
-			setTile(4, 1, "Tree", 1);
-			setTile(5, 1, "Tree", 1);
-			setTile(6, 1, "Tree", 1);
-			setTile(7, 1, "Tree", 1);
-			setTile(8, 1, "Tree", 1);
-			setTile(9, 1, "Tree", 1);
-			setTile(10, 1, "Tree", 1);
-		}
+		tileInit();
 	}
 	
 	public static int getGridHeight()
@@ -49,6 +24,16 @@ public class Board
 		return gridWidth;
 	}
 	
+	public static int getTileEntity(int x, int y)
+	{
+		// Temp
+		if(x==Assets.entAnna.getPositionX() && y==Assets.entAnna.getPositionY())
+		{
+			return 1;
+		}
+		return 0;
+	}
+	
 	public static String getTileImage(int x, int y)
 	{
 		return tileImage[x][y];
@@ -58,12 +43,26 @@ public class Board
 	{
 		if(tileImage[x][y]=="Grass"){return Assets.txtGrass;}
 		if(tileImage[x][y]=="Tree"){return Assets.txtTree;}
+		if(tileImage[x][y]=="Fence1L"){return Assets.txtFence1L;}
+		if(tileImage[x][y]=="Fence1M"){return Assets.txtFence1M;}
+		if(tileImage[x][y]=="Fence1MS"){return Assets.txtFence1MS;}
+		if(tileImage[x][y]=="Fence1R"){return Assets.txtFence1R;}
 		return Assets.txtGrass;
 	}
 	
 	public static int getTileType(int x, int y)
 	{
 		return tileType[x][y];
+	}
+	
+	public static void setGridHeight(int height)
+	{
+		gridHeight = height;
+	}
+	
+	public static void setGridWidth(int width)
+	{
+		gridWidth = width;
 	}
 	
 	public static void setTile(int x, int y, String image, int type)
