@@ -27,60 +27,63 @@ public class TitleState extends State
 				// New Game
 				State.setStateChange("Game");
 			}
-			//if(menuPos==2){State.setStateChange("");}
-			if(menuPos==3)
+			//if(menuPos==2){State.setStateChange("Tutorial");}
+			//if(menuPos==3){State.setStateChange("TitleOptions");}
+			//if(menuPos==4){State.setStateChange("TitleAbout");}
+		}
+		if(Keyboard.getKeyPressed()=="Escape")
+		{
+			// Quit
+			System.exit(0);
+		}
+		if(Keyboard.getKeyPressed()=="Up" && menuPos>2)
+		{
+			menuPos = menuPos - 2;
+			Keyboard.setKeyDone();
+		}
+		if(Keyboard.getKeyPressed()=="Down" && menuPos<3)
+		{
+			menuPos = menuPos + 2;
+			Keyboard.setKeyDone();
+		}
+		if(Keyboard.getKeyPressed()=="Left")
+		{
+			if(menuPos==2 || menuPos==4)
 			{
-				// Quit Game
-				System.exit(0);
+				menuPos = menuPos - 1;
+				Keyboard.setKeyDone();
 			}
 		}
-		if(Keyboard.getKeyPressed()=="Up" && menuPos>1)
+		if(Keyboard.getKeyPressed()=="Right")
 		{
-			menuPos = menuPos - 1;
-			Keyboard.setKeyDone();
-		}
-		if(Keyboard.getKeyPressed()=="Down" && menuPos<menuMax)
-		{
-			menuPos = menuPos + 1;
-			Keyboard.setKeyDone();
+			if(menuPos==1 || menuPos==3)
+			{
+				menuPos = menuPos + 1;
+				Keyboard.setKeyDone();
+			}
 		}
 	}
 	
 	public void render(Graphics g)
 	{
-		cursorFrame += 1;
-		if(cursorFrame>40){cursorFrame = 1;}
 		renderBackground(g);
 		renderOptions(g);
 	}
 	
 	public void renderBackground(Graphics g)
 	{
-		g.setColor(Color.black);
-		g.fillRect(0, 0, 800, 600);
-		g.drawImage(Assets.uiLogoAP,  150, 20, null);
-		g.setFont(Assets.fontHint);
-		g.setColor(Color.white);
-		g.drawString("Created by Jamie Purchase", 30, 580);
+		g.drawImage(Assets.uiTitleBkg,  0, 0, null);
 	}
 	
 	public void renderOptions(Graphics g)
 	{
-		g.setFont(Assets.fontOption);
-		g.setColor(Color.white);
-		g.drawString("New Game", 300, 300);
-		g.drawString("Options", 300, 350);
-		g.drawString("End Game", 300, 400);
-		renderOptionsCursor(g);
-	}
-	
-	public void renderOptionsCursor(Graphics g)
-	{
-		int x = 250;
-		int y = 50 * menuPos + 225;
-		if(cursorFrame>0 && cursorFrame<=10){Drawing.drawCursor(g, x, y, 1);}
-		if(cursorFrame>10 && cursorFrame<=20){Drawing.drawCursor(g, x, y, 2);}
-		if(cursorFrame>20 && cursorFrame<=30){Drawing.drawCursor(g, x, y, 3);}
-		if(cursorFrame>30 && cursorFrame<=40){Drawing.drawCursor(g, x, y, 4);}
+		if(menuPos==1){g.drawImage(Assets.uiTitleOpt1a,  200, 275, null);}
+		else{g.drawImage(Assets.uiTitleOpt1,  200, 275, null);}
+		if(menuPos==2){g.drawImage(Assets.uiTitleOpt2a,  400, 275, null);}
+		else{g.drawImage(Assets.uiTitleOpt2,  400, 275, null);}
+		if(menuPos==3){g.drawImage(Assets.uiTitleOpt3a,  200, 350, null);}
+		else{g.drawImage(Assets.uiTitleOpt3,  200, 350, null);}
+		if(menuPos==4){g.drawImage(Assets.uiTitleOpt4a,  400, 350, null);}
+		else{g.drawImage(Assets.uiTitleOpt4,  400, 350, null);}
 	}
 }

@@ -1,10 +1,11 @@
 package dev.tilegame.gfx;
+
 import java.awt.image.BufferedImage;
 
 public class Board
 {
-	//private static BufferedImage[][] tileImage;
-	//private static int[][] tileType;
+	private static String[ ][ ] tileImage = new String[25][17];
+	private static int[ ][ ] tileType = new int[25][17];
 	private static int gridWidth;
 	private static int gridHeight;
 	
@@ -13,16 +14,28 @@ public class Board
 		// Temp
 		if(template=="Test")
 		{
-			gridWidth = 20;
-			gridHeight = 16;
-			for(int x=1;x<=20;x+=1)
-			{
-				for(int y=1;y<=16;y+=1)
-				{
-					//tileImage[x][y] = Assets.txtGrass;
-					//tileType[x][y] = 0;
-				}
-			}
+			gridWidth = 10;
+			gridHeight = 10;
+			tileInit();
+			setTile(1, 1, "Tree", 1);
+			setTile(2, 1, "Tree", 1);
+			setTile(3, 1, "Tree", 1);
+			setTile(4, 1, "Tree", 1);
+			setTile(5, 1, "Tree", 1);
+			setTile(6, 1, "Tree", 1);
+			setTile(7, 1, "Tree", 1);
+			setTile(8, 1, "Tree", 1);
+			setTile(9, 1, "Tree", 1);
+			setTile(10, 1, "Tree", 1);
+			setTile(2, 1, "Tree", 1);
+			setTile(3, 1, "Tree", 1);
+			setTile(4, 1, "Tree", 1);
+			setTile(5, 1, "Tree", 1);
+			setTile(6, 1, "Tree", 1);
+			setTile(7, 1, "Tree", 1);
+			setTile(8, 1, "Tree", 1);
+			setTile(9, 1, "Tree", 1);
+			setTile(10, 1, "Tree", 1);
 		}
 	}
 	
@@ -36,13 +49,38 @@ public class Board
 		return gridWidth;
 	}
 	
-	/*public static BufferedImage getTileImage(int x, int y)
+	public static String getTileImage(int x, int y)
 	{
 		return tileImage[x][y];
-	}*/
+	}
 	
-	/*public static int getTileType(int x, int y)
+	public static BufferedImage getTileImageFile(int x, int y)
+	{
+		if(tileImage[x][y]=="Grass"){return Assets.txtGrass;}
+		if(tileImage[x][y]=="Tree"){return Assets.txtTree;}
+		return Assets.txtGrass;
+	}
+	
+	public static int getTileType(int x, int y)
 	{
 		return tileType[x][y];
-	}*/
+	}
+	
+	public static void setTile(int x, int y, String image, int type)
+	{
+		tileImage[x][y] = image;
+		tileType[x][y] = type;
+	}
+	
+	public static void tileInit()
+	{
+		for(int x=1;x<=gridWidth;x+=1)
+		{
+			for(int y=1;y<=gridHeight;y+=1)
+			{
+				tileImage[x][y] = "Grass";
+				tileType[x][y] = 0;
+			}
+		}
+	}
 }

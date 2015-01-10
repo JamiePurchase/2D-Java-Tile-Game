@@ -3,6 +3,7 @@ import dev.tilegame.gfx.Assets;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class IntroState extends State
 {
@@ -16,7 +17,7 @@ public class IntroState extends State
 	public void tick()
 	{
 		introFrame += 1;
-		if(introFrame>400)
+		if(introFrame>800)
 		{
 			State.setStateChange("Title");
 		}
@@ -25,13 +26,22 @@ public class IntroState extends State
 	public void render(Graphics g)
 	{
 		g.setColor(Color.black);
-		g.fillRect(0, 0, 800, 600);
+		BufferedImage drawBkg = Assets.uiIntro0;
+		g.drawImage(drawBkg, 0, 0, null);
 		if(introFrame>=100 && introFrame <= 300)
 		{
-			g.setFont(Assets.fontStandard);
-			g.setColor(Color.white);
-			g.drawString("Jamie Purchase", 350, 300);
-			g.drawString("Presents", 380, 350);
+			BufferedImage drawImage = Assets.uiIntro1;
+			g.drawImage(drawImage, 0, 0, null);
+		}
+		if(introFrame>=350 && introFrame <= 500)
+		{
+			BufferedImage drawImage = Assets.uiIntro2;
+			g.drawImage(drawImage, 0, 0, null);
+		}
+		if(introFrame>=550 && introFrame <= 750)
+		{
+			BufferedImage drawImage = Assets.uiIntro3;
+			g.drawImage(drawImage, 0, 0, null);
 		}
 	}
 }

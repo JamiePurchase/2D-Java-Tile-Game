@@ -23,6 +23,7 @@ public class Game extends JPanel implements Runnable
 	public static String stateChange = "none";
 	private BufferStrategy bs;
 	private Graphics g;
+	public static boolean chat = false;
 	
 	// States
 	private State stateGame, stateIntro, stateMenu, stateTitle;
@@ -58,16 +59,19 @@ public class Game extends JPanel implements Runnable
 		{
 			State.setState(stateGame);
 			State.setStateChange("");
+			Keyboard.setKeyDone();
 		}
 		if(State.getStateChange() == "Menu")
 		{
 			State.setState(stateMenu);
 			State.setStateChange("");
+			Keyboard.setKeyDone();
 		}
 		if(State.getStateChange() == "Title")
 		{
 			State.setState(stateTitle);
 			State.setStateChange("");
+			Keyboard.setKeyDone();
 		}
 		
 		// Tick state

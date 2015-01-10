@@ -4,7 +4,8 @@ public abstract class CreatureEntity extends Entity
 {
 	private static String action;
 	private static String direction;
-	private static int walkFrame; 
+	private static int walkFrame;
+	private static int walkFrameTick;
 	private static int statHealth;
 	
 	public CreatureEntity()
@@ -12,6 +13,7 @@ public abstract class CreatureEntity extends Entity
 		action = "Idle";
 		direction = "S";
 		walkFrame = 0;
+		walkFrameTick = 0;
 	}
 	
 	public static String getAction()
@@ -34,6 +36,11 @@ public abstract class CreatureEntity extends Entity
 		return walkFrame;
 	}
 	
+	public static int getWalkFrameTick()
+	{
+		return walkFrameTick;
+	}
+	
 	public static void setAction(String act)
 	{
 		action = act;
@@ -52,5 +59,22 @@ public abstract class CreatureEntity extends Entity
 	public static void setWalkFrame(int value)
 	{
 		walkFrame = value;
+	}
+	
+	public static void setWalkFrameTick()
+	{
+		walkFrameTick = walkFrameTick + 1;
+		if(walkFrameTick>10)
+		{
+			walkFrame = walkFrame + 1;
+			walkFrameTick = 0;
+		}
+	}
+	
+	public static void walk(String direction)
+	{
+		setAction("Walk");
+		setDirection(direction);
+		setWalkFrame(1);
 	}
 }

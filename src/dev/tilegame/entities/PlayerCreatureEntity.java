@@ -1,6 +1,8 @@
 package dev.tilegame.entities;
+import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
 import dev.tilegame.gfx.Assets;
+import dev.tilegame.states.State;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -60,44 +62,104 @@ public class PlayerCreatureEntity extends CreatureEntity
 	{
 		BufferedImage drawImage = getImage();
 		int drawX = getPositionX() * 32 - 32;
-		int drawY = getPositionY() * 32 - 32;
+		int drawY = getPositionY() * 32 + 24;
+		if(getAction()=="Walk")
+		{
+			int offset = getWalkFrame() * 8;
+			if(getDirection()=="N"){drawY -= offset;}
+			if(getDirection()=="E"){drawX += offset;}
+			if(getDirection()=="S"){drawY += offset;}
+			if(getDirection()=="W"){drawX -= offset;}
+		}
 		g.drawImage(drawImage, drawX, drawY, null);
 	}
 	
 	public void tick()
 	{
-		tickKeyEvents();
+		if(getAction()=="Idle"){tickKeyEvents();}
 		tickMovement();
 	}
 	
 	public void tickKeyEvents()
 	{
+		if(Game.chat==true)
+		{
+			tickKeyEventsChat();
+		}
+		else
+		{
+			tickKeyEventsStandard();
+		}
+	}
+	
+	public void tickKeyEventsChat()
+	{
+		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
+		{
+			Game.chat = false;
+		}
+	}
+		
+	public void tickKeyEventsStandard()
+	{
+		if(Keyboard.getKeyPressed()=="Enter")
+		{
+			State.setStateChange("Menu");
+		}
 		if(Keyboard.getKeyPressed()=="Up")
 		{
-			setAction("Walk");
+			if(getPositionY()>1)
+			{
+				int newPosX = getPositionX();
+				int newPosY = getPositionY() - 1;
+				if(Assets.brdTest.getTileType(newPosX, newPosY)==0)
+				{
+					walk("N");
+				}
+			}
 			setDirection("N");
-			setWalkFrame(1);
 			Keyboard.setKeyDone();
 		}
 		if(Keyboard.getKeyPressed()=="Down")
 		{
-			setAction("Walk");
+			if(getPositionY()<Assets.brdTest.getGridHeight())
+			{
+				int newPosX = getPositionX();
+				int newPosY = getPositionY() + 1;
+				if(Assets.brdTest.getTileType(newPosX, newPosY)==0)
+				{
+					walk("S");
+				}
+			}
 			setDirection("S");
-			setWalkFrame(1);
 			Keyboard.setKeyDone();
 		}
 		if(Keyboard.getKeyPressed()=="Left")
 		{
-			setAction("Walk");
+			if(getPositionX()>1)
+			{
+				int newPosX = getPositionX() - 1;
+				int newPosY = getPositionY();
+				if(Assets.brdTest.getTileType(newPosX, newPosY)==0)
+				{
+					walk("W");
+				}
+			}
 			setDirection("W");
-			setWalkFrame(1);
 			Keyboard.setKeyDone();
 		}
 		if(Keyboard.getKeyPressed()=="Right")
 		{
-			setAction("Walk");
+			if(getPositionX()<Assets.brdTest.getGridWidth())
+			{
+				int newPosX = getPositionX() + 1;
+				int newPosY = getPositionY();
+				if(Assets.brdTest.getTileType(newPosX, newPosY)==0)
+				{
+					walk("E");
+				}
+			}
 			setDirection("E");
-			setWalkFrame(1);
 			Keyboard.setKeyDone();
 		}
 	}
@@ -106,8 +168,8 @@ public class PlayerCreatureEntity extends CreatureEntity
 	{
 		if(getAction()=="Walk")
 		{
-			int walkFrameNew = getWalkFrame() + 1;
-			if(walkFrameNew>4)
+			setWalkFrameTick();
+			if(getWalkFrame()>4)
 			{
 				int walkPosX = getPositionX();
 				int walkPosY = getPositionY();
@@ -119,10 +181,6 @@ public class PlayerCreatureEntity extends CreatureEntity
 				setPositionY(walkPosY);
 				setAction("Idle");
 				setWalkFrame(0);
-			}
-			else
-			{
-				setWalkFrame(walkFrameNew);
 			}
 		}
 	}
