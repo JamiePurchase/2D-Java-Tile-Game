@@ -1,15 +1,12 @@
 package dev.tilegame.entities;
+import dev.tilegame.Keyboard;
 import dev.tilegame.gfx.Assets;
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-public class PlayerCreatureEntity extends CreatureEntity implements KeyListener
+public class PlayerCreatureEntity extends CreatureEntity
 {
-	private static boolean moveN = false, moveE = false, moveS = false, moveW = false;
-	private int moveSpeed = 3;
 	
 	public PlayerCreatureEntity()
 	{
@@ -18,7 +15,6 @@ public class PlayerCreatureEntity extends CreatureEntity implements KeyListener
 	
 	public static BufferedImage getImage()
 	{
-		if(moveN){return Assets.charPlayerN1;}
 		if(getAction()=="Idle")
 		{
 			if(getDirection()=="N"){return Assets.charPlayerN1;}
@@ -26,56 +22,38 @@ public class PlayerCreatureEntity extends CreatureEntity implements KeyListener
 			if(getDirection()=="S"){return Assets.charPlayerS1;}
 			if(getDirection()=="W"){return Assets.charPlayerW1;}
 		}
+		if(getAction()=="Walk")
+		{
+			if(getDirection()=="N")
+			{
+				if(getWalkFrame()==1){return Assets.charPlayerN2;}
+				if(getWalkFrame()==2){return Assets.charPlayerN1;}
+				if(getWalkFrame()==3){return Assets.charPlayerN3;}
+				if(getWalkFrame()==4){return Assets.charPlayerN1;}
+			}
+			if(getDirection()=="E")
+			{
+				if(getWalkFrame()==1){return Assets.charPlayerE2;}
+				if(getWalkFrame()==2){return Assets.charPlayerE1;}
+				if(getWalkFrame()==3){return Assets.charPlayerE3;}
+				if(getWalkFrame()==4){return Assets.charPlayerE1;}
+			}
+			if(getDirection()=="S")
+			{
+				if(getWalkFrame()==1){return Assets.charPlayerS2;}
+				if(getWalkFrame()==2){return Assets.charPlayerS1;}
+				if(getWalkFrame()==3){return Assets.charPlayerS3;}
+				if(getWalkFrame()==4){return Assets.charPlayerS1;}
+			}
+			if(getDirection()=="W")
+			{
+				if(getWalkFrame()==1){return Assets.charPlayerW2;}
+				if(getWalkFrame()==2){return Assets.charPlayerW1;}
+				if(getWalkFrame()==3){return Assets.charPlayerW3;}
+				if(getWalkFrame()==4){return Assets.charPlayerW1;}
+			}
+		}
 		return Assets.charPlayerS1;
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e)
-	{
-		System.out.println("Key Pressed");
-		if(e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			moveN = true;
-		}
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			moveE = true;
-		}
-		if(e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			moveS = true;
-		}
-		if(e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			moveW = true;
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e)
-	{
-		System.out.println("Key Released");
-		if(e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			moveN = false;
-		}
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			moveE = false;
-		}
-		if(e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			moveS = false;
-		}
-		if(e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			moveW = false;
-		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent key)
-	{
 	}
 	
 	public void render(Graphics g)
@@ -88,27 +66,64 @@ public class PlayerCreatureEntity extends CreatureEntity implements KeyListener
 	
 	public void tick()
 	{
-		if(moveN)
+		tickKeyEvents();
+		tickMovement();
+	}
+	
+	public void tickKeyEvents()
+	{
+		if(Keyboard.getKeyPressed()=="Up")
 		{
-			int newY = getPositionY() - moveSpeed; 
-			setPositionY(newY);
+			setAction("Walk");
+			setDirection("N");
+			setWalkFrame(1);
+			Keyboard.setKeyDone();
 		}
-		if(moveE)
+		if(Keyboard.getKeyPressed()=="Down")
 		{
-			int newX = getPositionX() + moveSpeed; 
-			setPositionX(newX);
+			setAction("Walk");
+			setDirection("S");
+			setWalkFrame(1);
+			Keyboard.setKeyDone();
 		}
-		if(moveS)
+		if(Keyboard.getKeyPressed()=="Left")
 		{
-			//int newY = getPositionY() + moveSpeed;
-			int newY = getPositionY() + 1;
-			if(newY>16){newY = 0;}
-			setPositionY(newY);
+			setAction("Walk");
+			setDirection("W");
+			setWalkFrame(1);
+			Keyboard.setKeyDone();
 		}
-		if(moveW)
+		if(Keyboard.getKeyPressed()=="Right")
 		{
-			int newX = getPositionX() - moveSpeed; 
-			setPositionX(newX);
+			setAction("Walk");
+			setDirection("E");
+			setWalkFrame(1);
+			Keyboard.setKeyDone();
+		}
+	}
+	
+	public void tickMovement()
+	{
+		if(getAction()=="Walk")
+		{
+			int walkFrameNew = getWalkFrame() + 1;
+			if(walkFrameNew>4)
+			{
+				int walkPosX = getPositionX();
+				int walkPosY = getPositionY();
+				if(getDirection()=="N"){walkPosY -= 1;}
+				if(getDirection()=="E"){walkPosX += 1;}
+				if(getDirection()=="S"){walkPosY += 1;}
+				if(getDirection()=="W"){walkPosX -= 1;}
+				setPositionX(walkPosX);
+				setPositionY(walkPosY);
+				setAction("Idle");
+				setWalkFrame(0);
+			}
+			else
+			{
+				setWalkFrame(walkFrameNew);
+			}
 		}
 	}
 

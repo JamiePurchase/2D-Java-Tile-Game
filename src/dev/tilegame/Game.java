@@ -24,9 +24,6 @@ public class Game extends JPanel implements Runnable
 	private BufferStrategy bs;
 	private Graphics g;
 	
-	// Temp
-	public static boolean menuDown = false;
-	
 	// States
 	private State stateGame, stateIntro, stateMenu, stateTitle;
 
@@ -57,6 +54,16 @@ public class Game extends JPanel implements Runnable
 	private void tick()
 	{
 		// Change state
+		if(State.getStateChange() == "Game")
+		{
+			State.setState(stateGame);
+			State.setStateChange("");
+		}
+		if(State.getStateChange() == "Menu")
+		{
+			State.setState(stateMenu);
+			State.setStateChange("");
+		}
 		if(State.getStateChange() == "Title")
 		{
 			State.setState(stateTitle);
@@ -125,7 +132,7 @@ public class Game extends JPanel implements Runnable
 			}
 			if(timer >= 1000000000)
 			{
-				System.out.println("Ticks and Frames: " + ticks);
+				//System.out.println("Ticks and Frames: " + ticks);
 				ticks = 0;
 				timer = 0;
 			}

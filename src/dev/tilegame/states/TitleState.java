@@ -19,6 +19,21 @@ public class TitleState extends State
 	
 	public void tick()
 	{
+		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
+		{
+			Keyboard.setKeyDone();
+			if(menuPos==1)
+			{
+				// New Game
+				State.setStateChange("Game");
+			}
+			//if(menuPos==2){State.setStateChange("");}
+			if(menuPos==3)
+			{
+				// Quit Game
+				System.exit(0);
+			}
+		}
 		if(Keyboard.getKeyPressed()=="Up" && menuPos>1)
 		{
 			menuPos = menuPos - 1;
