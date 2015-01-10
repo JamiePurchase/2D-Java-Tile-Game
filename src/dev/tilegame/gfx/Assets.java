@@ -22,6 +22,8 @@ public class Assets
 	public static BufferedImage uiIntro0, uiIntro1, uiIntro2, uiIntro3;
 	public static BufferedImage uiTitleBkg, uiTitleOpt1, uiTitleOpt1a, uiTitleOpt2, uiTitleOpt2a;
 	public static BufferedImage uiTitleOpt3, uiTitleOpt3a, uiTitleOpt4, uiTitleOpt4a;
+	public static BufferedImage uiOptDone, uiOptDoneA;
+	public static BufferedImage uiOptionsBkg, uiTutorialBkg, uiAboutBkg;
 	public static BufferedImage uiGameInfo1, uiGameInfoMushroom, uiGameInfoTreasure;
 	public static BufferedImage[] uiGameInfoCount = new BufferedImage[10];
 
@@ -39,6 +41,7 @@ public class Assets
 	public static BufferedImage txtTree1a, txtTree1b, txtTree1c, txtTree2a, txtTree2b;
 	public static BufferedImage txtTree3aL, txtTree3aR, txtTree3bL, txtTree3bR;
 	public static BufferedImage txtTree4aL, txtTree4aR, txtTree5aL, txtTree5aR;
+	public static BufferedImage txtTree6TL, txtTree6TR, txtTree6BL, txtTree6BR;
 	
 	// Fonts
 	public static Font fontStandard, fontOption, fontHint, fontInfoCount;
@@ -98,6 +101,17 @@ public class Assets
 		uiTitleOpt3a = ImageLoader.loadImage("/interface/titleOpt3a.png");
 		uiTitleOpt4 = ImageLoader.loadImage("/interface/titleOpt4.png");
 		uiTitleOpt4a = ImageLoader.loadImage("/interface/titleOpt4a.png");
+		uiOptDone = ImageLoader.loadImage("/interface/uiOptDone.png");
+		uiOptDoneA = ImageLoader.loadImage("/interface/uiOptDoneA.png");
+		
+		// Options
+		uiOptionsBkg = ImageLoader.loadImage("/interface/optionsBkg.png");
+		
+		// Tutorial
+		uiTutorialBkg = ImageLoader.loadImage("/interface/tutorialBkg.png");
+		
+		// About
+		uiAboutBkg = ImageLoader.loadImage("/interface/aboutBkg.png");
 		
 		// Game
 		uiGameInfo1 = ImageLoader.loadImage("/interface/gameInfo1.png");
@@ -176,6 +190,8 @@ public class Assets
 		txtFence1M = sheetWorld.crop(96, 0, 32, 32);
 		txtFence1MS = sheetWorld.crop(128, 0, 32, 32);
 		txtFence1R = sheetWorld.crop(160, 0, 32, 32);
+		
+		// Look at these again
 		txtTree1b = sheetWorld.crop(0, 32, 32, 32);
 		txtTree1c = sheetWorld.crop(0, 64, 32, 32);
 		txtTree2a = sheetWorld.crop(96, 32, 32, 32);
@@ -188,6 +204,11 @@ public class Assets
 		txtTree4aR = sheetWorld.crop(160, 32, 32, 32);
 		txtTree5aL = sheetWorld.crop(128, 64, 32, 32);
 		txtTree5aR = sheetWorld.crop(160, 64, 32, 32);
+		//
+		txtTree6TL = sheetWorld.crop(192, 0, 32, 32);
+		txtTree6TR = sheetWorld.crop(224, 0, 32, 32);
+		txtTree6BL = sheetWorld.crop(192, 32, 32, 32);
+		txtTree6BR = sheetWorld.crop(224, 32, 32, 32);
 	}
 
 }

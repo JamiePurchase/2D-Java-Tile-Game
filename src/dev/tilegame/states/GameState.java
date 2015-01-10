@@ -28,6 +28,8 @@ public class GameState extends State
 	public void renderEntities(Graphics g)
 	{
 		Assets.entPlayer.render(g);
+		Game.world.drawMushrooms(g);
+		Game.world.drawTreasure(g);
 		
 		// Test
 		//Assets.entAnna.render(g);

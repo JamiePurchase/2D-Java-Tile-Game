@@ -9,8 +9,6 @@ import java.awt.Graphics;
 public class TitleState extends State
 {
 	private int menuPos = 1;
-	private int menuMax = 3;
-	private int cursorFrame = 1;
 	
 	public TitleState()
 	{
@@ -27,9 +25,21 @@ public class TitleState extends State
 				// New Game
 				State.setStateChange("Game");
 			}
-			//if(menuPos==2){State.setStateChange("Tutorial");}
-			//if(menuPos==3){State.setStateChange("TitleOptions");}
-			//if(menuPos==4){State.setStateChange("TitleAbout");}
+			if(menuPos==2)
+			{
+				// Basic Instructions
+				State.setStateChange("Tutorial");
+			}
+			if(menuPos==3)
+			{
+				// Game Options
+				State.setStateChange("Options");
+			}
+			if(menuPos==4)
+			{
+				// Project Information
+				State.setStateChange("About");
+			}
 		}
 		if(Keyboard.getKeyPressed()=="Escape")
 		{
@@ -68,6 +78,11 @@ public class TitleState extends State
 	{
 		renderBackground(g);
 		renderOptions(g);
+	}
+	
+	public void renderAbout(Graphics g)
+	{
+		g.drawImage(Assets.uiIntro0, 0, 0, null);
 	}
 	
 	public void renderBackground(Graphics g)

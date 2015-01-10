@@ -102,6 +102,10 @@ public class Board01
 		Game.world.setTile(12, 9, "Fence1M", 1);
 		Game.world.setTile(13, 9, "Fence1M", 1);
 		Game.world.setTile(14, 9, "Fence1R", 1);
+		Game.world.setTile(16, 11, "Tree6TL", 1);
+		Game.world.setTile(17, 11, "Tree6TR", 1);
+		Game.world.setTile(16, 12, "Tree6BL", 1);
+		Game.world.setTile(17, 12, "Tree6BR", 1);
 		
 		// Mushrooms
 		Game.world.setMushroom(3, 3);

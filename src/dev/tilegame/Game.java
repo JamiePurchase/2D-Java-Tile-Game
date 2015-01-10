@@ -3,10 +3,13 @@ import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
 import dev.tilegame.states.State;
+import dev.tilegame.states.AboutState;
 import dev.tilegame.states.GameState;
 import dev.tilegame.states.IntroState;
 import dev.tilegame.states.MenuState;
+import dev.tilegame.states.OptionsState;
 import dev.tilegame.states.TitleState;
+import dev.tilegame.states.TutorialState;
 import dev.tilegame.world.Board01;
 
 import java.awt.Graphics;
@@ -31,7 +34,7 @@ public class Game extends JPanel implements Runnable
 	public static int backpackTreasure = 0;
 	
 	// States
-	private State stateGame, stateIntro, stateMenu, stateTitle;
+	private State stateAbout, stateGame, stateIntro, stateMenu, stateOptions, stateTitle, stateTutorial;
 
 	public Game(String title, int width, int height)
 	{
@@ -51,10 +54,13 @@ public class Game extends JPanel implements Runnable
 
 	private void initStates()
 	{
+		stateAbout = new AboutState();
 		stateGame = new GameState();
 		stateIntro = new IntroState();
 		stateMenu = new MenuState();
+		stateOptions = new OptionsState();
 		stateTitle = new TitleState();
+		stateTutorial = new TutorialState();
 	}
 	
 	private void initWorld()
@@ -66,6 +72,12 @@ public class Game extends JPanel implements Runnable
 	private void tick()
 	{
 		// Change state
+		if(State.getStateChange() == "About")
+		{
+			State.setState(stateAbout);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
 		if(State.getStateChange() == "Game")
 		{
 			State.setState(stateGame);
@@ -78,9 +90,21 @@ public class Game extends JPanel implements Runnable
 			State.setStateChange("");
 			Keyboard.setKeyDone();
 		}
+		if(State.getStateChange() == "Options")
+		{
+			State.setState(stateOptions);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
 		if(State.getStateChange() == "Title")
 		{
 			State.setState(stateTitle);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
+		if(State.getStateChange() == "Tutorial")
+		{
+			State.setState(stateTutorial);
 			State.setStateChange("");
 			Keyboard.setKeyDone();
 		}

@@ -1,6 +1,7 @@
 package dev.tilegame.gfx;
 import dev.tilegame.Game;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class Board
@@ -29,6 +30,32 @@ public class Board
 		tileInit();
 	}
 	
+	public static void drawMushrooms(Graphics g)
+	{
+		for(int mushroom=1;mushroom<=getMushroomCount();mushroom+=1)
+		{
+			if(mushroomFind[mushroom]<1)
+			{
+				int posX = 32 * mushroomPosX[mushroom] - 32;
+				int posY = 32 * mushroomPosY[mushroom] + 24;
+				g.drawImage(Assets.itemMushroom1, posX, posY, null);
+			}
+		}
+	}
+	
+	public static void drawTreasure(Graphics g)
+	{
+		for(int treasure=1;treasure<=getTreasureCount();treasure+=1)
+		{
+			if(treasureFind[treasure]<1)
+			{
+				int posX = 32 * treasurePosX[treasure] - 32;
+				int posY = 32 * treasurePosY[treasure] + 24;
+				g.drawImage(Assets.itemChest1, posX, posY, null);
+			}
+		}
+	}
+	
 	public static int getGridHeight()
 	{
 		return gridHeight;
@@ -37,6 +64,11 @@ public class Board
 	public static int getGridWidth()
 	{
 		return gridWidth;
+	}
+	
+	public static int getMushroomCount()
+	{
+		return mushroomCount;
 	}
 	
 	public static String getTileEntity(int x, int y)
@@ -56,8 +88,6 @@ public class Board
 	
 	public static BufferedImage getTileImageFile(int x, int y)
 	{
-		if(tileEntity[x][y]=="Mushroom"){return Assets.itemMushroom1;}
-		if(tileEntity[x][y]=="Treasure"){return Assets.itemChest1;}
 		if(tileImage[x][y]=="Grass"){return Assets.txtGrass;}
 		if(tileImage[x][y]=="Tree"){return Assets.txtTree1a;}
 		if(tileImage[x][y]=="TreeB"){return Assets.txtTree1b;}
@@ -76,7 +106,16 @@ public class Board
 		if(tileImage[x][y]=="Fence1M"){return Assets.txtFence1M;}
 		if(tileImage[x][y]=="Fence1MS"){return Assets.txtFence1MS;}
 		if(tileImage[x][y]=="Fence1R"){return Assets.txtFence1R;}
+		if(tileImage[x][y]=="Tree6TL"){return Assets.txtTree6TL;}
+		if(tileImage[x][y]=="Tree6TR"){return Assets.txtTree6TR;}
+		if(tileImage[x][y]=="Tree6BL"){return Assets.txtTree6BL;}
+		if(tileImage[x][y]=="Tree6BR"){return Assets.txtTree6BR;}
 		return Assets.txtGrass;
+	}
+	
+	public static int getTreasureCount()
+	{
+		return treasureCount;
 	}
 	
 	public static int getTileType(int x, int y)
