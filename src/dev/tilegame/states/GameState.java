@@ -46,8 +46,10 @@ public class GameState extends State
 	public void renderInfo(Graphics g)
 	{
 		g.drawImage(Assets.uiGameInfo1, 0, 0, null);
-		g.setColor(Color.black);
-		g.drawString("Test", 25, 25);
+		g.drawImage(Assets.uiGameInfoMushroom, 170, 0, null);
+		g.drawImage(Assets.uiGameInfoCount[Game.backpackMushrooms], 245, 10, null);
+		g.drawImage(Assets.uiGameInfoTreasure, 370, 0, null);
+		g.drawImage(Assets.uiGameInfoCount[Game.backpackTreasure], 445, 10, null);
 	}
 	
 	public void renderTile(Graphics g, int x, int y)

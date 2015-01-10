@@ -6,16 +6,19 @@ public class Board01
 	
 	public Board01()
 	{
+		// Dimensions
 		Game.world.setGridWidth(25);
 		Game.world.setGridHeight(17);
+		
+		// Tiles
 		Game.world.setTile(1, 1, "Tree", 1);
 		Game.world.setTile(2, 1, "Tree", 1);
 		Game.world.setTile(3, 1, "Tree", 1);
 		Game.world.setTile(4, 1, "Tree", 1);
 		Game.world.setTile(5, 1, "Tree", 1);
 		Game.world.setTile(6, 1, "Tree", 1);
-		Game.world.setTile(7, 1, "Tree", 1);
-		Game.world.setTile(8, 1, "Tree", 1);
+		Game.world.setTile(7, 1, "TreesDR", 1);
+		Game.world.setTile(8, 1, "TreesDL", 1);
 		Game.world.setTile(9, 1, "Tree", 1);
 		Game.world.setTile(10, 1, "Tree", 1);
 		Game.world.setTile(11, 1, "Tree", 1);
@@ -38,9 +41,9 @@ public class Board01
 		Game.world.setTile(1, 4, "Tree", 1);
 		Game.world.setTile(1, 5, "Tree", 1);
 		Game.world.setTile(1, 6, "Tree", 1);
-		Game.world.setTile(1, 7, "Tree", 1);
-		Game.world.setTile(1, 8, "Tree", 1);
-		Game.world.setTile(1, 9, "Tree", 1);
+		//Game.world.setTile(1, 7, "Tree", 1);
+		//Game.world.setTile(1, 8, "Tree", 1);
+		Game.world.setTile(1, 9, "FenceM", 1);
 		Game.world.setTile(1, 10, "Tree", 1);
 		Game.world.setTile(1, 11, "Tree", 1);
 		Game.world.setTile(1, 12, "Tree", 1);
@@ -89,10 +92,24 @@ public class Board01
 		Game.world.setTile(25, 15, "Tree", 1);
 		Game.world.setTile(25, 16, "Tree", 1);
 		Game.world.setTile(25, 17, "Tree", 1);
-		Game.world.setTile(3, 9, "Fence1L", 1);
+		Game.world.setTile(3, 9, "Fence1M", 1);
+		Game.world.setTile(3, 9, "Fence1M", 1);
 		Game.world.setTile(4, 9, "Fence1MS", 1);
 		Game.world.setTile(5, 9, "Fence1M", 1);
 		Game.world.setTile(6, 9, "Fence1M", 1);
 		Game.world.setTile(7, 9, "Fence1R", 1);
+		Game.world.setTile(11, 9, "Fence1L", 1);
+		Game.world.setTile(12, 9, "Fence1M", 1);
+		Game.world.setTile(13, 9, "Fence1M", 1);
+		Game.world.setTile(14, 9, "Fence1R", 1);
+		
+		// Mushrooms
+		Game.world.setMushroom(3, 3);
+		Game.world.setMushroom(4, 13);
+		Game.world.setMushroom(17, 7);
+		
+		// Treasure Chests
+		Game.world.setTreasure(9,4);
+		Game.world.setTreasure(21,13);
 	}
 }

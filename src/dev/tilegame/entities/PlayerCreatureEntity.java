@@ -114,7 +114,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			if(getDirection()=="E"){checkPosX += 1;}
 			if(getDirection()=="S"){checkPosY += 1;}
 			if(getDirection()=="W"){checkPosX -= 1;}
-			if(Game.world.getTileEntity(checkPosX, checkPosY)>0)
+			if(Game.world.getTileEntity(checkPosX, checkPosY)=="NPC")
 			{
 				Game.chat = true;
 				System.out.println("Speak to Anna");
@@ -196,6 +196,29 @@ public class PlayerCreatureEntity extends CreatureEntity
 				setAction("Idle");
 				setWalkFrame(0);
 			}
+		}
+	}
+	
+	public static void walk(String direction)
+	{
+		setAction("Walk");
+		setDirection(direction);
+		setWalkFrame(1);
+		int tileX = Assets.entPlayer.getPositionX();
+		int tileY = Assets.entPlayer.getPositionY();
+		if(direction=="N"){tileY -= 1;}
+		if(direction=="E"){tileX += 1;}
+		if(direction=="S"){tileY += 1;}
+		if(direction=="W"){tileX -= 1;}
+		if(Game.world.getTileEntity(tileX, tileY)=="Mushroom")
+		{
+			int ID = Game.world.getTileEntityID(tileX, tileY);
+			Game.world.setMushroomFound(ID);
+		}
+		if(Game.world.getTileEntity(tileX, tileY)=="Treasure")
+		{
+			int ID = Game.world.getTileEntityID(tileX, tileY);
+			Game.world.setTreasureFound(ID);
 		}
 	}
 

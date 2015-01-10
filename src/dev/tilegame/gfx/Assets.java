@@ -22,22 +22,26 @@ public class Assets
 	public static BufferedImage uiIntro0, uiIntro1, uiIntro2, uiIntro3;
 	public static BufferedImage uiTitleBkg, uiTitleOpt1, uiTitleOpt1a, uiTitleOpt2, uiTitleOpt2a;
 	public static BufferedImage uiTitleOpt3, uiTitleOpt3a, uiTitleOpt4, uiTitleOpt4a;
-	public static BufferedImage uiGameInfo1;
-	
+	public static BufferedImage uiGameInfo1, uiGameInfoMushroom, uiGameInfoTreasure;
+	public static BufferedImage[] uiGameInfoCount = new BufferedImage[10];
+
 	// Sprites
 	public static BufferedImage charPlayerN1, charPlayerN2, charPlayerN3;
 	public static BufferedImage charPlayerE1, charPlayerE2, charPlayerE3;
 	public static BufferedImage charPlayerS1, charPlayerS2, charPlayerS3;
 	public static BufferedImage charPlayerW1, charPlayerW2, charPlayerW3;
 	public static BufferedImage npcAnnaN, npcAnnaE, npcAnnaS, npcAnnaW;
+	public static BufferedImage itemMushroom1, itemChest1;
 	public static BufferedImage itemGarnet1, itemGarnet2;
 	
 	// Textures
-	public static BufferedImage txtGrass, txtTree;
-	public static BufferedImage txtFence1L, txtFence1M, txtFence1MS, txtFence1R;
+	public static BufferedImage txtGrass, txtFence1L, txtFence1M, txtFence1MS, txtFence1R;
+	public static BufferedImage txtTree1a, txtTree1b, txtTree1c, txtTree2a, txtTree2b;
+	public static BufferedImage txtTree3aL, txtTree3aR, txtTree3bL, txtTree3bR;
+	public static BufferedImage txtTree4aL, txtTree4aR, txtTree5aL, txtTree5aR;
 	
 	// Fonts
-	public static Font fontStandard, fontOption, fontHint;
+	public static Font fontStandard, fontOption, fontHint, fontInfoCount;
 	
 	public static void init()
 	{
@@ -97,11 +101,25 @@ public class Assets
 		
 		// Game
 		uiGameInfo1 = ImageLoader.loadImage("/interface/gameInfo1.png");
+		uiGameInfoMushroom = ImageLoader.loadImage("/interface/gameInfoPanelM.png");
+		uiGameInfoTreasure = ImageLoader.loadImage("/interface/gameInfoPanelT.png");
+		Spritesheet sheetInfoCount = new Spritesheet(ImageLoader.loadImage("/interface/gameInfoCount.png"));
+		uiGameInfoCount[0] = sheetInfoCount.crop(0, 0, 36, 36);
+		uiGameInfoCount[1] = sheetInfoCount.crop(36, 0, 36, 36);
+		uiGameInfoCount[2] = sheetInfoCount.crop(72, 0, 36, 36);
+		uiGameInfoCount[3] = sheetInfoCount.crop(108, 0, 36, 36);
+		uiGameInfoCount[4] = sheetInfoCount.crop(144, 0, 36, 36);
+		uiGameInfoCount[5] = sheetInfoCount.crop(180, 0, 36, 36);
+		uiGameInfoCount[6] = sheetInfoCount.crop(216, 0, 36, 36);
+		uiGameInfoCount[7] = sheetInfoCount.crop(252, 0, 36, 36);
+		uiGameInfoCount[8] = sheetInfoCount.crop(288, 0, 36, 36);
+		uiGameInfoCount[9] = sheetInfoCount.crop(324, 0, 36, 36);
 		
 		// Fonts
 		fontStandard = new Font("Times New Roman", Font.PLAIN, 26);
 		fontOption = new Font("Times New Roman", Font.PLAIN, 32);
 		fontHint = new Font("Times New Roman", Font.ITALIC, 22);
+		fontInfoCount = new Font("Times New Roman", Font.BOLD, 36);
 	}
 	
 	public static void initSprites()
@@ -132,6 +150,12 @@ public class Assets
 		npcAnnaS = sheetAnna.crop(32, 0, 32, 32);
 		npcAnnaW = sheetAnna.crop(32, 32, 32, 32);
 		
+		// Mushroom
+		itemMushroom1 = ImageLoader.loadImage("/sprites/mushroom.png");
+		
+		// Treasure
+		itemChest1 = ImageLoader.loadImage("/sprites/chest.png");
+		
 		// Garnet Sheet
 		Spritesheet sheetGarnet = new Spritesheet(ImageLoader.loadImage("/sprites/garnet.png"));
 		
@@ -147,11 +171,23 @@ public class Assets
 		
 		// World Images
 		txtGrass = sheetWorld.crop(0, 0, 32, 32);
-		txtTree = sheetWorld.crop(32, 0, 32, 32);
+		txtTree1a = sheetWorld.crop(32, 0, 32, 32);
 		txtFence1L = sheetWorld.crop(64, 0, 32, 32);
 		txtFence1M = sheetWorld.crop(96, 0, 32, 32);
 		txtFence1MS = sheetWorld.crop(128, 0, 32, 32);
 		txtFence1R = sheetWorld.crop(160, 0, 32, 32);
+		txtTree1b = sheetWorld.crop(0, 32, 32, 32);
+		txtTree1c = sheetWorld.crop(0, 64, 32, 32);
+		txtTree2a = sheetWorld.crop(96, 32, 32, 32);
+		txtTree2b = sheetWorld.crop(96, 64, 32, 32);
+		txtTree3aL = sheetWorld.crop(32, 32, 32, 32);
+		txtTree3aR = sheetWorld.crop(64, 32, 32, 32);
+		txtTree3bL = sheetWorld.crop(32, 64, 32, 32);
+		txtTree3bR = sheetWorld.crop(64, 64, 32, 32);
+		txtTree4aL = sheetWorld.crop(128, 32, 32, 32);
+		txtTree4aR = sheetWorld.crop(160, 32, 32, 32);
+		txtTree5aL = sheetWorld.crop(128, 64, 32, 32);
+		txtTree5aR = sheetWorld.crop(160, 64, 32, 32);
 	}
 
 }
