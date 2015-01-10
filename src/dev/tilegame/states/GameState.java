@@ -12,7 +12,7 @@ public class GameState extends State
 	
 	public void tick()
 	{
-		
+		Assets.entPlayer.tick();
 	}
 	
 	public void render(Graphics g)
@@ -23,18 +23,11 @@ public class GameState extends State
 	
 	public void renderEntities(Graphics g)
 	{
-		for(int x=1;x<=3;x+=1)
+		Assets.entPlayer.render(g);
+		/*for(int x=1;x<=1;x+=1)
 		{
-			renderEntity(g, "Player");
-		}
-	}
-	
-	public void renderEntity(Graphics g, String entity)
-	{
-		BufferedImage drawImage = Assets.charPlayerS1;
-		int drawX = Assets.entPlayer.getPositionX() * 32 - 32;
-		int drawY = Assets.entPlayer.getPositionY() * 32 - 32;
-		g.drawImage(drawImage, drawX, drawY, null);
+			entity.render();
+		}*/
 	}
 	
 	public void renderTile(Graphics g, int x, int y)
@@ -48,9 +41,9 @@ public class GameState extends State
 	
 	public void renderTiles(Graphics g)
 	{
-		for(int x=1;x<=10;x+=1)
+		for(int x=1;x<=Assets.brdTest.getGridWidth();x+=1)
 		{
-			for(int y=1;y<=10;y+=1)
+			for(int y=1;y<=Assets.brdTest.getGridHeight();y+=1)
 			{
 				renderTile(g, x, y);
 			}

@@ -29,16 +29,29 @@ public class Assets
 	
 	public static void init()
 	{
-		initPlayer();
 		initInterface();
 		initSprites();
 		initTextures();
 		initBoards();
+		initEntities();
 	}
 	
 	public static void initBoards()
 	{
-		brdTest = new Board();
+		brdTest = new Board("Test");
+	}
+	
+	public static void initEntities()
+	{
+		initEntityPlayer();
+	}
+	
+	public static void initEntityPlayer()
+	{
+		entPlayer = new PlayerCreatureEntity();
+		entPlayer.setDirection("S");
+		entPlayer.setPositionX(1);
+		entPlayer.setPositionY(1);
 	}
 	
 	public static void initInterface()
@@ -58,14 +71,6 @@ public class Assets
 		fontStandard = new Font("Times New Roman", Font.PLAIN, 26);
 		fontOption = new Font("Times New Roman", Font.PLAIN, 32);
 		fontHint = new Font("Times New Roman", Font.ITALIC, 22);
-	}
-	
-	public static void initPlayer()
-	{
-		entPlayer = new PlayerCreatureEntity();
-		entPlayer.setDirection("S");
-		entPlayer.setPositionX(1);
-		entPlayer.setPositionY(1);
 	}
 	
 	public static void initSprites()

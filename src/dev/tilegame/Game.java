@@ -3,26 +3,28 @@ import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.states.State;
 import dev.tilegame.states.GameState;
+import dev.tilegame.states.IntroState;
 import dev.tilegame.states.MenuState;
 import dev.tilegame.states.TitleState;
+
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-public class Game implements Runnable
+import javax.swing.JPanel;
+
+public class Game extends JPanel implements Runnable
 {
 	private Display display;
 	public String title;
 	public int width, height;
 	private Thread thread;
 	private boolean running = false;
+	public static String stateChange = "none";
 	private BufferStrategy bs;
 	private Graphics g;
 	
-	// Temp
-	int x = 1;
-	
 	// States
-	private State stateGame, stateMenu, stateTitle;
+	private State stateGame, stateIntro, stateMenu, stateTitle;
 
 	public Game(String title, int width, int height)
 	{
@@ -37,18 +39,28 @@ public class Game implements Runnable
 		Assets.init();
 		initStates();
 		//State.setState(stateTitle);
-		State.setState(stateGame);
+		State.setState(stateIntro);
+		this.addKeyListener(Assets.entPlayer);
 	}
-	
+
 	private void initStates()
 	{
 		stateGame = new GameState();
+		stateIntro = new IntroState();
 		stateMenu = new MenuState();
 		stateTitle = new TitleState();
 	}
 	
 	private void tick()
 	{
+		// Change state
+		if(State.getStateChange() == "Title")
+		{
+			State.setState(stateTitle);
+			State.setStateChange("");
+		}
+		
+		// Tick state
 		if(State.getState() != null)
 		{
 			State.getState().tick();

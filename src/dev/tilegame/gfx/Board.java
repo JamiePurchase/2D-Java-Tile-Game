@@ -8,15 +8,20 @@ public class Board
 	private static int gridWidth;
 	private static int gridHeight;
 	
-	public Board()
+	public Board(String template)
 	{
 		// Temp
-		for(int x=1;x<=10;x+=1)
+		if(template=="Test")
 		{
-			for(int y=1;y<=10;y+=1)
+			gridWidth = 20;
+			gridHeight = 16;
+			for(int x=1;x<=20;x+=1)
 			{
-				//tileImage[x][y] = Assets.txtGrass;
-				//tileType[x][y] = 0;
+				for(int y=1;y<=16;y+=1)
+				{
+					//tileImage[x][y] = Assets.txtGrass;
+					//tileType[x][y] = 0;
+				}
 			}
 		}
 	}
