@@ -1,9 +1,13 @@
 package dev.tilegame.gfx;
+import dev.tilegame.entities.PlayerCreatureEntity;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 
 public class Assets
 {
+	// Character
+	public static PlayerCreatureEntity entPlayer;
+	
 	// Interface
 	public static BufferedImage uiCursor1, uiCursor2, uiCursor3;
 	public static BufferedImage uiLogoAP;
@@ -17,14 +21,24 @@ public class Assets
 	// Textures
 	public static BufferedImage txtGrass, txtTree;
 	
+	// Boards
+	public static Board brdTest;
+	
 	// Fonts
 	public static Font fontStandard, fontOption, fontHint;
 	
 	public static void init()
 	{
+		initPlayer();
 		initInterface();
 		initSprites();
 		initTextures();
+		initBoards();
+	}
+	
+	public static void initBoards()
+	{
+		brdTest = new Board();
 	}
 	
 	public static void initInterface()
@@ -44,6 +58,14 @@ public class Assets
 		fontStandard = new Font("Times New Roman", Font.PLAIN, 26);
 		fontOption = new Font("Times New Roman", Font.PLAIN, 32);
 		fontHint = new Font("Times New Roman", Font.ITALIC, 22);
+	}
+	
+	public static void initPlayer()
+	{
+		entPlayer = new PlayerCreatureEntity();
+		entPlayer.setDirection("S");
+		entPlayer.setPositionX(1);
+		entPlayer.setPositionY(1);
 	}
 	
 	public static void initSprites()

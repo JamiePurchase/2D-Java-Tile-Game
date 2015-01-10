@@ -1,5 +1,6 @@
 package dev.tilegame.states;
 import dev.tilegame.gfx.Assets;
+import dev.tilegame.gfx.Drawing;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -51,9 +52,9 @@ public class TitleState extends State
 	{
 		int x = 250;
 		int y = 50 * menuPos + 225;
-		if(cursorFrame>0 && cursorFrame<=10){g.drawImage(Assets.uiCursor1, x, y, null);}
-		if(cursorFrame>10 && cursorFrame<=20){g.drawImage(Assets.uiCursor2, x, y, null);}
-		if(cursorFrame>20 && cursorFrame<=30){g.drawImage(Assets.uiCursor3, x, y, null);}
-		if(cursorFrame>30 && cursorFrame<=40){g.drawImage(Assets.uiCursor2, x, y, null);}
+		if(cursorFrame>0 && cursorFrame<=10){Drawing.drawCursor(g, x, y, 1);}
+		if(cursorFrame>10 && cursorFrame<=20){Drawing.drawCursor(g, x, y, 2);}
+		if(cursorFrame>20 && cursorFrame<=30){Drawing.drawCursor(g, x, y, 3);}
+		if(cursorFrame>30 && cursorFrame<=40){Drawing.drawCursor(g, x, y, 4);}
 	}
 }

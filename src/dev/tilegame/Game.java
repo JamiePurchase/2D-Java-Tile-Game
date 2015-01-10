@@ -36,7 +36,8 @@ public class Game implements Runnable
 		display = new Display(title, width, height);
 		Assets.init();
 		initStates();
-		State.setState(stateTitle);
+		//State.setState(stateTitle);
+		State.setState(stateGame);
 	}
 	
 	private void initStates()
