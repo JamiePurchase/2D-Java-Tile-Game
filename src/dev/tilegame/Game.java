@@ -58,10 +58,12 @@ public class Game extends JPanel implements Runnable
 	private void initAudio()
 	{
 		AudioPlayer.init();
-		//AudioPlayer.load("/music/bgm1.mp3", "music1");
+		AudioPlayer.load("/music/bgm1.wav", "music1");
+		AudioPlayer.load("/music/bgm2.wav", "music2");
 		AudioPlayer.load("/sounds/collectGarnet.wav", "Garnet");
 		AudioPlayer.load("/sounds/collectMushroom.wav", "Mushroom");
 		AudioPlayer.load("/sounds/collectTreasure.wav", "Treasure");
+		AudioPlayer.play("music2");
 	}
 
 	private void initStates()
