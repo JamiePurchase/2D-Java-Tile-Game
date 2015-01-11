@@ -15,10 +15,13 @@ import dev.tilegame.states.TitleState;
 import dev.tilegame.states.TutorialState;
 import dev.tilegame.world.Board01;
 import dev.tilegame.datafiles.FileManager;
+import dev.tilegame.datafiles.ReadFile;
+import dev.tilegame.datafiles.WriteFile;
 
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
@@ -33,7 +36,14 @@ public class Game extends JPanel implements Runnable
 	private BufferStrategy bs;
 	private Graphics g;
 	public static boolean chat = false;
+	
+	// Board Object
 	public static Board world;
+	
+	// Campaign Data
+	public static int campaignStage = 0;
+	
+	// Backpack (consider moving to it's own class?)
 	public static int backpackGarnets = 0;
 	public static int backpackMushrooms = 0;
 	public static int backpackTreasure = 0;
@@ -54,8 +64,15 @@ public class Game extends JPanel implements Runnable
 		this.width = width;
 		this.height = height;
 		
-		// Temp
-		
+		// Test
+		try
+		{
+			saveGame();
+		}
+		catch (IOException e)
+		{
+			System.out.println("IO Error");
+		}
 	}
 	
 	private void init()
@@ -224,6 +241,27 @@ public class Game extends JPanel implements Runnable
 		
 		// End game
 		stop();
+	}
+	
+	public void saveGame() throws IOException
+	{
+		String file_name = "C:/Users/Jamie/Documents/My Workshop/Autumn Park/Datafiles/Data.txt";
+		/*try
+		{
+			ReadFile file = new ReadFile(file_name);
+			String[] aryLines = file.OpenFile();
+			int i;
+			for(i=0;i<aryLines.length;i+=1)
+			{
+				System.out.println(aryLines[i]);
+			}
+		}
+		catch (IOException e)
+		{
+			System.out.println("IO Error");
+		}*/
+		WriteFile data = new WriteFile(file_name, true);
+		data.writeToFile("Hello world");
 	}
 	
 	public synchronized void start()

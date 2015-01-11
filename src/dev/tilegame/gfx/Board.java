@@ -36,45 +36,6 @@ public class Board
 		tileInit();
 	}
 	
-	public static void drawGarnets(Graphics g)
-	{
-		for(int garnet=1;garnet<=getGarnetCount();garnet+=1)
-		{
-			if(garnetFind[garnet]<1)
-			{
-				int posX = 32 * garnetPosX[garnet] - 32;
-				int posY = 32 * garnetPosY[garnet] + 24;
-				g.drawImage(Assets.itemGarnet1, posX, posY, null);
-			}
-		}
-	}
-	
-	public static void drawMushrooms(Graphics g)
-	{
-		for(int mushroom=1;mushroom<=getMushroomCount();mushroom+=1)
-		{
-			if(mushroomFind[mushroom]<1)
-			{
-				int posX = 32 * mushroomPosX[mushroom] - 32;
-				int posY = 32 * mushroomPosY[mushroom] + 24;
-				g.drawImage(Assets.itemMushroom1, posX, posY, null);
-			}
-		}
-	}
-	
-	public static void drawTreasure(Graphics g)
-	{
-		for(int treasure=1;treasure<=getTreasureCount();treasure+=1)
-		{
-			if(treasureFind[treasure]<1)
-			{
-				int posX = 32 * treasurePosX[treasure] - 32;
-				int posY = 32 * treasurePosY[treasure] + 24;
-				g.drawImage(Assets.itemChest1, posX, posY, null);
-			}
-		}
-	}
-	
 	public static int getGridHeight()
 	{
 		return gridHeight;
@@ -149,6 +110,75 @@ public class Board
 	public static int getTileType(int x, int y)
 	{
 		return tileType[x][y];
+	}
+	
+	public void render(Graphics g)
+	{
+		renderTiles(g);
+		Assets.entPlayer.render(g);
+		renderGarnets(g);
+		renderMushrooms(g);
+		renderTreasure(g);
+		
+		// Test (should loop through all NPCs and draw those that are on the visible area of the board
+		g.drawImage(Assets.npcAnnaS, 256, 184, null);
+	}
+	
+	public static void renderGarnets(Graphics g)
+	{
+		for(int garnet=1;garnet<=getGarnetCount();garnet+=1)
+		{
+			if(garnetFind[garnet]<1)
+			{
+				int posX = 32 * garnetPosX[garnet] - 32;
+				int posY = 32 * garnetPosY[garnet] + 24;
+				g.drawImage(Assets.itemGarnet1, posX, posY, null);
+			}
+		}
+	}
+	
+	public static void renderMushrooms(Graphics g)
+	{
+		for(int mushroom=1;mushroom<=getMushroomCount();mushroom+=1)
+		{
+			if(mushroomFind[mushroom]<1)
+			{
+				int posX = 32 * mushroomPosX[mushroom] - 32;
+				int posY = 32 * mushroomPosY[mushroom] + 24;
+				g.drawImage(Assets.itemMushroom1, posX, posY, null);
+			}
+		}
+	}
+	
+	public void renderTile(Graphics g, int x, int y)
+	{
+		int drawX = x * 32 - 32;
+		int drawY = y * 32 + 24;
+		g.drawImage(Game.world.getTileImageFile(x, y), drawX, drawY, null);
+	}
+	
+	public void renderTiles(Graphics g)
+	{
+		for(int x=1;x<=Game.world.getGridWidth();x+=1)
+		{
+			for(int y=1;y<=Game.world.getGridHeight();y+=1)
+			{
+				renderTile(g, x, y);
+			}
+		}
+	}
+	
+	public static void renderTreasure(Graphics g)
+	{
+		for(int treasure=1;treasure<=getTreasureCount();treasure+=1)
+		{
+			if(treasureFind[treasure]<1)
+			{
+				int posX = 32 * treasurePosX[treasure] - 32;
+				int posY = 32 * treasurePosY[treasure] + 24;
+				g.drawImage(Assets.itemChest1, posX, posY, null);
+			}
+		}
 	}
 	
 	public static void setGarnet(int x, int y)

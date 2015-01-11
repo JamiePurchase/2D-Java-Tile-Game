@@ -30,10 +30,18 @@ public class Assets
 	public static BufferedImage uiCharacterOpt2a, uiCharacterOpt3, uiCharacterOpt3a;
 
 	// Sprites
-	public static BufferedImage charPlayerN1, charPlayerN2, charPlayerN3;
-	public static BufferedImage charPlayerE1, charPlayerE2, charPlayerE3;
-	public static BufferedImage charPlayerS1, charPlayerS2, charPlayerS3;
-	public static BufferedImage charPlayerW1, charPlayerW2, charPlayerW3;
+	public static BufferedImage charPlayer1N1, charPlayer1N2, charPlayer1N3;
+	public static BufferedImage charPlayer1E1, charPlayer1E2, charPlayer1E3;
+	public static BufferedImage charPlayer1S1, charPlayer1S2, charPlayer1S3;
+	public static BufferedImage charPlayer1W1, charPlayer1W2, charPlayer1W3;
+	public static BufferedImage charPlayer2N1, charPlayer2N2, charPlayer2N3;
+	public static BufferedImage charPlayer2E1, charPlayer2E2, charPlayer2E3;
+	public static BufferedImage charPlayer2S1, charPlayer2S2, charPlayer2S3;
+	public static BufferedImage charPlayer2W1, charPlayer2W2, charPlayer2W3;
+	public static BufferedImage charPlayer3N1, charPlayer3N2, charPlayer3N3;
+	public static BufferedImage charPlayer3E1, charPlayer3E2, charPlayer3E3;
+	public static BufferedImage charPlayer3S1, charPlayer3S2, charPlayer3S3;
+	public static BufferedImage charPlayer3W1, charPlayer3W2, charPlayer3W3;
 	public static BufferedImage npcAnnaN, npcAnnaE, npcAnnaS, npcAnnaW;
 	public static BufferedImage itemMushroom1, itemChest1;
 	public static BufferedImage itemGarnet1, itemGarnet2;
@@ -154,21 +162,47 @@ public class Assets
 	public static void initSprites()
 	{
 		// Player Sheet
-		Spritesheet sheetPlayer = new Spritesheet(ImageLoader.loadImage("/sprites/player.png"));
+		Spritesheet sheetPlayer1 = new Spritesheet(ImageLoader.loadImage("/sprites/player1.png"));
+		Spritesheet sheetPlayer2 = new Spritesheet(ImageLoader.loadImage("/sprites/player2.png"));
+		Spritesheet sheetPlayer3 = new Spritesheet(ImageLoader.loadImage("/sprites/player3.png"));
 		
 		// Player Images
-		charPlayerN1 = sheetPlayer.crop(32, 96, 32, 32);
-		charPlayerN2 = sheetPlayer.crop(0, 96, 32, 32);
-		charPlayerN3 = sheetPlayer.crop(64, 96, 32, 32);
-		charPlayerE1 = sheetPlayer.crop(32, 64, 32, 32);
-		charPlayerE2 = sheetPlayer.crop(0, 64, 32, 32);
-		charPlayerE3 = sheetPlayer.crop(64, 64, 32, 32);
-		charPlayerS1 = sheetPlayer.crop(32, 0, 32, 32);
-		charPlayerS2 = sheetPlayer.crop(0, 0, 32, 32);
-		charPlayerS3 = sheetPlayer.crop(64, 0, 32, 32);
-		charPlayerW1 = sheetPlayer.crop(32, 32, 32, 32);
-		charPlayerW2 = sheetPlayer.crop(0, 32, 32, 32);
-		charPlayerW3 = sheetPlayer.crop(64, 32, 32, 32);
+		charPlayer1N1 = sheetPlayer1.crop(32, 96, 32, 32);
+		charPlayer1N2 = sheetPlayer1.crop(0, 96, 32, 32);
+		charPlayer1N3 = sheetPlayer1.crop(64, 96, 32, 32);
+		charPlayer1E1 = sheetPlayer1.crop(32, 64, 32, 32);
+		charPlayer1E2 = sheetPlayer1.crop(0, 64, 32, 32);
+		charPlayer1E3 = sheetPlayer1.crop(64, 64, 32, 32);
+		charPlayer1S1 = sheetPlayer1.crop(32, 0, 32, 32);
+		charPlayer1S2 = sheetPlayer1.crop(0, 0, 32, 32);
+		charPlayer1S3 = sheetPlayer1.crop(64, 0, 32, 32);
+		charPlayer1W1 = sheetPlayer1.crop(32, 32, 32, 32);
+		charPlayer1W2 = sheetPlayer1.crop(0, 32, 32, 32);
+		charPlayer1W3 = sheetPlayer1.crop(64, 32, 32, 32);
+		charPlayer2N1 = sheetPlayer2.crop(32, 96, 32, 32);
+		charPlayer2N2 = sheetPlayer2.crop(0, 96, 32, 32);
+		charPlayer2N3 = sheetPlayer2.crop(64, 96, 32, 32);
+		charPlayer2E1 = sheetPlayer2.crop(32, 64, 32, 32);
+		charPlayer2E2 = sheetPlayer2.crop(0, 64, 32, 32);
+		charPlayer2E3 = sheetPlayer2.crop(64, 64, 32, 32);
+		charPlayer2S1 = sheetPlayer2.crop(32, 0, 32, 32);
+		charPlayer2S2 = sheetPlayer2.crop(0, 0, 32, 32);
+		charPlayer2S3 = sheetPlayer2.crop(64, 0, 32, 32);
+		charPlayer2W1 = sheetPlayer2.crop(32, 32, 32, 32);
+		charPlayer2W2 = sheetPlayer2.crop(0, 32, 32, 32);
+		charPlayer2W3 = sheetPlayer2.crop(64, 32, 32, 32);
+		charPlayer3N1 = sheetPlayer3.crop(32, 96, 32, 32);
+		charPlayer3N2 = sheetPlayer3.crop(0, 96, 32, 32);
+		charPlayer3N3 = sheetPlayer3.crop(64, 96, 32, 32);
+		charPlayer3E1 = sheetPlayer3.crop(32, 64, 32, 32);
+		charPlayer3E2 = sheetPlayer3.crop(0, 64, 32, 32);
+		charPlayer3E3 = sheetPlayer3.crop(64, 64, 32, 32);
+		charPlayer3S1 = sheetPlayer3.crop(32, 0, 32, 32);
+		charPlayer3S2 = sheetPlayer3.crop(0, 0, 32, 32);
+		charPlayer3S3 = sheetPlayer3.crop(64, 0, 32, 32);
+		charPlayer3W1 = sheetPlayer3.crop(32, 32, 32, 32);
+		charPlayer3W2 = sheetPlayer3.crop(0, 32, 32, 32);
+		charPlayer3W3 = sheetPlayer3.crop(64, 32, 32, 32);
 		
 		// NCP Anna Sheet
 		Spritesheet sheetAnna = new Spritesheet(ImageLoader.loadImage("/sprites/npcAnna.png"));

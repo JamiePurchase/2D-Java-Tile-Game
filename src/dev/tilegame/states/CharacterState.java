@@ -12,6 +12,8 @@ public class CharacterState extends State
 
 	private int menuPos = 1;
 	private int menuMax = 3;
+	private int spriteTick = 1;
+	private int spriteFrame = 1;
 	
 	public CharacterState()
 	{
@@ -19,6 +21,12 @@ public class CharacterState extends State
 	}
 	
 	public void tick()
+	{
+		tickKeyEvents();
+		tickSprites();
+	}
+	
+	public void tickKeyEvents()
 	{
 		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
 		{
@@ -47,9 +55,21 @@ public class CharacterState extends State
 		}
 	}
 	
+	public void tickSprites()
+	{
+		spriteTick += 1;
+		if(spriteTick>10)
+		{
+			spriteTick = 1;
+			spriteFrame += 1;
+			if(spriteFrame>4){spriteFrame = 1;}
+		}
+	}
+	
 	public void render(Graphics g)
 	{
 		renderBackground(g);
+		renderSprites(g);
 		renderOptions(g);
 		renderInformation(g);
 	}
@@ -88,11 +108,53 @@ public class CharacterState extends State
 	
 	public void renderOptions(Graphics g)
 	{
-		if(menuPos==1){g.drawImage(Assets.uiCharacterOpt1a,  100, 300, null);}
-		else{g.drawImage(Assets.uiCharacterOpt1,  100, 300, null);}
-		if(menuPos==2){g.drawImage(Assets.uiCharacterOpt2a,  300, 300, null);}
-		else{g.drawImage(Assets.uiCharacterOpt2,  300, 300, null);}
-		if(menuPos==3){g.drawImage(Assets.uiCharacterOpt3a,  500, 300, null);}
-		else{g.drawImage(Assets.uiCharacterOpt3,  500, 300, null);}
+		if(menuPos==1){g.drawImage(Assets.uiCharacterOpt1a,  155, 300, null);}
+		else{g.drawImage(Assets.uiCharacterOpt1,  155, 300, null);}
+		if(menuPos==2){g.drawImage(Assets.uiCharacterOpt2a,  340, 300, null);}
+		else{g.drawImage(Assets.uiCharacterOpt2,  340, 300, null);}
+		if(menuPos==3){g.drawImage(Assets.uiCharacterOpt3a,  460, 300, null);}
+		else{g.drawImage(Assets.uiCharacterOpt3,  460, 300, null);}
+	}
+	
+	public void renderSprites(Graphics g)
+	{
+		// Warmonger
+		if(menuPos==1)
+		{
+			if(spriteFrame==1){g.drawImage(Assets.charPlayer1S1, 248, 250, null);}
+			if(spriteFrame==2){g.drawImage(Assets.charPlayer1S2, 248, 250, null);}
+			if(spriteFrame==3){g.drawImage(Assets.charPlayer1S1, 248, 250, null);}
+			if(spriteFrame==4){g.drawImage(Assets.charPlayer1S3, 248, 250, null);}
+		}
+		else
+		{
+			g.drawImage(Assets.charPlayer1S1, 248, 250, null);
+		}
+		
+		// Stalker
+		if(menuPos==2)
+		{
+			if(spriteFrame==1){g.drawImage(Assets.charPlayer2S1, 384, 250, null);}
+			if(spriteFrame==2){g.drawImage(Assets.charPlayer2S2, 384, 250, null);}
+			if(spriteFrame==3){g.drawImage(Assets.charPlayer2S1, 384, 250, null);}
+			if(spriteFrame==4){g.drawImage(Assets.charPlayer2S3, 384, 250, null);}
+		}
+		else
+		{
+			g.drawImage(Assets.charPlayer2S1, 384, 250, null);
+		}
+		
+		// Spellweaver
+		if(menuPos==3)
+		{
+			if(spriteFrame==1){g.drawImage(Assets.charPlayer3S1, 520, 250, null);}
+			if(spriteFrame==2){g.drawImage(Assets.charPlayer3S2, 520, 250, null);}
+			if(spriteFrame==3){g.drawImage(Assets.charPlayer3S1, 520, 250, null);}
+			if(spriteFrame==4){g.drawImage(Assets.charPlayer3S3, 520, 250, null);}
+		}
+		else
+		{
+			g.drawImage(Assets.charPlayer3S1, 520, 250, null);
+		}
 	}
 }

@@ -14,12 +14,12 @@ public class Keyboard implements KeyListener
 
     public void keyTyped(KeyEvent e)
     {
-        System.out.println("Key typed: " + e.getKeyChar());
+        //System.out.println("Key typed: " + e.getKeyChar());
     }
 
     public void keyPressed(KeyEvent e)
     {
-        System.out.println("Key pressed: " + e.getKeyChar());
+        //System.out.println("Key pressed: " + e.getKeyChar());
         if(e.getKeyCode() == KeyEvent.VK_ENTER){keyPressed = "Enter";}
         if(e.getKeyCode() == KeyEvent.VK_SPACE){keyPressed = "Space";}
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE){keyPressed = "Escape";}
@@ -31,7 +31,7 @@ public class Keyboard implements KeyListener
 
     public void keyReleased(KeyEvent e)
     {
-        System.out.println("Key released: " + e.getKeyChar());
+        //System.out.println("Key released: " + e.getKeyChar());
     }
     
 	public static void setKeyDone()

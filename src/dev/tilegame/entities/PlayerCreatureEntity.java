@@ -20,43 +20,125 @@ public class PlayerCreatureEntity extends CreatureEntity
 	{
 		if(getAction()=="Idle")
 		{
-			if(getDirection()=="N"){return Assets.charPlayerN1;}
-			if(getDirection()=="E"){return Assets.charPlayerE1;}
-			if(getDirection()=="S"){return Assets.charPlayerS1;}
-			if(getDirection()=="W"){return Assets.charPlayerW1;}
+			if(Game.playerClass=="Warmonger")
+			{
+				if(getDirection()=="N"){return Assets.charPlayer1N1;}
+				if(getDirection()=="E"){return Assets.charPlayer1E1;}
+				if(getDirection()=="S"){return Assets.charPlayer1S1;}
+				if(getDirection()=="W"){return Assets.charPlayer1W1;}
+			}
+			if(Game.playerClass=="Stalker")
+			{
+				if(getDirection()=="N"){return Assets.charPlayer2N1;}
+				if(getDirection()=="E"){return Assets.charPlayer2E1;}
+				if(getDirection()=="S"){return Assets.charPlayer2S1;}
+				if(getDirection()=="W"){return Assets.charPlayer2W1;}
+			}
+			if(Game.playerClass=="Spellweaver")
+			{
+				if(getDirection()=="N"){return Assets.charPlayer3N1;}
+				if(getDirection()=="E"){return Assets.charPlayer3E1;}
+				if(getDirection()=="S"){return Assets.charPlayer3S1;}
+				if(getDirection()=="W"){return Assets.charPlayer3W1;}
+			}
 		}
 		if(getAction()=="Walk")
 		{
-			if(getDirection()=="N")
+			if(Game.playerClass=="Warmonger")
 			{
-				if(getWalkFrame()==1){return Assets.charPlayerN2;}
-				if(getWalkFrame()==2){return Assets.charPlayerN1;}
-				if(getWalkFrame()==3){return Assets.charPlayerN3;}
-				if(getWalkFrame()==4){return Assets.charPlayerN1;}
+				if(getDirection()=="N")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer1N2;}
+					if(getWalkFrame()==2){return Assets.charPlayer1N1;}
+					if(getWalkFrame()==3){return Assets.charPlayer1N3;}
+					if(getWalkFrame()==4){return Assets.charPlayer1N1;}
+				}
+				if(getDirection()=="E")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer1E2;}
+					if(getWalkFrame()==2){return Assets.charPlayer1E1;}
+					if(getWalkFrame()==3){return Assets.charPlayer1E3;}
+					if(getWalkFrame()==4){return Assets.charPlayer1E1;}
+				}
+				if(getDirection()=="S")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer1S2;}
+					if(getWalkFrame()==2){return Assets.charPlayer1S1;}
+					if(getWalkFrame()==3){return Assets.charPlayer1S3;}
+					if(getWalkFrame()==4){return Assets.charPlayer1S1;}
+				}
+				if(getDirection()=="W")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer1W2;}
+					if(getWalkFrame()==2){return Assets.charPlayer1W1;}
+					if(getWalkFrame()==3){return Assets.charPlayer1W3;}
+					if(getWalkFrame()==4){return Assets.charPlayer1W1;}
+				}
 			}
-			if(getDirection()=="E")
+			if(Game.playerClass=="Stalker")
 			{
-				if(getWalkFrame()==1){return Assets.charPlayerE2;}
-				if(getWalkFrame()==2){return Assets.charPlayerE1;}
-				if(getWalkFrame()==3){return Assets.charPlayerE3;}
-				if(getWalkFrame()==4){return Assets.charPlayerE1;}
+				if(getDirection()=="N")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer2N2;}
+					if(getWalkFrame()==2){return Assets.charPlayer2N1;}
+					if(getWalkFrame()==3){return Assets.charPlayer2N3;}
+					if(getWalkFrame()==4){return Assets.charPlayer2N1;}
+				}
+				if(getDirection()=="E")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer2E2;}
+					if(getWalkFrame()==2){return Assets.charPlayer2E1;}
+					if(getWalkFrame()==3){return Assets.charPlayer2E3;}
+					if(getWalkFrame()==4){return Assets.charPlayer2E1;}
+				}
+				if(getDirection()=="S")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer2S2;}
+					if(getWalkFrame()==2){return Assets.charPlayer2S1;}
+					if(getWalkFrame()==3){return Assets.charPlayer2S3;}
+					if(getWalkFrame()==4){return Assets.charPlayer2S1;}
+				}
+				if(getDirection()=="W")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer2W2;}
+					if(getWalkFrame()==2){return Assets.charPlayer2W1;}
+					if(getWalkFrame()==3){return Assets.charPlayer2W3;}
+					if(getWalkFrame()==4){return Assets.charPlayer2W1;}
+				}
 			}
-			if(getDirection()=="S")
+			if(Game.playerClass=="Spellweaver")
 			{
-				if(getWalkFrame()==1){return Assets.charPlayerS2;}
-				if(getWalkFrame()==2){return Assets.charPlayerS1;}
-				if(getWalkFrame()==3){return Assets.charPlayerS3;}
-				if(getWalkFrame()==4){return Assets.charPlayerS1;}
-			}
-			if(getDirection()=="W")
-			{
-				if(getWalkFrame()==1){return Assets.charPlayerW2;}
-				if(getWalkFrame()==2){return Assets.charPlayerW1;}
-				if(getWalkFrame()==3){return Assets.charPlayerW3;}
-				if(getWalkFrame()==4){return Assets.charPlayerW1;}
+				if(getDirection()=="N")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer3N2;}
+					if(getWalkFrame()==2){return Assets.charPlayer3N1;}
+					if(getWalkFrame()==3){return Assets.charPlayer3N3;}
+					if(getWalkFrame()==4){return Assets.charPlayer3N1;}
+				}
+				if(getDirection()=="E")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer3E2;}
+					if(getWalkFrame()==2){return Assets.charPlayer3E1;}
+					if(getWalkFrame()==3){return Assets.charPlayer3E3;}
+					if(getWalkFrame()==4){return Assets.charPlayer3E1;}
+				}
+				if(getDirection()=="S")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer3S2;}
+					if(getWalkFrame()==2){return Assets.charPlayer3S1;}
+					if(getWalkFrame()==3){return Assets.charPlayer3S3;}
+					if(getWalkFrame()==4){return Assets.charPlayer3S1;}
+				}
+				if(getDirection()=="W")
+				{
+					if(getWalkFrame()==1){return Assets.charPlayer3W2;}
+					if(getWalkFrame()==2){return Assets.charPlayer3W1;}
+					if(getWalkFrame()==3){return Assets.charPlayer3W3;}
+					if(getWalkFrame()==4){return Assets.charPlayer3W1;}
+				}
 			}
 		}
-		return Assets.charPlayerS1;
+		return null;
 	}
 	
 	public void render(Graphics g)
