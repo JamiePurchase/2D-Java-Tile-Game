@@ -36,7 +36,7 @@ public class Game extends JPanel implements Runnable
 	private BufferStrategy bs;
 	private Graphics g;
 	public static boolean chat = false;
-	private static String boardChange;
+	private static String boardChange = "none";
 	
 	// Board Object
 	public static Board world;
@@ -65,7 +65,7 @@ public class Game extends JPanel implements Runnable
 		this.width = width;
 		this.height = height;
 		
-		// Test
+		/* Test
 		try
 		{
 			saveGame();
@@ -73,7 +73,7 @@ public class Game extends JPanel implements Runnable
 		catch (IOException e)
 		{
 			System.out.println("IO Error");
-		}
+		}*/
 	}
 	
 	private void init()
@@ -115,8 +115,8 @@ public class Game extends JPanel implements Runnable
 	private void initWorld()
 	{
 		world = new Board();
-		//world.getData("Board01");
-		world.getData("JvGooseberryManor");
+		world.getData("Board01");
+		world.saveBoard();
 	}
 	
 	private void tick()
@@ -174,11 +174,11 @@ public class Game extends JPanel implements Runnable
 		}
 		
 		// Change Board
-		if(boardChange!="")
+		if(boardChange!="none")
 		{
 			world = new Board();
 			world.getData(boardChange);
-			boardChange = "";
+			boardChange = "none";
 		}
 		
 		// Tick state
@@ -275,7 +275,7 @@ public class Game extends JPanel implements Runnable
 		{
 			System.out.println("IO Error");
 		}*/
-		WriteFile data = new WriteFile(file_name, true);
+		WriteFile data = new WriteFile(file_name, false);
 		data.writeToFile("Hello world");
 	}
 	

@@ -266,6 +266,8 @@ public class PlayerCreatureEntity extends CreatureEntity
 		{
 			Keyboard.setKeyDone();
 			Game.boardChange("JvGooseberryManor");
+			setPositionX(10);
+			setPositionY(6);
 		}
 	}
 	

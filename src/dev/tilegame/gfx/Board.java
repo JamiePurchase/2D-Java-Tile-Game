@@ -1,11 +1,13 @@
 package dev.tilegame.gfx;
 import dev.tilegame.Game;
+import dev.tilegame.datafiles.WriteFile;
 import dev.tilegame.world.Board01;
 import dev.tilegame.world.JvGooseberryManor;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Board
 {
@@ -64,9 +66,19 @@ public class Board
 		return garnetCount;
 	}
 	
+	public static String getLocation()
+	{
+		return locationName;
+	}
+	
 	public static int getMushroomCount()
 	{
 		return mushroomCount;
+	}
+	
+	public static String getName()
+	{
+		return boardName;
 	}
 	
 	public static String getTileEntity(int x, int y)
@@ -311,5 +323,57 @@ public class Board
 				tileType[x][y] = type;
 			}
 		}
+	}
+	
+	public static void saveBoard()
+	{
+		try
+		{
+			saveBoardAction();
+		}
+		catch (IOException e)
+		{
+			System.out.println("IO Error");
+		}
+	}
+	
+	public static void saveBoardAction() throws IOException
+	{
+		// Get the file
+		String file_name = "C:/Users/Jamie/Documents/My Workshop/Autumn Park/Datafiles/Board01.txt";
+		WriteFile data = new WriteFile(file_name, false);
+		String br = System.getProperty("line.separator");
+		
+		// Board Data
+		String write = "Test Board Save" + br;
+		write = write + getName() + br;
+		write = write + getLocation() + br;
+		write = write + getGridWidth() + br;
+		write = write + getGridHeight() + br;
+		write = write + bkgHasImage + br;
+		write = write + bkgImage + br;
+		write = write + "Music (to do later)" + br;
+		write = write + "Wild Encounters (to do later)" + br;
+		write = write + "#" + br;
+		
+		// Tile Data
+		for(int x=1;x<=gridWidth;x+=1)
+		{
+			for(int y=1;y<=gridHeight;y+=1)
+			{
+				write = write + tileImage[x][y] + br;
+				write = write + tileType[x][y] + br;
+				write = write + tileEntity[x][y] + br;
+				write = write + tileEntityID[x][y] + br;
+			}
+		}
+		write = write + "#" + br;
+		
+		// Garnet Data
+		// Mushroom Data
+		// Treasure Data
+		
+		// Write the data
+		data.writeToFile(write);
 	}
 }
