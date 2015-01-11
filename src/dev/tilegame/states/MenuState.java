@@ -86,7 +86,7 @@ public class MenuState extends State
 		}
 		
 		// Text
-		g.setFont(Assets.fontOption);
+		g.setFont(Assets.fontStandard);
 		g.setColor(Color.white);
 		g.drawString(option, x+25, y+35);
 	}

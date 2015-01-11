@@ -26,6 +26,8 @@ public class Assets
 	public static BufferedImage uiOptionsBkg, uiTutorialBkg, uiAboutBkg;
 	public static BufferedImage uiGameInfo1, uiGameInfoMushroom, uiGameInfoTreasure, uiGameInfoGarnet;
 	public static BufferedImage[] uiGameInfoCount = new BufferedImage[10];
+	public static BufferedImage uiCharacterBkg, uiCharacterOpt1, uiCharacterOpt1a, uiCharacterOpt2;
+	public static BufferedImage uiCharacterOpt2a, uiCharacterOpt3, uiCharacterOpt3a;
 
 	// Sprites
 	public static BufferedImage charPlayerN1, charPlayerN2, charPlayerN3;
@@ -36,15 +38,19 @@ public class Assets
 	public static BufferedImage itemMushroom1, itemChest1;
 	public static BufferedImage itemGarnet1, itemGarnet2;
 	
+	// Test
+	public static BufferedImage battleCharacter2Idle, battleBackground;
+	
 	// Textures
 	public static BufferedImage txtGrass, txtFence1L, txtFence1M, txtFence1MS, txtFence1R;
 	public static BufferedImage txtTree1a, txtTree1b, txtTree1c, txtTree2a, txtTree2b;
 	public static BufferedImage txtTree3aL, txtTree3aR, txtTree3bL, txtTree3bR;
 	public static BufferedImage txtTree4aL, txtTree4aR, txtTree5aL, txtTree5aR;
 	public static BufferedImage txtTree6TL, txtTree6TR, txtTree6BL, txtTree6BR;
+	public static BufferedImage txtTree7aT, txtTree7aB, txtTree7bT, txtTree7bB;
 	
 	// Fonts
-	public static Font fontStandard, fontOption, fontHint, fontInfoCount;
+	public static Font fontStandard, fontInfoCount, fontReduced;
 	
 	public static void init()
 	{
@@ -113,6 +119,15 @@ public class Assets
 		// About
 		uiAboutBkg = ImageLoader.loadImage("/interface/aboutBkg.png");
 		
+		// Character Select
+		uiCharacterBkg = ImageLoader.loadImage("/interface/characterSelectBkg.png");
+		uiCharacterOpt1 = ImageLoader.loadImage("/interface/characterOpt1.png");
+		uiCharacterOpt1a = ImageLoader.loadImage("/interface/characterOpt1a.png");
+		uiCharacterOpt2 = ImageLoader.loadImage("/interface/characterOpt2.png");
+		uiCharacterOpt2a = ImageLoader.loadImage("/interface/characterOpt2a.png");
+		uiCharacterOpt3 = ImageLoader.loadImage("/interface/characterOpt3.png");
+		uiCharacterOpt3a = ImageLoader.loadImage("/interface/characterOpt3a.png");
+		
 		// Game
 		uiGameInfo1 = ImageLoader.loadImage("/interface/gameInfo1.png");
 		uiGameInfoMushroom = ImageLoader.loadImage("/interface/gameInfoPanelM.png");
@@ -133,6 +148,7 @@ public class Assets
 		// Fonts
 		fontStandard = new Font("MV Boli", Font.PLAIN, 26);
 		fontInfoCount = new Font("Times New Roman", Font.BOLD, 36);
+		fontReduced = new Font("MV Boli", Font.PLAIN, 20);
 	}
 	
 	public static void initSprites()
@@ -175,6 +191,15 @@ public class Assets
 		// Garnet Images
 		itemGarnet1 = sheetGarnet.crop(0, 0, 32, 32);
 		itemGarnet2 = sheetGarnet.crop(32, 0, 32, 32);
+		
+		// Test
+		initSpritesBattle();
+	}
+	
+	public static void initSpritesBattle()
+	{
+		battleBackground = ImageLoader.loadImage("/battle/backgrounds/test1.png");
+		battleCharacter2Idle = ImageLoader.loadImage("/battle/character2/Idle.png");
 	}
 	
 	public static void initTextures()
@@ -208,6 +233,11 @@ public class Assets
 		txtTree6TR = sheetWorld.crop(224, 0, 32, 32);
 		txtTree6BL = sheetWorld.crop(192, 32, 32, 32);
 		txtTree6BR = sheetWorld.crop(224, 32, 32, 32);
+		//
+		txtTree7aT = sheetWorld.crop(256, 0, 32, 32);
+		txtTree7aB = sheetWorld.crop(256, 32, 32, 32);
+		txtTree7bT = sheetWorld.crop(288, 0, 32, 32);
+		txtTree7bB = sheetWorld.crop(288, 32, 32, 32);
 	}
 
 }

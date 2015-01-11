@@ -5,6 +5,8 @@ import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
 import dev.tilegame.states.State;
 import dev.tilegame.states.AboutState;
+import dev.tilegame.states.BattleState;
+import dev.tilegame.states.CharacterState;
 import dev.tilegame.states.GameState;
 import dev.tilegame.states.IntroState;
 import dev.tilegame.states.MenuState;
@@ -35,8 +37,15 @@ public class Game extends JPanel implements Runnable
 	public static int backpackMushrooms = 0;
 	public static int backpackTreasure = 0;
 	
+	// Test
+	public static String playerClass = "";
+	
 	// States
-	private State stateAbout, stateGame, stateIntro, stateMenu, stateOptions, stateTitle, stateTutorial;
+	private State stateAbout, stateCharacter, stateIntro, stateOptions, stateTitle, stateTutorial;
+	private State stateGame, stateMenu;
+	
+	// Test
+	private State stateBattle;
 
 	public Game(String title, int width, int height)
 	{
@@ -63,18 +72,22 @@ public class Game extends JPanel implements Runnable
 		AudioPlayer.load("/sounds/collectGarnet.wav", "Garnet");
 		AudioPlayer.load("/sounds/collectMushroom.wav", "Mushroom");
 		AudioPlayer.load("/sounds/collectTreasure.wav", "Treasure");
-		AudioPlayer.play("music2");
+		AudioPlayer.play("music1");
 	}
 
 	private void initStates()
 	{
 		stateAbout = new AboutState();
+		stateCharacter = new CharacterState();
 		stateGame = new GameState();
 		stateIntro = new IntroState();
 		stateMenu = new MenuState();
 		stateOptions = new OptionsState();
 		stateTitle = new TitleState();
 		stateTutorial = new TutorialState();
+		
+		// Test
+		stateBattle = new BattleState();
 	}
 	
 	private void initWorld()
@@ -89,6 +102,12 @@ public class Game extends JPanel implements Runnable
 		if(State.getStateChange() == "About")
 		{
 			State.setState(stateAbout);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
+		if(State.getStateChange() == "Character")
+		{
+			State.setState(stateCharacter);
 			State.setStateChange("");
 			Keyboard.setKeyDone();
 		}
@@ -119,6 +138,14 @@ public class Game extends JPanel implements Runnable
 		if(State.getStateChange() == "Tutorial")
 		{
 			State.setState(stateTutorial);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
+		
+		// Temp
+		if(State.getStateChange() == "Battle")
+		{
+			State.setState(stateBattle);
 			State.setStateChange("");
 			Keyboard.setKeyDone();
 		}

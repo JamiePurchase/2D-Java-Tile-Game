@@ -17,13 +17,19 @@ public class TitleState extends State
 	
 	public void tick()
 	{
-		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
+		// Test
+		//if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
+		if(Keyboard.getKeyPressed()=="Enter")
+		{
+			State.setStateChange("Battle");
+		}
+		if(Keyboard.getKeyPressed()=="Space")
 		{
 			Keyboard.setKeyDone();
 			if(menuPos==1)
 			{
-				// New Game
-				State.setStateChange("Game");
+				// Character Selection
+				State.setStateChange("Character");
 			}
 			if(menuPos==2)
 			{
@@ -78,11 +84,6 @@ public class TitleState extends State
 	{
 		renderBackground(g);
 		renderOptions(g);
-	}
-	
-	public void renderAbout(Graphics g)
-	{
-		g.drawImage(Assets.uiIntro0, 0, 0, null);
 	}
 	
 	public void renderBackground(Graphics g)

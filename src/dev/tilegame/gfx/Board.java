@@ -134,6 +134,10 @@ public class Board
 		if(tileImage[x][y]=="Tree6TR"){return Assets.txtTree6TR;}
 		if(tileImage[x][y]=="Tree6BL"){return Assets.txtTree6BL;}
 		if(tileImage[x][y]=="Tree6BR"){return Assets.txtTree6BR;}
+		if(tileImage[x][y]=="Tree7aT"){return Assets.txtTree7aT;}
+		if(tileImage[x][y]=="Tree7aB"){return Assets.txtTree7aB;}
+		if(tileImage[x][y]=="Tree7bT"){return Assets.txtTree7bT;}
+		if(tileImage[x][y]=="Tree7bB"){return Assets.txtTree7bB;}
 		return Assets.txtGrass;
 	}
 	
