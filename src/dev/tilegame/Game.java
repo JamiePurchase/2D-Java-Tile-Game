@@ -30,6 +30,7 @@ public class Game extends JPanel implements Runnable
 	private Graphics g;
 	public static boolean chat = false;
 	public static Board world;
+	public static int backpackGarnets = 0;
 	public static int backpackMushrooms = 0;
 	public static int backpackTreasure = 0;
 	

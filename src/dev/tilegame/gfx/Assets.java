@@ -24,7 +24,7 @@ public class Assets
 	public static BufferedImage uiTitleOpt3, uiTitleOpt3a, uiTitleOpt4, uiTitleOpt4a;
 	public static BufferedImage uiOptDone, uiOptDoneA;
 	public static BufferedImage uiOptionsBkg, uiTutorialBkg, uiAboutBkg;
-	public static BufferedImage uiGameInfo1, uiGameInfoMushroom, uiGameInfoTreasure;
+	public static BufferedImage uiGameInfo1, uiGameInfoMushroom, uiGameInfoTreasure, uiGameInfoGarnet;
 	public static BufferedImage[] uiGameInfoCount = new BufferedImage[10];
 
 	// Sprites
@@ -117,6 +117,7 @@ public class Assets
 		uiGameInfo1 = ImageLoader.loadImage("/interface/gameInfo1.png");
 		uiGameInfoMushroom = ImageLoader.loadImage("/interface/gameInfoPanelM.png");
 		uiGameInfoTreasure = ImageLoader.loadImage("/interface/gameInfoPanelT.png");
+		uiGameInfoGarnet = ImageLoader.loadImage("/interface/gameInfoPanelG.png");
 		Spritesheet sheetInfoCount = new Spritesheet(ImageLoader.loadImage("/interface/gameInfoCount.png"));
 		uiGameInfoCount[0] = sheetInfoCount.crop(0, 0, 36, 36);
 		uiGameInfoCount[1] = sheetInfoCount.crop(36, 0, 36, 36);

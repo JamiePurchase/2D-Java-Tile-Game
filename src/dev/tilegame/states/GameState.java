@@ -28,6 +28,7 @@ public class GameState extends State
 	public void renderEntities(Graphics g)
 	{
 		Assets.entPlayer.render(g);
+		Game.world.drawGarnets(g);
 		Game.world.drawMushrooms(g);
 		Game.world.drawTreasure(g);
 		
@@ -52,6 +53,8 @@ public class GameState extends State
 		g.drawImage(Assets.uiGameInfoCount[Game.backpackMushrooms], 245, 10, null);
 		g.drawImage(Assets.uiGameInfoTreasure, 370, 0, null);
 		g.drawImage(Assets.uiGameInfoCount[Game.backpackTreasure], 445, 10, null);
+		g.drawImage(Assets.uiGameInfoGarnet, 570, 0, null);
+		g.drawImage(Assets.uiGameInfoCount[Game.backpackGarnets], 645, 10, null);
 	}
 	
 	public void renderTile(Graphics g, int x, int y)

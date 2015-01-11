@@ -25,9 +25,28 @@ public class Board
 	private static int[] treasurePosX = new int[10];
 	private static int[] treasurePosY = new int[10];
 	
+	// Temp
+	private static int garnetCount = 0;
+	private static int[] garnetFind = new int[10];
+	private static int[] garnetPosX = new int[10];
+	private static int[] garnetPosY = new int[10];
+	
 	public Board()
 	{
 		tileInit();
+	}
+	
+	public static void drawGarnets(Graphics g)
+	{
+		for(int garnet=1;garnet<=getGarnetCount();garnet+=1)
+		{
+			if(garnetFind[garnet]<1)
+			{
+				int posX = 32 * garnetPosX[garnet] - 32;
+				int posY = 32 * garnetPosY[garnet] + 24;
+				g.drawImage(Assets.itemGarnet1, posX, posY, null);
+			}
+		}
 	}
 	
 	public static void drawMushrooms(Graphics g)
@@ -64,6 +83,11 @@ public class Board
 	public static int getGridWidth()
 	{
 		return gridWidth;
+	}
+	
+	public static int getGarnetCount()
+	{
+		return garnetCount;
 	}
 	
 	public static int getMushroomCount()
@@ -121,6 +145,26 @@ public class Board
 	public static int getTileType(int x, int y)
 	{
 		return tileType[x][y];
+	}
+	
+	public static void setGarnet(int x, int y)
+	{
+		garnetCount += 1;
+		garnetFind[garnetCount] = 0;
+		garnetPosX[garnetCount] = x;
+		garnetPosY[garnetCount] = y;
+		tileEntity[x][y] = "Garnet";
+		tileEntityID[x][y] = garnetCount;
+	}
+	
+	public static void setGarnetFound(int ID)
+	{
+		garnetFind[ID] = 1;
+		int posX = garnetPosX[ID];
+		int posY = garnetPosY[ID];
+		tileEntity[posX][posY] = "None";
+		tileEntityID[posX][posY] = 0;
+		Game.backpackGarnets += 1;
 	}
 	
 	public static void setGridHeight(int height)
