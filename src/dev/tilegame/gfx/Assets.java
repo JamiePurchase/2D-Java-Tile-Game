@@ -131,9 +131,7 @@ public class Assets
 		uiGameInfoCount[9] = sheetInfoCount.crop(324, 0, 36, 36);
 		
 		// Fonts
-		fontStandard = new Font("Times New Roman", Font.PLAIN, 26);
-		fontOption = new Font("Times New Roman", Font.PLAIN, 32);
-		fontHint = new Font("Times New Roman", Font.ITALIC, 22);
+		fontStandard = new Font("MV Boli", Font.PLAIN, 26);
 		fontInfoCount = new Font("Times New Roman", Font.BOLD, 36);
 	}
 	

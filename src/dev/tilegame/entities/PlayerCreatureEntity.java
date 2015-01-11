@@ -1,6 +1,7 @@
 package dev.tilegame.entities;
 import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
+import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.states.State;
 
@@ -214,16 +215,19 @@ public class PlayerCreatureEntity extends CreatureEntity
 		{
 			int ID = Game.world.getTileEntityID(tileX, tileY);
 			Game.world.setGarnetFound(ID);
+			AudioPlayer.play("Garnet");
 		}
 		if(Game.world.getTileEntity(tileX, tileY)=="Mushroom")
 		{
 			int ID = Game.world.getTileEntityID(tileX, tileY);
 			Game.world.setMushroomFound(ID);
+			AudioPlayer.play("Mushroom");
 		}
 		if(Game.world.getTileEntity(tileX, tileY)=="Treasure")
 		{
 			int ID = Game.world.getTileEntityID(tileX, tileY);
 			Game.world.setTreasureFound(ID);
+			AudioPlayer.play("Treasure");
 		}
 	}
 

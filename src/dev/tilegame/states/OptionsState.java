@@ -1,6 +1,8 @@
 package dev.tilegame.states;
 import dev.tilegame.Keyboard;
 import dev.tilegame.gfx.Assets;
+
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class OptionsState extends State
@@ -34,6 +36,12 @@ public class OptionsState extends State
 	
 	public void renderOptions(Graphics g)
 	{
+		g.setFont(Assets.fontStandard);
+		g.setColor(Color.WHITE);
+		g.drawString("Frame Rate", 225, 300);
+		g.drawString("60 FPS", 450, 300);
+		g.drawString("Sound Effects", 225, 350);
+		g.drawString("Enabled", 450, 350);
 		g.drawImage(Assets.uiOptDone,  300, 425, null);
 	}
 }

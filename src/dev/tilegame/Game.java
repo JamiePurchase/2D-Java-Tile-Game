@@ -1,4 +1,5 @@
 package dev.tilegame;
+import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
@@ -50,7 +51,17 @@ public class Game extends JPanel implements Runnable
 		Assets.init();
 		initStates();
 		initWorld();
+		initAudio();
 		State.setState(stateIntro);
+	}
+	
+	private void initAudio()
+	{
+		AudioPlayer.init();
+		//AudioPlayer.load("/music/bgm1.mp3", "music1");
+		AudioPlayer.load("/sounds/collectGarnet.wav", "Garnet");
+		AudioPlayer.load("/sounds/collectMushroom.wav", "Mushroom");
+		AudioPlayer.load("/sounds/collectTreasure.wav", "Treasure");
 	}
 
 	private void initStates()

@@ -1,6 +1,8 @@
 package dev.tilegame.states;
 import dev.tilegame.Keyboard;
 import dev.tilegame.gfx.Assets;
+
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class TutorialState extends State
@@ -34,6 +36,12 @@ public class TutorialState extends State
 	
 	public void renderDetails(Graphics g)
 	{
+		g.setFont(Assets.fontStandard);
+		g.setColor(Color.WHITE);
+		g.drawString("Move with the arrow keys.", 230, 250);
+		g.drawString("Interact with the spacebar.", 220, 300);
+		g.drawString("Press enter to access the menu.", 210, 350);
+		g.drawString("Walk into items to collect them.", 210, 400);
 		g.drawImage(Assets.uiOptDoneA,  300, 425, null);
 	}
 }
