@@ -21,7 +21,7 @@ public class Assets
 	public static BufferedImage uiCursor1, uiCursor2, uiCursor3;
 	public static BufferedImage uiIntro0, uiIntro1, uiIntro2, uiIntro3;
 	public static BufferedImage uiTitleBkg, uiTitleOpt1, uiTitleOpt1a, uiTitleOpt2, uiTitleOpt2a;
-	public static BufferedImage uiTitleOpt3, uiTitleOpt3a, uiTitleOpt4, uiTitleOpt4a;
+	public static BufferedImage uiTitleOpt3, uiTitleOpt3a, uiTitleOpt4, uiTitleOpt4a, uiTitleOpt5, uiTitleOpt5a;
 	public static BufferedImage uiOptDone, uiOptDoneA;
 	public static BufferedImage uiOptionsBkg, uiTutorialBkg, uiAboutBkg;
 	public static BufferedImage uiGameInfo1, uiGameInfoMushroom, uiGameInfoTreasure, uiGameInfoGarnet;
@@ -57,6 +57,9 @@ public class Assets
 	public static BufferedImage txtTree6TL, txtTree6TR, txtTree6BL, txtTree6BR;
 	public static BufferedImage txtTree7aT, txtTree7aB, txtTree7bT, txtTree7bB;
 	
+	// Board Backgrounds
+	public static BufferedImage bkgJvGooseberryManor;
+	
 	// Fonts
 	public static Font fontStandard, fontInfoCount, fontReduced;
 	
@@ -65,7 +68,13 @@ public class Assets
 		initInterface();
 		initSprites();
 		initTextures();
+		initBackgrounds();
 		initEntities();
+	}
+	
+	public static void initBackgrounds()
+	{
+		bkgJvGooseberryManor = ImageLoader.loadImage("/backgrounds/JvGooseberryManor.png");
 	}
 	
 	public static void initEntities()
@@ -115,6 +124,8 @@ public class Assets
 		uiTitleOpt3a = ImageLoader.loadImage("/interface/titleOpt3a.png");
 		uiTitleOpt4 = ImageLoader.loadImage("/interface/titleOpt4.png");
 		uiTitleOpt4a = ImageLoader.loadImage("/interface/titleOpt4a.png");
+		uiTitleOpt5 = ImageLoader.loadImage("/interface/titleOpt5.png");
+		uiTitleOpt5a = ImageLoader.loadImage("/interface/titleOpt5a.png");
 		uiOptDone = ImageLoader.loadImage("/interface/uiOptDone.png");
 		uiOptDoneA = ImageLoader.loadImage("/interface/uiOptDoneA.png");
 		

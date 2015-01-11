@@ -11,6 +11,7 @@ public class Board01
 		Game.world.setGridHeight(17);
 		
 		// Tiles
+		Game.world.tileInit("Grass", 0);
 		Game.world.setTile(1, 1, "Tree", 1);
 		Game.world.setTile(2, 1, "Tree", 1);
 		Game.world.setTile(3, 1, "Tree", 1);

@@ -3,6 +3,7 @@ import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
 import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.gfx.Assets;
+import dev.tilegame.gfx.Board;
 import dev.tilegame.states.State;
 
 import java.awt.Graphics;
@@ -258,6 +259,13 @@ public class PlayerCreatureEntity extends CreatureEntity
 			}
 			setDirection("E");
 			Keyboard.setKeyDone();
+		}
+		
+		// Test
+		if(Keyboard.getKeyPressed()=="D")
+		{
+			Keyboard.setKeyDone();
+			Game.boardChange("JvGooseberryManor");
 		}
 	}
 	

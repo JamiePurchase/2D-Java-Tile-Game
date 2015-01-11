@@ -27,6 +27,7 @@ public class Keyboard implements KeyListener
         if(e.getKeyCode() == KeyEvent.VK_DOWN){keyPressed = "Down";}
         if(e.getKeyCode() == KeyEvent.VK_LEFT){keyPressed = "Left";}
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){keyPressed = "Right";}
+        if(e.getKeyCode() == KeyEvent.VK_D){keyPressed = "D";}
     }
 
     public void keyReleased(KeyEvent e)

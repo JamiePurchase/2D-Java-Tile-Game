@@ -33,15 +33,20 @@ public class TitleState extends State
 			}
 			if(menuPos==2)
 			{
+				// Load Game
+				//State.setStateChange("Load");
+			}
+			if(menuPos==3)
+			{
 				// Basic Instructions
 				State.setStateChange("Tutorial");
 			}
-			if(menuPos==3)
+			if(menuPos==4)
 			{
 				// Game Options
 				State.setStateChange("Options");
 			}
-			if(menuPos==4)
+			if(menuPos==5)
 			{
 				// Project Information
 				State.setStateChange("About");
@@ -52,15 +57,31 @@ public class TitleState extends State
 			// Quit
 			System.exit(0);
 		}
-		if(Keyboard.getKeyPressed()=="Up" && menuPos>2)
+		if(Keyboard.getKeyPressed()=="Up")
 		{
-			menuPos = menuPos - 2;
-			Keyboard.setKeyDone();
+			if(menuPos>2 && menuPos<5)
+			{
+				menuPos = menuPos - 2;
+				Keyboard.setKeyDone();
+			}
+			else if(menuPos==5)
+			{
+				menuPos = 3;
+				Keyboard.setKeyDone();
+			}
 		}
-		if(Keyboard.getKeyPressed()=="Down" && menuPos<3)
+		if(Keyboard.getKeyPressed()=="Down")
 		{
-			menuPos = menuPos + 2;
-			Keyboard.setKeyDone();
+			if(menuPos<3)
+			{
+				menuPos = menuPos + 2;
+				Keyboard.setKeyDone();
+			}
+			else if(menuPos>2 && menuPos<5)
+			{
+				menuPos = 5;
+				Keyboard.setKeyDone();
+			}
 		}
 		if(Keyboard.getKeyPressed()=="Left")
 		{
@@ -95,11 +116,13 @@ public class TitleState extends State
 	{
 		if(menuPos==1){g.drawImage(Assets.uiTitleOpt1a,  200, 275, null);}
 		else{g.drawImage(Assets.uiTitleOpt1,  200, 275, null);}
-		if(menuPos==2){g.drawImage(Assets.uiTitleOpt2a,  400, 275, null);}
-		else{g.drawImage(Assets.uiTitleOpt2,  400, 275, null);}
-		if(menuPos==3){g.drawImage(Assets.uiTitleOpt3a,  200, 350, null);}
-		else{g.drawImage(Assets.uiTitleOpt3,  200, 350, null);}
-		if(menuPos==4){g.drawImage(Assets.uiTitleOpt4a,  400, 350, null);}
-		else{g.drawImage(Assets.uiTitleOpt4,  400, 350, null);}
+		if(menuPos==2){g.drawImage(Assets.uiTitleOpt5a,  400, 275, null);}
+		else{g.drawImage(Assets.uiTitleOpt5,  400, 275, null);}
+		if(menuPos==3){g.drawImage(Assets.uiTitleOpt2a,  200, 350, null);}
+		else{g.drawImage(Assets.uiTitleOpt2,  200, 350, null);}
+		if(menuPos==4){g.drawImage(Assets.uiTitleOpt3a,  400, 350, null);}
+		else{g.drawImage(Assets.uiTitleOpt3,  400, 350, null);}
+		if(menuPos==5){g.drawImage(Assets.uiTitleOpt4a,  300, 425, null);}
+		else{g.drawImage(Assets.uiTitleOpt4,  300, 425, null);}
 	}
 }

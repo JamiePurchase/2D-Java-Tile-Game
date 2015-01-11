@@ -36,6 +36,7 @@ public class Game extends JPanel implements Runnable
 	private BufferStrategy bs;
 	private Graphics g;
 	public static boolean chat = false;
+	private static String boardChange;
 	
 	// Board Object
 	public static Board world;
@@ -114,7 +115,8 @@ public class Game extends JPanel implements Runnable
 	private void initWorld()
 	{
 		world = new Board();
-		Board01 boardLoader = new Board01();
+		//world.getData("Board01");
+		world.getData("JvGooseberryManor");
 	}
 	
 	private void tick()
@@ -169,6 +171,14 @@ public class Game extends JPanel implements Runnable
 			State.setState(stateBattle);
 			State.setStateChange("");
 			Keyboard.setKeyDone();
+		}
+		
+		// Change Board
+		if(boardChange!="")
+		{
+			world = new Board();
+			world.getData(boardChange);
+			boardChange = "";
 		}
 		
 		// Tick state
@@ -241,6 +251,11 @@ public class Game extends JPanel implements Runnable
 		
 		// End game
 		stop();
+	}
+	
+	public static void boardChange(String board)
+	{
+		boardChange = board;
 	}
 	
 	public void saveGame() throws IOException
