@@ -14,6 +14,7 @@ import dev.tilegame.states.OptionsState;
 import dev.tilegame.states.TitleState;
 import dev.tilegame.states.TutorialState;
 import dev.tilegame.world.Board01;
+import dev.tilegame.datafiles.FileManager;
 
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
@@ -52,6 +53,9 @@ public class Game extends JPanel implements Runnable
 		this.title = title;
 		this.width = width;
 		this.height = height;
+		
+		// Temp
+		
 	}
 	
 	private void init()
