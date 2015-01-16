@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel implements Runnable
 {
+	private static final long serialVersionUID = 1L;
 	private Display display;
 	public String title;
 	public int width, height;
