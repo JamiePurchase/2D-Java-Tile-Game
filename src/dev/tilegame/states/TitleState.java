@@ -35,6 +35,9 @@ public class TitleState extends State
 			{
 				// Load Game
 				//State.setStateChange("Load");
+				
+				// Temp
+				State.setStateChange("Debug");
 			}
 			if(menuPos==3)
 			{

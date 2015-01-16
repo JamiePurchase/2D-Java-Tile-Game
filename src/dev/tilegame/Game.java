@@ -3,6 +3,8 @@ import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
+import dev.tilegame.states.DebugState;
+import dev.tilegame.states.EditorState;
 import dev.tilegame.states.State;
 import dev.tilegame.states.AboutState;
 import dev.tilegame.states.BattleState;
@@ -56,6 +58,7 @@ public class Game extends JPanel implements Runnable
 	// States
 	private State stateAbout, stateCharacter, stateIntro, stateOptions, stateTitle, stateTutorial;
 	private State stateGame, stateMenu;
+	private State stateDebug, stateEditor;
 	
 	// Test
 	private State stateBattle;
@@ -102,6 +105,8 @@ public class Game extends JPanel implements Runnable
 	{
 		stateAbout = new AboutState();
 		stateCharacter = new CharacterState();
+		stateDebug = new DebugState();
+		stateEditor = new EditorState();
 		stateGame = new GameState();
 		stateIntro = new IntroState();
 		stateMenu = new MenuState();
@@ -132,6 +137,18 @@ public class Game extends JPanel implements Runnable
 		if(State.getStateChange() == "Character")
 		{
 			State.setState(stateCharacter);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
+		if(State.getStateChange() == "Debug")
+		{
+			State.setState(stateDebug);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
+		if(State.getStateChange() == "Editor")
+		{
+			State.setState(stateEditor);
 			State.setStateChange("");
 			Keyboard.setKeyDone();
 		}

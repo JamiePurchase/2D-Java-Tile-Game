@@ -98,33 +98,7 @@ public class Board
 	
 	public static BufferedImage getTileImageFile(int x, int y)
 	{
-		if(tileImage[x][y]=="Grass"){return Assets.txtGrass;}
-		if(tileImage[x][y]=="Tree"){return Assets.txtTree1a;}
-		if(tileImage[x][y]=="TreeB"){return Assets.txtTree1b;}
-		if(tileImage[x][y]=="TreeC"){return Assets.txtTree1c;}
-		if(tileImage[x][y]=="Shrub"){return Assets.txtTree2a;}
-		if(tileImage[x][y]=="ShrubB"){return Assets.txtTree2b;}
-		if(tileImage[x][y]=="TreesL"){return Assets.txtTree3aL;}
-		if(tileImage[x][y]=="TreesR"){return Assets.txtTree3aR;}
-		if(tileImage[x][y]=="TreesBL"){return Assets.txtTree3bL;}
-		if(tileImage[x][y]=="TreesBR"){return Assets.txtTree3bR;}
-		if(tileImage[x][y]=="TreesCL"){return Assets.txtTree4aL;}
-		if(tileImage[x][y]=="TreesCR"){return Assets.txtTree4aR;}
-		if(tileImage[x][y]=="TreesDL"){return Assets.txtTree5aL;}
-		if(tileImage[x][y]=="TreesDR"){return Assets.txtTree5aR;}
-		if(tileImage[x][y]=="Fence1L"){return Assets.txtFence1L;}
-		if(tileImage[x][y]=="Fence1M"){return Assets.txtFence1M;}
-		if(tileImage[x][y]=="Fence1MS"){return Assets.txtFence1MS;}
-		if(tileImage[x][y]=="Fence1R"){return Assets.txtFence1R;}
-		if(tileImage[x][y]=="Tree6TL"){return Assets.txtTree6TL;}
-		if(tileImage[x][y]=="Tree6TR"){return Assets.txtTree6TR;}
-		if(tileImage[x][y]=="Tree6BL"){return Assets.txtTree6BL;}
-		if(tileImage[x][y]=="Tree6BR"){return Assets.txtTree6BR;}
-		if(tileImage[x][y]=="Tree7aT"){return Assets.txtTree7aT;}
-		if(tileImage[x][y]=="Tree7aB"){return Assets.txtTree7aB;}
-		if(tileImage[x][y]=="Tree7bT"){return Assets.txtTree7bT;}
-		if(tileImage[x][y]=="Tree7bB"){return Assets.txtTree7bB;}
-		return Assets.txtGrass;
+		return BoardTiles.getTileFile(tileImage[x][y]);
 	}
 	
 	public static int getTreasureCount()

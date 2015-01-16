@@ -26,4 +26,14 @@ public class Drawing
 		g.setColor(Color.white);
 		g.drawRect(x, y, width, height);
 	}
+	
+	public static void drawMenuItem(Graphics g, String text, int x, int y)
+	{
+		g.setFont(Assets.fontEditorMenu);
+		g.setColor(Color.BLACK);
+		g.drawString(text, x, y);
+		/*g.setFont(Assets.fontStandardUnderline);
+		String character = "" + text.charAt(1);
+		g.drawString(character, x, y);*/
+	}
 }

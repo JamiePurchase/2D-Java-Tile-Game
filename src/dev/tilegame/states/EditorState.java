@@ -1,14 +1,18 @@
 package dev.tilegame.states;
+import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
 import dev.tilegame.gfx.Assets;
+import dev.tilegame.gfx.BoardTiles;
+import dev.tilegame.gfx.Drawing;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class EditorState extends State
 {
-	private String editorFile = "";
-	private int editorBrush = 1;
+	private int editorFileNew = 0;
+	private String editorFilePath = "";
 	
 	// Look at this later
 	private int[] entitySomething;
@@ -18,14 +22,26 @@ public class EditorState extends State
 	private int gridHeight;
 	private int gridPosX;
 	private int gridPosY;
-	private String[][] tileImage;
-	private int[][] tileType;
-	private String[][] tileEntity;
-	private int[][] tileEntityID;
+	private String[][] tileImage = new String[26][18];
+	private int[][] tileType = new int[26][18];
+	private String[][] tileEntity = new String[26][18];
+	private int[][] tileEntityID = new int[26][18];
+	
+	// Toolbar
+	private int editorToolbar = 0;
+	
+	// Brushes
+	private int editorBrushType;
 	
 	public EditorState()
 	{
-		
+		editorInit();
+	}
+	
+	public void editorInit()
+	{
+		editorBrushType = 1;
+		editorNew();
 	}
 	
 	public void editorLoad(String file)
@@ -38,7 +54,13 @@ public class EditorState extends State
 	{
 		// Reset the grid arrays
 		//gridSetBackground; - image or colour?
-		gridSetTileAll("None", 0);
+		//gridSetTileAll("None", 0);
+		
+		// Temp
+		gridWidth = 10;
+		gridHeight = 10; 
+		gridSetTileAll("Grass", 0);
+		tileImage[3][3] = "Tree";
 	}
 	
 	public void gridSetTileAll(String fill, int type)
@@ -67,22 +89,64 @@ public class EditorState extends State
 	public void render(Graphics g)
 	{
 		renderBackground(g);
-		renderDetails(g);
+		renderBoard(g);
+		renderToolbars(g);
 	}
 	
 	public void renderBackground(Graphics g)
 	{
-		g.drawImage(Assets.uiAboutBkg,  0, 0, null);
+		//g.drawImage(Assets.uiAboutBkg,  0, 0, null);
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 1366, 768);
 	}
 	
-	public void renderDetails(Graphics g)
+	public void renderBoard(Graphics g)
 	{
-		g.setFont(Assets.fontStandard);
-		g.setColor(Color.WHITE);
-		g.drawString("This game was developed in a weekend,", 150, 250);
-		g.drawString("while I started to learn Java.", 200, 300);
-		g.drawString("Created with Eclipse. Sprites from", 175, 350);
-		g.drawString("famitsu. Inspiration from Youtube.", 175, 400);
-		g.drawImage(Assets.uiOptDoneA,  300, 425, null);
+		renderBoardTiles(g);
+	}
+	
+	public void renderBoardTile(Graphics g, int x, int y)
+	{
+		int drawX = x * 32 - 32;
+		int drawY = y * 32 + 0;
+		g.drawImage(BoardTiles.getTileFile(tileImage[x][y]), drawX, drawY, null);
+	}
+	
+	public void renderBoardTiles(Graphics g)
+	{
+		for(int x=1;x<=gridWidth;x+=1)
+		{
+			for(int y=1;y<=gridHeight;y+=1)
+			{
+				if(tileImage[x][y]!=""){renderBoardTile(g, x, y);}
+			}
+		}
+	}
+	
+	public void renderToolbars(Graphics g)
+	{
+		// Toolbar
+		g.setColor(Color.GRAY);
+		g.fillRect(0, 0, 1366, 32);
+		g.setColor(Color.BLACK);
+		g.drawRect(0, 0, 1366, 32);
+		
+		// Menu Items
+		Drawing.drawMenuItem(g, "File", 25, 22);
+		Drawing.drawMenuItem(g, "Select", 125, 22);
+		Drawing.drawMenuItem(g, "Tiles", 225, 22);
+		Drawing.drawMenuItem(g, "Entities", 325, 22);
+		
+		if(editorToolbar==1)
+		{
+			g.setColor(Color.GRAY);
+			g.fillRect(0,32,100,120);
+			g.setColor(Color.BLACK);
+			g.drawRect(0, 32, 100, 120);
+			Drawing.drawMenuItem(g, "New", 25, 54);
+			Drawing.drawMenuItem(g, "Load", 25, 84);
+			Drawing.drawMenuItem(g, "Save", 25, 114);
+			Drawing.drawMenuItem(g, "Close", 25, 144);
+		}
 	}
 }
