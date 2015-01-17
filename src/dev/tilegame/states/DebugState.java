@@ -8,7 +8,7 @@ import java.awt.Graphics;
 public class DebugState extends State
 {
 	private int menuPos = 1;
-	private int menuMax = 2;
+	private int menuMax = 4;
 	
 	public DebugState()
 	{
@@ -25,6 +25,14 @@ public class DebugState extends State
 				State.setStateChange("Editor");
 			}
 			if(menuPos==2)
+			{
+				State.setStateChange("Battle");
+			}
+			if(menuPos==3)
+			{
+				State.setStateChange("Menu");
+			}
+			if(menuPos==4)
 			{
 				State.setStateChange("Title");
 			}
@@ -76,9 +84,8 @@ public class DebugState extends State
 		g.drawString("Debug Menu", 50, 50);
 		g.setFont(Assets.fontDebugStandard);
 		g.drawString("Board Editor", 100, 100);
-		g.drawString("Close", 100, 130);
-		//g.drawString("Created with Eclipse. Sprites from", 175, 350);
-		//g.drawString("famitsu. Inspiration from Youtube.", 175, 400);
-		//g.drawImage(Assets.uiOptDoneA,  300, 425, null);
+		g.drawString("Battle System", 100, 130);
+		g.drawString("Pause Menu", 100, 160);
+		g.drawString("Close", 100, 190);
 	}
 }

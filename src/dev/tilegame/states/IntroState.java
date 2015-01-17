@@ -3,7 +3,6 @@ import dev.tilegame.gfx.Assets;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 public class IntroState extends State
 {
@@ -11,7 +10,6 @@ public class IntroState extends State
 	
 	public IntroState()
 	{
-		
 	}
 	
 	public void tick()

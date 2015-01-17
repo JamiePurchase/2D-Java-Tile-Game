@@ -36,11 +36,18 @@ public class Game extends JPanel implements Runnable
 	public int width, height;
 	private Thread thread;
 	private boolean running = false;
-	public static String stateChange = "none";
 	private BufferStrategy bs;
 	private Graphics g;
+	
+	// Note: Consider where this should be
 	public static boolean chat = false;
+	
+	// State Management
 	private static String boardChange = "none";
+	public static String stateChange = "none";
+	
+	// Development Mode
+	public static boolean development = false;
 	
 	// Session
 	public static Session session;
@@ -62,16 +69,15 @@ public class Game extends JPanel implements Runnable
 	// States
 	private State stateAbout, stateCharacter, stateIntro, stateOptions, stateTitle, stateTutorial;
 	private State stateGame, stateGameNew, stateMenu;
-	private State stateDebug;
-	
-	// Test
 	private State stateBattle;
+	private State stateDebug;
 
-	public Game(String title, int width, int height)
+	public Game(String title, int width, int height, boolean dev)
 	{
 		this.title = title;
 		this.width = width;
 		this.height = height;
+		this.development = dev;
 		
 		/* Test
 		try
@@ -86,12 +92,24 @@ public class Game extends JPanel implements Runnable
 	
 	private void init()
 	{
+		// Create Display
 		display = new Display(title, width, height);
+		
+		// Load Resources
 		Assets.init();
 		initStates();
 		initWorld();
 		initAudio();
-		State.setState(stateIntro);
+		
+		// Development Menu
+		if(development==true){State.setState(stateDebug);}
+		
+		// Introduction
+		else
+		{
+			AudioPlayer.play("music1");
+			State.setState(stateIntro);
+		}
 	}
 	
 	private void initAudio()
@@ -102,7 +120,6 @@ public class Game extends JPanel implements Runnable
 		AudioPlayer.load("/sounds/collectGarnet.wav", "Garnet");
 		AudioPlayer.load("/sounds/collectMushroom.wav", "Mushroom");
 		AudioPlayer.load("/sounds/collectTreasure.wav", "Treasure");
-		AudioPlayer.play("music1");
 	}
 
 	private void initStates()
