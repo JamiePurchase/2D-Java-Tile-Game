@@ -20,6 +20,7 @@ import dev.tilegame.datafiles.FileManager;
 import dev.tilegame.datafiles.ReadFile;
 import dev.tilegame.datafiles.WriteFile;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
@@ -219,7 +220,8 @@ public class Game extends JPanel implements Runnable
 		
 		// Graphics start
 		g = bs.getDrawGraphics();
-		g.clearRect(0, 0, width, height);
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, width, height);
 		
 		// Graphics draw
 		if(State.getState() != null)

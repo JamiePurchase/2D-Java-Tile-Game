@@ -17,6 +17,9 @@ public class Assets
 	// Harvest
 	public static HarvestNatureEntity entGarnet;
 	
+	// Avatars
+	public static BufferedImage avtPlayer1;
+	
 	// Interface
 	public static BufferedImage uiCursor1, uiCursor2;
 	public static BufferedImage uiIntro1, uiIntro2, uiIntro3;
@@ -24,8 +27,9 @@ public class Assets
 	public static BufferedImage uiTitleOpt3, uiTitleOpt3a, uiTitleOpt4, uiTitleOpt4a, uiTitleOpt5, uiTitleOpt5a;
 	public static BufferedImage uiOptDone, uiOptDoneA;
 	public static BufferedImage uiOptionsBkg, uiTutorialBkg, uiAboutBkg;
-	public static BufferedImage uiGameInfo1, uiGameInfoMushroom, uiGameInfoTreasure, uiGameInfoGarnet;
+	public static BufferedImage uiGameInfo1, uiGameBorder;
 	public static BufferedImage[] uiGameInfoCount = new BufferedImage[10];
+	public static BufferedImage uiMenuBkg;
 	public static BufferedImage uiCharacterBkg, uiCharacterOpt1, uiCharacterOpt1a, uiCharacterOpt2;
 	public static BufferedImage uiCharacterOpt2a, uiCharacterOpt3, uiCharacterOpt3a;
 	public static BufferedImage uiEditorCursor1;
@@ -68,12 +72,18 @@ public class Assets
 	
 	public static void init()
 	{
+		initAvatars();
 		initBackgrounds();
 		initEntities();
 		initFonts();
 		initSprites();
 		initInterface();
 		initTextures();
+	}
+	
+	public static void initAvatars()
+	{
+		avtPlayer1 = ImageLoader.loadImage("/avatars/player1.png");
 	}
 	
 	public static void initBackgrounds()
@@ -117,6 +127,7 @@ public class Assets
 		initInterfaceCursor();
 		initInterfaceGame();
 		initInterfaceIntro();
+		initInterfaceMenu();
 		initInterfaceOptions();
 		initInterfaceTitle();
 		initInterfaceTutorial();
@@ -141,7 +152,7 @@ public class Assets
 	public static void initInterfaceCursor()
 	{
 		uiCursor1 = ImageLoader.loadImage("/interface/cursor1.png");
-		uiCursor2 = ImageLoader.loadImage("/interface/cursor2.png");
+		uiCursor2 = ImageLoader.loadImage("/interface/cursor2b.png");
 	}
 	
 	public static void initInterfaceEditor()
@@ -152,9 +163,7 @@ public class Assets
 	public static void initInterfaceGame()
 	{
 		uiGameInfo1 = ImageLoader.loadImage("/interface/gameInfo1.png");
-		uiGameInfoMushroom = ImageLoader.loadImage("/interface/gameInfoPanelM.png");
-		uiGameInfoTreasure = ImageLoader.loadImage("/interface/gameInfoPanelT.png");
-		uiGameInfoGarnet = ImageLoader.loadImage("/interface/gameInfoPanelG.png");
+		uiGameBorder = ImageLoader.loadImage("/interface/gameBorder.png");
 		Spritesheet sheetInfoCount = new Spritesheet(ImageLoader.loadImage("/interface/gameInfoCount.png"));
 		uiGameInfoCount[0] = sheetInfoCount.crop(0, 0, 36, 36);
 		uiGameInfoCount[1] = sheetInfoCount.crop(36, 0, 36, 36);
@@ -173,6 +182,11 @@ public class Assets
 		uiIntro1 = ImageLoader.loadImage("/interface/intro1.png");
 		uiIntro2 = ImageLoader.loadImage("/interface/intro2.png");
 		uiIntro3 = ImageLoader.loadImage("/interface/intro3.png");
+	}
+	
+	public static void initInterfaceMenu()
+	{
+		uiMenuBkg = ImageLoader.loadImage("/interface/menuBkg.png");
 	}
 	
 	public static void initInterfaceOptions()

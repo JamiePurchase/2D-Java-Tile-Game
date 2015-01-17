@@ -116,8 +116,6 @@ public class Board
 		renderBackground(g);
 		renderTiles(g);
 		Assets.entPlayer.render(g);
-		renderGarnets(g);
-		renderMushrooms(g);
 		renderTreasure(g);
 		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
@@ -126,41 +124,16 @@ public class Board
 	
 	public static void renderBackground(Graphics g)
 	{
+		g.drawImage(Assets.uiGameBorder, 0, 0, null);
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 1366, 768);
-		if(bkgHasImage){g.drawImage(bkgImage, 0, 0, null);}
-	}
-	
-	public static void renderGarnets(Graphics g)
-	{
-		for(int garnet=1;garnet<=getGarnetCount();garnet+=1)
-		{
-			if(garnetFind[garnet]<1)
-			{
-				int posX = 32 * garnetPosX[garnet] - 32;
-				int posY = 32 * garnetPosY[garnet] - 32;
-				g.drawImage(Assets.itemGarnet1, posX, posY, null);
-			}
-		}
-	}
-	
-	public static void renderMushrooms(Graphics g)
-	{
-		for(int mushroom=1;mushroom<=getMushroomCount();mushroom+=1)
-		{
-			if(mushroomFind[mushroom]<1)
-			{
-				int posX = 32 * mushroomPosX[mushroom] - 32;
-				int posY = 32 * mushroomPosY[mushroom] - 32;
-				g.drawImage(Assets.itemMushroom1, posX, posY, null);
-			}
-		}
+		g.fillRect(11, 16, 1344, 736);
+		if(bkgHasImage){g.drawImage(bkgImage, 11, 16, null);}
 	}
 	
 	public void renderTile(Graphics g, int x, int y)
 	{
-		int drawX = x * 32 - 32;
-		int drawY = y * 32 - 32;
+		int drawX = x * 32 - 21;
+		int drawY = y * 32 - 16;
 		g.drawImage(Game.world.getTileImageFile(x, y), drawX, drawY, null);
 	}
 	

@@ -4,6 +4,16 @@ import java.awt.Graphics;
 
 public class Drawing
 {
+	public static void drawStringShadow(Graphics g, String text, int x, int y)
+	{
+		g.setFont(Assets.fontStandard);
+		g.setColor(Color.BLACK);
+		g.drawString(text, x+1, y+1);
+		g.drawString(text, x+2, y+2);
+		g.setColor(Color.WHITE);
+		g.drawString(text, x, y);
+	}
+	
 	public static void drawFrame(Graphics g, int x, int y, int width, int height)
 	{
 		// Shadow

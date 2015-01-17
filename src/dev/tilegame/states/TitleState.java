@@ -22,6 +22,7 @@ public class TitleState extends State
 		if(Keyboard.getKeyPressed()=="Enter")
 		{
 			State.setStateChange("Battle");
+			Keyboard.setKeyDone();
 		}
 		if(Keyboard.getKeyPressed()=="Space")
 		{
@@ -30,29 +31,35 @@ public class TitleState extends State
 			{
 				// Character Selection
 				State.setStateChange("Character");
+				Keyboard.setKeyDone();
 			}
 			if(menuPos==2)
 			{
 				// Load Game
 				//State.setStateChange("Load");
+				//Keyboard.setKeyDone();
 				
 				// Temp
 				State.setStateChange("Debug");
+				Keyboard.setKeyDone();
 			}
 			if(menuPos==3)
 			{
 				// Basic Instructions
 				State.setStateChange("Tutorial");
+				Keyboard.setKeyDone();
 			}
 			if(menuPos==4)
 			{
 				// Game Options
 				State.setStateChange("Options");
+				Keyboard.setKeyDone();
 			}
 			if(menuPos==5)
 			{
 				// Project Information
 				State.setStateChange("About");
+				Keyboard.setKeyDone();
 			}
 		}
 		if(Keyboard.getKeyPressed()=="Escape")
