@@ -1,5 +1,6 @@
 package dev.tilegame.display;
 import dev.tilegame.Keyboard;
+import dev.tilegame.Mouse;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
@@ -28,6 +29,11 @@ public class Display
 		frame = new JFrame(title);
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// Temp
+		frame.setUndecorated(true);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
@@ -35,6 +41,7 @@ public class Display
 		// Create a JPanel
 		JPanel panel = new JPanel();
         panel.addKeyListener(new Keyboard());
+        panel.addMouseListener(new Mouse());
         frame.add(panel);
         panel.requestFocusInWindow();
 		

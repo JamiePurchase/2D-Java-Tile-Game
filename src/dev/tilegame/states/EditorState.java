@@ -1,6 +1,7 @@
 package dev.tilegame.states;
 import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
+import dev.tilegame.Mouse;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.BoardTiles;
 import dev.tilegame.gfx.Drawing;
@@ -85,6 +86,10 @@ public class EditorState extends State
 		{
 			Keyboard.setKeyDone();
 			State.setStateChange("Title");
+		}
+		if(Mouse.getMousePressed()==1)
+		{
+			System.exit(0);
 		}
 	}
 	

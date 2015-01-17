@@ -138,7 +138,7 @@ public class Board
 			if(garnetFind[garnet]<1)
 			{
 				int posX = 32 * garnetPosX[garnet] - 32;
-				int posY = 32 * garnetPosY[garnet] + 24;
+				int posY = 32 * garnetPosY[garnet] - 32;
 				g.drawImage(Assets.itemGarnet1, posX, posY, null);
 			}
 		}
@@ -151,7 +151,7 @@ public class Board
 			if(mushroomFind[mushroom]<1)
 			{
 				int posX = 32 * mushroomPosX[mushroom] - 32;
-				int posY = 32 * mushroomPosY[mushroom] + 24;
+				int posY = 32 * mushroomPosY[mushroom] - 32;
 				g.drawImage(Assets.itemMushroom1, posX, posY, null);
 			}
 		}
@@ -160,7 +160,7 @@ public class Board
 	public void renderTile(Graphics g, int x, int y)
 	{
 		int drawX = x * 32 - 32;
-		int drawY = y * 32 + 24;
+		int drawY = y * 32 - 32;
 		g.drawImage(Game.world.getTileImageFile(x, y), drawX, drawY, null);
 	}
 	
@@ -182,7 +182,7 @@ public class Board
 			if(treasureFind[treasure]<1)
 			{
 				int posX = 32 * treasurePosX[treasure] - 32;
-				int posY = 32 * treasurePosY[treasure] + 24;
+				int posY = 32 * treasurePosY[treasure] - 32;
 				g.drawImage(Assets.itemChest1, posX, posY, null);
 			}
 		}
