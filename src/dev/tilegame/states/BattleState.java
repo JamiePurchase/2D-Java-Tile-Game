@@ -35,32 +35,6 @@ public class BattleState extends State
 				// Do stuff
 			}
 		}
-		if(Keyboard.getKeyPressed()=="Up" && menuPos>2)
-		{
-			menuPos = menuPos - 2;
-			Keyboard.setKeyDone();
-		}
-		if(Keyboard.getKeyPressed()=="Down" && menuPos<3)
-		{
-			menuPos = menuPos + 2;
-			Keyboard.setKeyDone();
-		}
-		if(Keyboard.getKeyPressed()=="Left")
-		{
-			if(menuPos==2 || menuPos==4)
-			{
-				menuPos = menuPos - 1;
-				Keyboard.setKeyDone();
-			}
-		}
-		if(Keyboard.getKeyPressed()=="Right")
-		{
-			if(menuPos==1 || menuPos==3)
-			{
-				menuPos = menuPos + 1;
-				Keyboard.setKeyDone();
-			}
-		}
 	}
 	
 	public void render(Graphics g)
@@ -82,6 +56,17 @@ public class BattleState extends State
 	
 	public void renderUnits(Graphics g)
 	{
-		g.drawImage(Assets.battleCharacter2Idle, 600, 200, null);
+		// Allies
+		/*for(var pos=1;pos<=Battle.forceUnitCount[1];pos+=1)
+		{
+			//g.drawImage(Battle.forceUnit[1][pos].getAnim(), 600, 200, null);
+			// Note: Should we specify a stance? Should the system automatically look at status effects, SOS and the like?
+		}*/
+		
+		// Enemies
+		/*for(var pos=1;pos<=Battle.forceUnitCount[2];pos+=1)
+		{
+			//g.drawImage(Assets.battleCharacter2Idle, 600, 200, null);
+		}*/
 	}
 }

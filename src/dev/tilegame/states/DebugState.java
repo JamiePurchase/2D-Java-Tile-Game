@@ -1,5 +1,6 @@
 package dev.tilegame.states;
 import dev.tilegame.Keyboard;
+import dev.tilegame.battle.MockData;
 import dev.tilegame.gfx.Assets;
 
 import java.awt.Color;
@@ -15,6 +16,12 @@ public class DebugState extends State
 		
 	}
 	
+	public void actionTestBattle()
+	{
+		new MockData();
+		State.setStateChange("Battle");
+	}
+	
 	public void tick()
 	{
 		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
@@ -26,7 +33,7 @@ public class DebugState extends State
 			}
 			if(menuPos==2)
 			{
-				State.setStateChange("Battle");
+				actionTestBattle();
 			}
 			if(menuPos==3)
 			{
