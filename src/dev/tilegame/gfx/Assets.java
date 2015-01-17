@@ -19,7 +19,7 @@ public class Assets
 	
 	// Interface
 	public static BufferedImage uiCursor1, uiCursor2, uiCursor3;
-	public static BufferedImage uiIntro0, uiIntro1, uiIntro2, uiIntro3;
+	public static BufferedImage uiIntro1, uiIntro2, uiIntro3;
 	public static BufferedImage uiTitleBkg, uiTitleOpt1, uiTitleOpt1a, uiTitleOpt2, uiTitleOpt2a;
 	public static BufferedImage uiTitleOpt3, uiTitleOpt3a, uiTitleOpt4, uiTitleOpt4a, uiTitleOpt5, uiTitleOpt5a;
 	public static BufferedImage uiOptDone, uiOptDoneA;
@@ -164,7 +164,6 @@ public class Assets
 	
 	public static void initInterfaceIntro()
 	{
-		uiIntro0 = ImageLoader.loadImage("/interface/intro0.png");
 		uiIntro1 = ImageLoader.loadImage("/interface/intro1.png");
 		uiIntro2 = ImageLoader.loadImage("/interface/intro2.png");
 		uiIntro3 = ImageLoader.loadImage("/interface/intro3.png");

@@ -21,7 +21,7 @@ public class GameState extends State
 	public void render(Graphics g)
 	{
 		Game.world.render(g);
-		renderInfo(g);
+		//renderInfo(g);
 	}
 	
 	public void renderInfo(Graphics g)

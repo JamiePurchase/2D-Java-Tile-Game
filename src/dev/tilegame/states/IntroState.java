@@ -26,22 +26,18 @@ public class IntroState extends State
 	public void render(Graphics g)
 	{
 		g.setColor(Color.black);
-		BufferedImage drawBkg = Assets.uiIntro0;
-		g.drawImage(drawBkg, 0, 0, null);
+		g.fillRect(0,0,1366,768);
 		if(introFrame>=100 && introFrame <= 300)
 		{
-			BufferedImage drawImage = Assets.uiIntro1;
-			g.drawImage(drawImage, 0, 0, null);
+			g.drawImage(Assets.uiIntro1, 0, 0, null);
 		}
 		if(introFrame>=350 && introFrame <= 500)
 		{
-			BufferedImage drawImage = Assets.uiIntro2;
-			g.drawImage(drawImage, 0, 0, null);
+			g.drawImage(Assets.uiIntro2, 0, 0, null);
 		}
 		if(introFrame>=550 && introFrame <= 750)
-		{
-			BufferedImage drawImage = Assets.uiIntro3;
-			g.drawImage(drawImage, 0, 0, null);
+		{ ;
+			g.drawImage(Assets.uiIntro3, 0, 0, null);
 		}
 	}
 }

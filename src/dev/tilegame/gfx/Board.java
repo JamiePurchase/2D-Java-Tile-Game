@@ -127,8 +127,8 @@ public class Board
 	public static void renderBackground(Graphics g)
 	{
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 56, 600, 544);
-		if(bkgHasImage){g.drawImage(bkgImage, 0, 56, null);}
+		g.fillRect(0, 0, 1366, 768);
+		if(bkgHasImage){g.drawImage(bkgImage, 0, 0, null);}
 	}
 	
 	public static void renderGarnets(Graphics g)

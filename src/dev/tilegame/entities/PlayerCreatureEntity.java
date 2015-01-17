@@ -146,7 +146,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 	{
 		BufferedImage drawImage = getImage();
 		int drawX = getPositionX() * 32 - 32;
-		int drawY = getPositionY() * 32 + 24;
+		int drawY = getPositionY() * 32 - 32;
 		if(getAction()=="Walk")
 		{
 			int offset = getWalkFrame() * 8;
