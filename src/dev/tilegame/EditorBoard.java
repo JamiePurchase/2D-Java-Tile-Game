@@ -100,7 +100,82 @@ public class EditorBoard extends JPanel implements Runnable
 	
 	private void editorLoad()
 	{
+		try
+		{
+			editorLoadBoard();
+		}
+		catch (IOException e)
+		{
+			System.out.println("IO Error");
+		}
 		
+		// Brush
+		brushType = 1;
+		
+		// Cursor
+		cursorState = "Grid";
+		cursorGridPosX = 1;
+		cursorGridPosY = 1;
+		cursorGridMaxX = boardWidth;
+		cursorGridMaxY = boardHeight;
+		
+		// Info
+		editorInfoText = "Board Loaded";
+		editorInfoTime = 100;
+	}
+	
+	private void editorLoadBoard() throws IOException
+	{
+		// Temp
+		editorFilePath = "C:/Users/Jamie/Documents/My Workshop/Autumn Park/Datafiles/Board01.txt";
+		
+		// Open File
+		ReadFile file = new ReadFile(editorFilePath);
+		String[] aryLines = file.OpenFile();
+		//String[] fileData = new String[aryLines.length];
+		System.out.println("File has " + aryLines.length + " lines");
+		int i = 0;
+		for(i=0;i<aryLines.length;i+=1)
+		{
+			//fileData[i] = aryLines[i];
+			System.out.println(i + " " + aryLines[i]);
+		}
+		
+		// Board
+		/*boardName = fileData[1];
+		boardLocation = fileData[2];
+		boardWidth = Integer.parseInt(fileData[3]);
+		boardHeight = Integer.parseInt(fileData[4]);
+		boardBkgActive = Integer.parseInt(fileData[5]);
+		boardBkgImage = fileData[6];*/
+		
+		// Tiles
+		/*int tileMax = boardWidth * boardHeight;
+		int tileX = 1;
+		int tileY = 1;
+		int linePart = 1;
+		int lineMax = tileMax + 10;*/
+		/*for(int line=11;line<=lineMax;line+=1)
+		{
+			if(linePart==1){tileImage[tileX][tileY] = fileData[line];}
+			if(linePart==2){tileType[tileX][tileY] = Integer.parseInt(fileData[line]);}
+			if(linePart==3){tileEntity[tileX][tileY] = fileData[line];}
+			if(linePart==4){tileEntityID[tileX][tileY] = Integer.parseInt(fileData[line]);}
+			linePart+=1;
+			if(linePart>4)
+			{
+				linePart = 1;
+				tileY+=1;
+				if(tileY>boardHeight)
+				{
+					tileX+=1;
+					tileY = 1;
+				}
+			}
+		}*/
+		
+		// Temp
+		//tileImage[1][1] = fileData[11];
 	}
 	
 	private void editorNew()
