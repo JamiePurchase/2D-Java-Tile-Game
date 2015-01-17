@@ -6,6 +6,10 @@ public class Board01
 	
 	public Board01()
 	{
+		// Details
+		Game.world.setName("Board01");
+		Game.world.setLocation("Board01");
+		
 		// Dimensions
 		Game.world.setGridWidth(25);
 		Game.world.setGridHeight(17);
