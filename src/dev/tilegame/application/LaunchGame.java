@@ -1,6 +1,8 @@
-package dev.tilegame;
+package dev.tilegame.application;
 
-public class Launcher
+import dev.tilegame.Game;
+
+public class LaunchGame
 {
 	public static void main(String args[])
 	{

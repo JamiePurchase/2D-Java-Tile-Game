@@ -1,6 +1,7 @@
 package dev.tilegame.entities;
 import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
+import dev.tilegame.Session;
 import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
@@ -9,10 +10,10 @@ import dev.tilegame.states.State;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class PlayerCreatureEntity extends CreatureEntity
+public class EntityCreaturePlayer extends EntityCreature
 {
 	
-	public PlayerCreatureEntity()
+	public EntityCreaturePlayer()
 	{
 		
 	}
@@ -198,7 +199,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			if(getDirection()=="E"){checkPosX += 1;}
 			if(getDirection()=="S"){checkPosY += 1;}
 			if(getDirection()=="W"){checkPosX -= 1;}
-			if(Game.world.getTileEntity(checkPosX, checkPosY)=="NPC")
+			if(Session.world.getTileEntity(checkPosX, checkPosY)=="NPC")
 			{
 				Game.chat = true;
 				System.out.println("Speak to Anna");
@@ -210,7 +211,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			{
 				int newPosX = getPositionX();
 				int newPosY = getPositionY() - 1;
-				if(Game.world.getTileType(newPosX, newPosY)==0)
+				if(Session.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("N");
 				}
@@ -220,11 +221,11 @@ public class PlayerCreatureEntity extends CreatureEntity
 		}
 		if(Keyboard.getKeyPressed()=="Down")
 		{
-			if(getPositionY()<Game.world.getGridHeight())
+			if(getPositionY()<Session.world.getGridHeight())
 			{
 				int newPosX = getPositionX();
 				int newPosY = getPositionY() + 1;
-				if(Game.world.getTileType(newPosX, newPosY)==0)
+				if(Session.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("S");
 				}
@@ -238,7 +239,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			{
 				int newPosX = getPositionX() - 1;
 				int newPosY = getPositionY();
-				if(Game.world.getTileType(newPosX, newPosY)==0)
+				if(Session.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("W");
 				}
@@ -248,11 +249,11 @@ public class PlayerCreatureEntity extends CreatureEntity
 		}
 		if(Keyboard.getKeyPressed()=="Right")
 		{
-			if(getPositionX()<Game.world.getGridWidth())
+			if(getPositionX()<Session.world.getGridWidth())
 			{
 				int newPosX = getPositionX() + 1;
 				int newPosY = getPositionY();
-				if(Game.world.getTileType(newPosX, newPosY)==0)
+				if(Session.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("E");
 				}
@@ -297,28 +298,16 @@ public class PlayerCreatureEntity extends CreatureEntity
 		setAction("Walk");
 		setDirection(direction);
 		setWalkFrame(1);
-		int tileX = Assets.entPlayer.getPositionX();
-		int tileY = Assets.entPlayer.getPositionY();
+		int tileX = getPositionX();
+		int tileY = getPositionY();
 		if(direction=="N"){tileY -= 1;}
 		if(direction=="E"){tileX += 1;}
 		if(direction=="S"){tileY += 1;}
 		if(direction=="W"){tileX -= 1;}
-		if(Game.world.getTileEntity(tileX, tileY)=="Garnet")
+		if(Session.world.getTileEntity(tileX, tileY)=="Treasure")
 		{
-			int ID = Game.world.getTileEntityID(tileX, tileY);
-			Game.world.setGarnetFound(ID);
-			AudioPlayer.play("Garnet");
-		}
-		if(Game.world.getTileEntity(tileX, tileY)=="Mushroom")
-		{
-			int ID = Game.world.getTileEntityID(tileX, tileY);
-			Game.world.setMushroomFound(ID);
-			AudioPlayer.play("Mushroom");
-		}
-		if(Game.world.getTileEntity(tileX, tileY)=="Treasure")
-		{
-			int ID = Game.world.getTileEntityID(tileX, tileY);
-			Game.world.setTreasureFound(ID);
+			int ID = Session.world.getTileEntityID(tileX, tileY);
+			Session.world.setTreasureFound(ID);
 			AudioPlayer.play("Treasure");
 		}
 	}

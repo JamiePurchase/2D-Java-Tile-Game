@@ -1,5 +1,6 @@
 package dev.tilegame.gfx;
 import dev.tilegame.Game;
+import dev.tilegame.Session;
 import dev.tilegame.datafiles.WriteFile;
 import dev.tilegame.world.Board01;
 import dev.tilegame.world.JvGooseberryManor;
@@ -115,13 +116,13 @@ public class Board
 	{
 		renderBackground(g);
 		renderTiles(g);
-		Assets.entPlayer.render(g);
+		Session.player.render(g);
 		renderGarnets(g);
 		renderMushrooms(g);
 		renderTreasure(g);
 		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
-		g.drawImage(Assets.npcAnnaS, 256, 184, null);
+		//g.drawImage(Assets.npcAnnaS, 256, 184, null);
 	}
 	
 	public static void renderBackground(Graphics g)
@@ -161,16 +162,16 @@ public class Board
 	{
 		int drawX = x * 32 - 32;
 		int drawY = y * 32 - 32;
-		g.drawImage(Game.world.getTileImageFile(x, y), drawX, drawY, null);
+		g.drawImage(Session.world.getTileImageFile(x, y), drawX, drawY, null);
 	}
 	
 	public void renderTiles(Graphics g)
 	{
-		for(int x=1;x<=Game.world.getGridWidth();x+=1)
+		for(int x=1;x<=Session.world.getGridWidth();x+=1)
 		{
-			for(int y=1;y<=Game.world.getGridHeight();y+=1)
+			for(int y=1;y<=Session.world.getGridHeight();y+=1)
 			{
-				if(Game.world.getTileImage(x, y)!=""){renderTile(g, x, y);}
+				if(Session.world.getTileImage(x, y)!=""){renderTile(g, x, y);}
 			}
 		}
 	}
@@ -199,26 +200,6 @@ public class Board
 		bkgImage = image;
 	}
 	
-	public static void setGarnet(int x, int y)
-	{
-		garnetCount += 1;
-		garnetFind[garnetCount] = 0;
-		garnetPosX[garnetCount] = x;
-		garnetPosY[garnetCount] = y;
-		tileEntity[x][y] = "Garnet";
-		tileEntityID[x][y] = garnetCount;
-	}
-	
-	public static void setGarnetFound(int ID)
-	{
-		garnetFind[ID] = 1;
-		int posX = garnetPosX[ID];
-		int posY = garnetPosY[ID];
-		tileEntity[posX][posY] = "None";
-		tileEntityID[posX][posY] = 0;
-		Game.backpackGarnets += 1;
-	}
-	
 	public static void setGridHeight(int height)
 	{
 		gridHeight = height;
@@ -232,26 +213,6 @@ public class Board
 	public static void setLocation(String location)
 	{
 		locationName = location;
-	}
-	
-	public static void setMushroom(int x, int y)
-	{
-		mushroomCount += 1;
-		mushroomFind[mushroomCount] = 0;
-		mushroomPosX[mushroomCount] = x;
-		mushroomPosY[mushroomCount] = y;
-		tileEntity[x][y] = "Mushroom";
-		tileEntityID[x][y] = mushroomCount;
-	}
-	
-	public static void setMushroomFound(int ID)
-	{
-		mushroomFind[ID] = 1;
-		int posX = mushroomPosX[ID];
-		int posY = mushroomPosY[ID];
-		tileEntity[posX][posY] = "None";
-		tileEntityID[posX][posY] = 0;
-		Game.backpackMushrooms += 1;
 	}
 	
 	public static void setName(String name)
@@ -282,7 +243,8 @@ public class Board
 		int posY = treasurePosY[ID];
 		tileEntity[posX][posY] = "None";
 		tileEntityID[posX][posY] = 0;
-		Game.backpackTreasure += 1;
+		//Session.backpackTreasure += 1;
+		// Note: Update the inventory
 	}
 	
 	public static void tileInit(String fill, int type)
