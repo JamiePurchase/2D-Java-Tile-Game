@@ -32,6 +32,8 @@ public class EditorState extends State
 	
 	// Brushes
 	private int editorBrushType;
+	private int editorCursorPosX = 5;
+	private int editorCursorPosY = 3;
 	
 	public EditorState()
 	{
@@ -90,7 +92,7 @@ public class EditorState extends State
 	{
 		renderBackground(g);
 		renderBoard(g);
-		renderToolbars(g);
+		renderTools(g);
 	}
 	
 	public void renderBackground(Graphics g)
@@ -103,6 +105,14 @@ public class EditorState extends State
 	public void renderBoard(Graphics g)
 	{
 		renderBoardTiles(g);
+		renderBoardCursor(g);
+	}
+	
+	public void renderBoardCursor(Graphics g)
+	{
+		int cursorX = 32 * editorCursorPosX + 64;
+		int cursorY = 32 * editorCursorPosY + 32;
+		g.drawImage(Assets.uiEditorCursor1, cursorX, cursorY, null);
 	}
 	
 	public void renderBoardTile(Graphics g, int x, int y)
@@ -123,30 +133,65 @@ public class EditorState extends State
 		}
 	}
 	
-	public void renderToolbars(Graphics g)
+	public void renderTools(Graphics g)
 	{
-		// Toolbar
+		renderToolsMenu(g);
+		renderToolsBrush(g);
+	}
+	
+	public void renderToolsBrush(Graphics g)
+	{
+		g.setColor(Color.GRAY);
+		g.fillRect(0, 32, 128, 746);
+		g.setColor(Color.BLACK);
+		g.drawRect(0, 32, 128, 746);
+
+		g.setFont(Assets.fontEditorMenu);
+		g.setColor(Color.BLACK);
+		g.drawString("Brush", 5, 54);
+	}
+	
+	public void renderToolsMenu(Graphics g)
+	{
+		// Frame
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, 1366, 32);
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, 1366, 32);
+
+		// Title
+		g.setFont(Assets.fontEditorMenuBold);
+		g.setColor(Color.BLACK);
+		g.drawString("EDITOR", 20, 22);
 		
 		// Menu Items
-		Drawing.drawMenuItem(g, "File", 25, 22);
-		Drawing.drawMenuItem(g, "Select", 125, 22);
-		Drawing.drawMenuItem(g, "Tiles", 225, 22);
-		Drawing.drawMenuItem(g, "Entities", 325, 22);
+		Drawing.drawMenuItem(g, "File", 153, 22);
+		Drawing.drawMenuItem(g, "Select", 253, 22);
+		Drawing.drawMenuItem(g, "Tiles", 353, 22);
+		Drawing.drawMenuItem(g, "Entities", 453, 22);
 		
 		if(editorToolbar==1)
 		{
 			g.setColor(Color.GRAY);
-			g.fillRect(0,32,100,120);
+			g.fillRect(128,32,100,120);
 			g.setColor(Color.BLACK);
-			g.drawRect(0, 32, 100, 120);
-			Drawing.drawMenuItem(g, "New", 25, 54);
-			Drawing.drawMenuItem(g, "Load", 25, 84);
-			Drawing.drawMenuItem(g, "Save", 25, 114);
-			Drawing.drawMenuItem(g, "Close", 25, 144);
+			g.drawRect(128, 32, 100, 120);
+			Drawing.drawMenuItem(g, "New", 153, 54);
+			Drawing.drawMenuItem(g, "Load", 153, 84);
+			Drawing.drawMenuItem(g, "Save", 153, 114);
+			Drawing.drawMenuItem(g, "Close", 153, 144);
+		}
+		
+		if(editorToolbar==2)
+		{
+			g.setColor(Color.GRAY);
+			g.fillRect(228,32,100,120);
+			g.setColor(Color.BLACK);
+			g.drawRect(228, 32, 100, 120);
+			Drawing.drawMenuItem(g, "New", 253, 54);
+			Drawing.drawMenuItem(g, "Load", 253, 84);
+			Drawing.drawMenuItem(g, "Save", 253, 114);
+			Drawing.drawMenuItem(g, "Close", 253, 144);
 		}
 	}
 }

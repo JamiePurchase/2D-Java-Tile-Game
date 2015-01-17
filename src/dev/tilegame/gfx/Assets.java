@@ -28,6 +28,7 @@ public class Assets
 	public static BufferedImage[] uiGameInfoCount = new BufferedImage[10];
 	public static BufferedImage uiCharacterBkg, uiCharacterOpt1, uiCharacterOpt1a, uiCharacterOpt2;
 	public static BufferedImage uiCharacterOpt2a, uiCharacterOpt3, uiCharacterOpt3a;
+	public static BufferedImage uiEditorCursor1;
 
 	// Sprites
 	public static BufferedImage charPlayer1N1, charPlayer1N2, charPlayer1N3;
@@ -63,15 +64,16 @@ public class Assets
 	// Fonts
 	public static Font fontStandard, fontStandardUnderline, fontInfoCount, fontReduced;
 	public static Font fontDebugTitle, fontDebugStandard;
-	public static Font fontEditorMenu;
+	public static Font fontEditorMenu, fontEditorMenuBold;
 	
 	public static void init()
 	{
-		initInterface();
-		initSprites();
-		initTextures();
 		initBackgrounds();
 		initEntities();
+		initFonts();
+		initSprites();
+		initInterface();
+		initTextures();
 	}
 	
 	public static void initBackgrounds()
@@ -109,38 +111,24 @@ public class Assets
 	}
 	
 	public static void initInterface()
-	{		
-		// Intro
-		uiIntro0 = ImageLoader.loadImage("/interface/intro0.png");
-		uiIntro1 = ImageLoader.loadImage("/interface/intro1.png");
-		uiIntro2 = ImageLoader.loadImage("/interface/intro2.png");
-		uiIntro3 = ImageLoader.loadImage("/interface/intro3.png");
-		
-		// Title
-		uiTitleBkg = ImageLoader.loadImage("/interface/titleBkg.png");
-		uiTitleOpt1 = ImageLoader.loadImage("/interface/titleOpt1.png");
-		uiTitleOpt1a = ImageLoader.loadImage("/interface/titleOpt1a.png");
-		uiTitleOpt2 = ImageLoader.loadImage("/interface/titleOpt2.png");
-		uiTitleOpt2a = ImageLoader.loadImage("/interface/titleOpt2a.png");
-		uiTitleOpt3 = ImageLoader.loadImage("/interface/titleOpt3.png");
-		uiTitleOpt3a = ImageLoader.loadImage("/interface/titleOpt3a.png");
-		uiTitleOpt4 = ImageLoader.loadImage("/interface/titleOpt4.png");
-		uiTitleOpt4a = ImageLoader.loadImage("/interface/titleOpt4a.png");
-		uiTitleOpt5 = ImageLoader.loadImage("/interface/titleOpt5.png");
-		uiTitleOpt5a = ImageLoader.loadImage("/interface/titleOpt5a.png");
-		uiOptDone = ImageLoader.loadImage("/interface/uiOptDone.png");
-		uiOptDoneA = ImageLoader.loadImage("/interface/uiOptDoneA.png");
-		
-		// Options
-		uiOptionsBkg = ImageLoader.loadImage("/interface/optionsBkg.png");
-		
-		// Tutorial
-		uiTutorialBkg = ImageLoader.loadImage("/interface/tutorialBkg.png");
-		
-		// About
+	{
+		initInterfaceAbout();
+		initInterfaceCharacterSelect();
+		initInterfaceEditor();
+		initInterfaceGame();
+		initInterfaceIntro();
+		initInterfaceOptions();
+		initInterfaceTitle();
+		initInterfaceTutorial();
+	}
+	
+	public static void initInterfaceAbout()
+	{
 		uiAboutBkg = ImageLoader.loadImage("/interface/aboutBkg.png");
-		
-		// Character Select
+	}
+	
+	public static void initInterfaceCharacterSelect()
+	{
 		uiCharacterBkg = ImageLoader.loadImage("/interface/characterSelectBkg.png");
 		uiCharacterOpt1 = ImageLoader.loadImage("/interface/characterOpt1.png");
 		uiCharacterOpt1a = ImageLoader.loadImage("/interface/characterOpt1a.png");
@@ -148,8 +136,15 @@ public class Assets
 		uiCharacterOpt2a = ImageLoader.loadImage("/interface/characterOpt2a.png");
 		uiCharacterOpt3 = ImageLoader.loadImage("/interface/characterOpt3.png");
 		uiCharacterOpt3a = ImageLoader.loadImage("/interface/characterOpt3a.png");
-		
-		// Game
+	}
+	
+	public static void initInterfaceEditor()
+	{
+		uiEditorCursor1 = ImageLoader.loadImage("/interface/editorCursor1.png");
+	}
+	
+	public static void initInterfaceGame()
+	{
 		uiGameInfo1 = ImageLoader.loadImage("/interface/gameInfo1.png");
 		uiGameInfoMushroom = ImageLoader.loadImage("/interface/gameInfoPanelM.png");
 		uiGameInfoTreasure = ImageLoader.loadImage("/interface/gameInfoPanelT.png");
@@ -165,8 +160,45 @@ public class Assets
 		uiGameInfoCount[7] = sheetInfoCount.crop(252, 0, 36, 36);
 		uiGameInfoCount[8] = sheetInfoCount.crop(288, 0, 36, 36);
 		uiGameInfoCount[9] = sheetInfoCount.crop(324, 0, 36, 36);
-		
-		// Fonts
+	}
+	
+	public static void initInterfaceIntro()
+	{
+		uiIntro0 = ImageLoader.loadImage("/interface/intro0.png");
+		uiIntro1 = ImageLoader.loadImage("/interface/intro1.png");
+		uiIntro2 = ImageLoader.loadImage("/interface/intro2.png");
+		uiIntro3 = ImageLoader.loadImage("/interface/intro3.png");
+	}
+	
+	public static void initInterfaceOptions()
+	{
+		uiOptionsBkg = ImageLoader.loadImage("/interface/optionsBkg.png");
+	}
+	
+	public static void initInterfaceTitle()
+	{
+		uiTitleBkg = ImageLoader.loadImage("/interface/titleBkg.png");
+		uiTitleOpt1 = ImageLoader.loadImage("/interface/titleOpt1.png");
+		uiTitleOpt1a = ImageLoader.loadImage("/interface/titleOpt1a.png");
+		uiTitleOpt2 = ImageLoader.loadImage("/interface/titleOpt2.png");
+		uiTitleOpt2a = ImageLoader.loadImage("/interface/titleOpt2a.png");
+		uiTitleOpt3 = ImageLoader.loadImage("/interface/titleOpt3.png");
+		uiTitleOpt3a = ImageLoader.loadImage("/interface/titleOpt3a.png");
+		uiTitleOpt4 = ImageLoader.loadImage("/interface/titleOpt4.png");
+		uiTitleOpt4a = ImageLoader.loadImage("/interface/titleOpt4a.png");
+		uiTitleOpt5 = ImageLoader.loadImage("/interface/titleOpt5.png");
+		uiTitleOpt5a = ImageLoader.loadImage("/interface/titleOpt5a.png");
+		uiOptDone = ImageLoader.loadImage("/interface/uiOptDone.png");
+		uiOptDoneA = ImageLoader.loadImage("/interface/uiOptDoneA.png");
+	}
+	
+	public static void initInterfaceTutorial()
+	{
+		uiTutorialBkg = ImageLoader.loadImage("/interface/tutorialBkg.png");
+	}
+	
+	public static void initFonts()
+	{
 		fontStandard = new Font("MV Boli", Font.PLAIN, 26);
 		fontStandardUnderline = new Font("MV Boli", Font.PLAIN, 26);
 		fontInfoCount = new Font("Times New Roman", Font.BOLD, 36);
@@ -174,6 +206,7 @@ public class Assets
 		fontDebugTitle = new Font("MV Boli", Font.BOLD, 32);
 		fontDebugStandard = new Font("MV Boli", Font.PLAIN, 26);
 		fontEditorMenu = new Font("Arial", Font.PLAIN, 18);
+		fontEditorMenuBold = new Font("Arial", Font.BOLD, 18);
 	}
 	
 	public static void initSprites()
