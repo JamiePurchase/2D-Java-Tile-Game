@@ -40,9 +40,10 @@ public class EditorBoard extends JPanel implements Runnable
 	private static String editorFilePath = "";
 	private static String editorInfoText = "";
 	private static int editorInfoTime = 0;
-	
-	// Look at this later
-	private int[] entitySomething;
+	private static int editorViewGrid = 0;
+	private static int editorViewSolid = 0;
+	private static int editorViewEntities = 0;
+	private static int editorViewZones = 0;
 	
 	// Board
 	private static String boardName;
@@ -69,7 +70,7 @@ public class EditorBoard extends JPanel implements Runnable
 	private int cursorGridMaxY = 10;
 	private int cursorMenuPosX = 1;
 	private int[] cursorMenuPosY = new int[5];
-	private int cursorMenuMaxX = 5;
+	private int cursorMenuMaxX = 4;
 	private int[] cursorMenuMaxY = new int[5];
 	
 	// Resources
@@ -342,6 +343,8 @@ public class EditorBoard extends JPanel implements Runnable
 		int drawX = x * 32 + 118;
 		int drawY = y * 32 + 0;
 		g.drawImage(BoardTiles.getTileFile(tileImage[x][y]), drawX, drawY, null);
+		//if(editorViewGrid==1){g.drawImage(Assets.uiEditorGrid, drawX, drawY, null);}
+		g.drawImage(Assets.uiEditorGrid, drawX, drawY, null);
 	}
 	
 	public void renderBoardTiles(Graphics g)
@@ -394,9 +397,9 @@ public class EditorBoard extends JPanel implements Runnable
 		
 		// Menu Items
 		Drawing.drawMenuItem(g, "File", 165, 22, 0);
-		Drawing.drawMenuItem(g, "????", 265, 22, 0);
-		Drawing.drawMenuItem(g, "????", 365, 22, 0);
-		Drawing.drawMenuItem(g, "????", 465, 22, 0);
+		Drawing.drawMenuItem(g, "Board", 265, 22, 0);
+		Drawing.drawMenuItem(g, "Tools", 365, 22, 0);
+		Drawing.drawMenuItem(g, "View", 465, 22, 0);
 		
 		// Grid Details
 		g.setColor(Color.BLACK);
@@ -419,12 +422,12 @@ public class EditorBoard extends JPanel implements Runnable
 		if(cursorState=="Menu" && cursorMenuPosX==1)
 		{
 			g.setColor(Color.GRAY);
-			g.fillRect(150,32,100,120);
+			g.fillRect(150,32,150,120);
 			g.setColor(Color.WHITE);
 			int fillY = 30 * cursorMenuPosY[1] + 2;
-			g.fillRect(150, fillY, 100, 30);
+			g.fillRect(150, fillY, 150, 30);
 			g.setColor(Color.BLACK);
-			g.drawRect(150, 32, 100, 120);
+			g.drawRect(150, 32, 150, 120);
 			if(cursorMenuPosY[1]==1){Drawing.drawMenuItem(g, "New", 165, 54, 1);}
 			else{Drawing.drawMenuItem(g, "New", 165, 54, 0);}
 			if(cursorMenuPosY[1]==2){Drawing.drawMenuItem(g, "Load", 165, 84, 1);}
@@ -438,20 +441,59 @@ public class EditorBoard extends JPanel implements Runnable
 		if(cursorState=="Menu" && cursorMenuPosX==2)
 		{
 			g.setColor(Color.GRAY);
-			g.fillRect(250,32,100,120);
+			g.fillRect(250,32,150,120);
 			g.setColor(Color.WHITE);
 			int fillY = 30 * cursorMenuPosY[2] + 2;
-			g.fillRect(250, fillY, 100, 30);
+			g.fillRect(250, fillY, 150, 30);
 			g.setColor(Color.BLACK);
-			g.drawRect(250, 32, 100, 120);
-			if(cursorMenuPosY[2]==1){Drawing.drawMenuItem(g, "????", 265, 54, 1);}
-			else{Drawing.drawMenuItem(g, "????", 265, 54, 0);}
-			if(cursorMenuPosY[2]==2){Drawing.drawMenuItem(g, "????", 265, 84, 1);}
-			else{Drawing.drawMenuItem(g, "????", 265, 84, 0);}
-			if(cursorMenuPosY[2]==3){Drawing.drawMenuItem(g, "????", 265, 114, 1);}
-			else{Drawing.drawMenuItem(g, "????", 265, 114, 0);}
-			if(cursorMenuPosY[2]==4){Drawing.drawMenuItem(g, "????", 265, 144, 1);}
-			else{Drawing.drawMenuItem(g, "????", 265, 144, 0);}
+			g.drawRect(250, 32, 150, 120);
+			if(cursorMenuPosY[2]==1){Drawing.drawMenuItem(g, "Details", 265, 54, 1);}
+			else{Drawing.drawMenuItem(g, "Details", 265, 54, 0);}
+			if(cursorMenuPosY[2]==2){Drawing.drawMenuItem(g, "Dimensions", 265, 84, 1);}
+			else{Drawing.drawMenuItem(g, "Dimensions", 265, 84, 0);}
+			if(cursorMenuPosY[2]==3){Drawing.drawMenuItem(g, "Music", 265, 114, 1);}
+			else{Drawing.drawMenuItem(g, "Music", 265, 114, 0);}
+			if(cursorMenuPosY[2]==4){Drawing.drawMenuItem(g, "Encounters", 265, 144, 1);}
+			else{Drawing.drawMenuItem(g, "Encounters", 265, 144, 0);}
+		}
+
+		
+		if(cursorState=="Menu" && cursorMenuPosX==3)
+		{
+			g.setColor(Color.GRAY);
+			g.fillRect(350,32,150,120);
+			g.setColor(Color.WHITE);
+			int fillY = 30 * cursorMenuPosY[3] + 2;
+			g.fillRect(350, fillY, 150, 30);
+			g.setColor(Color.BLACK);
+			g.drawRect(350, 32, 150, 120);
+			if(cursorMenuPosY[3]==1){Drawing.drawMenuItem(g, "Brush", 365, 54, 1);}
+			else{Drawing.drawMenuItem(g, "Brush", 365, 54, 0);}
+			if(cursorMenuPosY[3]==2){Drawing.drawMenuItem(g, "????", 365, 84, 1);}
+			else{Drawing.drawMenuItem(g, "????", 365, 84, 0);}
+			if(cursorMenuPosY[3]==3){Drawing.drawMenuItem(g, "????", 365, 114, 1);}
+			else{Drawing.drawMenuItem(g, "????", 365, 114, 0);}
+			if(cursorMenuPosY[3]==4){Drawing.drawMenuItem(g, "????", 365, 144, 1);}
+			else{Drawing.drawMenuItem(g, "????", 365, 144, 0);}
+		}
+		
+		if(cursorState=="Menu" && cursorMenuPosX==4)
+		{
+			g.setColor(Color.GRAY);
+			g.fillRect(450,32,150,120);
+			g.setColor(Color.WHITE);
+			int fillY = 30 * cursorMenuPosY[4] + 2;
+			g.fillRect(450, fillY, 150, 30);
+			g.setColor(Color.BLACK);
+			g.drawRect(450, 32, 150, 120);
+			if(cursorMenuPosY[4]==1){Drawing.drawMenuItem(g, "Grid", 465, 54, 1);}
+			else{Drawing.drawMenuItem(g, "Grid", 465, 54, 0);}
+			if(cursorMenuPosY[4]==2){Drawing.drawMenuItem(g, "Solidity", 465, 84, 1);}
+			else{Drawing.drawMenuItem(g, "Solidity", 465, 84, 0);}
+			if(cursorMenuPosY[4]==3){Drawing.drawMenuItem(g, "Entities", 465, 114, 1);}
+			else{Drawing.drawMenuItem(g, "Entities", 465, 114, 0);}
+			if(cursorMenuPosY[4]==4){Drawing.drawMenuItem(g, "Zones", 465, 144, 1);}
+			else{Drawing.drawMenuItem(g, "Zones", 465, 144, 0);}
 		}
 	}
 	
@@ -522,18 +564,23 @@ public class EditorBoard extends JPanel implements Runnable
 	
 	private void tick()
 	{
-		// Splashscreen
-		if(editorState=="Intro"){tickIntro();}
-		
-		// Info Message
-		if(editorInfoTime>1)
+		if(editorState=="Intro")
 		{
-			editorInfoTime-=1;
-			if(editorInfoTime==0){editorInfoText = "";}
+			// Splashscreen
+			tickIntro();
 		}
+		else
+		{
+			// Info Message
+			if(editorInfoTime>1)
+			{
+				editorInfoTime-=1;
+				if(editorInfoTime==0){editorInfoText = "";}
+			}
 		
-		// Key Events
-		else{tickEvents();}
+			// Key Events
+			tickEvents();
+		}
 	}
 	
 	private void tickEvents()
@@ -602,6 +649,79 @@ public class EditorBoard extends JPanel implements Runnable
 				if(cursorMenuPosY[1]==4)
 				{
 					System.exit(0);
+				}
+			}
+			if(cursorMenuPosX==2)
+			{
+				if(cursorMenuPosY[2]==1)
+				{
+					//
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[2]==2)
+				{
+					//
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[2]==3)
+				{
+					//
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[2]==4)
+				{
+					//
+					Keyboard.setKeyDone();
+				}
+			}
+			if(cursorMenuPosX==3)
+			{
+				if(cursorMenuPosY[3]==1)
+				{
+					//
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[3]==2)
+				{
+					//
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[3]==3)
+				{
+					//
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[3]==4)
+				{
+					//
+					Keyboard.setKeyDone();
+				}
+			}
+			if(cursorMenuPosX==4)
+			{
+				if(cursorMenuPosY[4]==1)
+				{
+					if(editorViewGrid==0){editorViewGrid = 1;}
+					else{editorViewGrid = 0;}
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[4]==2)
+				{
+					if(editorViewSolid==0){editorViewSolid = 1;}
+					else{editorViewSolid = 0;}
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[4]==3)
+				{
+					if(editorViewEntities==0){editorViewEntities = 1;}
+					else{editorViewEntities = 0;}
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[4]==4)
+				{
+					if(editorViewZones==0){editorViewZones = 1;}
+					else{editorViewZones = 0;}
+					Keyboard.setKeyDone();
 				}
 			}
 		}

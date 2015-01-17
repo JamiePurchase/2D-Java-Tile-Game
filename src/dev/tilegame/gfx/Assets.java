@@ -32,7 +32,7 @@ public class Assets
 	public static BufferedImage uiMenuBkg;
 	public static BufferedImage uiCharacterBkg, uiCharacterOpt1, uiCharacterOpt1a, uiCharacterOpt2;
 	public static BufferedImage uiCharacterOpt2a, uiCharacterOpt3, uiCharacterOpt3a;
-	public static BufferedImage uiEditorCursor1;
+	public static BufferedImage uiEditorCursor1, uiEditorGrid;
 
 	// Sprites
 	public static BufferedImage charPlayer1N1, charPlayer1N2, charPlayer1N3;
@@ -62,6 +62,9 @@ public class Assets
 	public static BufferedImage txtTree6TL, txtTree6TR, txtTree6BL, txtTree6BR;
 	public static BufferedImage txtTree7aT, txtTree7aB, txtTree7bT, txtTree7bB;
 	
+	// Tilesets
+	public static BufferedImage[] tlsJharvaVillage;
+	
 	// Board Backgrounds
 	public static BufferedImage bkgJvGooseberryManor;
 	
@@ -79,6 +82,7 @@ public class Assets
 		initSprites();
 		initInterface();
 		initTextures();
+		initTilesets();
 	}
 	
 	public static void initAvatars()
@@ -158,6 +162,7 @@ public class Assets
 	public static void initInterfaceEditor()
 	{
 		uiEditorCursor1 = ImageLoader.loadImage("/interface/editorCursor1.png");
+		uiEditorGrid = ImageLoader.loadImage("/interface/editorGrid.png");
 	}
 	
 	public static void initInterfaceGame()
@@ -343,6 +348,11 @@ public class Assets
 		txtTree7aB = sheetWorld.crop(256, 32, 32, 32);
 		txtTree7bT = sheetWorld.crop(288, 0, 32, 32);
 		txtTree7bB = sheetWorld.crop(288, 32, 32, 32);
+	}
+	
+	public static void initTilesets()
+	{
+		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 6);
 	}
 
 }

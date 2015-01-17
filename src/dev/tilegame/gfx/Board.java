@@ -17,7 +17,7 @@ public class Board
 	private static BufferedImage bkgImage;
 	private static int gridWidth;
 	private static int gridHeight;
-	private static String[ ][ ] tileImage = new String[26][18];
+	private static BufferedImage[ ][ ] tileImage = new BufferedImage[26][18];
 	private static int[ ][ ] tileType = new int[26][18];
 	private static String[ ][ ] tileEntity = new String[26][18];
 	private static int[ ][ ] tileEntityID = new int[26][18];
@@ -91,14 +91,9 @@ public class Board
 		return tileEntityID[x][y];
 	}
 	
-	public static String getTileImage(int x, int y)
+	public static BufferedImage getTileImage(int x, int y)
 	{
 		return tileImage[x][y];
-	}
-	
-	public static BufferedImage getTileImageFile(int x, int y)
-	{
-		return BoardTiles.getTileFile(tileImage[x][y]);
 	}
 	
 	public static int getTreasureCount()
@@ -134,7 +129,7 @@ public class Board
 	{
 		int drawX = x * 32 - 21;
 		int drawY = y * 32 - 16;
-		g.drawImage(Game.world.getTileImageFile(x, y), drawX, drawY, null);
+		g.drawImage(Game.world.getTileImage(x, y), drawX, drawY, null);
 	}
 	
 	public void renderTiles(Graphics g)
@@ -143,7 +138,7 @@ public class Board
 		{
 			for(int y=1;y<=Game.world.getGridHeight();y+=1)
 			{
-				if(Game.world.getTileImage(x, y)!=""){renderTile(g, x, y);}
+				renderTile(g, x, y);
 			}
 		}
 	}
@@ -234,6 +229,12 @@ public class Board
 	
 	public static void setTile(int x, int y, String image, int type)
 	{
+		tileImage[x][y] = BoardTiles.getTileFile(image);
+		tileType[x][y] = type;
+	}
+	
+	public static void setTile(int x, int y, BufferedImage image, int type)
+	{
 		tileImage[x][y] = image;
 		tileType[x][y] = type;
 	}
@@ -266,7 +267,21 @@ public class Board
 			{
 				tileEntity[x][y] = "None";
 				tileEntityID[x][y] = 0;
-				tileImage[x][y] = fill;
+				tileImage[x][y] = BoardTiles.getTileFile(fill);
+				tileType[x][y] = type;
+			}
+		}
+	}
+	
+	public static void tileInit(BufferedImage image, int type)
+	{
+		for(int x=1;x<=gridWidth;x+=1)
+		{
+			for(int y=1;y<=gridHeight;y+=1)
+			{
+				tileEntity[x][y] = "None";
+				tileEntityID[x][y] = 0;
+				tileImage[x][y] = image;
 				tileType[x][y] = type;
 			}
 		}

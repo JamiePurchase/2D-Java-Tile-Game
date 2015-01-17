@@ -51,7 +51,12 @@ public class MenuState extends State
 	
 	public void tickInventory()
 	{
-		
+		if(Keyboard.getKeyPressed()=="Escape")
+		{
+			menuState = "Inventory";
+			menuPosInventory = 1;
+			menuMaxInventory = 7;
+		}
 	}
 	
 	public void tickJournal()
