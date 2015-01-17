@@ -34,7 +34,7 @@ public class CharacterState extends State
 			if(menuPos==1){Game.playerClass = "Warmonger";}
 			if(menuPos==2){Game.playerClass = "Stalker";}
 			if(menuPos==3){Game.playerClass = "Spellweaver";}
-			State.setStateChange("Game");
+			State.setStateChange("GameNew");
 		}
 		if(Keyboard.getKeyPressed()=="Escape")
 		{

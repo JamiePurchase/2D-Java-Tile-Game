@@ -5,6 +5,7 @@ import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
 import dev.tilegame.states.DebugState;
 import dev.tilegame.states.EditorState;
+import dev.tilegame.states.GameNewState;
 import dev.tilegame.states.State;
 import dev.tilegame.states.AboutState;
 import dev.tilegame.states.BattleState;
@@ -41,6 +42,9 @@ public class Game extends JPanel implements Runnable
 	public static boolean chat = false;
 	private static String boardChange = "none";
 	
+	// Session
+	public static Session session;
+	
 	// Board Object
 	public static Board world;
 	
@@ -57,8 +61,8 @@ public class Game extends JPanel implements Runnable
 	
 	// States
 	private State stateAbout, stateCharacter, stateIntro, stateOptions, stateTitle, stateTutorial;
-	private State stateGame, stateMenu;
-	private State stateDebug, stateEditor;
+	private State stateGame, stateGameNew, stateMenu;
+	private State stateDebug;
 	
 	// Test
 	private State stateBattle;
@@ -106,8 +110,8 @@ public class Game extends JPanel implements Runnable
 		stateAbout = new AboutState();
 		stateCharacter = new CharacterState();
 		stateDebug = new DebugState();
-		stateEditor = new EditorState();
 		stateGame = new GameState();
+		stateGameNew = new GameNewState();
 		stateIntro = new IntroState();
 		stateMenu = new MenuState();
 		stateOptions = new OptionsState();
@@ -121,8 +125,6 @@ public class Game extends JPanel implements Runnable
 	private void initWorld()
 	{
 		world = new Board();
-		world.getData("Board01");
-		world.saveBoard();
 	}
 	
 	private void tick()
@@ -146,15 +148,15 @@ public class Game extends JPanel implements Runnable
 			State.setStateChange("");
 			Keyboard.setKeyDone();
 		}
-		if(State.getStateChange() == "Editor")
-		{
-			State.setState(stateEditor);
-			State.setStateChange("");
-			Keyboard.setKeyDone();
-		}
 		if(State.getStateChange() == "Game")
 		{
 			State.setState(stateGame);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
+		if(State.getStateChange() == "GameNew")
+		{
+			State.setState(stateGameNew);
 			State.setStateChange("");
 			Keyboard.setKeyDone();
 		}
@@ -295,6 +297,11 @@ public class Game extends JPanel implements Runnable
 		}*/
 		WriteFile data = new WriteFile(file_name, false);
 		data.writeToFile("Hello world");
+	}
+	
+	public static void setSession(Session newSession)
+	{
+		session = newSession;
 	}
 	
 	public synchronized void start()
