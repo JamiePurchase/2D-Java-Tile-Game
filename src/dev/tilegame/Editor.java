@@ -68,12 +68,35 @@ public class Editor extends JPanel implements Runnable
 
 	public Editor()
 	{
+		editorNew();
 	}
 	
 	private void createWindow()
 	{
 		display = new Display("Autumn Park Editor", 1366, 768);
 		Assets.init(); 
+	}
+	
+	private void editorNew()
+	{
+		gridWidth = 10;
+		gridHeight = 10;
+		gridSetTileAll("Grass", 0);
+		tileImage[3][3] = "Tree";
+	}
+	
+	public void gridSetTileAll(String fill, int type)
+	{
+		for(int x=1;x<=gridWidth;x+=1)
+		{
+			for(int y=1;y<=gridHeight;y+=1)
+			{
+				tileEntity[x][y] = "None";
+				tileEntityID[x][y] = 0;
+				tileImage[x][y] = fill;
+				tileType[x][y] = type;
+			}
+		}
 	}
 	
 	private void render()
@@ -121,14 +144,15 @@ public class Editor extends JPanel implements Runnable
 	
 	public void renderBoardCursor(Graphics g)
 	{
-		int cursorX = 32 * editorCursorPosX + 122;
-		int cursorY = 32 * editorCursorPosY + 0;
-		g.drawImage(assetCursor1, cursorX, cursorY, null);
+		BufferedImage cursorImage = assetCursor1;
+		int cursorPosX = 32 * editorCursorPosX + 118;
+		int cursorPosY = 32 * editorCursorPosY + 0;
+		g.drawImage(cursorImage, cursorPosX, cursorPosY, null);
 	}
 	
 	public void renderBoardTile(Graphics g, int x, int y)
 	{
-		int drawX = x * 32 + 122;
+		int drawX = x * 32 + 118;
 		int drawY = y * 32 + 0;
 		g.drawImage(BoardTiles.getTileFile(tileImage[x][y]), drawX, drawY, null);
 	}
@@ -317,7 +341,7 @@ public class Editor extends JPanel implements Runnable
 	private void tickIntro()
 	{
 		introFrame += 1;
-		if(introFrame>200)
+		if(introFrame>100)
 		{
 			editorState = "Editor";
 		}

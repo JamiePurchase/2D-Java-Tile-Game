@@ -4,11 +4,13 @@ import dev.tilegame.Mouse;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Display
+public class Display extends JFrame implements MouseListener
 {
 	private JFrame frame;
 	private Canvas canvas;
@@ -21,6 +23,7 @@ public class Display
 		this.width = width;
 		this.height = height;
 		createDisplay();
+		addMouseListener(this);
 	}
 	
 	private void createDisplay()
@@ -41,7 +44,7 @@ public class Display
 		// Create a JPanel
 		JPanel panel = new JPanel();
         panel.addKeyListener(new Keyboard());
-        panel.addMouseListener(new Mouse());
+        //panel.addMouseListener(new Mouse());
         frame.add(panel);
         panel.requestFocusInWindow();
 		
@@ -59,5 +62,41 @@ public class Display
 	public Canvas getCanvas()
 	{
 		return canvas;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{
+		int x = e.getX();
+		int y = e.getY();
+		System.out.println("Mouse Clicked at X: " + x + " - Y: " + y);
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+		System.out.println("Mouse Entered frame at X: " + x + " - Y: " + y);
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+		System.out.println("Mouse Exited frame at X: " + x + " - Y: " + y);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+		System.out.println("Mouse Pressed at X: " + x + " - Y: " + y);
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+		System.out.println("Mouse Released at X: " + x + " - Y: " + y);
 	}
 }

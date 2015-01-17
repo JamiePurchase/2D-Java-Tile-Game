@@ -14,7 +14,8 @@ public class GameState extends State
 	
 	public void tick()
 	{
-		Session.player.tick();
+		System.out.println("GameState tick() was called.");
+		//Session.getPlayer().tick();
 	}
 	
 	public void render(Graphics g)

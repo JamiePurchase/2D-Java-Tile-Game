@@ -24,22 +24,10 @@ public class Board
 	private static int[ ][ ] tileEntityID = new int[26][18];
 	
 	// Temp
-	private static int mushroomCount = 0;
-	private static int[] mushroomFind = new int[10];
-	private static int[] mushroomPosX = new int[10];
-	private static int[] mushroomPosY = new int[10];
-	
-	// Temp
 	private static int treasureCount = 0;
 	private static int[] treasureFind = new int[10];
 	private static int[] treasurePosX = new int[10];
 	private static int[] treasurePosY = new int[10];
-	
-	// Temp
-	private static int garnetCount = 0;
-	private static int[] garnetFind = new int[10];
-	private static int[] garnetPosX = new int[10];
-	private static int[] garnetPosY = new int[10];
 	
 	public Board()
 	{
@@ -62,19 +50,9 @@ public class Board
 		return gridWidth;
 	}
 	
-	public static int getGarnetCount()
-	{
-		return garnetCount;
-	}
-	
 	public static String getLocation()
 	{
 		return locationName;
-	}
-	
-	public static int getMushroomCount()
-	{
-		return mushroomCount;
 	}
 	
 	public static String getName()
@@ -117,8 +95,6 @@ public class Board
 		renderBackground(g);
 		renderTiles(g);
 		Session.player.render(g);
-		renderGarnets(g);
-		renderMushrooms(g);
 		renderTreasure(g);
 		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
@@ -130,32 +106,6 @@ public class Board
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 1366, 768);
 		if(bkgHasImage){g.drawImage(bkgImage, 0, 0, null);}
-	}
-	
-	public static void renderGarnets(Graphics g)
-	{
-		for(int garnet=1;garnet<=getGarnetCount();garnet+=1)
-		{
-			if(garnetFind[garnet]<1)
-			{
-				int posX = 32 * garnetPosX[garnet] - 32;
-				int posY = 32 * garnetPosY[garnet] - 32;
-				g.drawImage(Assets.itemGarnet1, posX, posY, null);
-			}
-		}
-	}
-	
-	public static void renderMushrooms(Graphics g)
-	{
-		for(int mushroom=1;mushroom<=getMushroomCount();mushroom+=1)
-		{
-			if(mushroomFind[mushroom]<1)
-			{
-				int posX = 32 * mushroomPosX[mushroom] - 32;
-				int posY = 32 * mushroomPosY[mushroom] - 32;
-				g.drawImage(Assets.itemMushroom1, posX, posY, null);
-			}
-		}
 	}
 	
 	public void renderTile(Graphics g, int x, int y)

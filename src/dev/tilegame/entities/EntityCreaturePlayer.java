@@ -161,8 +161,9 @@ public class EntityCreaturePlayer extends EntityCreature
 	
 	public void tick()
 	{
-		if(getAction()=="Idle"){tickKeyEvents();}
-		tickMovement();
+		System.out.println("EntityCreaturePlayer tick was called.");
+		//if(getAction()=="Idle"){tickKeyEvents();}
+		//tickMovement();
 	}
 	
 	public void tickKeyEvents()
