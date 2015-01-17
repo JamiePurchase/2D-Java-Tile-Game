@@ -1,10 +1,22 @@
 package dev.tilegame.gfx;
+import dev.tilegame.entities.PlayerCreatureEntity;
+import dev.tilegame.entities.NpcCreatureEntity;
+import dev.tilegame.entities.HarvestNatureEntity;
 
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 
 public class Assets
-{	
+{
+	// Character
+	public static PlayerCreatureEntity entPlayer;
+	
+	// NPCs
+	public static NpcCreatureEntity entAnna;
+	
+	// Harvest
+	public static HarvestNatureEntity entGarnet;
+	
 	// Interface
 	public static BufferedImage uiCursor1, uiCursor2, uiCursor3;
 	public static BufferedImage uiIntro1, uiIntro2, uiIntro3;
@@ -16,6 +28,7 @@ public class Assets
 	public static BufferedImage[] uiGameInfoCount = new BufferedImage[10];
 	public static BufferedImage uiCharacterBkg, uiCharacterOpt1, uiCharacterOpt1a, uiCharacterOpt2;
 	public static BufferedImage uiCharacterOpt2a, uiCharacterOpt3, uiCharacterOpt3a;
+	public static BufferedImage uiEditorCursor1;
 
 	// Sprites
 	public static BufferedImage charPlayer1N1, charPlayer1N2, charPlayer1N3;
@@ -56,6 +69,7 @@ public class Assets
 	public static void init()
 	{
 		initBackgrounds();
+		initEntities();
 		initFonts();
 		initSprites();
 		initInterface();
@@ -67,10 +81,40 @@ public class Assets
 		bkgJvGooseberryManor = ImageLoader.loadImage("/backgrounds/JvGooseberryManor.png");
 	}
 	
+	public static void initEntities()
+	{
+		initEntityPlayer();
+		initEntityNPCs();
+		initEntityHarvest();
+	}
+	
+	public static void initEntityHarvest()
+	{
+		entGarnet = new HarvestNatureEntity("Garnet");
+		entGarnet.setPositionX(7);
+		entGarnet.setPositionY(3);
+	}
+	
+	public static void initEntityNPCs()
+	{
+		entAnna = new NpcCreatureEntity();
+		entAnna.setPositionX(5);
+		entAnna.setPositionY(4);
+	}
+	
+	public static void initEntityPlayer()
+	{
+		entPlayer = new PlayerCreatureEntity();
+		entPlayer.setDirection("S");
+		entPlayer.setPositionX(5);
+		entPlayer.setPositionY(5);
+	}
+	
 	public static void initInterface()
 	{
 		initInterfaceAbout();
 		initInterfaceCharacterSelect();
+		initInterfaceEditor();
 		initInterfaceGame();
 		initInterfaceIntro();
 		initInterfaceOptions();
@@ -92,6 +136,11 @@ public class Assets
 		uiCharacterOpt2a = ImageLoader.loadImage("/interface/characterOpt2a.png");
 		uiCharacterOpt3 = ImageLoader.loadImage("/interface/characterOpt3.png");
 		uiCharacterOpt3a = ImageLoader.loadImage("/interface/characterOpt3a.png");
+	}
+	
+	public static void initInterfaceEditor()
+	{
+		uiEditorCursor1 = ImageLoader.loadImage("/interface/editorCursor1.png");
 	}
 	
 	public static void initInterfaceGame()

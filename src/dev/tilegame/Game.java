@@ -4,6 +4,7 @@ import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
 import dev.tilegame.states.DebugState;
+import dev.tilegame.states.EditorState;
 import dev.tilegame.states.State;
 import dev.tilegame.states.AboutState;
 import dev.tilegame.states.BattleState;
@@ -40,13 +41,24 @@ public class Game extends JPanel implements Runnable
 	public static boolean chat = false;
 	private static String boardChange = "none";
 	
+	// Board Object
+	public static Board world;
+	
+	// Campaign Data
+	public static int campaignStage = 0;
+	
+	// Backpack (consider moving to it's own class?)
+	public static int backpackGarnets = 0;
+	public static int backpackMushrooms = 0;
+	public static int backpackTreasure = 0;
+	
 	// Test
 	public static String playerClass = "";
 	
 	// States
 	private State stateAbout, stateCharacter, stateIntro, stateOptions, stateTitle, stateTutorial;
 	private State stateGame, stateMenu;
-	private State stateDebug;
+	private State stateDebug, stateEditor;
 	
 	// Test
 	private State stateBattle;
@@ -73,6 +85,7 @@ public class Game extends JPanel implements Runnable
 		display = new Display(title, width, height);
 		Assets.init();
 		initStates();
+		initWorld();
 		initAudio();
 		State.setState(stateIntro);
 	}
@@ -93,6 +106,7 @@ public class Game extends JPanel implements Runnable
 		stateAbout = new AboutState();
 		stateCharacter = new CharacterState();
 		stateDebug = new DebugState();
+		stateEditor = new EditorState();
 		stateGame = new GameState();
 		stateIntro = new IntroState();
 		stateMenu = new MenuState();
@@ -102,6 +116,13 @@ public class Game extends JPanel implements Runnable
 		
 		// Test
 		stateBattle = new BattleState();
+	}
+	
+	private void initWorld()
+	{
+		world = new Board();
+		world.getData("Board01");
+		world.saveBoard();
 	}
 	
 	private void tick()
@@ -122,6 +143,12 @@ public class Game extends JPanel implements Runnable
 		if(State.getStateChange() == "Debug")
 		{
 			State.setState(stateDebug);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
+		if(State.getStateChange() == "Editor")
+		{
+			State.setState(stateEditor);
 			State.setStateChange("");
 			Keyboard.setKeyDone();
 		}
@@ -167,7 +194,8 @@ public class Game extends JPanel implements Runnable
 		// Change Board
 		if(boardChange!="none")
 		{
-			Session.setBoard(boardChange);
+			world = new Board();
+			world.getData(boardChange);
 			boardChange = "none";
 		}
 		

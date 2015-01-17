@@ -1,6 +1,6 @@
 package dev.tilegame.entities;
 
-public abstract class EntityCreature extends Entity
+public abstract class CreatureEntity extends Entity
 {
 	private static String action;
 	private static String direction;
@@ -8,7 +8,7 @@ public abstract class EntityCreature extends Entity
 	private static int walkFrameTick;
 	private static int statHealth;
 	
-	public EntityCreature()
+	public CreatureEntity()
 	{
 		action = "Idle";
 		direction = "S";

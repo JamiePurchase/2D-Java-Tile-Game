@@ -21,7 +21,7 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
-public class Editor extends JPanel implements Runnable
+public class EditorBoard extends JPanel implements Runnable
 {
 	// Application
 	private static final long serialVersionUID = 1L;
@@ -66,7 +66,7 @@ public class Editor extends JPanel implements Runnable
 	public static BufferedImage assetIntro = ImageLoader.loadImage("/interface/editorIntro.png");
 	public static BufferedImage assetCursor1 = ImageLoader.loadImage("/interface/editorCursor1.png");
 
-	public Editor()
+	public EditorBoard()
 	{
 		editorNew();
 	}

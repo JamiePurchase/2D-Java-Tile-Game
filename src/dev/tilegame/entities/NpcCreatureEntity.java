@@ -4,10 +4,10 @@ import java.awt.image.BufferedImage;
 
 import dev.tilegame.gfx.Assets;
 
-public class EntityCreatureNpc extends EntityCreature
+public class NpcCreatureEntity extends CreatureEntity
 {
 
-	public EntityCreatureNpc()
+	public NpcCreatureEntity()
 	{
 		
 	}

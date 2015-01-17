@@ -1,9 +1,10 @@
 package dev.tilegame.states;
 import dev.tilegame.Game;
-import dev.tilegame.Session;
 import dev.tilegame.gfx.Assets;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class GameState extends State
 {
@@ -14,13 +15,12 @@ public class GameState extends State
 	
 	public void tick()
 	{
-		System.out.println("GameState tick() was called.");
-		//Session.getPlayer().tick();
+		Assets.entPlayer.tick();
 	}
 	
 	public void render(Graphics g)
 	{
-		Session.world.render(g);
+		Game.world.render(g);
 	}
 
 }
