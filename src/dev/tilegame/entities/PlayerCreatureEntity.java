@@ -303,18 +303,6 @@ public class PlayerCreatureEntity extends CreatureEntity
 		if(direction=="E"){tileX += 1;}
 		if(direction=="S"){tileY += 1;}
 		if(direction=="W"){tileX -= 1;}
-		if(Game.world.getTileEntity(tileX, tileY)=="Garnet")
-		{
-			int ID = Game.world.getTileEntityID(tileX, tileY);
-			Game.world.setGarnetFound(ID);
-			AudioPlayer.play("Garnet");
-		}
-		if(Game.world.getTileEntity(tileX, tileY)=="Mushroom")
-		{
-			int ID = Game.world.getTileEntityID(tileX, tileY);
-			Game.world.setMushroomFound(ID);
-			AudioPlayer.play("Mushroom");
-		}
 		if(Game.world.getTileEntity(tileX, tileY)=="Treasure")
 		{
 			int ID = Game.world.getTileEntityID(tileX, tileY);

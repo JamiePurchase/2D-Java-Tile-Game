@@ -131,15 +131,6 @@ public class Board01
 		Game.world.setTile(24, 17, "Tree", 1);
 		Game.world.setTile(25, 17, "Tree", 1);
 		
-		// Garnets
-		Game.world.setGarnet(2,4);
-		Game.world.setGarnet(23,6);
-		
-		// Mushrooms
-		Game.world.setMushroom(3, 3);
-		Game.world.setMushroom(4, 13);
-		Game.world.setMushroom(17, 7);
-		
 		// Treasure Chests
 		Game.world.setTreasure(9,4);
 		Game.world.setTreasure(21,13);

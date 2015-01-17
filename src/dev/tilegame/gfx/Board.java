@@ -17,28 +17,19 @@ public class Board
 	private static BufferedImage bkgImage;
 	private static int gridWidth;
 	private static int gridHeight;
+	private static boolean gridScroll = false;
+	private static int gridOffsetX = 0;
+	private static int gridOffsetY = 0;
 	private static BufferedImage[ ][ ] tileImage = new BufferedImage[26][18];
 	private static int[ ][ ] tileType = new int[26][18];
 	private static String[ ][ ] tileEntity = new String[26][18];
 	private static int[ ][ ] tileEntityID = new int[26][18];
 	
 	// Temp
-	private static int mushroomCount = 0;
-	private static int[] mushroomFind = new int[10];
-	private static int[] mushroomPosX = new int[10];
-	private static int[] mushroomPosY = new int[10];
-	
-	// Temp
 	private static int treasureCount = 0;
 	private static int[] treasureFind = new int[10];
 	private static int[] treasurePosX = new int[10];
 	private static int[] treasurePosY = new int[10];
-	
-	// Temp
-	private static int garnetCount = 0;
-	private static int[] garnetFind = new int[10];
-	private static int[] garnetPosX = new int[10];
-	private static int[] garnetPosY = new int[10];
 	
 	public Board()
 	{
@@ -51,9 +42,44 @@ public class Board
 		if(name=="JvGooseberryManor"){JvGooseberryManor boardLoader = new JvGooseberryManor();}
 	}
 	
+	public static int getGridEdgeE()
+	{
+		return gridOffsetX + 42;
+	}
+	
+	public static int getGridEdgeN()
+	{
+		return gridOffsetY;
+	}
+	
+	public static int getGridEdgeS()
+	{
+		return gridOffsetY + 42;
+	}
+	
+	public static int getGridEdgeW()
+	{
+		return gridOffsetX;
+	}
+	
 	public static int getGridHeight()
 	{
 		return gridHeight;
+	}
+	
+	public static int getGridOffsetX()
+	{
+		return gridOffsetX;
+	}
+	
+	public static int getGridOffsetY()
+	{
+		return gridOffsetY;
+	}
+	
+	public static boolean getGridScroll()
+	{
+		return gridScroll;
 	}
 	
 	public static int getGridWidth()
@@ -61,19 +87,21 @@ public class Board
 		return gridWidth;
 	}
 	
-	public static int getGarnetCount()
-	{
-		return garnetCount;
-	}
-	
 	public static String getLocation()
 	{
 		return locationName;
 	}
 	
-	public static int getMushroomCount()
+	public static boolean getOnScreen(int x, int y)
 	{
-		return mushroomCount;
+		if(x>=getGridEdgeW() && x<=getGridEdgeE())
+		{
+			if(y>=getGridEdgeN() && y<=getGridEdgeS())
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public static String getName()
@@ -123,6 +151,7 @@ public class Board
 		g.setColor(Color.BLACK);
 		g.fillRect(11, 16, 1344, 736);
 		if(bkgHasImage){g.drawImage(bkgImage, 11, 16, null);}
+		// Note: Should the background image be larger than the screen when the board is?
 	}
 	
 	public void renderTile(Graphics g, int x, int y)
@@ -138,6 +167,7 @@ public class Board
 		{
 			for(int y=1;y<=Game.world.getGridHeight();y+=1)
 			{
+				//if(getOnScreen(x, y)==true){renderTile(g, x, y);}
 				renderTile(g, x, y);
 			}
 		}
@@ -167,26 +197,6 @@ public class Board
 		bkgImage = image;
 	}
 	
-	public static void setGarnet(int x, int y)
-	{
-		garnetCount += 1;
-		garnetFind[garnetCount] = 0;
-		garnetPosX[garnetCount] = x;
-		garnetPosY[garnetCount] = y;
-		tileEntity[x][y] = "Garnet";
-		tileEntityID[x][y] = garnetCount;
-	}
-	
-	public static void setGarnetFound(int ID)
-	{
-		garnetFind[ID] = 1;
-		int posX = garnetPosX[ID];
-		int posY = garnetPosY[ID];
-		tileEntity[posX][posY] = "None";
-		tileEntityID[posX][posY] = 0;
-		Game.backpackGarnets += 1;
-	}
-	
 	public static void setGridHeight(int height)
 	{
 		gridHeight = height;
@@ -197,29 +207,30 @@ public class Board
 		gridWidth = width;
 	}
 	
+	public static void setGridOffset(int x, int y)
+	{
+		setGridOffsetX(x);
+		setGridOffsetY(y);
+	}
+	
+	public static void setGridOffsetX(int x)
+	{
+		gridOffsetX = x;
+	}
+	
+	public static void setGridOffsetY(int y)
+	{
+		gridOffsetY = y;
+	}
+	
+	public static void setGridScroll(boolean scroll)
+	{
+		gridScroll = scroll;
+	}
+	
 	public static void setLocation(String location)
 	{
 		locationName = location;
-	}
-	
-	public static void setMushroom(int x, int y)
-	{
-		mushroomCount += 1;
-		mushroomFind[mushroomCount] = 0;
-		mushroomPosX[mushroomCount] = x;
-		mushroomPosY[mushroomCount] = y;
-		tileEntity[x][y] = "Mushroom";
-		tileEntityID[x][y] = mushroomCount;
-	}
-	
-	public static void setMushroomFound(int ID)
-	{
-		mushroomFind[ID] = 1;
-		int posX = mushroomPosX[ID];
-		int posY = mushroomPosY[ID];
-		tileEntity[posX][posY] = "None";
-		tileEntityID[posX][posY] = 0;
-		Game.backpackMushrooms += 1;
 	}
 	
 	public static void setName(String name)
