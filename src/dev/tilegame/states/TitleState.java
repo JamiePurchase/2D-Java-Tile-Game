@@ -117,7 +117,10 @@ public class TitleState extends State
 	
 	public void renderOptions(Graphics g)
 	{
-		if(menuPos==1){g.drawImage(Assets.uiTitleOpt1a,  200, 275, null);}
+		g.drawImage(Assets.uiCursor1,  200, 275, null);
+		g.drawImage(Assets.uiCursor2,  200, 475, null);
+		
+		/*if(menuPos==1){g.drawImage(Assets.uiTitleOpt1a,  200, 275, null);}
 		else{g.drawImage(Assets.uiTitleOpt1,  200, 275, null);}
 		if(menuPos==2){g.drawImage(Assets.uiTitleOpt5a,  400, 275, null);}
 		else{g.drawImage(Assets.uiTitleOpt5,  400, 275, null);}
@@ -126,6 +129,6 @@ public class TitleState extends State
 		if(menuPos==4){g.drawImage(Assets.uiTitleOpt3a,  400, 350, null);}
 		else{g.drawImage(Assets.uiTitleOpt3,  400, 350, null);}
 		if(menuPos==5){g.drawImage(Assets.uiTitleOpt4a,  300, 425, null);}
-		else{g.drawImage(Assets.uiTitleOpt4,  300, 425, null);}
+		else{g.drawImage(Assets.uiTitleOpt4,  300, 425, null);}*/
 	}
 }

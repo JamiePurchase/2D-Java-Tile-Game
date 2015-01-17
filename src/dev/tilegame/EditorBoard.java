@@ -42,33 +42,46 @@ public class EditorBoard extends JPanel implements Runnable
 	// Look at this later
 	private int[] entitySomething;
 	
-	private String gridBackground;
-	private int gridWidth;
-	private int gridHeight;
-	private int gridPosX;
-	private int gridPosY;
-	private String[][] tileImage = new String[26][18];
-	private int[][] tileType = new int[26][18];
-	private String[][] tileEntity = new String[26][18];
-	private int[][] tileEntityID = new int[26][18];
+	// Board
+	private static String boardName;
+	private static String boardLocation;
+	private static int boardBkgActive;
+	private static String boardBkgImage;
+	private static int boardWidth;
+	private static int boardHeight;
 	
-	// Toolbar
-	private int editorToolbar = 0;
+	// Tiles
+	private static String[][] tileImage = new String[26][18];
+	private static int[][] tileType = new int[26][18];
+	private static String[][] tileEntity = new String[26][18];
+	private static int[][] tileEntityID = new int[26][18];
 	
 	// Brushes
-	private int editorBrushType;
-	private int editorCursorPosX = 5;
-	private int editorCursorPosY = 3;
-	private int editorCursorMaxX = 10;
-	private int editorCursorMaxY = 10;
+	private int brushType;
 	
 	// Cursor
+	private String cursorState = "Grid";
+	private int cursorGridPosX = 5;
+	private int cursorGridPosY = 3;
+	private int cursorGridMaxX = 10;
+	private int cursorGridMaxY = 10;
+	private int cursorMenuPosX = 1;
+	private int cursorMenuPosY = 1;
+	
+	// Resources
 	public static BufferedImage assetIntro = ImageLoader.loadImage("/interface/editorIntro.png");
 	public static BufferedImage assetCursor1 = ImageLoader.loadImage("/interface/editorCursor1.png");
 
 	public EditorBoard()
 	{
 		editorNew();
+	}
+	
+	private void brushAction()
+	{
+		// Temp
+		gridSetTileImage("Tree", cursorGridPosX, cursorGridPosY);
+		gridSetTileType(1, cursorGridPosX, cursorGridPosY);
 	}
 	
 	private void createWindow()
@@ -79,24 +92,53 @@ public class EditorBoard extends JPanel implements Runnable
 	
 	private void editorNew()
 	{
-		gridWidth = 10;
-		gridHeight = 10;
-		gridSetTileAll("Grass", 0);
-		tileImage[3][3] = "Tree";
+		// Board
+		boardBkgActive = 0;
+		boardBkgImage = "";
+		boardWidth = 10;
+		boardHeight = 10;
+		
+		// Tiles
+		gridSetAll("Grass", 0);
+		
+		// Brush
+		brushType = 1;
+		
+		// Cursor
+		cursorState = "Grid";
+		cursorGridPosX = 1;
+		cursorGridPosY = 1;
+		cursorGridMaxX = boardWidth;
+		cursorGridMaxY = boardHeight;
 	}
 	
-	public void gridSetTileAll(String fill, int type)
+	public void gridSetAll(String fill, int type)
 	{
-		for(int x=1;x<=gridWidth;x+=1)
+		for(int x=1;x<=boardWidth;x+=1)
 		{
-			for(int y=1;y<=gridHeight;y+=1)
+			for(int y=1;y<=boardHeight;y+=1)
 			{
-				tileEntity[x][y] = "None";
-				tileEntityID[x][y] = 0;
-				tileImage[x][y] = fill;
-				tileType[x][y] = type;
+				gridSetTileEntity("None", 0, x, y);
+				gridSetTileImage(fill, x, y);
+				gridSetTileType(type, x, y);
 			}
 		}
+	}
+	
+	public void gridSetTileEntity(String entity, int entityID, int x, int y)
+	{
+		tileEntity[x][y] = entity;
+		tileEntityID[x][y] = entityID;
+	}
+	
+	public void gridSetTileImage(String fill, int x, int y)
+	{
+		tileImage[x][y] = fill;
+	}
+	
+	public void gridSetTileType(int type, int x, int y)
+	{
+		tileType[x][y] = type;
 	}
 	
 	private void render()
@@ -145,8 +187,8 @@ public class EditorBoard extends JPanel implements Runnable
 	public void renderBoardCursor(Graphics g)
 	{
 		BufferedImage cursorImage = assetCursor1;
-		int cursorPosX = 32 * editorCursorPosX + 118;
-		int cursorPosY = 32 * editorCursorPosY + 0;
+		int cursorPosX = 32 * cursorGridPosX + 118;
+		int cursorPosY = 32 * cursorGridPosY + 0;
 		g.drawImage(cursorImage, cursorPosX, cursorPosY, null);
 	}
 	
@@ -159,9 +201,9 @@ public class EditorBoard extends JPanel implements Runnable
 	
 	public void renderBoardTiles(Graphics g)
 	{
-		for(int x=1;x<=gridWidth;x+=1)
+		for(int x=1;x<=boardWidth;x+=1)
 		{
-			for(int y=1;y<=gridHeight;y+=1)
+			for(int y=1;y<=boardHeight;y+=1)
 			{
 				if(tileImage[x][y]!=""){renderBoardTile(g, x, y);}
 			}
@@ -210,7 +252,7 @@ public class EditorBoard extends JPanel implements Runnable
 		Drawing.drawMenuItem(g, "Tiles", 353, 22);
 		Drawing.drawMenuItem(g, "Entities", 453, 22);
 		
-		if(editorToolbar==1)
+		if(cursorState=="Menu" && cursorMenuPosX==1)
 		{
 			g.setColor(Color.GRAY);
 			g.fillRect(128,32,100,120);
@@ -222,7 +264,7 @@ public class EditorBoard extends JPanel implements Runnable
 			Drawing.drawMenuItem(g, "Close", 153, 144);
 		}
 		
-		if(editorToolbar==2)
+		if(cursorState=="Menu" && cursorMenuPosX==2)
 		{
 			g.setColor(Color.GRAY);
 			g.fillRect(228,32,100,120);
@@ -275,6 +317,58 @@ public class EditorBoard extends JPanel implements Runnable
 		stop();
 	}
 	
+	public static void saveBoard()
+	{
+		try
+		{
+			saveBoardAction();
+		}
+		catch (IOException e)
+		{
+			System.out.println("IO Error");
+		}
+	}
+	
+	public static void saveBoardAction() throws IOException
+	{
+		// Get the file
+		String file_name = "C:/Users/Jamie/Documents/My Workshop/Autumn Park/Datafiles/Board01.txt";
+		WriteFile data = new WriteFile(file_name, false);
+		String br = System.getProperty("line.separator");
+		
+		// Board Data
+		String write = "Test Board Save" + br;
+		write = write + boardName + br;
+		write = write + boardLocation + br;
+		write = write + boardWidth + br;
+		write = write + boardHeight + br;
+		write = write + boardBkgActive + br;
+		write = write + boardBkgImage + br;
+		write = write + "Music (to do later)" + br;
+		write = write + "Wild Encounters (to do later)" + br;
+		write = write + "#" + br;
+		
+		// Tile Data
+		for(int x=1;x<=boardWidth;x+=1)
+		{
+			for(int y=1;y<=boardHeight;y+=1)
+			{
+				write = write + tileImage[x][y] + br;
+				write = write + tileType[x][y] + br;
+				write = write + tileEntity[x][y] + br;
+				write = write + tileEntityID[x][y] + br;
+			}
+		}
+		write = write + "#" + br;
+		
+		// Garnet Data
+		// Mushroom Data
+		// Treasure Data
+		
+		// Write the data
+		data.writeToFile(write);
+	}
+	
 	public synchronized void start()
 	{
 		if(running==false)
@@ -308,33 +402,51 @@ public class EditorBoard extends JPanel implements Runnable
 	
 	private void tickEvents()
 	{
-		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space" || Keyboard.getKeyPressed()=="Escape")
+		if(cursorState=="Grid"){tickEventsGrid();}
+		if(cursorState=="Menu"){tickEventsMenu();}
+	}
+	
+	private void tickEventsGrid()
+	{
+		if(Keyboard.getKeyPressed()=="Enter")
 		{
-			System.exit(0);
-		}
-		if(Keyboard.getKeyPressed()=="Up" && editorCursorPosY>1)
-		{
-			editorCursorPosY-=1;
+			cursorState = "Menu";
+			cursorMenuPosX = 1;
+			cursorMenuPosY = 1;
 			Keyboard.setKeyDone();
 		}
-		if(Keyboard.getKeyPressed()=="Down" && editorCursorPosY<editorCursorMaxY)
+		if(Keyboard.getKeyPressed()=="Space")
 		{
-			editorCursorPosY+=1;
+			brushAction();
 			Keyboard.setKeyDone();
 		}
-		if(Keyboard.getKeyPressed()=="Left" && editorCursorPosX>1)
+		if(Keyboard.getKeyPressed()=="Up" && cursorGridPosY>1)
 		{
-			editorCursorPosX-=1;
+			cursorGridPosY-=1;
 			Keyboard.setKeyDone();
 		}
-		if(Keyboard.getKeyPressed()=="Right" && editorCursorPosX<editorCursorMaxX)
+		if(Keyboard.getKeyPressed()=="Down" && cursorGridPosY<cursorGridMaxY)
 		{
-			editorCursorPosX+=1;
+			cursorGridPosY+=1;
 			Keyboard.setKeyDone();
 		}
-		if(Mouse.getMousePressed()==1)
+		if(Keyboard.getKeyPressed()=="Left" && cursorGridPosX>1)
 		{
-			System.exit(0);
+			cursorGridPosX-=1;
+			Keyboard.setKeyDone();
+		}
+		if(Keyboard.getKeyPressed()=="Right" && cursorGridPosX<cursorGridMaxX)
+		{
+			cursorGridPosX+=1;
+			Keyboard.setKeyDone();
+		}
+	}
+	
+	private void tickEventsMenu()
+	{
+		if(Keyboard.getKeyPressed()=="Escape")
+		{
+			cursorState = "Grid";
 		}
 	}
 	

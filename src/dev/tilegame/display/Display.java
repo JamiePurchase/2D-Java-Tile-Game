@@ -41,7 +41,7 @@ public class Display
 		// Create a JPanel
 		JPanel panel = new JPanel();
         panel.addKeyListener(new Keyboard());
-        panel.addMouseListener(new Mouse());
+        //panel.addMouseListener(new Mouse());
         frame.add(panel);
         panel.requestFocusInWindow();
 		

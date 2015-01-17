@@ -18,7 +18,7 @@ public class Assets
 	public static HarvestNatureEntity entGarnet;
 	
 	// Interface
-	public static BufferedImage uiCursor1, uiCursor2, uiCursor3;
+	public static BufferedImage uiCursor1, uiCursor2;
 	public static BufferedImage uiIntro1, uiIntro2, uiIntro3;
 	public static BufferedImage uiTitleBkg, uiTitleOpt1, uiTitleOpt1a, uiTitleOpt2, uiTitleOpt2a;
 	public static BufferedImage uiTitleOpt3, uiTitleOpt3a, uiTitleOpt4, uiTitleOpt4a, uiTitleOpt5, uiTitleOpt5a;
@@ -114,7 +114,7 @@ public class Assets
 	{
 		initInterfaceAbout();
 		initInterfaceCharacterSelect();
-		initInterfaceEditor();
+		initInterfaceCursor();
 		initInterfaceGame();
 		initInterfaceIntro();
 		initInterfaceOptions();
@@ -136,6 +136,12 @@ public class Assets
 		uiCharacterOpt2a = ImageLoader.loadImage("/interface/characterOpt2a.png");
 		uiCharacterOpt3 = ImageLoader.loadImage("/interface/characterOpt3.png");
 		uiCharacterOpt3a = ImageLoader.loadImage("/interface/characterOpt3a.png");
+	}
+	
+	public static void initInterfaceCursor()
+	{
+		uiCursor1 = ImageLoader.loadImage("/interface/cursor1.png");
+		uiCursor2 = ImageLoader.loadImage("/interface/cursor2.png");
 	}
 	
 	public static void initInterfaceEditor()
