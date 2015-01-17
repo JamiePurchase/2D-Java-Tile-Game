@@ -4,7 +4,6 @@ import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
 import dev.tilegame.states.DebugState;
-import dev.tilegame.states.EditorState;
 import dev.tilegame.states.GameNewState;
 import dev.tilegame.states.State;
 import dev.tilegame.states.AboutState;

@@ -19,9 +19,10 @@ public class Drawing
 		g.drawRect(x, y, width, height);
 	}
 	
-	public static void drawMenuItem(Graphics g, String text, int x, int y)
+	public static void drawMenuItem(Graphics g, String text, int x, int y, int hover)
 	{
 		g.setFont(Assets.fontEditorMenu);
+		if(hover==1){g.setFont(Assets.fontEditorMenuBold);}
 		g.setColor(Color.BLACK);
 		g.drawString(text, x, y);
 		/*g.setFont(Assets.fontStandardUnderline);

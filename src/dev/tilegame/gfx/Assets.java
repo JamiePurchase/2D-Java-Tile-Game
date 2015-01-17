@@ -64,7 +64,7 @@ public class Assets
 	// Fonts
 	public static Font fontStandard, fontStandardUnderline, fontInfoCount, fontReduced;
 	public static Font fontDebugTitle, fontDebugStandard;
-	public static Font fontEditorMenu, fontEditorMenuBold;
+	public static Font fontEditorMenu, fontEditorMenuBold, fontEditorMenuInfo, fontEditorMenuTitle;
 	
 	public static void init()
 	{
@@ -212,6 +212,8 @@ public class Assets
 		fontDebugStandard = new Font("MV Boli", Font.PLAIN, 26);
 		fontEditorMenu = new Font("Arial", Font.PLAIN, 18);
 		fontEditorMenuBold = new Font("Arial", Font.BOLD, 18);
+		fontEditorMenuInfo = new Font("Arial", Font.ITALIC, 18);
+		fontEditorMenuTitle = new Font("Arial", Font.BOLD, 18);
 	}
 	
 	public static void initSprites()

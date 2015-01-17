@@ -37,7 +37,9 @@ public class EditorBoard extends JPanel implements Runnable
 	// Editor
 	public String editorState = "Intro";
 	private int editorFileNew = 0;
-	private String editorFilePath = "";
+	private static String editorFilePath = "";
+	private static String editorInfoText = "";
+	private static int editorInfoTime = 0;
 	
 	// Look at this later
 	private int[] entitySomething;
@@ -66,7 +68,9 @@ public class EditorBoard extends JPanel implements Runnable
 	private int cursorGridMaxX = 10;
 	private int cursorGridMaxY = 10;
 	private int cursorMenuPosX = 1;
-	private int cursorMenuPosY = 1;
+	private int[] cursorMenuPosY = new int[5];
+	private int cursorMenuMaxX = 5;
+	private int[] cursorMenuMaxY = new int[5];
 	
 	// Resources
 	public static BufferedImage assetIntro = ImageLoader.loadImage("/interface/editorIntro.png");
@@ -74,6 +78,10 @@ public class EditorBoard extends JPanel implements Runnable
 
 	public EditorBoard()
 	{
+		cursorMenuMaxY[1] = 4;
+		cursorMenuMaxY[2] = 4;
+		cursorMenuMaxY[3] = 4;
+		cursorMenuMaxY[4] = 4;
 		editorNew();
 	}
 	
@@ -88,6 +96,11 @@ public class EditorBoard extends JPanel implements Runnable
 	{
 		display = new Display("Autumn Park Editor", 1366, 768);
 		Assets.init(); 
+	}
+	
+	private void editorLoad()
+	{
+		
 	}
 	
 	private void editorNew()
@@ -110,6 +123,63 @@ public class EditorBoard extends JPanel implements Runnable
 		cursorGridPosY = 1;
 		cursorGridMaxX = boardWidth;
 		cursorGridMaxY = boardHeight;
+	}
+	
+	public void editorSave()
+	{
+		try
+		{
+			editorSaveBoard();
+		}
+		catch (IOException e)
+		{
+			System.out.println("IO Error");
+		}
+		cursorState = "Grid";
+		editorInfoText = "Board Saved";
+		editorInfoTime = 100;
+	}
+	
+	public static void editorSaveBoard() throws IOException
+	{
+		// Temp
+		editorFilePath = "C:/Users/Jamie/Documents/My Workshop/Autumn Park/Datafiles/Board01.txt";
+		
+		// Open File
+		WriteFile data = new WriteFile(editorFilePath, false);
+		String br = System.getProperty("line.separator");
+		
+		// Board Data
+		String write = "Test Board Save" + br;
+		write = write + boardName + br;
+		write = write + boardLocation + br;
+		write = write + boardWidth + br;
+		write = write + boardHeight + br;
+		write = write + boardBkgActive + br;
+		write = write + boardBkgImage + br;
+		write = write + "Music (to do later)" + br;
+		write = write + "Wild Encounters (to do later)" + br;
+		write = write + "#" + br;
+		
+		// Tile Data
+		for(int x=1;x<=boardWidth;x+=1)
+		{
+			for(int y=1;y<=boardHeight;y+=1)
+			{
+				write = write + tileImage[x][y] + br;
+				write = write + tileType[x][y] + br;
+				write = write + tileEntity[x][y] + br;
+				write = write + tileEntityID[x][y] + br;
+			}
+		}
+		write = write + "#" + br;
+		
+		// Garnet Data
+		// Mushroom Data
+		// Treasure Data
+		
+		// Write Data
+		data.writeToFile(write);
 	}
 	
 	public void gridSetAll(String fill, int type)
@@ -239,41 +309,74 @@ public class EditorBoard extends JPanel implements Runnable
 		g.setColor(Color.GRAY);
 		g.fillRect(0, 0, 1366, 32);
 		g.setColor(Color.BLACK);
-		g.drawRect(0, 0, 1366, 32);
+		g.drawRect(0, 0, 150, 32);
+		g.drawRect(150, 0, 1216, 32);
 
 		// Title
-		g.setFont(Assets.fontEditorMenuBold);
+		g.setFont(Assets.fontEditorMenuTitle);
 		g.setColor(Color.BLACK);
 		g.drawString("EDITOR", 20, 22);
 		
 		// Menu Items
-		Drawing.drawMenuItem(g, "File", 153, 22);
-		Drawing.drawMenuItem(g, "Select", 253, 22);
-		Drawing.drawMenuItem(g, "Tiles", 353, 22);
-		Drawing.drawMenuItem(g, "Entities", 453, 22);
+		Drawing.drawMenuItem(g, "File", 165, 22, 0);
+		Drawing.drawMenuItem(g, "????", 265, 22, 0);
+		Drawing.drawMenuItem(g, "????", 365, 22, 0);
+		Drawing.drawMenuItem(g, "????", 465, 22, 0);
+		
+		// Grid Details
+		g.setColor(Color.BLACK);
+		g.drawRect(675, 0, 400, 32);
+		g.setFont(Assets.fontEditorMenu);
+		g.setColor(Color.BLACK);
+		String textPos = "Position: " + cursorGridPosX + "," + cursorGridPosY;
+		String textType = "Normal";
+		if(tileType[cursorGridPosX][cursorGridPosY]==1){textType = "Solid";}
+		String textImage = tileImage[cursorGridPosX][cursorGridPosY];
+		g.drawString(textPos, 700, 22);
+		g.drawString(textType, 850, 22);
+		g.drawString(textImage, 950, 22);
+		
+		// Info Message
+		g.setFont(Assets.fontEditorMenuInfo);
+		g.setColor(Color.BLACK);
+		if(editorInfoTime>1){g.drawString(editorInfoText, 1100, 22);}
 		
 		if(cursorState=="Menu" && cursorMenuPosX==1)
 		{
 			g.setColor(Color.GRAY);
-			g.fillRect(128,32,100,120);
+			g.fillRect(150,32,100,120);
+			g.setColor(Color.WHITE);
+			int fillY = 30 * cursorMenuPosY[1] + 2;
+			g.fillRect(150, fillY, 100, 30);
 			g.setColor(Color.BLACK);
-			g.drawRect(128, 32, 100, 120);
-			Drawing.drawMenuItem(g, "New", 153, 54);
-			Drawing.drawMenuItem(g, "Load", 153, 84);
-			Drawing.drawMenuItem(g, "Save", 153, 114);
-			Drawing.drawMenuItem(g, "Close", 153, 144);
+			g.drawRect(150, 32, 100, 120);
+			if(cursorMenuPosY[1]==1){Drawing.drawMenuItem(g, "New", 165, 54, 1);}
+			else{Drawing.drawMenuItem(g, "New", 165, 54, 0);}
+			if(cursorMenuPosY[1]==2){Drawing.drawMenuItem(g, "Load", 165, 84, 1);}
+			else{Drawing.drawMenuItem(g, "Load", 165, 84, 0);}
+			if(cursorMenuPosY[1]==3){Drawing.drawMenuItem(g, "Save", 165, 114, 1);}
+			else{Drawing.drawMenuItem(g, "Save", 165, 114, 0);}
+			if(cursorMenuPosY[1]==4){Drawing.drawMenuItem(g, "Close", 165, 144, 1);}
+			else{Drawing.drawMenuItem(g, "Close", 165, 144, 0);}
 		}
 		
 		if(cursorState=="Menu" && cursorMenuPosX==2)
 		{
 			g.setColor(Color.GRAY);
-			g.fillRect(228,32,100,120);
+			g.fillRect(250,32,100,120);
+			g.setColor(Color.WHITE);
+			int fillY = 30 * cursorMenuPosY[2] + 2;
+			g.fillRect(250, fillY, 100, 30);
 			g.setColor(Color.BLACK);
-			g.drawRect(228, 32, 100, 120);
-			Drawing.drawMenuItem(g, "New", 253, 54);
-			Drawing.drawMenuItem(g, "Load", 253, 84);
-			Drawing.drawMenuItem(g, "Save", 253, 114);
-			Drawing.drawMenuItem(g, "Close", 253, 144);
+			g.drawRect(250, 32, 100, 120);
+			if(cursorMenuPosY[2]==1){Drawing.drawMenuItem(g, "????", 265, 54, 1);}
+			else{Drawing.drawMenuItem(g, "????", 265, 54, 0);}
+			if(cursorMenuPosY[2]==2){Drawing.drawMenuItem(g, "????", 265, 84, 1);}
+			else{Drawing.drawMenuItem(g, "????", 265, 84, 0);}
+			if(cursorMenuPosY[2]==3){Drawing.drawMenuItem(g, "????", 265, 114, 1);}
+			else{Drawing.drawMenuItem(g, "????", 265, 114, 0);}
+			if(cursorMenuPosY[2]==4){Drawing.drawMenuItem(g, "????", 265, 144, 1);}
+			else{Drawing.drawMenuItem(g, "????", 265, 144, 0);}
 		}
 	}
 	
@@ -317,58 +420,6 @@ public class EditorBoard extends JPanel implements Runnable
 		stop();
 	}
 	
-	public static void saveBoard()
-	{
-		try
-		{
-			saveBoardAction();
-		}
-		catch (IOException e)
-		{
-			System.out.println("IO Error");
-		}
-	}
-	
-	public static void saveBoardAction() throws IOException
-	{
-		// Get the file
-		String file_name = "C:/Users/Jamie/Documents/My Workshop/Autumn Park/Datafiles/Board01.txt";
-		WriteFile data = new WriteFile(file_name, false);
-		String br = System.getProperty("line.separator");
-		
-		// Board Data
-		String write = "Test Board Save" + br;
-		write = write + boardName + br;
-		write = write + boardLocation + br;
-		write = write + boardWidth + br;
-		write = write + boardHeight + br;
-		write = write + boardBkgActive + br;
-		write = write + boardBkgImage + br;
-		write = write + "Music (to do later)" + br;
-		write = write + "Wild Encounters (to do later)" + br;
-		write = write + "#" + br;
-		
-		// Tile Data
-		for(int x=1;x<=boardWidth;x+=1)
-		{
-			for(int y=1;y<=boardHeight;y+=1)
-			{
-				write = write + tileImage[x][y] + br;
-				write = write + tileType[x][y] + br;
-				write = write + tileEntity[x][y] + br;
-				write = write + tileEntityID[x][y] + br;
-			}
-		}
-		write = write + "#" + br;
-		
-		// Garnet Data
-		// Mushroom Data
-		// Treasure Data
-		
-		// Write the data
-		data.writeToFile(write);
-	}
-	
 	public synchronized void start()
 	{
 		if(running==false)
@@ -396,7 +447,17 @@ public class EditorBoard extends JPanel implements Runnable
 	
 	private void tick()
 	{
+		// Splashscreen
 		if(editorState=="Intro"){tickIntro();}
+		
+		// Info Message
+		if(editorInfoTime>1)
+		{
+			editorInfoTime-=1;
+			if(editorInfoTime==0){editorInfoText = "";}
+		}
+		
+		// Key Events
 		else{tickEvents();}
 	}
 	
@@ -412,7 +473,7 @@ public class EditorBoard extends JPanel implements Runnable
 		{
 			cursorState = "Menu";
 			cursorMenuPosX = 1;
-			cursorMenuPosY = 1;
+			cursorMenuPosY[1] = 1;
 			Keyboard.setKeyDone();
 		}
 		if(Keyboard.getKeyPressed()=="Space")
@@ -444,9 +505,57 @@ public class EditorBoard extends JPanel implements Runnable
 	
 	private void tickEventsMenu()
 	{
+		if(Keyboard.getKeyPressed()=="Space" || Keyboard.getKeyPressed()=="Enter")
+		{
+			if(cursorMenuPosX==1)
+			{
+				if(cursorMenuPosY[1]==1)
+				{
+					editorNew();
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[1]==2)
+				{
+					editorLoad();
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[1]==3)
+				{
+					editorSave();
+					Keyboard.setKeyDone();
+				}
+				if(cursorMenuPosY[1]==4)
+				{
+					System.exit(0);
+				}
+			}
+		}
 		if(Keyboard.getKeyPressed()=="Escape")
 		{
 			cursorState = "Grid";
+			Keyboard.setKeyDone();
+		}
+		if(Keyboard.getKeyPressed()=="Up" && cursorMenuPosY[cursorMenuPosX]>1)
+		{
+			cursorMenuPosY[cursorMenuPosX]-=1;
+			Keyboard.setKeyDone();
+		}
+		if(Keyboard.getKeyPressed()=="Down" && cursorMenuPosY[cursorMenuPosX]<cursorMenuMaxY[cursorMenuPosX])
+		{
+			cursorMenuPosY[cursorMenuPosX]+=1;
+			Keyboard.setKeyDone();
+		}
+		if(Keyboard.getKeyPressed()=="Left" && cursorMenuPosX>1)
+		{
+			cursorMenuPosX-=1;
+			cursorMenuPosY[cursorMenuPosX] = 1;
+			Keyboard.setKeyDone();
+		}
+		if(Keyboard.getKeyPressed()=="Right" && cursorMenuPosX<cursorMenuMaxX)
+		{
+			cursorMenuPosX+=1;
+			cursorMenuPosY[cursorMenuPosX] = 1;
+			Keyboard.setKeyDone();
 		}
 	}
 	
