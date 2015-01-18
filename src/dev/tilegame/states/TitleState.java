@@ -108,6 +108,10 @@ public class TitleState extends State
 		
 		int cursorX = 215 + cursorAnimMove;
 		int cursorY = menuPos * 50 + 300;
+		
+		// Temp (the continue option is currently disabled)
+		if(menuPos==2){cursorX=217;}
+		
 		Drawing.drawStringShadow(g, ">", cursorX, cursorY, 1, Color.GRAY);
 		
 		/*if(menuPos==1){g.drawImage(Assets.uiTitleOpt1a,  200, 275, null);}
