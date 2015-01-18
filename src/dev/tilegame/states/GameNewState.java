@@ -26,8 +26,8 @@ public class GameNewState extends State
 		Game.setSession(newSession);
 		
 		// Initial Board
-		//Game.world.getData("Board01");
-		Game.world.getData("JvExterior");
+		Game.world.getData("Board01");
+		//Game.world.getData("JvExterior");
 		Assets.entPlayer.setPositionX(50);
 		Assets.entPlayer.setPositionY(44);
 		

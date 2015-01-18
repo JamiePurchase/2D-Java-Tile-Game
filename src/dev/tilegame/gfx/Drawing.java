@@ -6,10 +6,17 @@ public class Drawing
 {
 	public static void drawStringShadow(Graphics g, String text, int x, int y)
 	{
+		drawStringShadow(g, text, x, y, 2, Color.BLACK);
+	}
+		
+	public static void drawStringShadow(Graphics g, String text, int x, int y, int shadow, Color color)
+	{
 		g.setFont(Assets.fontStandard);
-		g.setColor(Color.BLACK);
-		g.drawString(text, x+1, y+1);
-		g.drawString(text, x+2, y+2);
+		g.setColor(color);
+		for(int n=1;n<=shadow;n+=1)
+		{
+			g.drawString(text, x+n, y+n);
+		}
 		g.setColor(Color.WHITE);
 		g.drawString(text, x, y);
 	}

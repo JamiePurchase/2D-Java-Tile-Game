@@ -142,7 +142,7 @@ public class Board
 		renderTreasure(g);
 		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
-		g.drawImage(Assets.npcAnnaS, 256, 184, null);
+		//g.drawImage(Assets.npcAnnaS, 256, 184, null);
 	}
 	
 	public static void renderBackground(Graphics g)
@@ -156,19 +156,37 @@ public class Board
 	
 	public void renderTile(Graphics g, int x, int y)
 	{
-		int drawX = x * 32 - 21;
-		int drawY = y * 32 - 16;
-		g.drawImage(Game.world.getTileImage(x, y), drawX, drawY, null);
+		int drawX = (x * 32) - 21 - (gridOffsetX * 32);
+		int drawY = (y * 32) - 16 - (gridOffsetY * 32);
+		
+		// Debug
+		String debug1 = "renderTile from board coords " + x + "," + y;
+		String debug2 = "drawX = " + drawX + " and drawY = " + drawY;
+		System.out.println(debug1);
+		System.out.println(debug2);
+		//g.drawImage(tileImage[x][y], drawX, drawY, null);
+	}
+	
+	public void renderTileAt(Graphics g, int tileX, int tileY, int posX, int posY)
+	{
+		int drawX = (posX * 32) - 21;
+		int drawY = (posY * 32) - 16;
+		g.drawImage(tileImage[tileX][tileY], drawX, drawY, null);
 	}
 	
 	public void renderTiles(Graphics g)
 	{
-		for(int x=1;x<=Game.world.getGridWidth();x+=1)
+		for(int x=1;x<=42;x+=1)
 		{
-			for(int y=1;y<=Game.world.getGridHeight();y+=1)
+			for(int y=1;y<=23;y+=1)
 			{
+				// Note: Old method was to loop through all tiles (using gridWidth and gridHeight) and draw some
 				//if(getOnScreen(x, y)==true){renderTile(g, x, y);}
-				renderTile(g, x, y);
+				
+				// Note: New method is to draw exactly 42 x 23 tiles, using the offset values to pick which tiles to use
+				int tileX = x + gridOffsetX;
+				int tileY = y + gridOffsetY;
+				renderTileAt(g, tileX, tileY, x, y);
 			}
 		}
 	}

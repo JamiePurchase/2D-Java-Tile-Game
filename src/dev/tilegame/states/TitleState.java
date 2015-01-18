@@ -9,6 +9,9 @@ import java.awt.Graphics;
 public class TitleState extends State
 {
 	private int menuPos = 1;
+	private int menuMax = 5;
+	private int cursorAnimTick = 0;
+	private int cursorAnimMove = 0;
 	
 	public TitleState()
 	{
@@ -17,14 +20,23 @@ public class TitleState extends State
 	
 	public void tick()
 	{
-		// Test
-		//if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
-		if(Keyboard.getKeyPressed()=="Enter")
+		// Cursor
+		cursorAnimTick+=1;
+		if(cursorAnimTick==15){cursorAnimMove = 2;}
+		if(cursorAnimTick==30){cursorAnimMove = 3;}
+		if(cursorAnimTick==45){cursorAnimMove = 4;}
+		if(cursorAnimTick==60){cursorAnimMove = 5;}
+		if(cursorAnimTick==75){cursorAnimMove = 4;}
+		if(cursorAnimTick==90){cursorAnimMove = 3;}
+		if(cursorAnimTick==105){cursorAnimMove = 2;}
+		if(cursorAnimTick==120)
 		{
-			State.setStateChange("Battle");
-			Keyboard.setKeyDone();
+			cursorAnimMove = 1;
+			cursorAnimTick = 0;
 		}
-		if(Keyboard.getKeyPressed()=="Space")
+		
+		// Key Events
+		if(Keyboard.getKeyPressed()=="Space" || Keyboard.getKeyPressed()=="Enter")
 		{
 			Keyboard.setKeyDone();
 			if(menuPos==1)
@@ -38,10 +50,6 @@ public class TitleState extends State
 				// Load Game
 				//State.setStateChange("Load");
 				//Keyboard.setKeyDone();
-				
-				// Temp
-				State.setStateChange("Debug");
-				Keyboard.setKeyDone();
 			}
 			if(menuPos==3)
 			{
@@ -67,47 +75,15 @@ public class TitleState extends State
 			// Quit
 			System.exit(0);
 		}
-		if(Keyboard.getKeyPressed()=="Up")
+		if(Keyboard.getKeyPressed()=="Up" && menuPos>1)
 		{
-			if(menuPos>2 && menuPos<5)
-			{
-				menuPos = menuPos - 2;
-				Keyboard.setKeyDone();
-			}
-			else if(menuPos==5)
-			{
-				menuPos = 3;
-				Keyboard.setKeyDone();
-			}
+			menuPos-=1;
+			Keyboard.setKeyDone();
 		}
-		if(Keyboard.getKeyPressed()=="Down")
+		if(Keyboard.getKeyPressed()=="Down" && menuPos<menuMax)
 		{
-			if(menuPos<3)
-			{
-				menuPos = menuPos + 2;
-				Keyboard.setKeyDone();
-			}
-			else if(menuPos>2 && menuPos<5)
-			{
-				menuPos = 5;
-				Keyboard.setKeyDone();
-			}
-		}
-		if(Keyboard.getKeyPressed()=="Left")
-		{
-			if(menuPos==2 || menuPos==4)
-			{
-				menuPos = menuPos - 1;
-				Keyboard.setKeyDone();
-			}
-		}
-		if(Keyboard.getKeyPressed()=="Right")
-		{
-			if(menuPos==1 || menuPos==3)
-			{
-				menuPos = menuPos + 1;
-				Keyboard.setKeyDone();
-			}
+			menuPos+=1;
+			Keyboard.setKeyDone();
 		}
 	}
 	
@@ -123,9 +99,16 @@ public class TitleState extends State
 	}
 	
 	public void renderOptions(Graphics g)
-	{
-		g.drawImage(Assets.uiCursor1,  200, 275, null);
-		g.drawImage(Assets.uiCursor2,  200, 475, null);
+	{		
+		Drawing.drawStringShadow(g, "New Game", 250, 350, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, "Continue", 250, 400, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, "Tutorial", 250, 450, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, "Options", 250, 500, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, "About", 250, 550, 1, Color.GRAY);
+		
+		int cursorX = 215 + cursorAnimMove;
+		int cursorY = menuPos * 50 + 300;
+		Drawing.drawStringShadow(g, ">", cursorX, cursorY, 1, Color.GRAY);
 		
 		/*if(menuPos==1){g.drawImage(Assets.uiTitleOpt1a,  200, 275, null);}
 		else{g.drawImage(Assets.uiTitleOpt1,  200, 275, null);}
