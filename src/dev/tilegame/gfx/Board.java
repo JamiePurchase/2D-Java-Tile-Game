@@ -2,6 +2,7 @@ package dev.tilegame.gfx;
 import dev.tilegame.Game;
 import dev.tilegame.datafiles.WriteFile;
 import dev.tilegame.world.Board01;
+import dev.tilegame.world.JvExterior;
 import dev.tilegame.world.JvGooseberryManor;
 
 import java.awt.Color;
@@ -20,16 +21,10 @@ public class Board
 	private static boolean gridScroll = false;
 	private static int gridOffsetX = 0;
 	private static int gridOffsetY = 0;
-	/*private static BufferedImage[ ][ ] tileImage = new BufferedImage[26][18];
-	private static int[ ][ ] tileType = new int[26][18];
-	private static String[ ][ ] tileEntity = new String[26][18];
-	private static int[ ][ ] tileEntityID = new int[26][18];*/
-	
-	// Temp
-	private static BufferedImage[ ][ ] tileImage = new BufferedImage[99][99];
-	private static int[ ][ ] tileType = new int[99][99];
-	private static String[ ][ ] tileEntity = new String[99][99];
-	private static int[ ][ ] tileEntityID = new int[99][99];
+	private static BufferedImage[ ][ ] tileImage = new BufferedImage[101][81];
+	private static int[ ][ ] tileType = new int[101][81];
+	private static String[ ][ ] tileEntity = new String[101][81];
+	private static int[ ][ ] tileEntityID = new int[101][81];
 	
 	// Temp
 	private static int treasureCount = 0;
@@ -45,6 +40,7 @@ public class Board
 	public static void getData(String name)
 	{
 		if(name=="Board01"){Board01 boardLoader = new Board01();}
+		if(name=="JvExterior"){JvExterior boardLoader = new JvExterior();}
 		if(name=="JvGooseberryManor"){JvGooseberryManor boardLoader = new JvGooseberryManor();}
 	}
 	
@@ -144,7 +140,7 @@ public class Board
 	{
 		renderBackground(g);
 		renderTiles(g);
-		Assets.entPlayer.render(g);
+		renderPlayer(g);
 		renderTreasure(g);
 		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
@@ -158,6 +154,11 @@ public class Board
 		g.fillRect(11, 16, 1344, 736);
 		if(bkgHasImage){g.drawImage(bkgImage, 11, 16, null);}
 		// Note: Should the background image be larger than the screen when the board is?
+	}
+	
+	public void renderPlayer(Graphics g)
+	{
+		Assets.entPlayer.render(g);
 	}
 	
 	public void renderTile(Graphics g, int x, int y)
@@ -339,5 +340,12 @@ public class Board
 				tileType[x][y] = type;
 			}
 		}
+		
+		// Debug
+		/*String debug1 = "tileInit(" + image + ", " + type + ")";
+		String debug2 = "gridWidth = " + gridWidth + " and gridHeight = " + gridHeight;
+		System.out.println(debug1);
+		System.out.println(debug2);*/
 	}
+
 }

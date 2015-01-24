@@ -145,8 +145,8 @@ public class PlayerCreatureEntity extends CreatureEntity
 	public void render(Graphics g)
 	{
 		BufferedImage drawImage = getImage();
-		int drawX = getPositionX() * 32 - 32;
-		int drawY = getPositionY() * 32 - 32;
+		int drawX = ((getPositionX() - Game.world.getGridOffsetX()) * 32) - 21;
+		int drawY = ((getPositionY() - Game.world.getGridOffsetY()) * 32) - 16;
 		if(getAction()=="Walk")
 		{
 			int offset = getWalkFrame() * 8;
@@ -156,6 +156,14 @@ public class PlayerCreatureEntity extends CreatureEntity
 			if(getDirection()=="W"){drawX -= offset;}
 		}
 		g.drawImage(drawImage, drawX, drawY, null);
+		
+		// Debug
+		String debug1 = "Player location: " + getPositionX() + ", " + getPositionY();
+		String debug2 = "Grid Offset: " + Game.world.getGridOffsetX() + ", " + Game.world.getGridOffsetY();
+		String debug3 = "Draw Coords = " + drawX + ", " + drawY;
+		System.out.println(debug1);
+		System.out.println(debug2);
+		System.out.println(debug3);
 	}
 	
 	public void tick()
