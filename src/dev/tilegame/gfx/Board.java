@@ -20,10 +20,16 @@ public class Board
 	private static boolean gridScroll = false;
 	private static int gridOffsetX = 0;
 	private static int gridOffsetY = 0;
-	private static BufferedImage[ ][ ] tileImage = new BufferedImage[26][18];
+	/*private static BufferedImage[ ][ ] tileImage = new BufferedImage[26][18];
 	private static int[ ][ ] tileType = new int[26][18];
 	private static String[ ][ ] tileEntity = new String[26][18];
-	private static int[ ][ ] tileEntityID = new int[26][18];
+	private static int[ ][ ] tileEntityID = new int[26][18];*/
+	
+	// Temp
+	private static BufferedImage[ ][ ] tileImage = new BufferedImage[99][99];
+	private static int[ ][ ] tileType = new int[99][99];
+	private static String[ ][ ] tileEntity = new String[99][99];
+	private static int[ ][ ] tileEntityID = new int[99][99];
 	
 	// Temp
 	private static int treasureCount = 0;
@@ -172,6 +178,12 @@ public class Board
 		int drawX = (posX * 32) - 21;
 		int drawY = (posY * 32) - 16;
 		g.drawImage(tileImage[tileX][tileY], drawX, drawY, null);
+		
+		// Debug
+		String debug1 = "renderTileAt(g, " + tileX + ", " + tileY + ", " + posX + ", " + posY + ",)";
+		String debug2 = "drawX = " + drawX + " and drawY = " + drawY + " and image = " + tileImage[tileX][tileY];
+		//System.out.println(debug1);
+		//System.out.println(debug2);
 	}
 	
 	public void renderTiles(Graphics g)
@@ -189,6 +201,11 @@ public class Board
 				renderTileAt(g, tileX, tileY, x, y);
 			}
 		}
+		
+		// Debug
+		/*renderTileAt(g, 1, 1, 1, 1);
+		String debug1 = "gridOffsetX = " + gridOffsetX + " and gridOffsetY = " + gridOffsetY;
+		System.out.println(debug1);*/
 	}
 	
 	public static void renderTreasure(Graphics g)
@@ -300,6 +317,14 @@ public class Board
 				tileType[x][y] = type;
 			}
 		}
+		
+		// Debug
+		/*String debug1 = "tileInit(" + fill + ", " + type + ")";
+		String debug2 = "gridWidth = " + gridWidth + " and gridHeight = " + gridHeight;
+		String debug3 = "image = " + BoardTiles.getTileFile(fill);
+		System.out.println(debug1);
+		System.out.println(debug2);
+		System.out.println(debug3);*/
 	}
 	
 	public static void tileInit(BufferedImage image, int type)

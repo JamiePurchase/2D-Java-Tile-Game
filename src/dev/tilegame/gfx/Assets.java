@@ -52,7 +52,9 @@ public class Assets
 	public static BufferedImage itemGarnet1, itemGarnet2;
 	
 	// Test
-	public static BufferedImage battleCharacter2Idle, battleBackground;
+	public static BufferedImage battleBackground;
+	public static BufferedImage battleCharacter2Idle;
+	public static BufferedImage battleBoarIdle;
 	
 	// Textures
 	public static BufferedImage txtGrass, txtFence1L, txtFence1M, txtFence1MS, txtFence1R;
@@ -310,6 +312,7 @@ public class Assets
 	{
 		battleBackground = ImageLoader.loadImage("/battle/backgrounds/test1.png");
 		battleCharacter2Idle = ImageLoader.loadImage("/battle/character2/Idle.png");
+		battleBoarIdle = ImageLoader.loadImage("/battle/boar/Idle.png");
 	}
 	
 	public static void initTextures()

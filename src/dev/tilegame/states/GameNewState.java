@@ -33,7 +33,7 @@ public class GameNewState extends State
 		
 		// Temp
 		Game.world.setGridScroll(true);
-		Game.world.setGridOffset(29, 32);
+		Game.world.setGridOffset(0, 0);
 		
 		// Inventory
 		Inventory newInventory = new Inventory();
