@@ -15,7 +15,7 @@ public class GameState extends State
 	
 	public void tick()
 	{
-		Assets.entPlayer.tick();
+		Game.world.tick();
 	}
 	
 	public void render(Graphics g)

@@ -221,7 +221,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("N");
-					if(Game.world.getGridScroll()==true){Game.world.setGridScrollAction(true);}
+					if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew("N");}
 				}
 			}
 			setDirection("N");
@@ -236,7 +236,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("S");
-					if(Game.world.getGridScroll()==true){Game.world.setGridScrollAction(true);}
+					if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew("S");}
 				}
 			}
 			setDirection("S");
@@ -251,7 +251,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("W");
-					if(Game.world.getGridScroll()==true){Game.world.setGridScrollAction(true);}
+					if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew("W");}
 				}
 			}
 			setDirection("W");
@@ -266,7 +266,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("E");
-					if(Game.world.getGridScroll()==true){Game.world.setGridScrollAction(true);}
+					if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew("E");}
 				}
 			}
 			setDirection("E");
@@ -294,7 +294,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			if(Game.world.getGridScrollAction()==true && getWalkFrame()==2)
 			{
 				Game.world.setGridOffsetMove(getDirection());
-				Game.world.setGridScrollAction(false);
+				Game.world.setGridScrollDone();
 			}
 			
 			// Walking finished

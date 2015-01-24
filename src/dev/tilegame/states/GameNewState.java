@@ -26,18 +26,27 @@ public class GameNewState extends State
 		Game.setSession(newSession);
 		
 		// Initial Board
-		//Game.world.getData("Board01");
-		Game.world.getData("JvExterior");
+		/*Game.world.getData("Board01");
+		Assets.entPlayer.setPositionX(5);
+		Assets.entPlayer.setPositionY(5);
+		Game.world.setGridScroll(false);
+		Game.world.setGridOffset(0, 0);*/
+		Assets.entPlayer.setWalkSpeed(1);
+		
+		// Temp
+		/*Game.world.getData("JvExterior");
 		Assets.entPlayer.setPositionX(50);
 		Assets.entPlayer.setPositionY(44);
-		
-		// Temp
-		//Assets.entPlayer.setWalkSpeed(2);
-		
-		// Temp
 		Game.world.setGridScroll(true);
-		Game.world.setGridOffset(29, 33);
+		Game.world.setGridOffset(29, 33);*/
 		
+		// Temp
+		Game.world.getData("JvPlayerBedroom");
+		Assets.entPlayer.setPositionX(21);
+		Assets.entPlayer.setPositionY(15);
+		Game.world.setGridScroll(false);
+		Game.world.setGridOffset(0, 0);
+
 		// Inventory
 		Inventory newInventory = new Inventory();
 		Session.setInventory(newInventory);

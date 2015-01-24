@@ -4,6 +4,7 @@ import dev.tilegame.datafiles.WriteFile;
 import dev.tilegame.world.Board01;
 import dev.tilegame.world.JvExterior;
 import dev.tilegame.world.JvGooseberryManor;
+import dev.tilegame.world.JvPlayerBedroom;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -20,6 +21,9 @@ public class Board
 	private static int gridHeight;
 	private static boolean gridScroll = false;
 	private static boolean gridScrollAction = false;
+	private static String gridScrollDirection;
+	private static int gridScrollFrame;
+	private static int gridScrollTick;
 	private static int gridOffsetX = 0;
 	private static int gridOffsetY = 0;
 	private static BufferedImage[ ][ ] tileImage = new BufferedImage[101][81];
@@ -42,6 +46,7 @@ public class Board
 	{
 		if(name=="Board01"){Board01 boardLoader = new Board01();}
 		if(name=="JvExterior"){JvExterior boardLoader = new JvExterior();}
+		if(name=="JvPlayerBedroom"){JvPlayerBedroom boardLoader = new JvPlayerBedroom();}
 		if(name=="JvGooseberryManor"){JvGooseberryManor boardLoader = new JvGooseberryManor();}
 	}
 	
@@ -100,6 +105,16 @@ public class Board
 		return gridScrollAction;
 	}
 	
+	public static String getGridScrollDirection()
+	{
+		return gridScrollDirection;
+	}
+	
+	public static int getGridScrollFrame()
+	{
+		return gridScrollFrame;
+	}
+	
 	public static int getGridWidth()
 	{
 		return gridWidth;
@@ -152,6 +167,28 @@ public class Board
 		return tileType[x][y];
 	}
 	
+	public void tick()
+	{
+		// Board Scrolling
+		if(gridScrollAction==true)
+		{
+			gridScrollTick+=1;
+			if(gridScrollTick==Assets.entPlayer.getWalkSpeed())
+			{
+				gridScrollFrame+=1;
+				if(gridScrollFrame==4)
+				{
+					gridScrollAction = false;
+					Game.world.gridScrollDirection = "";
+					Game.world.gridScrollFrame = 0;
+				}
+			}
+		}
+		
+		// Player
+		Assets.entPlayer.tick();
+	}
+	
 	public void render(Graphics g)
 	{
 		renderBackground(g);
@@ -192,8 +229,17 @@ public class Board
 	
 	public void renderTileAt(Graphics g, int tileX, int tileY, int posX, int posY)
 	{
+		renderTileAt(g, tileX, tileY, posX, posY, "", 0);
+	}
+	
+	public void renderTileAt(Graphics g, int tileX, int tileY, int posX, int posY, String scrollDirection, int scrollFrame)
+	{
 		int drawX = (posX * 32) - 21;
 		int drawY = (posY * 32) - 16;
+		if(scrollDirection=="N"){drawY-=(scrollFrame*8);}
+		if(scrollDirection=="E"){drawX+=(scrollFrame*8);}
+		if(scrollDirection=="S"){drawY+=(scrollFrame*8);}
+		if(scrollDirection=="W"){drawX-=(scrollFrame*8);}
 		g.drawImage(tileImage[tileX][tileY], drawX, drawY, null);
 		
 		// Debug
@@ -204,6 +250,33 @@ public class Board
 	}
 	
 	public void renderTiles(Graphics g)
+	{
+		// Note: this should scroll the board smoothly when the player walks
+		/*if(gridScrollAction==true){renderTilesScrolling(g);}
+		else{renderTilesStandard(g);}*/
+		
+		// Note: for now we are using the basic method
+		renderTilesStandard(g);
+	}
+	
+	public void renderTilesScrolling(Graphics g)
+	{
+		for(int x=1;x<=43;x+=1)
+		{
+			for(int y=1;y<=24;y+=1)
+			{
+				int tileX = x + gridOffsetX;
+				int tileY = y + gridOffsetY;
+				if(gridScrollDirection=="N"){tileY-=1;}
+				if(gridScrollDirection=="E"){tileX+=1;}
+				if(gridScrollDirection=="S"){tileY+=1;}
+				if(gridScrollDirection=="W"){tileX-=1;}
+				renderTileAt(g, tileX, tileY, x, y, gridScrollDirection, gridScrollFrame);
+			}
+		}
+	}
+	
+	public void renderTilesStandard(Graphics g)
 	{
 		for(int x=1;x<=42;x+=1)
 		{
@@ -283,9 +356,20 @@ public class Board
 		gridScroll = scroll;
 	}
 	
-	public static void setGridScrollAction(boolean scroll)
+	public static void setGridScrollDone()
 	{
-		gridScrollAction = scroll;
+		gridScrollAction = false;
+		gridScrollDirection = "";
+		gridScrollFrame = 0;
+		gridScrollTick = 0;
+	}
+	
+	public static void setGridScrollNew(String direction)
+	{
+		gridScrollAction = true;
+		gridScrollDirection = direction;
+		gridScrollFrame = 1;
+		gridScrollTick = 0;
 	}
 	
 	public static void setGridWidth(int width)

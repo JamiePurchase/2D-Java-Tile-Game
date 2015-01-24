@@ -65,7 +65,7 @@ public class Assets
 	public static BufferedImage txtTree7aT, txtTree7aB, txtTree7bT, txtTree7bB;
 	
 	// Tilesets
-	public static BufferedImage[] tlsJharvaVillage;
+	public static BufferedImage[] tlsJharvaVillage, tlsJharvaInterior;
 	
 	// Board Backgrounds
 	public static BufferedImage bkgJvGooseberryManor;
@@ -355,6 +355,7 @@ public class Assets
 	
 	public static void initTilesets()
 	{
+		tlsJharvaInterior = Tileset.getTileset("/textures/JharvaInterior.png", 8, 6);
 		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 6);
 	}
 
