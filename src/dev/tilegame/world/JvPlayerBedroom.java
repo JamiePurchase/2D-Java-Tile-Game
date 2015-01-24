@@ -191,5 +191,8 @@ public class JvPlayerBedroom {
 		Game.world.setTile(26, 19, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(27, 19, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(28, 19, Assets.tlsJharvaInterior[0], 1);
+		
+		// Portals
+		Game.world.setPortal(25, 10, "JvPlayerHouse", 24, 11, "S");
 	}
 }

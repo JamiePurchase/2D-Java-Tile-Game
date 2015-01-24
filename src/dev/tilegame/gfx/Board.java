@@ -31,7 +31,16 @@ public class Board
 	private static String[ ][ ] tileEntity = new String[101][81];
 	private static int[ ][ ] tileEntityID = new int[101][81];
 	
-	// Temp
+	// Portals
+	private static int portalCount = 0;
+	private static int[] portalPosX = new int[10];
+	private static int[] portalPosY = new int[10];
+	private static String[] portalSendBoard = new String[10];
+	private static String[] portalSendDirection = new String[10];
+	private static int[] portalSendX = new int[10];
+	private static int[] portalSendY = new int[10];
+	
+	// Treasure
 	private static int treasureCount = 0;
 	private static int[] treasureFind = new int[10];
 	private static int[] treasurePosX = new int[10];
@@ -385,6 +394,19 @@ public class Board
 	public static void setName(String name)
 	{
 		boardName = name;
+	}
+	
+	public static void setPortal(int posX, int posY, String sendBoard, int sendX, int sendY, String sendDirection)
+	{
+		portalCount += 1;
+		portalPosX[portalCount] = posX;
+		portalPosY[portalCount] = posY;
+		portalSendBoard[portalCount] = sendBoard;
+		portalSendDirection[portalCount] = sendDirection;
+		portalSendX[portalCount] = sendX;
+		portalSendY[portalCount] = sendY;
+		tileEntity[posX][posY] = "Portal";
+		tileEntityID[posX][posY] = portalCount;
 	}
 	
 	public static void setTile(int x, int y, String image, int type)

@@ -172,6 +172,24 @@ public class PlayerCreatureEntity extends CreatureEntity
 		tickMovement();
 	}
 	
+	public void tickKeyEntity(int posX, int posY)
+	{
+		if(Game.world.getTileEntity(posX, posY)=="NPC")
+		{
+			//Game.chat = true;
+			
+			// Debug
+			String debug1 = "Interacted with an npc at " + posX + ", " + posY;
+			System.out.println(debug1);
+		}
+		if(Game.world.getTileEntity(posX, posY)=="Portal")
+		{
+			// Debug
+			String debug1 = "Interacted with a portal at " + posX + ", " + posY;
+			System.out.println(debug1);
+		}
+	}
+	
 	public void tickKeyEvents()
 	{
 		if(Game.chat==true)
@@ -188,6 +206,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 	{
 		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
 		{
+			Keyboard.setKeyDone();
 			Game.chat = false;
 		}
 	}
@@ -196,21 +215,19 @@ public class PlayerCreatureEntity extends CreatureEntity
 	{
 		if(Keyboard.getKeyPressed()=="Enter")
 		{
+			Keyboard.setKeyDone();
 			State.setStateChange("Menu");
 		}
 		if(Keyboard.getKeyPressed()=="Space")
 		{
+			Keyboard.setKeyDone();
 			int checkPosX = getPositionX();
 			int checkPosY = getPositionY();
 			if(getDirection()=="N"){checkPosY -= 1;}
 			if(getDirection()=="E"){checkPosX += 1;}
 			if(getDirection()=="S"){checkPosY += 1;}
 			if(getDirection()=="W"){checkPosX -= 1;}
-			if(Game.world.getTileEntity(checkPosX, checkPosY)=="NPC")
-			{
-				Game.chat = true;
-				System.out.println("Speak to Anna");
-			}
+			if(!Game.world.getTileEntity(checkPosX, checkPosY).equals("None")){tickKeyEntity(checkPosX, checkPosY);}
 		}
 		if(Keyboard.getKeyPressed()=="Up")
 		{
@@ -271,15 +288,6 @@ public class PlayerCreatureEntity extends CreatureEntity
 			}
 			setDirection("E");
 			Keyboard.setKeyDone();
-		}
-		
-		// Test
-		if(Keyboard.getKeyPressed()=="D")
-		{
-			Keyboard.setKeyDone();
-			Game.boardChange("JvGooseberryManor");
-			setPositionX(10);
-			setPositionY(6);
 		}
 	}
 	
