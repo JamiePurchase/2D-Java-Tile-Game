@@ -158,12 +158,12 @@ public class PlayerCreatureEntity extends CreatureEntity
 		g.drawImage(drawImage, drawX, drawY, null);
 		
 		// Debug
-		String debug1 = "Player location: " + getPositionX() + ", " + getPositionY();
+		/*String debug1 = "Player location: " + getPositionX() + ", " + getPositionY();
 		String debug2 = "Grid Offset: " + Game.world.getGridOffsetX() + ", " + Game.world.getGridOffsetY();
 		String debug3 = "Draw Coords = " + drawX + ", " + drawY;
 		System.out.println(debug1);
 		System.out.println(debug2);
-		System.out.println(debug3);
+		System.out.println(debug3);*/
 	}
 	
 	public void tick()
@@ -221,6 +221,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("N");
+					Game.world.setGridScrollAction(true);
 				}
 			}
 			setDirection("N");
@@ -235,6 +236,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("S");
+					Game.world.setGridScrollAction(true);
 				}
 			}
 			setDirection("S");
@@ -249,6 +251,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("W");
+					Game.world.setGridScrollAction(true);
 				}
 			}
 			setDirection("W");
@@ -263,6 +266,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("E");
+					Game.world.setGridScrollAction(true);
 				}
 			}
 			setDirection("E");
@@ -284,6 +288,14 @@ public class PlayerCreatureEntity extends CreatureEntity
 		if(getAction()=="Walk")
 		{
 			setWalkFrameTick();
+			
+			// Temp
+			if(Game.world.getGridScrollAction()==true && getWalkFrame()==2)
+			{
+				Game.world.setGridOffsetMove(getDirection());
+				Game.world.setGridScrollAction(false);
+			}
+			
 			if(getWalkFrame()>4)
 			{
 				int walkPosX = getPositionX();

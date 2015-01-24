@@ -19,6 +19,7 @@ public class Board
 	private static int gridWidth;
 	private static int gridHeight;
 	private static boolean gridScroll = false;
+	private static boolean gridScrollAction = false;
 	private static int gridOffsetX = 0;
 	private static int gridOffsetY = 0;
 	private static BufferedImage[ ][ ] tileImage = new BufferedImage[101][81];
@@ -82,6 +83,11 @@ public class Board
 	public static boolean getGridScroll()
 	{
 		return gridScroll;
+	}
+	
+	public static boolean getGridScrollAction()
+	{
+		return gridScrollAction;
 	}
 	
 	public static int getGridWidth()
@@ -238,15 +244,18 @@ public class Board
 		gridHeight = height;
 	}
 	
-	public static void setGridWidth(int width)
-	{
-		gridWidth = width;
-	}
-	
 	public static void setGridOffset(int x, int y)
 	{
 		setGridOffsetX(x);
 		setGridOffsetY(y);
+	}
+	
+	public static void setGridOffsetMove(String direction)
+	{
+		if(direction=="N" && gridOffsetY>0){gridOffsetY-=1;}
+		if(direction=="E" && gridOffsetX<gridWidth-42){gridOffsetX+=1;}
+		if(direction=="S" && gridOffsetY<gridHeight-23){gridOffsetY+=1;}
+		if(direction=="W" && gridOffsetX>0){gridOffsetX-=1;}
 	}
 	
 	public static void setGridOffsetX(int x)
@@ -262,6 +271,16 @@ public class Board
 	public static void setGridScroll(boolean scroll)
 	{
 		gridScroll = scroll;
+	}
+	
+	public static void setGridScrollAction(boolean scroll)
+	{
+		gridScrollAction = scroll;
+	}
+	
+	public static void setGridWidth(int width)
+	{
+		gridWidth = width;
 	}
 	
 	public static void setLocation(String location)
