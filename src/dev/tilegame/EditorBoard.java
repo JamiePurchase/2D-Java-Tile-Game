@@ -61,6 +61,7 @@ public class EditorBoard extends JPanel implements Runnable
 	
 	// Brushes
 	private int brushType;
+	private String brushTileImage = "Tree";
 	
 	// Cursor
 	private String cursorState = "Grid";
@@ -89,7 +90,7 @@ public class EditorBoard extends JPanel implements Runnable
 	private void brushAction()
 	{
 		// Temp
-		gridSetTileImage("Tree", cursorGridPosX, cursorGridPosY);
+		gridSetTileImage(brushTileImage, cursorGridPosX, cursorGridPosY);
 		gridSetTileType(1, cursorGridPosX, cursorGridPosY);
 	}
 	
@@ -133,30 +134,30 @@ public class EditorBoard extends JPanel implements Runnable
 		// Open File
 		ReadFile file = new ReadFile(editorFilePath);
 		String[] aryLines = file.OpenFile();
-		//String[] fileData = new String[aryLines.length];
+		String[] fileData = new String[aryLines.length];
 		System.out.println("File has " + aryLines.length + " lines");
 		int i = 0;
 		for(i=0;i<aryLines.length;i+=1)
 		{
-			//fileData[i] = aryLines[i];
+			fileData[i] = aryLines[i];
 			System.out.println(i + " " + aryLines[i]);
 		}
 		
 		// Board
-		/*boardName = fileData[1];
+		boardName = fileData[1];
 		boardLocation = fileData[2];
 		boardWidth = Integer.parseInt(fileData[3]);
 		boardHeight = Integer.parseInt(fileData[4]);
 		boardBkgActive = Integer.parseInt(fileData[5]);
-		boardBkgImage = fileData[6];*/
+		boardBkgImage = fileData[6];
 		
 		// Tiles
-		/*int tileMax = boardWidth * boardHeight;
+		int tileMax = boardWidth * boardHeight;
 		int tileX = 1;
 		int tileY = 1;
-		int linePart = 1;
-		int lineMax = tileMax + 10;*/
-		/*for(int line=11;line<=lineMax;line+=1)
+		/*int linePart = 1;
+		int lineMax = tileMax + 10;
+		for(int line=10;line<=lineMax;line+=1)
 		{
 			if(linePart==1){tileImage[tileX][tileY] = fileData[line];}
 			if(linePart==2){tileType[tileX][tileY] = Integer.parseInt(fileData[line]);}
@@ -175,6 +176,9 @@ public class EditorBoard extends JPanel implements Runnable
 			}
 		}*/
 		
+		tileImage[1][1] = fileData[10];
+		tileImage[1][2] = fileData[14];
+		
 		// Temp
 		//tileImage[1][1] = fileData[11];
 	}
@@ -184,8 +188,8 @@ public class EditorBoard extends JPanel implements Runnable
 		// Board
 		boardBkgActive = 0;
 		boardBkgImage = "";
-		boardWidth = 10;
-		boardHeight = 10;
+		boardWidth = 24;
+		boardHeight = 17;
 		
 		// Tiles
 		gridSetAll("Grass", 0);
@@ -379,6 +383,11 @@ public class EditorBoard extends JPanel implements Runnable
 		g.setFont(Assets.fontEditorMenu);
 		g.setColor(Color.BLACK);
 		g.drawString("Brush", 10, 54);
+		
+		// Brush Tile Image (brushTileImage)
+		g.drawImage(Assets.tlsJharvaVillage[41],20,100,null);
+		g.setColor(Color.BLACK);
+		g.drawRect(20, 100, 32, 32);
 	}
 	
 	public void renderToolsMenu(Graphics g)
@@ -456,7 +465,6 @@ public class EditorBoard extends JPanel implements Runnable
 			if(cursorMenuPosY[2]==4){Drawing.drawMenuItem(g, "Encounters", 265, 144, 1);}
 			else{Drawing.drawMenuItem(g, "Encounters", 265, 144, 0);}
 		}
-
 		
 		if(cursorState=="Menu" && cursorMenuPosX==3)
 		{

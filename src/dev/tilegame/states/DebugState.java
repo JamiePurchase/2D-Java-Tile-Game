@@ -1,4 +1,5 @@
 package dev.tilegame.states;
+import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
 import dev.tilegame.battle.MockData;
 import dev.tilegame.gfx.Assets;
@@ -9,7 +10,7 @@ import java.awt.Graphics;
 public class DebugState extends State
 {
 	private int menuPos = 1;
-	private int menuMax = 4;
+	private int menuMax = 5;
 	
 	public DebugState()
 	{
@@ -29,17 +30,22 @@ public class DebugState extends State
 			Keyboard.setKeyDone();
 			if(menuPos==1)
 			{
-				State.setStateChange("Editor");
+				Game.audio = false;
+				State.setStateChange("Title");
 			}
 			if(menuPos==2)
 			{
-				actionTestBattle();
+				State.setStateChange("Editor");
 			}
 			if(menuPos==3)
 			{
-				State.setStateChange("Menu");
+				actionTestBattle();
 			}
 			if(menuPos==4)
+			{
+				State.setStateChange("Menu");
+			}
+			if(menuPos==5)
 			{
 				State.setStateChange("Title");
 			}
@@ -90,9 +96,10 @@ public class DebugState extends State
 		g.setColor(Color.GREEN);
 		g.drawString("Debug Menu", 50, 50);
 		g.setFont(Assets.fontDebugStandard);
-		g.drawString("Board Editor", 100, 100);
-		g.drawString("Battle System", 100, 130);
-		g.drawString("Pause Menu", 100, 160);
-		g.drawString("Close", 100, 190);
+		g.drawString("Title (no sound)", 100, 100);
+		g.drawString("Board Editor", 100, 130);
+		g.drawString("Battle System", 100, 160);
+		g.drawString("Pause Menu", 100, 190);
+		g.drawString("Close", 100, 220);
 	}
 }

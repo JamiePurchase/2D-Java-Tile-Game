@@ -51,6 +51,7 @@ public class Game extends JPanel implements Runnable
 	
 	// Session
 	public static Session session;
+	public static boolean audio = true;
 	
 	// Board Object
 	public static Board world;
@@ -78,16 +79,6 @@ public class Game extends JPanel implements Runnable
 		this.width = width;
 		this.height = height;
 		this.development = dev;
-		
-		/* Test
-		try
-		{
-			saveGame();
-		}
-		catch (IOException e)
-		{
-			System.out.println("IO Error");
-		}*/
 	}
 	
 	private void init()
