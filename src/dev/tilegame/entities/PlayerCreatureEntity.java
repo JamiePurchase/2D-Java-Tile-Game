@@ -4,6 +4,7 @@ import dev.tilegame.Keyboard;
 import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
+import dev.tilegame.gfx.Message;
 import dev.tilegame.states.State;
 
 import java.awt.Graphics;
@@ -188,18 +189,23 @@ public class PlayerCreatureEntity extends CreatureEntity
 			String debug1 = "Interacted with a portal at " + posX + ", " + posY;
 			System.out.println(debug1);
 		}
+		if(Game.world.getTileEntity(posX, posY)=="Scenery")
+		{
+			// Test
+			Game.messageActive = true;
+			Game.messageObject = new Message("Hello World","Message Test","Displaying Text");
+			
+			// Debug
+			String debug1 = "Interacted with scenery at " + posX + ", " + posY;
+			System.out.println(debug1);
+		}
 	}
 	
 	public void tickKeyEvents()
 	{
-		if(Game.chat==true)
-		{
-			tickKeyEventsChat();
-		}
-		else
-		{
-			tickKeyEventsStandard();
-		}
+		if(Game.chat==true){tickKeyEventsChat();}
+		else if(Game.messageActive==true){tickKeyEventsMessage();}
+		else{tickKeyEventsStandard();}
 	}
 	
 	public void tickKeyEventsChat()
@@ -208,6 +214,15 @@ public class PlayerCreatureEntity extends CreatureEntity
 		{
 			Keyboard.setKeyDone();
 			Game.chat = false;
+		}
+	}
+	
+	public void tickKeyEventsMessage()
+	{
+		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
+		{
+			Keyboard.setKeyDone();
+			Game.messageActive = false;
 		}
 	}
 		

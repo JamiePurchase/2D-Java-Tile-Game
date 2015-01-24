@@ -41,8 +41,8 @@ public class JvPlayerBedroom {
 		Game.world.setTile(18, 10, Assets.tlsJharvaInterior[10], 1);
 		Game.world.setTile(19, 10, Assets.tlsJharvaInterior[10], 1);
 		Game.world.setTile(20, 10, Assets.tlsJharvaInterior[10], 1);
-		Game.world.setTile(21, 10, Assets.tlsJharvaInterior[10], 1);
-		Game.world.setTile(22, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(21, 10, Assets.tlsJharvaInterior[11], 1);
+		Game.world.setTile(22, 10, Assets.tlsJharvaInterior[12], 1);
 		Game.world.setTile(23, 10, Assets.tlsJharvaInterior[10], 1);
 		Game.world.setTile(24, 10, Assets.tlsJharvaInterior[13], 1);
 		Game.world.setTile(25, 10, Assets.tlsJharvaInterior[14], 1);
@@ -56,8 +56,8 @@ public class JvPlayerBedroom {
 		Game.world.setTile(18, 11, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(19, 11, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(20, 11, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(21, 11, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(22, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(21, 11, Assets.tlsJharvaInterior[19], 0);
+		Game.world.setTile(22, 11, Assets.tlsJharvaInterior[20], 0);
 		Game.world.setTile(23, 11, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(24, 11, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(25, 11, Assets.tlsJharvaInterior[1], 0);
@@ -67,8 +67,8 @@ public class JvPlayerBedroom {
 		Game.world.setTile(29, 11, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(14, 12, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(15, 12, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(16, 12, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(17, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(16, 12, Assets.tlsJharvaInterior[30], 1);
+		Game.world.setTile(17, 12, Assets.tlsJharvaInterior[31], 1);
 		Game.world.setTile(18, 12, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(19, 12, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(20, 12, Assets.tlsJharvaInterior[1], 0);
@@ -83,8 +83,8 @@ public class JvPlayerBedroom {
 		Game.world.setTile(29, 12, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(14, 13, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(15, 13, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(16, 13, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(17, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(16, 13, Assets.tlsJharvaInterior[38], 1);
+		Game.world.setTile(17, 13, Assets.tlsJharvaInterior[39], 1);
 		Game.world.setTile(18, 13, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(19, 13, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(20, 13, Assets.tlsJharvaInterior[1], 0);
@@ -99,8 +99,8 @@ public class JvPlayerBedroom {
 		Game.world.setTile(29, 13, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(14, 14, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(15, 14, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(16, 14, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(17, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(16, 14, Assets.tlsJharvaInterior[46], 1);
+		Game.world.setTile(17, 14, Assets.tlsJharvaInterior[47], 1);
 		Game.world.setTile(18, 14, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(19, 14, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(20, 14, Assets.tlsJharvaInterior[1], 0);
@@ -124,8 +124,8 @@ public class JvPlayerBedroom {
 		Game.world.setTile(22, 15, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(23, 15, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(24, 15, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(25, 15, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(26, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(25, 15, Assets.tlsJharvaInterior[8], 1);
+		Game.world.setTile(26, 15, Assets.tlsJharvaInterior[9], 1);
 		Game.world.setTile(27, 15, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(28, 15, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(29, 15, Assets.tlsJharvaInterior[0], 1);
@@ -140,8 +140,8 @@ public class JvPlayerBedroom {
 		Game.world.setTile(22, 16, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(23, 16, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(24, 16, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(25, 16, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(26, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(25, 16, Assets.tlsJharvaInterior[16], 1);
+		Game.world.setTile(26, 16, Assets.tlsJharvaInterior[17], 1);
 		Game.world.setTile(27, 16, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(28, 16, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(29, 16, Assets.tlsJharvaInterior[0], 1);
@@ -194,5 +194,8 @@ public class JvPlayerBedroom {
 		
 		// Portals
 		Game.world.setPortal(25, 10, "JvPlayerHouse", 24, 11, "S");
+		
+		// Scenery
+		Game.world.setScenery(21, 10);
 	}
 }

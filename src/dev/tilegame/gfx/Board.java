@@ -39,6 +39,11 @@ public class Board
 	private static String[] portalSendDirection = new String[10];
 	private static int[] portalSendX = new int[10];
 	private static int[] portalSendY = new int[10];
+
+	// Portals
+	private static int sceneryCount = 0;
+	private static int[] sceneryPosX = new int[50];
+	private static int[] sceneryPosY = new int[50];
 	
 	// Treasure
 	private static int treasureCount = 0;
@@ -204,6 +209,7 @@ public class Board
 		renderTiles(g);
 		renderPlayer(g);
 		renderTreasure(g);
+		if(Game.messageActive==true){Game.messageObject.render(g);}
 		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
 		//g.drawImage(Assets.npcAnnaS, 256, 184, null);
@@ -407,6 +413,15 @@ public class Board
 		portalSendY[portalCount] = sendY;
 		tileEntity[posX][posY] = "Portal";
 		tileEntityID[posX][posY] = portalCount;
+	}
+	
+	public static void setScenery(int posX, int posY)
+	{
+		sceneryCount += 1;
+		sceneryPosX[portalCount] = posX;
+		sceneryPosY[portalCount] = posY;
+		tileEntity[posX][posY] = "Scenery";
+		tileEntityID[posX][posY] = sceneryCount;
 	}
 	
 	public static void setTile(int x, int y, String image, int type)

@@ -3,6 +3,7 @@ import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
+import dev.tilegame.gfx.Message;
 import dev.tilegame.states.DebugState;
 import dev.tilegame.states.GameNewState;
 import dev.tilegame.states.State;
@@ -72,6 +73,10 @@ public class Game extends JPanel implements Runnable
 	private State stateGame, stateGameNew, stateMenu;
 	private State stateBattle;
 	private State stateDebug;
+	
+	// Message Frame
+	public static boolean messageActive = false;
+	public static Message messageObject;
 
 	public Game(String title, int width, int height, boolean dev)
 	{
