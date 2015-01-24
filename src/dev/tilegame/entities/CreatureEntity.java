@@ -6,6 +6,7 @@ public abstract class CreatureEntity extends Entity
 	private static String direction;
 	private static int walkFrame;
 	private static int walkFrameTick;
+	private static int walkSpeed;
 	private static int statHealth;
 	
 	public CreatureEntity()
@@ -14,6 +15,7 @@ public abstract class CreatureEntity extends Entity
 		direction = "S";
 		walkFrame = 0;
 		walkFrameTick = 0;
+		walkSpeed = 1;
 	}
 	
 	public static String getAction()
@@ -41,6 +43,17 @@ public abstract class CreatureEntity extends Entity
 		return walkFrameTick;
 	}
 	
+	public static int getWalkFrameTickCount(int speed)
+	{
+		if(speed==2){return 5;}
+		return 10;
+	}
+	
+	public static int getWalkSpeed()
+	{
+		return walkSpeed;
+	}
+	
 	public static void setAction(String act)
 	{
 		action = act;
@@ -64,11 +77,16 @@ public abstract class CreatureEntity extends Entity
 	public static void setWalkFrameTick()
 	{
 		walkFrameTick = walkFrameTick + 1;
-		if(walkFrameTick>10)
+		if(walkFrameTick>getWalkFrameTickCount(walkSpeed))
 		{
 			walkFrame = walkFrame + 1;
 			walkFrameTick = 0;
 		}
+	}
+	
+	public static void setWalkSpeed(int speed)
+	{
+		walkSpeed = speed;
 	}
 	
 	public static void walk(String direction)

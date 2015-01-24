@@ -221,7 +221,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("N");
-					Game.world.setGridScrollAction(true);
+					if(Game.world.getGridScroll()==true){Game.world.setGridScrollAction(true);}
 				}
 			}
 			setDirection("N");
@@ -236,7 +236,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("S");
-					Game.world.setGridScrollAction(true);
+					if(Game.world.getGridScroll()==true){Game.world.setGridScrollAction(true);}
 				}
 			}
 			setDirection("S");
@@ -251,7 +251,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("W");
-					Game.world.setGridScrollAction(true);
+					if(Game.world.getGridScroll()==true){Game.world.setGridScrollAction(true);}
 				}
 			}
 			setDirection("W");
@@ -266,7 +266,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(Game.world.getTileType(newPosX, newPosY)==0)
 				{
 					walk("E");
-					Game.world.setGridScrollAction(true);
+					if(Game.world.getGridScroll()==true){Game.world.setGridScrollAction(true);}
 				}
 			}
 			setDirection("E");
@@ -287,15 +287,17 @@ public class PlayerCreatureEntity extends CreatureEntity
 	{
 		if(getAction()=="Walk")
 		{
+			// Each time this is called we might advance to the next frame (based on movement speed)
 			setWalkFrameTick();
 			
-			// Temp
+			// Scroll the board if necessary
 			if(Game.world.getGridScrollAction()==true && getWalkFrame()==2)
 			{
 				Game.world.setGridOffsetMove(getDirection());
 				Game.world.setGridScrollAction(false);
 			}
 			
+			// Walking finished
 			if(getWalkFrame()>4)
 			{
 				int walkPosX = getPositionX();

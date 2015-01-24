@@ -32,6 +32,9 @@ public class GameNewState extends State
 		Assets.entPlayer.setPositionY(44);
 		
 		// Temp
+		//Assets.entPlayer.setWalkSpeed(2);
+		
+		// Temp
 		Game.world.setGridScroll(true);
 		Game.world.setGridOffset(29, 33);
 		

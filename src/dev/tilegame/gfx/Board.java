@@ -75,9 +75,19 @@ public class Board
 		return gridOffsetX;
 	}
 	
+	public static int getGridOffsetXMax()
+	{
+		return gridWidth - 42;
+	}
+	
 	public static int getGridOffsetY()
 	{
 		return gridOffsetY;
+	}
+	
+	public static int getGridOffsetYMax()
+	{
+		return gridHeight - 23;
 	}
 	
 	public static boolean getGridScroll()
@@ -253,8 +263,8 @@ public class Board
 	public static void setGridOffsetMove(String direction)
 	{
 		if(direction=="N" && gridOffsetY>0){gridOffsetY-=1;}
-		if(direction=="E" && gridOffsetX<gridWidth-42){gridOffsetX+=1;}
-		if(direction=="S" && gridOffsetY<gridHeight-23){gridOffsetY+=1;}
+		if(direction=="E" && gridOffsetX<getGridOffsetXMax()){gridOffsetX+=1;}
+		if(direction=="S" && gridOffsetY<getGridOffsetYMax()){gridOffsetY+=1;}
 		if(direction=="W" && gridOffsetX>0){gridOffsetX-=1;}
 	}
 	
