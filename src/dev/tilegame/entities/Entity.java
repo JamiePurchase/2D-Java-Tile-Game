@@ -21,6 +21,12 @@ public abstract class Entity
 		return positionY;
 	}
 	
+	public static void setPosition(int posX, int posY)
+	{
+		positionX = posX;
+		positionY = posY;
+	}
+	
 	public static void setPositionX(int pos)
 	{
 		positionX = pos;

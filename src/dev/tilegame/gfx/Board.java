@@ -43,13 +43,14 @@ public class Board
 	private static String lightingStyle;
 	
 	// Portals
-	private static int portalCount = 0;
-	private static int[] portalPosX = new int[10];
-	private static int[] portalPosY = new int[10];
-	private static String[] portalSendBoard = new String[10];
-	private static String[] portalSendDirection = new String[10];
-	private static int[] portalSendX = new int[10];
-	private static int[] portalSendY = new int[10];
+	public static int portalCount = 0;
+	//public static Portal[] = new Portal[10];
+	public static int[] portalPosX = new int[10];
+	public static int[] portalPosY = new int[10];
+	public static String[] portalSendBoard = new String[10];
+	public static String[] portalSendDirection = new String[10];
+	public static int[] portalSendX = new int[10];
+	public static int[] portalSendY = new int[10];
 
 	// Scenery
 	private static int sceneryCount = 0;

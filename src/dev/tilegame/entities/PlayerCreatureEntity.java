@@ -25,6 +25,11 @@ public class PlayerCreatureEntity extends CreatureEntity
 		return Game.world.getTileEntity(getFacingTileX(), getFacingTileY());
 	}
 	
+	public int getFacingEntityID()
+	{
+		return Game.world.getTileEntityID(getFacingTileX(), getFacingTileY());
+	}
+	
 	public int getFacingTileX()
 	{
 		int tileX = getPositionX();
@@ -212,6 +217,15 @@ public class PlayerCreatureEntity extends CreatureEntity
 		System.out.println(debug3);*/
 	}
 	
+	public void setBoardNew(String newBoard, int newX, int newY, String newDirection, int offsetX, int offsetY)
+	{
+		Game.world.getData(newBoard);
+		Assets.entPlayer.setPosition(newX,newY);
+		Assets.entPlayer.setDirection(newDirection);
+		Game.world.setGridScroll(false);
+		Game.world.setGridOffset(offsetX, offsetY);
+	}
+	
 	public void tick()
 	{
 		tickCallout();
@@ -245,6 +259,9 @@ public class PlayerCreatureEntity extends CreatureEntity
 		}
 		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Portal")
 		{
+			// Change Board
+			setBoardNew(Game.world.portalSendBoard[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalSendX[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalSendY[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalSendDirection[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], 0, 0);
+			
 			// Debug
 			/*String debug1 = "Interacted with a portal at " + getFacingTileX() + ", " + getFacingTileY();
 			System.out.println(debug1);*/
