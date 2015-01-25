@@ -262,6 +262,14 @@ public class PlayerCreatureEntity extends CreatureEntity
 			/*String debug1 = "Interacted with an npc at " + getFacingTileX() + ", " + getFacingTileY();
 			System.out.println(debug1);*/
 		}
+		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Portal")
+		{
+			if(Game.world.portalType[Game.world.getTileEntityID(getFacingTileX(), getFacingTileY())]=="Interact")
+			{
+				// Change Board
+				setBoardNew(Game.world.portalSendBoard[Game.world.getTileEntityID(getFacingTileX(), getFacingTileY())], Game.world.portalSendX[Game.world.getTileEntityID(getFacingTileX(), getFacingTileY())], Game.world.portalSendY[Game.world.getTileEntityID(getFacingTileX(), getFacingTileY())], Game.world.portalSendDirection[Game.world.getTileEntityID(getFacingTileX(), getFacingTileY())], Game.world.portalOffsetX[Game.world.getTileEntityID(getFacingTileX(), getFacingTileY())], Game.world.portalOffsetY[Game.world.getTileEntityID(getFacingTileX(), getFacingTileY())]);
+			}
+		}
 		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Scenery")
 		{
 			// Test
@@ -318,16 +326,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			{
 				int newPosX = getPositionX();
 				int newPosY = getPositionY() - 1;
-				if(Game.world.getTileType(newPosX, newPosY)==0)
-				{
-					walk("N");
-					if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew("N");}
-				}
-				if(Game.world.getTileEntity(newPosX, newPosY)=="Portal")
-				{
-					// Change Board
-					setBoardNew(Game.world.portalSendBoard[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendX[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendY[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendDirection[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalOffsetX[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalOffsetY[Game.world.getTileEntityID(newPosX, newPosY)]);
-				}
+				tickKeyPush("N", newPosX, newPosY);
 			}
 			Keyboard.setKeyDone();
 		}
@@ -338,16 +337,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			{
 				int newPosX = getPositionX();
 				int newPosY = getPositionY() + 1;
-				if(Game.world.getTileType(newPosX, newPosY)==0)
-				{
-					walk("S");
-					if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew("S");}
-				}
-				if(Game.world.getTileEntity(newPosX, newPosY)=="Portal")
-				{
-					// Change Board
-					setBoardNew(Game.world.portalSendBoard[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendX[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendY[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendDirection[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalOffsetX[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalOffsetY[Game.world.getTileEntityID(newPosX, newPosY)]);
-				}
+				tickKeyPush("S", newPosX, newPosY);
 			}
 			Keyboard.setKeyDone();
 		}
@@ -358,16 +348,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			{
 				int newPosX = getPositionX() - 1;
 				int newPosY = getPositionY();
-				if(Game.world.getTileType(newPosX, newPosY)==0)
-				{
-					walk("W");
-					if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew("W");}
-				}
-				if(Game.world.getTileEntity(newPosX, newPosY)=="Portal")
-				{
-					// Change Board
-					setBoardNew(Game.world.portalSendBoard[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendX[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendY[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendDirection[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalOffsetX[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalOffsetY[Game.world.getTileEntityID(newPosX, newPosY)]);
-				}
+				tickKeyPush("W", newPosX, newPosY);
 			}
 			Keyboard.setKeyDone();
 		}
@@ -378,18 +359,22 @@ public class PlayerCreatureEntity extends CreatureEntity
 			{
 				int newPosX = getPositionX() + 1;
 				int newPosY = getPositionY();
-				if(Game.world.getTileType(newPosX, newPosY)==0)
-				{
-					walk("E");
-					if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew("E");}
-				}
-				if(Game.world.getTileEntity(newPosX, newPosY)=="Portal")
-				{
-					// Change Board
-					setBoardNew(Game.world.portalSendBoard[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendX[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendY[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendDirection[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalOffsetX[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalOffsetY[Game.world.getTileEntityID(newPosX, newPosY)]);
-				}
+				tickKeyPush("E", newPosX, newPosY);
 			}
 			Keyboard.setKeyDone();
+		}
+	}
+	
+	public void tickKeyPush(String direction, int newPosX, int newPosY)
+	{
+		if(Game.world.getTileType(newPosX, newPosY)==0)
+		{
+			walk(direction);
+			if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew(direction);}
+		}
+		if(Game.world.getTileEntity(newPosX, newPosY)=="Portal" && Game.world.portalType[Game.world.getTileEntityID(getFacingTileX(), getFacingTileY())]=="Collide")
+		{
+			setBoardNew(Game.world.portalSendBoard[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendX[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendY[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalSendDirection[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalOffsetX[Game.world.getTileEntityID(newPosX, newPosY)], Game.world.portalOffsetY[Game.world.getTileEntityID(newPosX, newPosY)]);
 		}
 	}
 	

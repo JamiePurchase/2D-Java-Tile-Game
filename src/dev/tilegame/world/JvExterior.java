@@ -22,10 +22,44 @@ public class JvExterior
 		
 		// Tiles
 		Game.world.tileInit(Assets.tlsJharvaVillage[0], 0);
-		
-		// Temp Tree
-		Game.world.setTile(5, 5, Assets.tlsJharvaVillage[41], 1);
-	
+		Game.world.setTile(71, 33, Assets.tlsJharvaVillage[1], 1);
+		Game.world.setTile(72, 33, Assets.tlsJharvaVillage[2], 1);
+		Game.world.setTile(73, 33, Assets.tlsJharvaVillage[2], 1);
+		Game.world.setTile(74, 33, Assets.tlsJharvaVillage[2], 1);
+		Game.world.setTile(75, 33, Assets.tlsJharvaVillage[2], 1);
+		Game.world.setTile(76, 33, Assets.tlsJharvaVillage[2], 1);
+		Game.world.setTile(77, 33, Assets.tlsJharvaVillage[2], 1);
+		Game.world.setTile(78, 33, Assets.tlsJharvaVillage[7], 1);
+		Game.world.setTile(71, 34, Assets.tlsJharvaVillage[17], 1);
+		Game.world.setTile(72, 34, Assets.tlsJharvaVillage[18], 1);
+		Game.world.setTile(73, 34, Assets.tlsJharvaVillage[18], 1);
+		Game.world.setTile(74, 34, Assets.tlsJharvaVillage[18], 1);
+		Game.world.setTile(75, 34, Assets.tlsJharvaVillage[18], 1);
+		Game.world.setTile(76, 34, Assets.tlsJharvaVillage[18], 1);
+		Game.world.setTile(77, 34, Assets.tlsJharvaVillage[18], 1);
+		Game.world.setTile(78, 34, Assets.tlsJharvaVillage[23], 1);
+		Game.world.setTile(71, 35, Assets.tlsJharvaVillage[25], 1);
+		Game.world.setTile(72, 35, Assets.tlsJharvaVillage[27], 1);
+		Game.world.setTile(73, 35, Assets.tlsJharvaVillage[27], 1);
+		Game.world.setTile(74, 35, Assets.tlsJharvaVillage[27], 1);
+		Game.world.setTile(75, 35, Assets.tlsJharvaVillage[27], 1);
+		Game.world.setTile(76, 35, Assets.tlsJharvaVillage[27], 1);
+		Game.world.setTile(77, 35, Assets.tlsJharvaVillage[27], 1);
+		Game.world.setTile(78, 35, Assets.tlsJharvaVillage[31], 1);
+		Game.world.setTile(69, 36, Assets.tlsJharvaVillage[54], 1);
+		Game.world.setTile(70, 36, Assets.tlsJharvaVillage[43], 1);
+		Game.world.setTile(71, 36, Assets.tlsJharvaVillage[52], 1);
+		Game.world.setTile(72, 36, Assets.tlsJharvaVillage[34], 1);
+		Game.world.setTile(73, 36, Assets.tlsJharvaVillage[34], 1);
+		Game.world.setTile(74, 36, Assets.tlsJharvaVillage[35], 1);
+		Game.world.setTile(75, 36, Assets.tlsJharvaVillage[34], 1);
+		Game.world.setTile(76, 36, Assets.tlsJharvaVillage[34], 1);
+		Game.world.setTile(77, 36, Assets.tlsJharvaVillage[34], 1);
+		Game.world.setTile(78, 36, Assets.tlsJharvaVillage[39], 1);
+		Game.world.setTile(69, 37, Assets.tlsJharvaVillage[62], 1);
+		Game.world.setTile(82, 37, Assets.tlsJharvaVillage[63], 1);
+		Game.world.setTile(69, 38, Assets.tlsJharvaVillage[62], 1);
+		Game.world.setTile(82, 38, Assets.tlsJharvaVillage[63], 1);
 		Game.world.setTile(41, 39, Assets.tlsJharvaVillage[1], 1);
 		Game.world.setTile(42, 39, Assets.tlsJharvaVillage[2], 1);
 		Game.world.setTile(43, 39, Assets.tlsJharvaVillage[2], 1);
@@ -34,6 +68,8 @@ public class JvExterior
 		Game.world.setTile(50, 39, Assets.tlsJharvaVillage[2], 1);
 		Game.world.setTile(51, 39, Assets.tlsJharvaVillage[2], 1);
 		Game.world.setTile(52, 39, Assets.tlsJharvaVillage[7], 1);
+		Game.world.setTile(69, 39, Assets.tlsJharvaVillage[62], 1);
+		Game.world.setTile(82, 39, Assets.tlsJharvaVillage[63], 1);
 		Game.world.setTile(41, 40, Assets.tlsJharvaVillage[17], 1);
 		Game.world.setTile(42, 40, Assets.tlsJharvaVillage[18], 1);
 		Game.world.setTile(43, 40, Assets.tlsJharvaVillage[18], 1);
@@ -42,7 +78,7 @@ public class JvExterior
 		Game.world.setTile(50, 40, Assets.tlsJharvaVillage[18], 1);
 		Game.world.setTile(51, 40, Assets.tlsJharvaVillage[18], 1);
 		Game.world.setTile(52, 40, Assets.tlsJharvaVillage[23], 1);
-		Game.world.setTile(69, 40, Assets.tlsJharvaVillage[0], 1); // need a tile for this one
+		Game.world.setTile(69, 40, Assets.tlsJharvaVillage[70], 1);
 		Game.world.setTile(70, 40, Assets.tlsJharvaVillage[43], 1);
 		Game.world.setTile(71, 40, Assets.tlsJharvaVillage[43], 1);
 		Game.world.setTile(72, 40, Assets.tlsJharvaVillage[47], 1);
@@ -51,7 +87,7 @@ public class JvExterior
 		Game.world.setTile(79, 40, Assets.tlsJharvaVillage[43], 1);
 		Game.world.setTile(80, 40, Assets.tlsJharvaVillage[43], 1);
 		Game.world.setTile(81, 40, Assets.tlsJharvaVillage[43], 1);
-		Game.world.setTile(82, 40, Assets.tlsJharvaVillage[0], 1); // need a tile for this one
+		Game.world.setTile(82, 40, Assets.tlsJharvaVillage[71], 1);
 		Game.world.setTile(41, 41, Assets.tlsJharvaVillage[25], 1);
 		Game.world.setTile(42, 41, Assets.tlsJharvaVillage[27], 1);
 		Game.world.setTile(43, 41, Assets.tlsJharvaVillage[27], 1);
@@ -68,5 +104,8 @@ public class JvExterior
 		Game.world.setTile(50, 42, Assets.tlsJharvaVillage[35], 1);
 		Game.world.setTile(51, 42, Assets.tlsJharvaVillage[34], 1);
 		Game.world.setTile(52, 42, Assets.tlsJharvaVillage[39], 1);
+		
+		// Portals
+		Game.world.setPortal("Interact", 50, 42, "JvPlayerHouse", 21, 18, "N");
 	}
 }

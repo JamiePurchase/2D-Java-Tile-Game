@@ -194,7 +194,7 @@ public class JvPlayerBedroom {
 		Game.world.setTile(28, 19, Assets.tlsJharvaInterior[0], 1);
 		
 		// Portals
-		Game.world.setPortal(25, 10, "JvPlayerHouse", 24, 11, "S");
+		Game.world.setPortal("Collide", 25, 10, "JvPlayerHouse", 24, 11, "S");
 		
 		// Scenery
 		Game.world.setScenery(21, 10);

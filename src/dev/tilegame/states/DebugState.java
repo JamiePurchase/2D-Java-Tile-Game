@@ -1,6 +1,7 @@
 package dev.tilegame.states;
 import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
+import dev.tilegame.Session;
 import dev.tilegame.battle.MockData;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Drawing;
@@ -20,6 +21,18 @@ public class DebugState extends State
 		
 	}
 	
+	public void actionGame()
+	{
+		State.setStateChange("Game");
+		Game.playerClass = "Spellweaver";
+		Game.world.getData("JvExterior");
+		Assets.entPlayer.setPosition(50, 44);
+		Assets.entPlayer.setDirection("S");
+		Game.world.setGridScroll(true);
+		Game.world.setGridOffset(29, 33);
+		Assets.entPlayer.setWalkSpeed(2);
+	}
+	
 	public void actionTestBattle()
 	{
 		new MockData();
@@ -33,8 +46,7 @@ public class DebugState extends State
 			Keyboard.setKeyDone();
 			if(menuPos==1)
 			{
-				Game.audio = false;
-				State.setStateChange("Title");
+				actionGame();
 			}
 			if(menuPos==2)
 			{
@@ -99,7 +111,7 @@ public class DebugState extends State
 		g.setColor(Color.GREEN);
 		g.drawString("Debug Menu", 50, 50);
 		g.setFont(Assets.fontDebugStandard);
-		g.drawString("Title (no sound)", 100, 100);
+		g.drawString("Jharva Village", 100, 100);
 		g.drawString("Board Editor", 100, 130);
 		g.drawString("Battle System", 100, 160);
 		g.drawString("Pause Menu", 100, 190);

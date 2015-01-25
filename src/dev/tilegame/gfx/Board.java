@@ -46,6 +46,7 @@ public class Board
 	// Portals
 	public static int portalCount = 0;
 	//public static Portal[] = new Portal[10];
+	public static String[] portalType = new String[10];
 	public static int[] portalPosX = new int[10];
 	public static int[] portalPosY = new int[10];
 	public static String[] portalSendBoard = new String[10];
@@ -435,14 +436,15 @@ public class Board
 		boardName = name;
 	}
 	
-	public static void setPortal(int posX, int posY, String sendBoard, int sendX, int sendY, String sendDirection)
+	public static void setPortal(String type, int posX, int posY, String sendBoard, int sendX, int sendY, String sendDirection)
 	{
-		setPortal(posX, posY, sendBoard, sendX, sendY, sendDirection, 0, 0);
+		setPortal(type, posX, posY, sendBoard, sendX, sendY, sendDirection, 0, 0);
 	}
 	
-	public static void setPortal(int posX, int posY, String sendBoard, int sendX, int sendY, String sendDirection, int offsetX, int offsetY)
+	public static void setPortal(String type, int posX, int posY, String sendBoard, int sendX, int sendY, String sendDirection, int offsetX, int offsetY)
 	{
 		portalCount += 1;
+		portalType[portalCount] = type;
 		portalPosX[portalCount] = posX;
 		portalPosY[portalCount] = posY;
 		portalSendBoard[portalCount] = sendBoard;
@@ -458,8 +460,8 @@ public class Board
 	public static void setScenery(int posX, int posY)
 	{
 		sceneryCount += 1;
-		sceneryPosX[portalCount] = posX;
-		sceneryPosY[portalCount] = posY;
+		sceneryPosX[sceneryCount] = posX;
+		sceneryPosY[sceneryCount] = posY;
 		tileEntity[posX][posY] = "Scenery";
 		tileEntityID[posX][posY] = sceneryCount;
 	}

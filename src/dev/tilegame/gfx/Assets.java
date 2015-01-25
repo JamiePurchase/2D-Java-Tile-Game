@@ -376,7 +376,7 @@ public class Assets
 	public static void initTilesets()
 	{
 		tlsJharvaInterior = Tileset.getTileset("/textures/JharvaInterior.png", 8, 6);
-		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 6);
+		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 9);
 	}
 
 }
