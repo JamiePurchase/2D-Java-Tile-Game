@@ -13,6 +13,9 @@ public class Assets
 	
 	// NPCs
 	public static NpcCreatureEntity entAnna;
+	public static BufferedImage[] npcAnna;
+	public static NpcCreatureEntity entHofmann;
+	public static BufferedImage[] npcHofmann;
 	
 	// Harvest
 	public static HarvestNatureEntity entGarnet;
@@ -119,9 +122,13 @@ public class Assets
 	
 	public static void initEntityNPCs()
 	{
+		// Test
 		entAnna = new NpcCreatureEntity();
-		entAnna.setPositionX(5);
-		entAnna.setPositionY(4);
+		entAnna.setPosition(5, 4);
+		
+		// Prof. Hofmann
+		entHofmann = new NpcCreatureEntity();
+		entHofmann.setPosition(64, 41);
 	}
 	
 	public static void initEntityPlayer()
@@ -259,6 +266,28 @@ public class Assets
 	
 	public static void initSprites()
 	{
+		initSpritesPlayer();
+		initSpritesNPCs();
+		
+		// Mushroom
+		itemMushroom1 = ImageLoader.loadImage("/sprites/mushroom.png");
+		
+		// Treasure
+		itemChest1 = ImageLoader.loadImage("/sprites/chest.png");
+		
+		// Garnet Sheet
+		Spritesheet sheetGarnet = new Spritesheet(ImageLoader.loadImage("/sprites/garnet.png"));
+		
+		// Garnet Images
+		itemGarnet1 = sheetGarnet.crop(0, 0, 32, 32);
+		itemGarnet2 = sheetGarnet.crop(32, 0, 32, 32);
+		
+		// Test
+		initSpritesBattle();
+	}
+	
+	public static void initSpritesPlayer()
+	{
 		// Player Sheet
 		Spritesheet sheetPlayer1 = new Spritesheet(ImageLoader.loadImage("/sprites/player1.png"));
 		Spritesheet sheetPlayer2 = new Spritesheet(ImageLoader.loadImage("/sprites/player2.png"));
@@ -301,31 +330,21 @@ public class Assets
 		charPlayer3W1 = sheetPlayer3.crop(32, 32, 32, 32);
 		charPlayer3W2 = sheetPlayer3.crop(0, 32, 32, 32);
 		charPlayer3W3 = sheetPlayer3.crop(64, 32, 32, 32);
-		
-		// NCP Anna Sheet
+	}
+	
+	public static void initSpritesNPCs()
+	{
+		// Tilesets
+		npcHofmann = Tileset.getTileset("/sprites/npcHofmann.png", 3, 4);
+
+		// NPC Sheet (old)
 		Spritesheet sheetAnna = new Spritesheet(ImageLoader.loadImage("/sprites/npcAnna.png"));
 		
-		// Player Images
+		// NPC Images (old)
 		npcAnnaN = sheetAnna.crop(32, 96, 32, 32);
 		npcAnnaE = sheetAnna.crop(32, 64, 32, 32);
 		npcAnnaS = sheetAnna.crop(32, 0, 32, 32);
 		npcAnnaW = sheetAnna.crop(32, 32, 32, 32);
-		
-		// Mushroom
-		itemMushroom1 = ImageLoader.loadImage("/sprites/mushroom.png");
-		
-		// Treasure
-		itemChest1 = ImageLoader.loadImage("/sprites/chest.png");
-		
-		// Garnet Sheet
-		Spritesheet sheetGarnet = new Spritesheet(ImageLoader.loadImage("/sprites/garnet.png"));
-		
-		// Garnet Images
-		itemGarnet1 = sheetGarnet.crop(0, 0, 32, 32);
-		itemGarnet2 = sheetGarnet.crop(32, 0, 32, 32);
-		
-		// Test
-		initSpritesBattle();
 	}
 	
 	public static void initSpritesBattle()

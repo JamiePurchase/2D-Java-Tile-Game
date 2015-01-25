@@ -105,6 +105,9 @@ public class JvExterior
 		Game.world.setTile(51, 42, Assets.tlsJharvaVillage[34], 1);
 		Game.world.setTile(52, 42, Assets.tlsJharvaVillage[39], 1);
 		
+		// NPCs
+		Game.world.setNpc(Assets.entHofmann);
+		
 		// Portals
 		Game.world.setPortal("Interact", 50, 42, "JvPlayerHouse", 21, 18, "N");
 	}

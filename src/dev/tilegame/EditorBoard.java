@@ -17,6 +17,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JPanel;
@@ -97,7 +99,7 @@ public class EditorBoard extends JPanel implements Runnable
 	private void createWindow()
 	{
 		display = new Display("Autumn Park Editor", 1366, 768);
-		Assets.init(); 
+		Assets.init();
 	}
 	
 	private void editorLoad()
@@ -131,56 +133,84 @@ public class EditorBoard extends JPanel implements Runnable
 		// Temp
 		editorFilePath = "C:/Users/Jamie/Documents/My Workshop/Autumn Park/Datafiles/Board01.txt";
 		
-		// Open File
-		ReadFile file = new ReadFile(editorFilePath);
-		String[] aryLines = file.OpenFile();
-		String[] fileData = new String[aryLines.length];
-		System.out.println("File has " + aryLines.length + " lines");
-		int i = 0;
-		for(i=0;i<aryLines.length;i+=1)
+		String[] fileData = editorLoadBoardData();
+		editorLoadBoardDetails(fileData);
+		editorLoadBoardTiles(fileData);
+		editorLoadBoardEntities(fileData);
+	}
+
+	private String[] editorLoadBoardData() throws IOException
+	{
+		FileReader fr = new FileReader(editorFilePath);
+		BufferedReader textReader = new BufferedReader(fr);
+		String[] textData = new String[2000];
+		int done = 0;
+		int line = 0;
+		while(done<1)
 		{
-			fileData[i] = aryLines[i];
-			System.out.println(i + " " + aryLines[i]);
+			line+=1;
+			textData[line] = textReader.readLine();
+			
+			// Debug
+			String debug1 = "" + line + " " + textData[line];
+			System.out.println(debug1);
+			
+			if(textData[line].equals("END")){done = 1;}
 		}
+		textReader.close();
+		return textData;
+	}
+	
+	private void editorLoadBoardDetails(String[] fileData)
+	{
+		boardName = fileData[2];
+		boardLocation = fileData[3];
+		boardWidth = Integer.parseInt(fileData[4]);
+		boardHeight = Integer.parseInt(fileData[5]);
+		boardBkgActive = Integer.parseInt(fileData[6]);
+		boardBkgImage = fileData[7];
+	}
+	
+	private void editorLoadBoardEntities(String[] fileData)
+	{
 		
-		// Board
-		boardName = fileData[1];
-		boardLocation = fileData[2];
-		boardWidth = Integer.parseInt(fileData[3]);
-		boardHeight = Integer.parseInt(fileData[4]);
-		boardBkgActive = Integer.parseInt(fileData[5]);
-		boardBkgImage = fileData[6];
-		
-		// Tiles
+	}
+	
+	private void editorLoadBoardTiles(String[] fileData)
+	{
 		int tileMax = boardWidth * boardHeight;
 		int tileX = 1;
 		int tileY = 1;
-		/*int linePart = 1;
-		int lineMax = tileMax + 10;
-		for(int line=10;line<=lineMax;line+=1)
+		int lineType;
+		int lineEntity;
+		int lineEntityID;
+		int lineStop = tileMax + 11;
+		
+		// Debug
+		String debug1 = "Board Dimensions: " + boardWidth + " x " + boardHeight + " (max " + tileMax + ")";
+		System.out.println(debug1);
+		
+		for(int line=11;line<=lineStop;line+=4)
 		{
-			if(linePart==1){tileImage[tileX][tileY] = fileData[line];}
-			if(linePart==2){tileType[tileX][tileY] = Integer.parseInt(fileData[line]);}
-			if(linePart==3){tileEntity[tileX][tileY] = fileData[line];}
-			if(linePart==4){tileEntityID[tileX][tileY] = Integer.parseInt(fileData[line]);}
-			linePart+=1;
-			if(linePart>4)
+			// Line Numbers
+			lineType = line + 1;
+			lineEntity = line + 2;
+			lineEntityID = line + 3;
+			
+			// Use Data
+			gridSetTileImage(fileData[line], tileX, tileY);
+			gridSetTileType(Integer.parseInt(fileData[lineType]), tileX, tileY);
+			gridSetTileEntity(fileData[lineEntity], Integer.parseInt(fileData[lineEntityID]), tileX, tileY);
+			
+			// Next tile in column
+			tileY+=1;
+			if(tileY>boardHeight)
 			{
-				linePart = 1;
-				tileY+=1;
-				if(tileY>boardHeight)
-				{
-					tileX+=1;
-					tileY = 1;
-				}
+				// Next column in board
+				tileY = 1;
+				tileX+=1;
 			}
-		}*/
-		
-		tileImage[1][1] = fileData[10];
-		tileImage[1][2] = fileData[14];
-		
-		// Temp
-		//tileImage[1][1] = fileData[11];
+		}
 	}
 	
 	private void editorNew()
@@ -257,6 +287,9 @@ public class EditorBoard extends JPanel implements Runnable
 		// Garnet Data
 		// Mushroom Data
 		// Treasure Data
+		
+		// End of Data
+		write = write + "# END";
 		
 		// Write Data
 		data.writeToFile(write);
@@ -348,7 +381,7 @@ public class EditorBoard extends JPanel implements Runnable
 		int drawY = y * 32 + 0;
 		g.drawImage(BoardTiles.getTileFile(tileImage[x][y]), drawX, drawY, null);
 		//if(editorViewGrid==1){g.drawImage(Assets.uiEditorGrid, drawX, drawY, null);}
-		g.drawImage(Assets.uiEditorGrid, drawX, drawY, null);
+		//g.drawImage(Assets.uiEditorGrid, drawX, drawY, null);
 	}
 	
 	public void renderBoardTiles(Graphics g)
@@ -357,7 +390,8 @@ public class EditorBoard extends JPanel implements Runnable
 		{
 			for(int y=1;y<=boardHeight;y+=1)
 			{
-				if(tileImage[x][y]!=""){renderBoardTile(g, x, y);}
+				//if(tileImage[x][y]!=""){renderBoardTile(g, x, y);}
+				renderBoardTile(g, x, y);
 			}
 		}
 	}

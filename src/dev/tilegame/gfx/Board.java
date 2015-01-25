@@ -1,6 +1,7 @@
 package dev.tilegame.gfx;
 import dev.tilegame.Game;
 import dev.tilegame.datafiles.WriteFile;
+import dev.tilegame.entities.NpcCreatureEntity;
 import dev.tilegame.world.Board01;
 import dev.tilegame.world.JvExterior;
 import dev.tilegame.world.JvGooseberryManor;
@@ -42,6 +43,10 @@ public class Board
 	// Lighting
 	private static boolean lightingActive = false;
 	private static String lightingStyle;
+	
+	// NPCs
+	public static int npcCount = 0;
+	public static NpcCreatureEntity[] npcObject = new NpcCreatureEntity[10];
 	
 	// Portals
 	public static int portalCount = 0;
@@ -228,6 +233,7 @@ public class Board
 		renderTiles(g);
 		if(lightingActive==true){renderLighting(g);}
 		renderPlayer(g);
+		renderNPCs(g);
 		renderTreasure(g);
 		if(Game.messageActive==true){renderMessage(g);}
 		
@@ -256,6 +262,14 @@ public class Board
 		if(Game.messageType=="Speech"){Game.messageObjectSpeech.render(g);}
 		if(Game.messageType=="Standard"){Game.messageObjectStandard.render(g);}
 		if(Game.messageType=="Tutorial"){Game.messageObjectTutorial.render(g);}
+	}
+	
+	public void renderNPCs(Graphics g)
+	{
+		for(int x=1;x<=Game.world.npcCount;x+=1)
+		{
+			npcObject[x].render(g);
+		}
 	}
 	
 	public void renderPlayer(Graphics g)
@@ -434,6 +448,14 @@ public class Board
 	public static void setName(String name)
 	{
 		boardName = name;
+	}
+	
+	public static void setNpc(NpcCreatureEntity object)
+	{
+		npcCount += 1;
+		npcObject[npcCount] = object;
+		tileEntity[object.getPositionX()][object.getPositionY()] = "NPC";
+		tileEntityID[object.getPositionX()][object.getPositionY()] = npcCount;
 	}
 	
 	public static void setPortal(String type, int posX, int posY, String sendBoard, int sendX, int sendY, String sendDirection)
