@@ -209,7 +209,7 @@ public class Board
 		renderTiles(g);
 		renderPlayer(g);
 		renderTreasure(g);
-		if(Game.messageActive==true){Game.messageObject.render(g);}
+		if(Game.messageActive==true){renderMessage(g);}
 		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
 		//g.drawImage(Assets.npcAnnaS, 256, 184, null);
@@ -222,6 +222,14 @@ public class Board
 		g.fillRect(11, 16, 1344, 736);
 		if(bkgHasImage){g.drawImage(bkgImage, 11, 16, null);}
 		// Note: Should the background image be larger than the screen when the board is?
+	}
+	
+	public void renderMessage(Graphics g)
+	{
+		if(Game.messageType=="Prompt"){Game.messageObjectPrompt.render(g);}
+		if(Game.messageType=="Speech"){Game.messageObjectSpeech.render(g);}
+		if(Game.messageType=="Standard"){Game.messageObjectStandard.render(g);}
+		if(Game.messageType=="Tutorial"){Game.messageObjectTutorial.render(g);}
 	}
 	
 	public void renderPlayer(Graphics g)

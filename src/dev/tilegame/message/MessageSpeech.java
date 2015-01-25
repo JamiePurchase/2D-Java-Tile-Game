@@ -1,25 +1,24 @@
-package dev.tilegame.gfx;
+package dev.tilegame.message;
 
 import java.awt.Color;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class Message
+import dev.tilegame.gfx.Assets;
+
+public class MessageSpeech extends Message
 {
-	private String[] messageText = new String[4];
 	private boolean portraitActive;
 	private BufferedImage portraitImage;
-	private boolean speakerActive;
-	private String speakerText;
-
-	public Message(String text1, String text2, String text3)
+	private String speakerName;
+	
+	public MessageSpeech(String speaker, String speech1, String speech2, String speech3)
 	{
-		messageText[1] = text1;
-		messageText[2] = text2;
-		messageText[3] = text3;
+		setMessageText(1, speech1);
+		setMessageText(2, speech2);
+		setMessageText(3, speech3);
+		speakerName = speaker;
 		portraitActive = false;
-		speakerActive = false;
 	}
 	
 	public void render(Graphics g)
@@ -39,12 +38,23 @@ public class Message
 		g.setColor(Color.BLACK);
 		g.drawRect(50, 568, 1266, 150);
 		
+		// Portrait
+		if(portraitActive==true)
+		{
+			g.drawImage(portraitImage, 50, 568, null);
+		}
+		
+		// Speaker
+		g.setColor(Color.BLACK);
+		g.setFont(Assets.fontStandardBold);
+		g.drawString(speakerName, 75, 615);
+		
 		// Text
 		g.setColor(Color.BLACK);
 		g.setFont(Assets.fontStandard);
-		g.drawString(messageText[1], 75, 615);
-		g.drawString(messageText[2], 75, 655);
-		g.drawString(messageText[3], 75, 695);
+		g.drawString(getMessageText(1), 175, 615);
+		g.drawString(getMessageText(2), 175, 655);
+		g.drawString(getMessageText(3), 175, 695);
 	}
 	
 	public void setPortrait(BufferedImage portrait)
@@ -52,10 +62,5 @@ public class Message
 		portraitActive = true;
 		portraitImage = portrait;
 	}
-	
-	public void setSpeaker(String speaker)
-	{
-		speakerActive = true;
-		speakerText = speaker;
-	}
+
 }

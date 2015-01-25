@@ -4,7 +4,7 @@ import dev.tilegame.Keyboard;
 import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
-import dev.tilegame.gfx.Message;
+import dev.tilegame.message.MessageStandard;
 import dev.tilegame.states.State;
 
 import java.awt.Graphics;
@@ -192,8 +192,8 @@ public class PlayerCreatureEntity extends CreatureEntity
 		if(Game.world.getTileEntity(posX, posY)=="Scenery")
 		{
 			// Test
-			Game.messageActive = true;
-			Game.messageObject = new Message("Hello World","Message Test","Displaying Text");
+			MessageStandard message = new MessageStandard("Hello World","Message Test","Displaying Text");
+			Game.setMessage(message);
 			
 			// Debug
 			String debug1 = "Interacted with scenery at " + posX + ", " + posY;

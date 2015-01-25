@@ -71,7 +71,8 @@ public class Assets
 	public static BufferedImage bkgJvGooseberryManor;
 	
 	// Fonts
-	public static Font fontStandard, fontStandardUnderline, fontInfoCount, fontReduced;
+	public static Font fontStandard, fontStandardBold, fontStandardUnderline;
+	public static Font fontInfoCount, fontReduced;
 	public static Font fontDebugTitle, fontDebugStandard;
 	public static Font fontEditorMenu, fontEditorMenuBold, fontEditorMenuInfo, fontEditorMenuTitle;
 	
@@ -226,6 +227,7 @@ public class Assets
 	public static void initFonts()
 	{
 		fontStandard = new Font("MV Boli", Font.PLAIN, 26);
+		fontStandardBold = new Font("MV Boli", Font.BOLD, 26);
 		fontStandardUnderline = new Font("MV Boli", Font.PLAIN, 26);
 		fontInfoCount = new Font("Times New Roman", Font.BOLD, 36);
 		fontReduced = new Font("MV Boli", Font.PLAIN, 20);

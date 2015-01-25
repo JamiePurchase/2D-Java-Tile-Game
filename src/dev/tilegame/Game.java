@@ -3,7 +3,10 @@ import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
-import dev.tilegame.gfx.Message;
+import dev.tilegame.message.MessagePrompt;
+import dev.tilegame.message.MessageSpeech;
+import dev.tilegame.message.MessageStandard;
+import dev.tilegame.message.MessageTutorial;
 import dev.tilegame.states.DebugState;
 import dev.tilegame.states.GameNewState;
 import dev.tilegame.states.State;
@@ -74,9 +77,13 @@ public class Game extends JPanel implements Runnable
 	private State stateBattle;
 	private State stateDebug;
 	
-	// Message Frame
+	// Messages
 	public static boolean messageActive = false;
-	public static Message messageObject;
+	public static String messageType = "None";
+	public static MessageStandard messageObjectStandard;
+	public static MessagePrompt messageObjectPrompt;
+	public static MessageSpeech messageObjectSpeech;
+	public static MessageTutorial messageObjectTutorial;
 
 	public Game(String title, int width, int height, boolean dev)
 	{
@@ -84,6 +91,11 @@ public class Game extends JPanel implements Runnable
 		this.width = width;
 		this.height = height;
 		this.development = dev;
+	}
+	
+	public static void boardChange(String board)
+	{
+		boardChange = board;
 	}
 	
 	private void init()
@@ -138,6 +150,112 @@ public class Game extends JPanel implements Runnable
 	private void initWorld()
 	{
 		world = new Board();
+	}
+	
+	private void render()
+	{
+		// Buffer strategy
+		bs = display.getCanvas().getBufferStrategy();
+		if(bs == null)
+		{
+			display.getCanvas().createBufferStrategy(3);
+			return;
+		}
+		
+		// Graphics start
+		g = bs.getDrawGraphics();
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, width, height);
+		
+		// Graphics draw
+		if(State.getState() != null)
+		{
+			State.getState().render(g);
+		}
+
+		// Graphics done
+		bs.show();
+		g.dispose();
+	}
+	
+	public void run()
+	{
+		// Render speed
+		int fps = 60;
+		double timePerTick = 1000000000 / fps;
+		double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
+		
+		// Create window
+		init();
+		
+		// Main game loop
+		while(running)
+		{
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			timer += now - lastTime;
+			lastTime = now;
+			if(delta >= 1)
+			{
+				tick();
+				render();
+				ticks++;
+				delta--;
+			}
+			if(timer >= 1000000000)
+			{
+				//System.out.println("Ticks and Frames: " + ticks);
+				ticks = 0;
+				timer = 0;
+			}
+		}
+		
+		// End game
+		stop();
+	}
+	
+	public void saveGame() throws IOException
+	{
+		String file_name = "C:/Users/Jamie/Documents/My Workshop/Autumn Park/Datafiles/Data.txt";
+		WriteFile data = new WriteFile(file_name, false);
+		data.writeToFile("Hello world");
+	}
+	
+	public static void setMessage(MessagePrompt message)
+	{
+		messageActive = true;
+		messageType = "Prompt";
+		messageObjectPrompt = message; 
+	}
+	
+	public static void setMessage(MessageSpeech message)
+	{
+		messageActive = true;
+		messageType = "Speech";
+		messageObjectSpeech = message; 
+	}
+	
+	public static void setMessage(MessageStandard message)
+	{
+		messageActive = true;
+		messageType = "Standard";
+		messageObjectStandard = message; 
+	}
+	
+	public static void setMessage(MessageTutorial message)
+	{
+		messageActive = true;
+		messageType = "Tutorial";
+		messageObjectTutorial = message; 
+	}
+	
+	public static void setSession(Session newSession)
+	{
+		session = newSession;
 	}
 	
 	private void tick()
@@ -219,103 +337,6 @@ public class Game extends JPanel implements Runnable
 		{
 			State.getState().tick();
 		}
-	}
-	
-	private void render()
-	{
-		// Buffer strategy
-		bs = display.getCanvas().getBufferStrategy();
-		if(bs == null)
-		{
-			display.getCanvas().createBufferStrategy(3);
-			return;
-		}
-		
-		// Graphics start
-		g = bs.getDrawGraphics();
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, width, height);
-		
-		// Graphics draw
-		if(State.getState() != null)
-		{
-			State.getState().render(g);
-		}
-
-		// Graphics done
-		bs.show();
-		g.dispose();
-	}
-	
-	public void run()
-	{
-		// Render speed
-		int fps = 60;
-		double timePerTick = 1000000000 / fps;
-		double delta = 0;
-		long now;
-		long lastTime = System.nanoTime();
-		long timer = 0;
-		int ticks = 0;
-		
-		// Create window
-		init();
-		
-		// Main game loop
-		while(running)
-		{
-			now = System.nanoTime();
-			delta += (now - lastTime) / timePerTick;
-			timer += now - lastTime;
-			lastTime = now;
-			if(delta >= 1)
-			{
-				tick();
-				render();
-				ticks++;
-				delta--;
-			}
-			if(timer >= 1000000000)
-			{
-				//System.out.println("Ticks and Frames: " + ticks);
-				ticks = 0;
-				timer = 0;
-			}
-		}
-		
-		// End game
-		stop();
-	}
-	
-	public static void boardChange(String board)
-	{
-		boardChange = board;
-	}
-	
-	public void saveGame() throws IOException
-	{
-		String file_name = "C:/Users/Jamie/Documents/My Workshop/Autumn Park/Datafiles/Data.txt";
-		/*try
-		{
-			ReadFile file = new ReadFile(file_name);
-			String[] aryLines = file.OpenFile();
-			int i;
-			for(i=0;i<aryLines.length;i+=1)
-			{
-				System.out.println(aryLines[i]);
-			}
-		}
-		catch (IOException e)
-		{
-			System.out.println("IO Error");
-		}*/
-		WriteFile data = new WriteFile(file_name, false);
-		data.writeToFile("Hello world");
-	}
-	
-	public static void setSession(Session newSession)
-	{
-		session = newSession;
 	}
 	
 	public synchronized void start()
