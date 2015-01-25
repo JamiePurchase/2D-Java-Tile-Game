@@ -5,6 +5,7 @@ import dev.tilegame.world.Board01;
 import dev.tilegame.world.JvExterior;
 import dev.tilegame.world.JvGooseberryManor;
 import dev.tilegame.world.JvPlayerBedroom;
+import dev.tilegame.world.JvPlayerHouse;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -51,6 +52,8 @@ public class Board
 	public static String[] portalSendDirection = new String[10];
 	public static int[] portalSendX = new int[10];
 	public static int[] portalSendY = new int[10];
+	public static int[] portalOffsetX = new int[10];
+	public static int[] portalOffsetY = new int[10];
 
 	// Scenery
 	private static int sceneryCount = 0;
@@ -73,6 +76,7 @@ public class Board
 		if(name=="Board01"){Board01 boardLoader = new Board01();}
 		if(name=="JvExterior"){JvExterior boardLoader = new JvExterior();}
 		if(name=="JvPlayerBedroom"){JvPlayerBedroom boardLoader = new JvPlayerBedroom();}
+		if(name=="JvPlayerHouse"){JvPlayerHouse boardLoader = new JvPlayerHouse();}
 		if(name=="JvGooseberryManor"){JvGooseberryManor boardLoader = new JvGooseberryManor();}
 	}
 	
@@ -431,6 +435,11 @@ public class Board
 	
 	public static void setPortal(int posX, int posY, String sendBoard, int sendX, int sendY, String sendDirection)
 	{
+		setPortal(posX, posY, sendBoard, sendX, sendY, sendDirection, 0, 0);
+	}
+	
+	public static void setPortal(int posX, int posY, String sendBoard, int sendX, int sendY, String sendDirection, int offsetX, int offsetY)
+	{
 		portalCount += 1;
 		portalPosX[portalCount] = posX;
 		portalPosY[portalCount] = posY;
@@ -438,6 +447,8 @@ public class Board
 		portalSendDirection[portalCount] = sendDirection;
 		portalSendX[portalCount] = sendX;
 		portalSendY[portalCount] = sendY;
+		portalOffsetX[portalCount] = offsetX;
+		portalOffsetY[portalCount] = offsetY;
 		tileEntity[posX][posY] = "Portal";
 		tileEntityID[posX][posY] = portalCount;
 	}

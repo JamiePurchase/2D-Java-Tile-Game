@@ -260,7 +260,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Portal")
 		{
 			// Change Board
-			setBoardNew(Game.world.portalSendBoard[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalSendX[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalSendY[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalSendDirection[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], 0, 0);
+			setBoardNew(Game.world.portalSendBoard[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalSendX[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalSendY[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalSendDirection[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalOffsetX[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())], Game.world.portalOffsetY[Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())]);
 			
 			// Debug
 			/*String debug1 = "Interacted with a portal at " + getFacingTileX() + ", " + getFacingTileY();
