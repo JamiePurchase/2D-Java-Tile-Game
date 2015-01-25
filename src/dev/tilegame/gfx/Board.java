@@ -13,10 +13,11 @@ import java.io.IOException;
 
 public class Board
 {
+	// Details
 	private static String boardName;
 	private static String locationName;
-	private static boolean bkgHasImage = false;
-	private static BufferedImage bkgImage;
+	
+	// Grid
 	private static int gridWidth;
 	private static int gridHeight;
 	private static boolean gridScroll = false;
@@ -26,10 +27,20 @@ public class Board
 	private static int gridScrollTick;
 	private static int gridOffsetX = 0;
 	private static int gridOffsetY = 0;
+	
+	// Background
+	private static boolean bkgHasImage = false;
+	private static BufferedImage bkgImage;
+	
+	// Tiles
 	private static BufferedImage[ ][ ] tileImage = new BufferedImage[101][81];
 	private static int[ ][ ] tileType = new int[101][81];
 	private static String[ ][ ] tileEntity = new String[101][81];
 	private static int[ ][ ] tileEntityID = new int[101][81];
+	
+	// Lighting
+	private static boolean lightingActive = false;
+	private static String lightingStyle;
 	
 	// Portals
 	private static int portalCount = 0;
@@ -40,7 +51,7 @@ public class Board
 	private static int[] portalSendX = new int[10];
 	private static int[] portalSendY = new int[10];
 
-	// Portals
+	// Scenery
 	private static int sceneryCount = 0;
 	private static int[] sceneryPosX = new int[50];
 	private static int[] sceneryPosY = new int[50];
@@ -207,6 +218,7 @@ public class Board
 	{
 		renderBackground(g);
 		renderTiles(g);
+		if(lightingActive==true){renderLighting(g);}
 		renderPlayer(g);
 		renderTreasure(g);
 		if(Game.messageActive==true){renderMessage(g);}
@@ -222,6 +234,12 @@ public class Board
 		g.fillRect(11, 16, 1344, 736);
 		if(bkgHasImage){g.drawImage(bkgImage, 11, 16, null);}
 		// Note: Should the background image be larger than the screen when the board is?
+	}
+	
+	public void renderLighting(Graphics g)
+	{
+		if(lightingStyle=="Afternoon"){Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, 0.25f);}
+		if(lightingStyle=="Night"){Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, 0.75f);}
 	}
 	
 	public void renderMessage(Graphics g)

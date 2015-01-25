@@ -179,8 +179,8 @@ public class PlayerCreatureEntity extends CreatureEntity
 	
 	public void renderCalloutQ(Graphics g)
 	{
-		int drawX = ((getPositionX() - Game.world.getGridOffsetX()) * 32) - 21;
-		int drawY = ((getPositionY() - Game.world.getGridOffsetY()) * 32) - 48;
+		int drawX = ((getPositionX() - Game.world.getGridOffsetX()) * 32) - 11;
+		int drawY = ((getPositionY() - Game.world.getGridOffsetY()) * 32) - 54;
 		if(calloutFrame==1){drawX-=2;}
 		if(calloutFrame==2 || calloutFrame==8){drawX-=1;}
 		if(calloutFrame==4 || calloutFrame==6){drawX+=1;}

@@ -77,8 +77,8 @@ public class Assets
 	public static Font fontDebugTitle, fontDebugStandard;
 	public static Font fontEditorMenu, fontEditorMenuBold, fontEditorMenuInfo, fontEditorMenuTitle;
 	
-	// Test
-	public static BufferedImage test1;
+	// Lighting
+	public static BufferedImage lightBlack, lightYellow;
 	
 	public static void init()
 	{
@@ -86,13 +86,11 @@ public class Assets
 		initBackgrounds();
 		initEntities();
 		initFonts();
+		initLighting();
 		initSprites();
 		initInterface();
 		initTextures();
 		initTilesets();
-		
-		// Test
-		test1 = ImageLoader.loadImage("/interface/test1.png");
 	}
 	
 	public static void initAvatars()
@@ -251,6 +249,12 @@ public class Assets
 		fontEditorMenuBold = new Font("Arial", Font.BOLD, 18);
 		fontEditorMenuInfo = new Font("Arial", Font.ITALIC, 18);
 		fontEditorMenuTitle = new Font("Arial", Font.BOLD, 18);
+	}
+	
+	public static void initLighting()
+	{
+		lightBlack = ImageLoader.loadImage("/lighting/black.png");
+		lightYellow = ImageLoader.loadImage("/lighting/yellow.png");
 	}
 	
 	public static void initSprites()

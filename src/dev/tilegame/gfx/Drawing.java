@@ -9,10 +9,17 @@ public class Drawing
 {
 	public static void drawImageOpaque(Graphics g, BufferedImage image, int posX, int posY, float alpha)
 	{
+		// Set Opacity
 		Graphics2D g2D = (Graphics2D) g;
 		AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
 		g2D.setComposite(composite);
+		
+		// Draw Image
 		g2D.drawImage(image, posX, posY, null);
+		
+		// Clear Opacity
+		composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
+		g2D.setComposite(composite);
 	}
 	
 	public static void drawStringShadow(Graphics g, String text, int x, int y)
