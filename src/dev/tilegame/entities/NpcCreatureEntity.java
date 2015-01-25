@@ -2,31 +2,46 @@ package dev.tilegame.entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import dev.tilegame.Game;
 import dev.tilegame.gfx.Assets;
 
 public class NpcCreatureEntity extends CreatureEntity
 {
+	public static BufferedImage imageIdleE, imageIdleN, imageIdleS, imageIdleW;
 
 	public NpcCreatureEntity()
 	{
 		
 	}
 	
-	public static BufferedImage getImage()
+	public static BufferedImage getImageIdle(String direction)
 	{
-		if(getDirection()=="N"){return Assets.npcAnnaN;}
-		if(getDirection()=="E"){return Assets.npcAnnaE;}
-		if(getDirection()=="S"){return Assets.npcAnnaS;}
-		if(getDirection()=="W"){return Assets.npcAnnaW;}
-		return Assets.npcAnnaS;
+		if(direction=="E"){return imageIdleE;}
+		if(direction=="N"){return imageIdleN;}
+		if(direction=="W"){return imageIdleW;}
+		return imageIdleS;
 	}
 	
 	public void render(Graphics g)
 	{
-		BufferedImage drawImage = getImage();
-		int drawX = getPositionX() * 32 - 32;
-		int drawY = getPositionY() * 32 + 24;
-		g.drawImage(drawImage, drawX, drawY, null);
+		// Note: Is the entity idle? What about actions?
+		int drawX = ((this.getPositionX() - Game.world.getGridOffsetX()) * 32) - 21;
+		int drawY = ((this.getPositionY() - Game.world.getGridOffsetY()) * 32) - 16;
+		g.drawImage(getImageIdle(getDirection()), drawX, drawY, null);
+		
+		// Debug
+		String debug1 = "posX = " + this.getPositionX() + "posY = " + this.getPositionY();
+		String debug2 = "drawX = " + drawX + " and drawY = " + drawY;
+		System.out.println(debug1);
+		System.out.println(debug2);
+	}
+	
+	public void setImageIdle(BufferedImage image, String direction)
+	{
+		if(direction=="E"){imageIdleE = image;}
+		if(direction=="N"){imageIdleN = image;}
+		if(direction=="S"){imageIdleS = image;}
+		if(direction=="W"){imageIdleW = image;}
 	}
 	
 	public void tick()

@@ -269,6 +269,10 @@ public class Board
 		for(int x=1;x<=Game.world.npcCount;x+=1)
 		{
 			npcObject[x].render(g);
+			
+			// Debug
+			/*String debug1 = "renderNPCs " + x; 
+			System.out.println(debug1);*/
 		}
 	}
 	

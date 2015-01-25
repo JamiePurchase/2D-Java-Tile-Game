@@ -1,10 +1,10 @@
 package dev.tilegame.gfx;
-import dev.tilegame.entities.PlayerCreatureEntity;
-import dev.tilegame.entities.NpcCreatureEntity;
-import dev.tilegame.entities.HarvestNatureEntity;
 
 import java.awt.Font;
 import java.awt.image.BufferedImage;
+
+import dev.tilegame.entities.HarvestNatureEntity;
+import dev.tilegame.entities.PlayerCreatureEntity;
 
 public class Assets
 {
@@ -12,9 +12,7 @@ public class Assets
 	public static PlayerCreatureEntity entPlayer;
 	
 	// NPCs
-	public static NpcCreatureEntity entAnna;
 	public static BufferedImage[] npcAnna;
-	public static NpcCreatureEntity entHofmann;
 	public static BufferedImage[] npcHofmann;
 	
 	// Harvest
@@ -109,27 +107,14 @@ public class Assets
 	public static void initEntities()
 	{
 		initEntityPlayer();
-		initEntityNPCs();
-		initEntityHarvest();
 	}
 	
-	public static void initEntityHarvest()
+	/*public static void initEntityHarvest()
 	{
 		entGarnet = new HarvestNatureEntity("Garnet");
 		entGarnet.setPositionX(7);
 		entGarnet.setPositionY(3);
-	}
-	
-	public static void initEntityNPCs()
-	{
-		// Test
-		entAnna = new NpcCreatureEntity();
-		entAnna.setPosition(5, 4);
-		
-		// Prof. Hofmann
-		entHofmann = new NpcCreatureEntity();
-		entHofmann.setPosition(64, 41);
-	}
+	}*/
 	
 	public static void initEntityPlayer()
 	{
@@ -395,7 +380,7 @@ public class Assets
 	public static void initTilesets()
 	{
 		tlsJharvaInterior = Tileset.getTileset("/textures/JharvaInterior.png", 8, 6);
-		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 9);
+		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 11);
 	}
 
 }

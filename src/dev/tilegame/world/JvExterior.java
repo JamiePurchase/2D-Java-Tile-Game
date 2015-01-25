@@ -1,6 +1,7 @@
 package dev.tilegame.world;
 
 import dev.tilegame.Game;
+import dev.tilegame.entities.NpcCreatureEntity;
 import dev.tilegame.gfx.Assets;
 
 public class JvExterior
@@ -106,7 +107,14 @@ public class JvExterior
 		Game.world.setTile(52, 42, Assets.tlsJharvaVillage[39], 1);
 		
 		// NPCs
-		Game.world.setNpc(Assets.entHofmann);
+		NpcCreatureEntity entHofmann = new NpcCreatureEntity();
+		entHofmann.setImageIdle(Assets.npcHofmann[10],"N");
+		entHofmann.setImageIdle(Assets.npcHofmann[7],"E");
+		entHofmann.setImageIdle(Assets.npcHofmann[1],"S");
+		entHofmann.setImageIdle(Assets.npcHofmann[4],"W");
+		entHofmann.setPosition(64, 41);
+		entHofmann.setDirection("S");
+		Game.world.setNpc(entHofmann);
 		
 		// Portals
 		Game.world.setPortal("Interact", 50, 42, "JvPlayerHouse", 21, 18, "N");

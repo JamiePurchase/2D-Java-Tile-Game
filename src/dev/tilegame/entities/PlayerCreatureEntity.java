@@ -401,10 +401,10 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(getDirection()=="E"){walkPosX += 1;}
 				if(getDirection()=="S"){walkPosY += 1;}
 				if(getDirection()=="W"){walkPosX -= 1;}
-				setPositionX(walkPosX);
-				setPositionY(walkPosY);
-				setAction("Idle");
-				setWalkFrame(0);
+				this.setPositionX(walkPosX);
+				this.setPositionY(walkPosY);
+				this.setAction("Idle");
+				this.setWalkFrame(0);
 			}
 		}
 	}
