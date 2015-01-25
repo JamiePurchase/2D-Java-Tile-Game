@@ -1,9 +1,20 @@
 package dev.tilegame.gfx;
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Drawing
 {
+	public static void drawImageOpaque(Graphics g, BufferedImage image, int posX, int posY, float alpha)
+	{
+		Graphics2D g2D = (Graphics2D) g;
+		AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+		g2D.setComposite(composite);
+		g2D.drawImage(image, posX, posY, null);
+	}
+	
 	public static void drawStringShadow(Graphics g, String text, int x, int y)
 	{
 		drawStringShadow(g, text, x, y, 2, Color.BLACK);

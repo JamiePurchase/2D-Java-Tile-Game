@@ -3,9 +3,12 @@ import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
 import dev.tilegame.battle.MockData;
 import dev.tilegame.gfx.Assets;
+import dev.tilegame.gfx.Drawing;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class DebugState extends State
 {
@@ -101,5 +104,11 @@ public class DebugState extends State
 		g.drawString("Battle System", 100, 160);
 		g.drawString("Pause Menu", 100, 190);
 		g.drawString("Close", 100, 220);
+		
+		// Test
+		g.drawImage(Assets.test1, 700, 100, null);
+		Drawing.drawImageOpaque(g, Assets.test1, 700, 200, 0.75f);
+		Drawing.drawImageOpaque(g, Assets.test1, 700, 300, 0.5f);
+		Drawing.drawImageOpaque(g, Assets.test1, 700, 400, 0.25f);
 	}
 }

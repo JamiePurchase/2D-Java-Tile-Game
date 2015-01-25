@@ -77,6 +77,9 @@ public class Assets
 	public static Font fontDebugTitle, fontDebugStandard;
 	public static Font fontEditorMenu, fontEditorMenuBold, fontEditorMenuInfo, fontEditorMenuTitle;
 	
+	// Test
+	public static BufferedImage test1;
+	
 	public static void init()
 	{
 		initAvatars();
@@ -87,6 +90,9 @@ public class Assets
 		initInterface();
 		initTextures();
 		initTilesets();
+		
+		// Test
+		test1 = ImageLoader.loadImage("/interface/test1.png");
 	}
 	
 	public static void initAvatars()
