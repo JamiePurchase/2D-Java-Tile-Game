@@ -12,10 +12,33 @@ import java.awt.image.BufferedImage;
 
 public class PlayerCreatureEntity extends CreatureEntity
 {
+	private int calloutTick = 0;
+	private int calloutFrame = 1;
 	
 	public PlayerCreatureEntity()
 	{
 		
+	}
+	
+	public String getFacingEntity()
+	{
+		return Game.world.getTileEntity(getFacingTileX(), getFacingTileY());
+	}
+	
+	public int getFacingTileX()
+	{
+		int tileX = getPositionX();
+		if(getDirection()=="E"){tileX+=1;}
+		if(getDirection()=="W"){tileX-=1;}
+		return tileX;
+	}
+	
+	public int getFacingTileY()
+	{
+		int tileY = getPositionY();
+		if(getDirection()=="N"){tileY-=1;}
+		if(getDirection()=="S"){tileY+=1;}
+		return tileY;
 	}
 	
 	public static BufferedImage getImage()
@@ -145,6 +168,28 @@ public class PlayerCreatureEntity extends CreatureEntity
 	
 	public void render(Graphics g)
 	{
+		renderPlayer(g);
+		renderCallout(g);
+	}
+	
+	public void renderCallout(Graphics g)
+	{
+		if(getFacingEntity()=="Scenery"){renderCalloutQ(g);}
+	}
+	
+	public void renderCalloutQ(Graphics g)
+	{
+		int drawX = ((getPositionX() - Game.world.getGridOffsetX()) * 32) - 21;
+		int drawY = ((getPositionY() - Game.world.getGridOffsetY()) * 32) - 48;
+		if(calloutFrame==1){drawX-=2;}
+		if(calloutFrame==2 || calloutFrame==8){drawX-=1;}
+		if(calloutFrame==4 || calloutFrame==6){drawX+=1;}
+		if(calloutFrame==5){drawX+=2;}
+		g.drawImage(Assets.uiCalloutQ, drawX, drawY, null);
+	}
+	
+	public void renderPlayer(Graphics g)
+	{
 		BufferedImage drawImage = getImage();
 		int drawX = ((getPositionX() - Game.world.getGridOffsetX()) * 32) - 21;
 		int drawY = ((getPositionY() - Game.world.getGridOffsetY()) * 32) - 16;
@@ -169,35 +214,50 @@ public class PlayerCreatureEntity extends CreatureEntity
 	
 	public void tick()
 	{
+		tickCallout();
 		if(getAction()=="Idle"){tickKeyEvents();}
 		tickMovement();
 	}
 	
-	public void tickKeyEntity(int posX, int posY)
+	public void tickCallout()
 	{
-		if(Game.world.getTileEntity(posX, posY)=="NPC")
+		calloutTick+=1;
+		if(calloutTick>=15)
+		{
+			calloutTick = 0;
+			calloutFrame+=1;
+			if(calloutFrame>8)
+			{
+				calloutFrame = 1;
+			}
+		}
+	}
+	
+	public void tickKeyEntity()
+	{
+		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="NPC")
 		{
 			//Game.chat = true;
 			
 			// Debug
-			String debug1 = "Interacted with an npc at " + posX + ", " + posY;
-			System.out.println(debug1);
+			/*String debug1 = "Interacted with an npc at " + getFacingTileX() + ", " + getFacingTileY();
+			System.out.println(debug1);*/
 		}
-		if(Game.world.getTileEntity(posX, posY)=="Portal")
+		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Portal")
 		{
 			// Debug
-			String debug1 = "Interacted with a portal at " + posX + ", " + posY;
-			System.out.println(debug1);
+			/*String debug1 = "Interacted with a portal at " + getFacingTileX() + ", " + getFacingTileY();
+			System.out.println(debug1);*/
 		}
-		if(Game.world.getTileEntity(posX, posY)=="Scenery")
+		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Scenery")
 		{
 			// Test
 			MessageStandard message = new MessageStandard("Hello World","Message Test","Displaying Text");
 			Game.setMessage(message);
 			
 			// Debug
-			String debug1 = "Interacted with scenery at " + posX + ", " + posY;
-			System.out.println(debug1);
+			/*String debug1 = "Interacted with scenery at " + getFacingTileX() + ", " + getFacingTileY();
+			System.out.println(debug1);*/
 		}
 	}
 	
@@ -236,13 +296,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 		if(Keyboard.getKeyPressed()=="Space")
 		{
 			Keyboard.setKeyDone();
-			int checkPosX = getPositionX();
-			int checkPosY = getPositionY();
-			if(getDirection()=="N"){checkPosY -= 1;}
-			if(getDirection()=="E"){checkPosX += 1;}
-			if(getDirection()=="S"){checkPosY += 1;}
-			if(getDirection()=="W"){checkPosX -= 1;}
-			if(!Game.world.getTileEntity(checkPosX, checkPosY).equals("None")){tickKeyEntity(checkPosX, checkPosY);}
+			if(!getFacingEntity().equals("None")){tickKeyEntity();}
 		}
 		if(Keyboard.getKeyPressed()=="Up")
 		{
@@ -348,12 +402,12 @@ public class PlayerCreatureEntity extends CreatureEntity
 		if(direction=="E"){tileX += 1;}
 		if(direction=="S"){tileY += 1;}
 		if(direction=="W"){tileX -= 1;}
-		if(Game.world.getTileEntity(tileX, tileY)=="Treasure")
+		/*if(Game.world.getTileEntity(tileX, tileY)=="Treasure")
 		{
 			int ID = Game.world.getTileEntityID(tileX, tileY);
 			Game.world.setTreasureFound(ID);
 			AudioPlayer.play("Treasure");
-		}
+		}*/
 	}
 
 }

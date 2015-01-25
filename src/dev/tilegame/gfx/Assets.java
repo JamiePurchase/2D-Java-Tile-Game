@@ -33,6 +33,7 @@ public class Assets
 	public static BufferedImage uiCharacterBkg, uiCharacterOpt1, uiCharacterOpt1a, uiCharacterOpt2;
 	public static BufferedImage uiCharacterOpt2a, uiCharacterOpt3, uiCharacterOpt3a;
 	public static BufferedImage uiEditorCursor1, uiEditorGrid;
+	public static BufferedImage uiCalloutE, uiCalloutQ;
 
 	// Sprites
 	public static BufferedImage charPlayer1N1, charPlayer1N2, charPlayer1N3;
@@ -130,6 +131,7 @@ public class Assets
 	public static void initInterface()
 	{
 		initInterfaceAbout();
+		initInterfaceCallouts();
 		initInterfaceCharacterSelect();
 		initInterfaceCursor();
 		initInterfaceGame();
@@ -143,6 +145,12 @@ public class Assets
 	public static void initInterfaceAbout()
 	{
 		uiAboutBkg = ImageLoader.loadImage("/interface/aboutBkg.png");
+	}
+	
+	public static void initInterfaceCallouts()
+	{
+		uiCalloutE = ImageLoader.loadImage("/interface/calloutE.png");
+		uiCalloutQ = ImageLoader.loadImage("/interface/calloutQ.png");
 	}
 	
 	public static void initInterfaceCharacterSelect()

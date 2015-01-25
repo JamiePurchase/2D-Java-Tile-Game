@@ -197,5 +197,7 @@ public class JvPlayerBedroom {
 		
 		// Scenery
 		Game.world.setScenery(21, 10);
+		Game.world.setScenery(22, 10);
+		// Note: improve the above so that we can specify interaction details (ie: what code to run)
 	}
 }
