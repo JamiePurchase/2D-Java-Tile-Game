@@ -11,6 +11,7 @@ public class JvExterior
 		// Data
 		Game.world.setName("JvExterior");
 		Game.world.setLocation("Jharva Village");
+		Game.world.setGridScroll(true);
 		
 		// Dimensions
 		Game.world.setGridWidth(100);

@@ -10,6 +10,7 @@ public class JvPlayerBedroom {
 		// Data
 		Game.world.setName("JvPlayerBedroom");
 		Game.world.setLocation("My Bedroom - Jharva Village");
+		Game.world.setGridScroll(false);
 		
 		// Dimensions
 		Game.world.setGridWidth(42);

@@ -10,6 +10,7 @@ public class JvPlayerHouse {
 		// Data
 		Game.world.setName("JvPlayerHouse");
 		Game.world.setLocation("My House - Jharva Village");
+		Game.world.setGridScroll(false);
 		
 		// Dimensions
 		Game.world.setGridWidth(42);
@@ -194,7 +195,7 @@ public class JvPlayerHouse {
 		
 		// Portals
 		Game.world.setPortal(24, 10, "JvPlayerBedroom", 25, 11, "S");
-		Game.world.setPortal(21, 19, "JvExterior", 50, 43, "S", 29, 31);
-		Game.world.setPortal(22, 19, "JvExterior", 50, 43, "S", 29, 31);
+		Game.world.setPortal(21, 19, "JvExterior", 50, 43, "S", 29, 32);
+		Game.world.setPortal(22, 19, "JvExterior", 50, 43, "S", 29, 32);
 	}
 }

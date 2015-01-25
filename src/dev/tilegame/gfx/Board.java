@@ -203,7 +203,9 @@ public class Board
 		if(gridScrollAction==true)
 		{
 			gridScrollTick+=1;
-			if(gridScrollTick==Assets.entPlayer.getWalkSpeed())
+			int gridScrollTickMax = 10;
+			if(Assets.entPlayer.getWalkSpeed()==2){gridScrollTickMax = 5;}
+			if(gridScrollTick>=gridScrollTickMax)
 			{
 				gridScrollFrame+=1;
 				if(gridScrollFrame==4)
