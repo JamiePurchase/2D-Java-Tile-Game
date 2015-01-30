@@ -9,6 +9,9 @@ import dev.tilegame.states.State;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class PlayerCreatureEntity extends CreatureEntity
 {
@@ -272,14 +275,44 @@ public class PlayerCreatureEntity extends CreatureEntity
 		}
 		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Scenery")
 		{
-			// Test
-			MessageStandard message = new MessageStandard("Hello World","Message Test","Displaying Text");
-			Game.setMessage(message);
+			try
+			{
+				tickKeyEntityScenery(Game.world.getSceneryFile(Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())));
+			}
+			catch (IOException e)
+			{
+				System.out.println("Error loading scenery data");
+			}
 			
 			// Debug
 			/*String debug1 = "Interacted with scenery at " + getFacingTileX() + ", " + getFacingTileY();
 			System.out.println(debug1);*/
 		}
+	}
+	
+	public void tickKeyEntityScenery(String filename) throws IOException
+	{
+		String filePath = "C:/Eclipse/Workspace/TileGame/res/scenery/" + filename + ".txt";
+		FileReader fr = new FileReader(filePath);
+		BufferedReader textReader = new BufferedReader(fr);
+		int done = 0;
+		int line = 0;
+		while(done<1)
+		{
+			line+=1;
+			String textData = textReader.readLine();
+			
+			// Debug
+			String debug1 = "" + line + " " + textData;
+			System.out.println(debug1);
+			
+			if(textData.equals("END")){done = 1;}
+			
+			// Temp
+			MessageStandard message = new MessageStandard(textData,"","");
+			Game.setMessage(message);
+		}
+		textReader.close();
 	}
 	
 	public void tickKeyEvents()

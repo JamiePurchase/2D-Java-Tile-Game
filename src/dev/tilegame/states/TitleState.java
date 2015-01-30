@@ -1,4 +1,5 @@
 package dev.tilegame.states;
+import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Drawing;
@@ -20,6 +21,8 @@ public class TitleState extends State
 	
 	public void tick()
 	{
+		Game.display.frame.requestFocus();
+		
 		// Cursor
 		cursorAnimTick+=1;
 		if(cursorAnimTick==15){cursorAnimMove = 2;}

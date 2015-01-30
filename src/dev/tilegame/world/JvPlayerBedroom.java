@@ -196,9 +196,17 @@ public class JvPlayerBedroom {
 		// Portals
 		Game.world.setPortal("Collide", 25, 10, "JvPlayerHouse", 24, 11, "S");
 		
-		// Scenery
-		Game.world.setScenery(21, 10);
-		Game.world.setScenery(22, 10);
+		// Scenery - Bed
+		Game.world.setScenery(16, 12, "BedRest");
+		Game.world.setScenery(17, 12, "BedRest");
+		Game.world.setScenery(16, 13, "BedRest");
+		Game.world.setScenery(17, 13, "BedRest");
+		Game.world.setScenery(16, 14, "BedRest");
+		Game.world.setScenery(17, 14, "BedRest");
+		
+		// Scenery - Bookcase
+		Game.world.setScenery(21, 10, "JvPlayerBedroomBookcase");
+		Game.world.setScenery(22, 10, "JvPlayerBedroomBookcase");
 		// Note: improve the above so that we can specify interaction details (ie: what code to run)
 	}
 }

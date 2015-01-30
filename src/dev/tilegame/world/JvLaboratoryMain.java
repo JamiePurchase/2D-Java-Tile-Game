@@ -3,14 +3,14 @@ package dev.tilegame.world;
 import dev.tilegame.Game;
 import dev.tilegame.gfx.Assets;
 
-public class JvPlayerHouse
+public class JvLaboratoryMain
 {
 
-	public JvPlayerHouse()
+	public JvLaboratoryMain()
 	{
 		// Data
-		Game.world.setName("JvPlayerHouse");
-		Game.world.setLocation("My House - Jharva Village");
+		Game.world.setName("JvLaboratory Main");
+		Game.world.setLocation("Prof Hofmann's Lab - Jharva Village");
 		Game.world.setGridScroll(false);
 		
 		// Dimensions
@@ -195,8 +195,8 @@ public class JvPlayerHouse
 		Game.world.setTile(28, 19, Assets.tlsJharvaInterior[0], 1);
 		
 		// Portals
-		Game.world.setPortal("Collide", 24, 10, "JvPlayerBedroom", 25, 11, "S");
-		Game.world.setPortal("Collide", 21, 19, "JvExterior", 50, 43, "S", 29, 32);
-		Game.world.setPortal("Collide", 22, 19, "JvExterior", 50, 43, "S", 29, 32);
+		//Game.world.setPortal("Collide", 24, 10, "JvPlayerBedroom", 25, 11, "S");
+		Game.world.setPortal("Collide", 21, 19, "JvExterior", 74, 37, "S", 29, 32);
+		Game.world.setPortal("Collide", 22, 19, "JvExterior", 74, 37, "S", 29, 32);
 	}
 }

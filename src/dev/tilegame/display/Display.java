@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 public class Display
 {
-	private JFrame frame;
+	public JFrame frame;
 	private Canvas canvas;
 	private String title;
 	private int width, height;
@@ -35,15 +35,14 @@ public class Display
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
 		
 		// Create a JPanel
 		JPanel panel = new JPanel();
         panel.addKeyListener(new Keyboard());
         //panel.addMouseListener(new Mouse());
-        frame.add(panel);
         panel.requestFocusInWindow();
+        panel.setFocusable(true);
+        frame.add(panel);
 		
 		// Create the canvas
 		canvas = new Canvas();
@@ -51,9 +50,17 @@ public class Display
 		canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setMinimumSize(new Dimension(width, height));
 		
+		// Temp
+		canvas.addKeyListener(new Keyboard());
+		frame.addKeyListener(new Keyboard());
+		
 		// Add the canvas to the frame
 		frame.add(canvas);
 		frame.pack();
+
+		// May need to move these back to the gap in the temp suite later
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 	}
 	
 	public Canvas getCanvas()

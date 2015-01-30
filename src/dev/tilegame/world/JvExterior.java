@@ -114,9 +114,10 @@ public class JvExterior
 		entHofmann.setImageIdle(Assets.npcHofmann[4],"W");
 		entHofmann.setPosition(64, 41);
 		entHofmann.setDirection("S");
-		Game.world.setNpc(entHofmann);
+		//Game.world.setNpc(entHofmann);
 		
 		// Portals
 		Game.world.setPortal("Interact", 50, 42, "JvPlayerHouse", 21, 18, "N");
+		Game.world.setPortal("Interact", 74, 36, "JvLaboratoryMain", 21, 18, "N");
 	}
 }

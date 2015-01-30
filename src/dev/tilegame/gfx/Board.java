@@ -65,6 +65,7 @@ public class Board
 	private static int sceneryCount = 0;
 	private static int[] sceneryPosX = new int[50];
 	private static int[] sceneryPosY = new int[50];
+	private static String[] sceneryFile = new String[50];
 	
 	// Treasure
 	private static int treasureCount = 0;
@@ -176,6 +177,11 @@ public class Board
 	public static String getName()
 	{
 		return boardName;
+	}
+	
+	public static String getSceneryFile(int id)
+	{
+		return sceneryFile[id];
 	}
 	
 	public static String getTileEntity(int x, int y)
@@ -483,11 +489,12 @@ public class Board
 		tileEntityID[posX][posY] = portalCount;
 	}
 	
-	public static void setScenery(int posX, int posY)
+	public static void setScenery(int posX, int posY, String file)
 	{
 		sceneryCount += 1;
 		sceneryPosX[sceneryCount] = posX;
 		sceneryPosY[sceneryCount] = posY;
+		sceneryFile[sceneryCount] = file;
 		tileEntity[posX][posY] = "Scenery";
 		tileEntityID[posX][posY] = sceneryCount;
 	}
