@@ -43,6 +43,15 @@ public class Board
 	private static String[ ][ ] tileEntity = new String[101][81];
 	private static int[ ][ ] tileEntityID = new int[101][81];
 	
+	// Timers
+	public int timerTileTransformCount;
+	public boolean[] timerTileTransformActive = new boolean[50];
+	public int[] timerTileTransformTicks = new int[50];
+	public int[] timerTileTransformX = new int[50];
+	public int[] timerTileTransformY = new int[50];
+	public int[] timerTileTransformType = new int[50];
+	public BufferedImage[] timerTileTransformImage = new BufferedImage[50];
+	
 	// Lighting
 	private static boolean lightingActive = false;
 	private static String lightingStyle;
@@ -70,7 +79,7 @@ public class Board
 	private static int[] sceneryPosX = new int[50];
 	private static int[] sceneryPosY = new int[50];
 	public static BoardScenery[] sceneryObject = new BoardScenery[50];
-	private static String[] sceneryFile = new String[50];
+	public static String[] sceneryFile = new String[50];
 	
 	// Treasure
 	private static int treasureCount = 0;
@@ -235,8 +244,27 @@ public class Board
 			}
 		}
 		
+		// Timers
+		tickTimers();
+		
 		// Player
 		Assets.entPlayer.tick();
+	}
+	
+	public void tickTimers()
+	{
+		for(int x=1;x<=Game.world.timerTileTransformCount;x+=1)
+		{
+			if(Game.world.timerTileTransformActive[x]==true)
+			{
+				Game.world.timerTileTransformTicks[x]-=1;
+				if(Game.world.timerTileTransformTicks[x]<1)
+				{
+					Game.world.setTile(Game.world.timerTileTransformX[x], Game.world.timerTileTransformY[x], Game.world.timerTileTransformImage[x], Game.world.timerTileTransformType[x]);
+					Game.world.timerTileTransformActive[x] = false;
+				}
+			}
+		}
 	}
 	
 	public void render(Graphics g)
@@ -534,10 +562,27 @@ public class Board
 		tileType[x][y] = type;
 	}
 	
+	public static void setTile(int x, int y, BufferedImage image)
+	{
+		tileImage[x][y] = image;
+	}
+	
 	public static void setTile(int x, int y, BufferedImage image, int type)
 	{
 		tileImage[x][y] = image;
 		tileType[x][y] = type;
+	}
+	
+	public int setTimerTileTransform(int x, int y, int ticks, BufferedImage image, int type)
+	{
+		timerTileTransformCount+=1;
+		timerTileTransformActive[timerTileTransformCount] = true;
+		timerTileTransformTicks[timerTileTransformCount] = ticks;
+		timerTileTransformX[timerTileTransformCount] = x;
+		timerTileTransformY[timerTileTransformCount] = y;
+		timerTileTransformType[timerTileTransformCount] = type;
+		timerTileTransformImage[timerTileTransformCount] = image;
+		return timerTileTransformCount;
 	}
 	
 	public static void setTreasure(int x, int y)

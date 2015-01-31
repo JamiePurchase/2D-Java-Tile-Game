@@ -5,6 +5,7 @@ import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
 import dev.tilegame.message.MessageStandard;
+import dev.tilegame.scenery.Scenery;
 import dev.tilegame.states.State;
 
 import java.awt.Graphics;
@@ -279,7 +280,12 @@ public class PlayerCreatureEntity extends CreatureEntity
 		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Scenery")
 		{
 			int scnID = Game.world.getTileEntityID(getFacingTileX(),getFacingTileY());
-			Game.world.sceneryObject[scnID].script.interact();
+			
+			// Test
+			new Scenery().interact(Game.world.sceneryFile[scnID]);
+			
+			//Game.world.sceneryObject[scnID].script.interact();
+			// Note: it may be a possibility to have a large JvScenery class that contains interaction details for lots of different scenery entities
 			
 			/*try
 			{
