@@ -263,7 +263,10 @@ public class PlayerCreatureEntity extends CreatureEntity
 			
 			// Debug
 			/*String debug1 = "Interacted with an npc at " + getFacingTileX() + ", " + getFacingTileY();
-			System.out.println(debug1);*/
+			System.out.println(debug1);*/			
+			
+			int npcID = Game.world.getTileEntityID(getFacingTileX(),getFacingTileY());
+			Game.world.npcObject[npcID].dialogue.talk();
 		}
 		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Portal")
 		{
@@ -275,14 +278,17 @@ public class PlayerCreatureEntity extends CreatureEntity
 		}
 		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Scenery")
 		{
-			try
+			int scnID = Game.world.getTileEntityID(getFacingTileX(),getFacingTileY());
+			Game.world.sceneryObject[scnID].script.interact();
+			
+			/*try
 			{
 				tickKeyEntityScenery(Game.world.getSceneryFile(Game.world.getTileEntityID(getFacingTileX(),getFacingTileY())));
 			}
 			catch (IOException e)
 			{
 				System.out.println("Error loading scenery data");
-			}
+			}*/
 			
 			// Debug
 			/*String debug1 = "Interacted with scenery at " + getFacingTileX() + ", " + getFacingTileY();
@@ -336,6 +342,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
 		{
 			Keyboard.setKeyDone();
+			if(Game.messageChainRemainder>0)
 			Game.messageActive = false;
 		}
 	}
@@ -400,7 +407,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 	
 	public void tickKeyPush(String direction, int newPosX, int newPosY)
 	{
-		if(Game.world.getTileType(newPosX, newPosY)==0)
+		if(Game.world.getTileType(newPosX, newPosY)==0 && Game.world.getTileEntity(newPosX, newPosY)=="None")
 		{
 			walk(direction);
 			if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew(direction);}

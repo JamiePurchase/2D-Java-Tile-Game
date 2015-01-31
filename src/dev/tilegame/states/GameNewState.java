@@ -35,11 +35,18 @@ public class GameNewState extends State
 		Game.world.setGridOffset(0, 0);*/
 		
 		// Temp
-		Game.world.getData("JvExterior");
+		/*Game.world.getData("JvExterior");
 		Assets.entPlayer.setPositionX(50);
 		Assets.entPlayer.setPositionY(44);
 		Game.world.setGridScroll(true);
-		Game.world.setGridOffset(29, 33);
+		Game.world.setGridOffset(29, 33);*/
+		
+		// Temp
+		Game.world.getData("JvExterior");
+		Assets.entPlayer.setPositionX(58);
+		Assets.entPlayer.setPositionY(13);
+		Game.world.setGridScroll(true);
+		Game.world.setGridOffset(37, 2);
 		
 		// Temp
 		/*Game.world.getData("PyExterior");

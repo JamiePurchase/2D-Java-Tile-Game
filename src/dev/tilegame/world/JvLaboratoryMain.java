@@ -1,6 +1,8 @@
 package dev.tilegame.world;
 
 import dev.tilegame.Game;
+import dev.tilegame.dialogue.talkHofmann;
+import dev.tilegame.entities.BoardNpc;
 import dev.tilegame.entities.NpcCreatureEntity;
 import dev.tilegame.gfx.Assets;
 
@@ -336,8 +338,14 @@ public class JvLaboratoryMain
 		entHofmann.setImageIdle(Assets.npcHofmann[1],"S");
 		entHofmann.setImageIdle(Assets.npcHofmann[4],"W");
 		entHofmann.setPosition(22, 12);
-		entHofmann.setDirection("S");
-		Game.world.setNpc(entHofmann);*/
+		entHofmann.setDirection("S");*/
+		
+		int id = Game.world.setNpc(new BoardNpc(22, 12, "S"));
+		Game.world.npcObject[id].setImageIdle(Assets.npcHofmann[10], "N");
+		Game.world.npcObject[id].setImageIdle(Assets.npcHofmann[7], "E");
+		Game.world.npcObject[id].setImageIdle(Assets.npcHofmann[1], "S");
+		Game.world.npcObject[id].setImageIdle(Assets.npcHofmann[4], "W");
+		Game.world.npcObject[id].dialogue = new talkHofmann();
 		
 		// Portals
 		Game.world.setPortal("Collide", 19, 19, "JvExterior", 74, 37, "S", 53, 37);

@@ -80,6 +80,8 @@ public class Game extends JPanel implements Runnable
 	// Messages
 	public static boolean messageActive = false;
 	public static String messageType = "None";
+	public static int messageChainRemainder = 0;
+	public static String[][] messageChainText = new String[10][4];
 	public static MessageStandard messageObjectStandard;
 	public static MessagePrompt messageObjectPrompt;
 	public static MessageSpeech messageObjectSpeech;

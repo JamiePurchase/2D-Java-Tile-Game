@@ -1,6 +1,8 @@
 package dev.tilegame.gfx;
 import dev.tilegame.Game;
 import dev.tilegame.datafiles.WriteFile;
+import dev.tilegame.entities.BoardNpc;
+import dev.tilegame.entities.BoardScenery;
 import dev.tilegame.entities.NpcCreatureEntity;
 import dev.tilegame.world.JvExterior;
 import dev.tilegame.world.JvGooseberryManor;
@@ -47,7 +49,8 @@ public class Board
 	
 	// NPCs
 	public static int npcCount = 0;
-	public static NpcCreatureEntity[] npcObject = new NpcCreatureEntity[10];
+	//public static NpcCreatureEntity[] npcObject = new NpcCreatureEntity[10];
+	public static BoardNpc[] npcObject = new BoardNpc[10];
 	
 	// Portals
 	public static int portalCount = 0;
@@ -66,6 +69,7 @@ public class Board
 	private static int sceneryCount = 0;
 	private static int[] sceneryPosX = new int[50];
 	private static int[] sceneryPosY = new int[50];
+	public static BoardScenery[] sceneryObject = new BoardScenery[50];
 	private static String[] sceneryFile = new String[50];
 	
 	// Treasure
@@ -273,14 +277,17 @@ public class Board
 	}
 	
 	public void renderNPCs(Graphics g)
-	{
+	{		
 		for(int x=1;x<=Game.world.npcCount;x+=1)
 		{
-			npcObject[x].render(g);
+			// Note: Is the entity idle? What about actions?
+			int drawX = ((npcObject[x].positionX - Game.world.getGridOffsetX()) * 32) - 21;
+			int drawY = ((npcObject[x].positionY - Game.world.getGridOffsetY()) * 32) - 16;
+			g.drawImage(npcObject[x].getImageIdle(npcObject[x].positionD), drawX, drawY, null);
 			
 			// Debug
-			String debug = "The npc is positioned at " + npcObject[x].getPositionX() + ", " + npcObject[x].getPositionY(); 
-			System.out.println(debug);
+			/*String debug = "The npc is positioned at " + npcObject[x].positionX + ", " + npcObject[x].positionY; 
+			System.out.println(debug);*/
 		}
 	}
 	
@@ -462,16 +469,19 @@ public class Board
 		boardName = name;
 	}
 	
-	public static void setNpc(NpcCreatureEntity object)
+	//public static void setNpc(NpcCreatureEntity object)
+	public static int setNpc(BoardNpc object)
 	{
 		npcCount += 1;
 		npcObject[npcCount] = object;
-		tileEntity[object.getPositionX()][object.getPositionY()] = "NPC";
-		tileEntityID[object.getPositionX()][object.getPositionY()] = npcCount;
+		tileEntity[object.positionX][object.positionY] = "NPC";
+		tileEntityID[object.positionX][object.positionY] = npcCount;
 		
 		// Debug
-		String debug = "Adding an npc to the board at " + object.getPositionX() + ", " + object.getPositionY();
-		System.out.println(debug);
+		/*String debug = "Adding an npc to the board at " + object.positionX + ", " + object.positionY;
+		System.out.println(debug);*/
+		
+		return npcCount;
 	}
 	
 	public static void setPortal(String type, int posX, int posY, String sendBoard, int sendX, int sendY, String sendDirection)
@@ -497,12 +507,25 @@ public class Board
 	
 	public static void setScenery(int posX, int posY, String file)
 	{
+		// OLD
 		sceneryCount += 1;
 		sceneryPosX[sceneryCount] = posX;
 		sceneryPosY[sceneryCount] = posY;
 		sceneryFile[sceneryCount] = file;
 		tileEntity[posX][posY] = "Scenery";
 		tileEntityID[posX][posY] = sceneryCount;
+	}
+	
+	public static int setScenery(BoardScenery object)
+	{
+		// NEW
+		sceneryCount += 1;
+		sceneryPosX[sceneryCount] = object.positionX;
+		sceneryPosY[sceneryCount] = object.positionY;
+		sceneryObject[sceneryCount] = object;
+		tileEntity[object.positionX][object.positionY] = "Scenery";
+		tileEntityID[object.positionX][object.positionY] = sceneryCount;
+		return sceneryCount;
 	}
 	
 	public static void setTile(int x, int y, String image, int type)

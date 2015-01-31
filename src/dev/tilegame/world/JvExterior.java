@@ -1,8 +1,12 @@
 package dev.tilegame.world;
 
 import dev.tilegame.Game;
+import dev.tilegame.dialogue.talkHofmann;
+import dev.tilegame.entities.BoardNpc;
+import dev.tilegame.entities.BoardScenery;
 import dev.tilegame.entities.NpcCreatureEntity;
 import dev.tilegame.gfx.Assets;
+import dev.tilegame.scenery.scnJvGateWooden;
 
 public class JvExterior
 {
@@ -23,6 +27,16 @@ public class JvExterior
 		
 		// Tiles
 		Game.world.tileInit(Assets.tlsJharvaVillage[0], 0);
+		Game.world.setTile(56, 9, Assets.tlsFenceWooden[2], 1);
+		Game.world.setTile(57, 9, Assets.tlsFenceWooden[27], 1);
+		Game.world.setTile(58, 9, Assets.tlsFenceWooden[28], 1);
+		Game.world.setTile(59, 9, Assets.tlsFenceWooden[29], 1);
+		Game.world.setTile(60, 9, Assets.tlsFenceWooden[2], 1);
+		Game.world.setTile(56, 10, Assets.tlsFenceWooden[14], 1);
+		Game.world.setTile(57, 10, Assets.tlsFenceWooden[39], 1);
+		Game.world.setTile(58, 10, Assets.tlsFenceWooden[40], 1);
+		Game.world.setTile(59, 10, Assets.tlsFenceWooden[41], 1);
+		Game.world.setTile(60, 10, Assets.tlsFenceWooden[14], 1);
 		Game.world.setTile(71, 33, Assets.tlsJharvaVillage[1], 1);
 		Game.world.setTile(72, 33, Assets.tlsJharvaVillage[2], 1);
 		Game.world.setTile(73, 33, Assets.tlsJharvaVillage[2], 1);
@@ -118,6 +132,14 @@ public class JvExterior
 		Game.world.setTile(47, 45, Assets.tlsJharvaVillage[43], 1);
 		Game.world.setTile(48, 45, Assets.tlsJharvaVillage[43], 1);
 		Game.world.setTile(49, 45, Assets.tlsJharvaVillage[47], 1);
+		
+		// Scenery
+		Game.world.setScenery(57, 10, "JvGateWooden");
+		Game.world.setScenery(58, 10, "JvGateWooden");
+		Game.world.setScenery(59, 10, "JvGateWooden");
+		
+		int id = Game.world.setScenery(new BoardScenery(57, 10));
+		Game.world.sceneryObject[id].script = new scnJvGateWooden();
 		
 		// Portals
 		Game.world.setPortal("Interact", 50, 42, "JvPlayerHouse", 21, 18, "N");

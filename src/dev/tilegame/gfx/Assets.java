@@ -68,6 +68,7 @@ public class Assets
 	
 	// Tilesets
 	public static BufferedImage[] tlsJharvaVillage, tlsJharvaInterior;
+	public static BufferedImage[] tlsFenceWooden;
 	public static BufferedImage[] tlsPythonCity;
 	
 	// Board Backgrounds
@@ -380,6 +381,7 @@ public class Assets
 	
 	public static void initTilesets()
 	{
+		tlsFenceWooden = Tileset.getTileset("/textures/FenceWooden.png", 12, 4);
 		tlsJharvaInterior = Tileset.getTileset("/textures/JharvaInterior.png", 8, 7);
 		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 13);
 		tlsPythonCity = Tileset.getTileset("/textures/PythonCity.png", 8, 11);
