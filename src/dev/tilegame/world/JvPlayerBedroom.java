@@ -148,7 +148,7 @@ public class JvPlayerBedroom {
 		Game.world.setTile(29, 16, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(14, 17, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(15, 17, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(16, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(16, 17, Assets.tlsJharvaInterior[18], 1);
 		Game.world.setTile(17, 17, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(18, 17, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(19, 17, Assets.tlsJharvaInterior[1], 0);
@@ -203,6 +203,9 @@ public class JvPlayerBedroom {
 		Game.world.setScenery(17, 13, "BedRest");
 		Game.world.setScenery(16, 14, "BedRest");
 		Game.world.setScenery(17, 14, "BedRest");
+		
+		// Scenery - Barrel
+		Game.world.setScenery(16, 17, "BarrelEmpty");
 		
 		// Scenery - Bookcase
 		Game.world.setScenery(21, 10, "JvPlayerBedroomBookcase");

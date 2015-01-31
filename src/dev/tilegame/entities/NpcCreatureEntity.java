@@ -30,10 +30,10 @@ public class NpcCreatureEntity extends CreatureEntity
 		g.drawImage(getImageIdle(getDirection()), drawX, drawY, null);
 		
 		// Debug
-		String debug1 = "posX = " + this.getPositionX() + "posY = " + this.getPositionY();
-		String debug2 = "drawX = " + drawX + " and drawY = " + drawY;
+		String debug1 = "Npc is at " + this.getPositionX() + ", " + this.getPositionY();
+		//String debug2 = "drawX = " + drawX + " and drawY = " + drawY;
 		System.out.println(debug1);
-		System.out.println(debug2);
+		//System.out.println(debug2);
 	}
 	
 	public void setImageIdle(BufferedImage image, String direction)

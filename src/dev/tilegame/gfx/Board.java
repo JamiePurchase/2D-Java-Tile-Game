@@ -2,11 +2,12 @@ package dev.tilegame.gfx;
 import dev.tilegame.Game;
 import dev.tilegame.datafiles.WriteFile;
 import dev.tilegame.entities.NpcCreatureEntity;
-import dev.tilegame.world.Board01;
 import dev.tilegame.world.JvExterior;
 import dev.tilegame.world.JvGooseberryManor;
+import dev.tilegame.world.JvLaboratoryMain;
 import dev.tilegame.world.JvPlayerBedroom;
 import dev.tilegame.world.JvPlayerHouse;
+import dev.tilegame.world.PyExterior;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -80,11 +81,12 @@ public class Board
 	
 	public static void getData(String name)
 	{
-		if(name=="Board01"){Board01 boardLoader = new Board01();}
 		if(name=="JvExterior"){JvExterior boardLoader = new JvExterior();}
+		if(name=="JvLaboratoryMain"){JvLaboratoryMain boardLoader = new JvLaboratoryMain();}
 		if(name=="JvPlayerBedroom"){JvPlayerBedroom boardLoader = new JvPlayerBedroom();}
 		if(name=="JvPlayerHouse"){JvPlayerHouse boardLoader = new JvPlayerHouse();}
 		if(name=="JvGooseberryManor"){JvGooseberryManor boardLoader = new JvGooseberryManor();}
+		if(name=="PyExterior"){PyExterior boardLoader = new PyExterior();}
 	}
 	
 	public static int getGridEdgeE()
@@ -277,8 +279,8 @@ public class Board
 			npcObject[x].render(g);
 			
 			// Debug
-			/*String debug1 = "renderNPCs " + x; 
-			System.out.println(debug1);*/
+			String debug = "The npc is positioned at " + npcObject[x].getPositionX() + ", " + npcObject[x].getPositionY(); 
+			System.out.println(debug);
 		}
 	}
 	
@@ -293,10 +295,10 @@ public class Board
 		int drawY = (y * 32) - 16 - (gridOffsetY * 32);
 		
 		// Debug
-		String debug1 = "renderTile from board coords " + x + "," + y;
+		/*String debug1 = "renderTile from board coords " + x + "," + y;
 		String debug2 = "drawX = " + drawX + " and drawY = " + drawY;
 		System.out.println(debug1);
-		System.out.println(debug2);
+		System.out.println(debug2);*/
 		//g.drawImage(tileImage[x][y], drawX, drawY, null);
 	}
 	
@@ -316,10 +318,10 @@ public class Board
 		g.drawImage(tileImage[tileX][tileY], drawX, drawY, null);
 		
 		// Debug
-		String debug1 = "renderTileAt(g, " + tileX + ", " + tileY + ", " + posX + ", " + posY + ",)";
+		/*String debug1 = "renderTileAt(g, " + tileX + ", " + tileY + ", " + posX + ", " + posY + ",)";
 		String debug2 = "drawX = " + drawX + " and drawY = " + drawY + " and image = " + tileImage[tileX][tileY];
-		//System.out.println(debug1);
-		//System.out.println(debug2);
+		System.out.println(debug1);
+		System.out.println(debug2);*/
 	}
 	
 	public void renderTiles(Graphics g)
@@ -466,6 +468,10 @@ public class Board
 		npcObject[npcCount] = object;
 		tileEntity[object.getPositionX()][object.getPositionY()] = "NPC";
 		tileEntityID[object.getPositionX()][object.getPositionY()] = npcCount;
+		
+		// Debug
+		String debug = "Adding an npc to the board at " + object.getPositionX() + ", " + object.getPositionY();
+		System.out.println(debug);
 	}
 	
 	public static void setPortal(String type, int posX, int posY, String sendBoard, int sendX, int sendY, String sendDirection)

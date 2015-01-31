@@ -19,7 +19,6 @@ import dev.tilegame.states.MenuState;
 import dev.tilegame.states.OptionsState;
 import dev.tilegame.states.TitleState;
 import dev.tilegame.states.TutorialState;
-import dev.tilegame.world.Board01;
 import dev.tilegame.datafiles.FileManager;
 import dev.tilegame.datafiles.ReadFile;
 import dev.tilegame.datafiles.WriteFile;
@@ -50,8 +49,9 @@ public class Game extends JPanel implements Runnable
 	private static String boardChange = "none";
 	public static String stateChange = "none";
 	
-	// Development Mode
+	// Development Features
 	public static boolean development = false;
+	public static boolean quickstart = false;
 	
 	// Session
 	public static Session session;
@@ -85,12 +85,15 @@ public class Game extends JPanel implements Runnable
 	public static MessageSpeech messageObjectSpeech;
 	public static MessageTutorial messageObjectTutorial;
 
-	public Game(String title, int width, int height, boolean dev)
+	public Game(String title, int width, int height, String append)
 	{
 		this.title = title;
 		this.width = width;
 		this.height = height;
-		this.development = dev;
+		
+		// Append development features
+		if(append=="dev1"){this.development = true;}
+		if(append=="quickstart"){this.quickstart = true;}
 	}
 	
 	public static void boardChange(String board)
@@ -111,6 +114,9 @@ public class Game extends JPanel implements Runnable
 		
 		// Development Menu
 		if(development==true){State.setState(stateDebug);}
+		
+		// Quickstart
+		if(quickstart==true){quickstart();}
 		
 		// Introduction
 		else
@@ -363,4 +369,11 @@ public class Game extends JPanel implements Runnable
 			}
 		}
 	}
+	
+	public void quickstart()
+	{
+		Game.playerClass = "Spellweaver";
+		State.setState(stateGameNew);
+	}
+
 }

@@ -68,6 +68,7 @@ public class Assets
 	
 	// Tilesets
 	public static BufferedImage[] tlsJharvaVillage, tlsJharvaInterior;
+	public static BufferedImage[] tlsPythonCity;
 	
 	// Board Backgrounds
 	public static BufferedImage bkgJvGooseberryManor;
@@ -379,8 +380,9 @@ public class Assets
 	
 	public static void initTilesets()
 	{
-		tlsJharvaInterior = Tileset.getTileset("/textures/JharvaInterior.png", 8, 6);
-		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 11);
+		tlsJharvaInterior = Tileset.getTileset("/textures/JharvaInterior.png", 8, 7);
+		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 13);
+		tlsPythonCity = Tileset.getTileset("/textures/PythonCity.png", 8, 11);
 	}
 
 }

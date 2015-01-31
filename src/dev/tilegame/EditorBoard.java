@@ -7,7 +7,6 @@ import dev.tilegame.gfx.BoardTiles;
 import dev.tilegame.gfx.Drawing;
 import dev.tilegame.gfx.ImageLoader;
 import dev.tilegame.states.State;
-import dev.tilegame.world.Board01;
 import dev.tilegame.datafiles.FileManager;
 import dev.tilegame.datafiles.ReadFile;
 import dev.tilegame.datafiles.WriteFile;

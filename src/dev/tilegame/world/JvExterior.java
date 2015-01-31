@@ -75,6 +75,7 @@ public class JvExterior
 		Game.world.setTile(42, 40, Assets.tlsJharvaVillage[18], 1);
 		Game.world.setTile(43, 40, Assets.tlsJharvaVillage[18], 1);
 		Game.world.setTile(44, 40, Assets.tlsJharvaVillage[23], 1);
+		Game.world.setTile(45, 40, Assets.tlsJharvaVillage[61], 1);
 		Game.world.setTile(49, 40, Assets.tlsJharvaVillage[17], 1);
 		Game.world.setTile(50, 40, Assets.tlsJharvaVillage[18], 1);
 		Game.world.setTile(51, 40, Assets.tlsJharvaVillage[18], 1);
@@ -93,6 +94,8 @@ public class JvExterior
 		Game.world.setTile(42, 41, Assets.tlsJharvaVillage[27], 1);
 		Game.world.setTile(43, 41, Assets.tlsJharvaVillage[27], 1);
 		Game.world.setTile(44, 41, Assets.tlsJharvaVillage[31], 1);
+		Game.world.setTile(45, 41, Assets.tlsJharvaVillage[69], 1);
+		Game.world.setTile(46, 41, Assets.tlsJharvaVillage[62], 1);
 		Game.world.setTile(49, 41, Assets.tlsJharvaVillage[25], 1);
 		Game.world.setTile(50, 41, Assets.tlsJharvaVillage[27], 1);
 		Game.world.setTile(51, 41, Assets.tlsJharvaVillage[27], 1);
@@ -100,24 +103,24 @@ public class JvExterior
 		Game.world.setTile(41, 42, Assets.tlsJharvaVillage[33], 1);
 		Game.world.setTile(42, 42, Assets.tlsJharvaVillage[35], 1);
 		Game.world.setTile(43, 42, Assets.tlsJharvaVillage[34], 1);
-		Game.world.setTile(44, 42, Assets.tlsJharvaVillage[39], 1);
+		Game.world.setTile(44, 42, Assets.tlsJharvaVillage[53], 1);
+		Game.world.setTile(45, 42, Assets.tlsJharvaVillage[77], 1);
+		Game.world.setTile(46, 42, Assets.tlsJharvaVillage[93], 1);
 		Game.world.setTile(49, 42, Assets.tlsJharvaVillage[33], 1);
 		Game.world.setTile(50, 42, Assets.tlsJharvaVillage[35], 1);
 		Game.world.setTile(51, 42, Assets.tlsJharvaVillage[34], 1);
 		Game.world.setTile(52, 42, Assets.tlsJharvaVillage[39], 1);
-		
-		// NPCs
-		NpcCreatureEntity entHofmann = new NpcCreatureEntity();
-		entHofmann.setImageIdle(Assets.npcHofmann[10],"N");
-		entHofmann.setImageIdle(Assets.npcHofmann[7],"E");
-		entHofmann.setImageIdle(Assets.npcHofmann[1],"S");
-		entHofmann.setImageIdle(Assets.npcHofmann[4],"W");
-		entHofmann.setPosition(64, 41);
-		entHofmann.setDirection("S");
-		//Game.world.setNpc(entHofmann);
+		Game.world.setTile(46, 43, Assets.tlsJharvaVillage[62], 1);
+		Game.world.setTile(46, 44, Assets.tlsJharvaVillage[62], 1);
+		Game.world.setTile(44, 45, Assets.tlsJharvaVillage[43], 1);
+		Game.world.setTile(45, 45, Assets.tlsJharvaVillage[43], 1);
+		Game.world.setTile(46, 45, Assets.tlsJharvaVillage[86], 1);
+		Game.world.setTile(47, 45, Assets.tlsJharvaVillage[43], 1);
+		Game.world.setTile(48, 45, Assets.tlsJharvaVillage[43], 1);
+		Game.world.setTile(49, 45, Assets.tlsJharvaVillage[47], 1);
 		
 		// Portals
 		Game.world.setPortal("Interact", 50, 42, "JvPlayerHouse", 21, 18, "N");
-		Game.world.setPortal("Interact", 74, 36, "JvLaboratoryMain", 21, 18, "N");
+		Game.world.setPortal("Interact", 74, 36, "JvLaboratoryMain", 19, 18, "N");
 	}
 }

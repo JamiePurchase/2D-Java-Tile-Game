@@ -354,44 +354,44 @@ public class PlayerCreatureEntity extends CreatureEntity
 		}
 		if(Keyboard.getKeyPressed()=="Up")
 		{
-			setDirection("N");
+			Assets.entPlayer.setDirection("N");
 			if(getPositionY()>1)
 			{
-				int newPosX = getPositionX();
-				int newPosY = getPositionY() - 1;
+				int newPosX = Assets.entPlayer.getPositionX();
+				int newPosY = Assets.entPlayer.getPositionY() - 1;
 				tickKeyPush("N", newPosX, newPosY);
 			}
 			Keyboard.setKeyDone();
 		}
 		if(Keyboard.getKeyPressed()=="Down")
 		{
-			setDirection("S");
+			Assets.entPlayer.setDirection("S");
 			if(getPositionY()<Game.world.getGridHeight())
 			{
-				int newPosX = getPositionX();
-				int newPosY = getPositionY() + 1;
+				int newPosX = Assets.entPlayer.getPositionX();
+				int newPosY = Assets.entPlayer.getPositionY() + 1;
 				tickKeyPush("S", newPosX, newPosY);
 			}
 			Keyboard.setKeyDone();
 		}
 		if(Keyboard.getKeyPressed()=="Left")
 		{
-			setDirection("W");
+			Assets.entPlayer.setDirection("W");
 			if(getPositionX()>1)
 			{
-				int newPosX = getPositionX() - 1;
-				int newPosY = getPositionY();
+				int newPosX = Assets.entPlayer.getPositionX() - 1;
+				int newPosY = Assets.entPlayer.getPositionY();
 				tickKeyPush("W", newPosX, newPosY);
 			}
 			Keyboard.setKeyDone();
 		}
 		if(Keyboard.getKeyPressed()=="Right")
 		{
-			setDirection("E");
+			Assets.entPlayer.setDirection("E");
 			if(getPositionX()<Game.world.getGridWidth())
 			{
-				int newPosX = getPositionX() + 1;
-				int newPosY = getPositionY();
+				int newPosX = Assets.entPlayer.getPositionX() + 1;
+				int newPosY = Assets.entPlayer.getPositionY();
 				tickKeyPush("E", newPosX, newPosY);
 			}
 			Keyboard.setKeyDone();
@@ -434,10 +434,10 @@ public class PlayerCreatureEntity extends CreatureEntity
 				if(getDirection()=="E"){walkPosX += 1;}
 				if(getDirection()=="S"){walkPosY += 1;}
 				if(getDirection()=="W"){walkPosX -= 1;}
-				this.setPositionX(walkPosX);
-				this.setPositionY(walkPosY);
-				this.setAction("Idle");
-				this.setWalkFrame(0);
+				Assets.entPlayer.setPositionX(walkPosX);
+				Assets.entPlayer.setPositionY(walkPosY);
+				Assets.entPlayer.setAction("Idle");
+				Assets.entPlayer.setWalkFrame(0);
 			}
 		}
 	}

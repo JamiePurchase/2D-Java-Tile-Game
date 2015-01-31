@@ -1,6 +1,7 @@
 package dev.tilegame.world;
 
 import dev.tilegame.Game;
+import dev.tilegame.entities.NpcCreatureEntity;
 import dev.tilegame.gfx.Assets;
 
 public class JvLaboratoryMain
@@ -9,8 +10,8 @@ public class JvLaboratoryMain
 	public JvLaboratoryMain()
 	{
 		// Data
-		Game.world.setName("JvLaboratory Main");
-		Game.world.setLocation("Prof Hofmann's Lab - Jharva Village");
+		Game.world.setName("JvLaboratoryMain");
+		Game.world.setLocation("Hofmann's Lab - Jharva Village");
 		Game.world.setGridScroll(false);
 		
 		// Dimensions
@@ -22,7 +23,14 @@ public class JvLaboratoryMain
 		
 		// Tiles
 		Game.world.tileInit(Assets.tlsJharvaInterior[0], 0);
-		
+	
+		Game.world.setTile(8, 9, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(10, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(11, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(12, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(13, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(14, 9, Assets.tlsJharvaInterior[2], 1);
 		Game.world.setTile(15, 9, Assets.tlsJharvaInterior[2], 1);
 		Game.world.setTile(16, 9, Assets.tlsJharvaInterior[2], 1);
 		Game.world.setTile(17, 9, Assets.tlsJharvaInterior[2], 1);
@@ -37,10 +45,23 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 9, Assets.tlsJharvaInterior[2], 1);
 		Game.world.setTile(27, 9, Assets.tlsJharvaInterior[2], 1);
 		Game.world.setTile(28, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(29, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(30, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(31, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(32, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(33, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(34, 9, Assets.tlsJharvaInterior[2], 1);
+		Game.world.setTile(8, 10, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(10, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(11, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(12, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(13, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(14, 10, Assets.tlsJharvaInterior[10], 1);
 		Game.world.setTile(15, 10, Assets.tlsJharvaInterior[10], 1);
-		Game.world.setTile(16, 10, Assets.tlsJharvaInterior[10], 1);
-		Game.world.setTile(17, 10, Assets.tlsJharvaInterior[10], 1);
-		Game.world.setTile(18, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(16, 10, Assets.tlsJharvaInterior[43], 1);
+		Game.world.setTile(17, 10, Assets.tlsJharvaInterior[44], 1);
+		Game.world.setTile(18, 10, Assets.tlsJharvaInterior[45], 1);
 		Game.world.setTile(19, 10, Assets.tlsJharvaInterior[10], 1);
 		Game.world.setTile(20, 10, Assets.tlsJharvaInterior[10], 1);
 		Game.world.setTile(21, 10, Assets.tlsJharvaInterior[10], 1);
@@ -51,11 +72,23 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 10, Assets.tlsJharvaInterior[10], 1);
 		Game.world.setTile(27, 10, Assets.tlsJharvaInterior[10], 1);
 		Game.world.setTile(28, 10, Assets.tlsJharvaInterior[10], 1);
-		Game.world.setTile(14, 11, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(29, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(30, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(31, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(32, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(33, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(34, 10, Assets.tlsJharvaInterior[10], 1);
+		Game.world.setTile(8, 11, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(10, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(11, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(12, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(13, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(14, 11, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(15, 11, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(16, 11, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(17, 11, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(18, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(16, 11, Assets.tlsJharvaInterior[51], 1);
+		Game.world.setTile(17, 11, Assets.tlsJharvaInterior[52], 1);
+		Game.world.setTile(18, 11, Assets.tlsJharvaInterior[53], 1);
 		Game.world.setTile(19, 11, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(20, 11, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(21, 11, Assets.tlsJharvaInterior[1], 0);
@@ -66,8 +99,20 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 11, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(27, 11, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(28, 11, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(29, 11, Assets.tlsJharvaInterior[0], 1);
-		Game.world.setTile(14, 12, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(29, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(30, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(31, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(32, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(33, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(34, 11, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(35, 11, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(8, 12, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(10, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(11, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(12, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(13, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(14, 12, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(15, 12, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(16, 12, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(17, 12, Assets.tlsJharvaInterior[1], 0);
@@ -82,8 +127,20 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 12, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(27, 12, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(28, 12, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(29, 12, Assets.tlsJharvaInterior[0], 1);
-		Game.world.setTile(14, 13, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(29, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(30, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(31, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(32, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(33, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(34, 12, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(35, 12, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(8, 13, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(10, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(11, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(12, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(13, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(14, 13, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(15, 13, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(16, 13, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(17, 13, Assets.tlsJharvaInterior[1], 0);
@@ -98,8 +155,20 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 13, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(27, 13, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(28, 13, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(29, 13, Assets.tlsJharvaInterior[0], 1);
-		Game.world.setTile(14, 14, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(29, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(30, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(31, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(32, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(33, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(34, 13, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(35, 13, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(8, 14, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(10, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(11, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(12, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(13, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(14, 14, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(15, 14, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(16, 14, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(17, 14, Assets.tlsJharvaInterior[1], 0);
@@ -114,8 +183,20 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 14, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(27, 14, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(28, 14, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(29, 14, Assets.tlsJharvaInterior[0], 1);
-		Game.world.setTile(14, 15, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(29, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(30, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(31, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(32, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(33, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(34, 14, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(35, 14, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(8, 15, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(10, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(11, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(12, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(13, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(14, 15, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(15, 15, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(16, 15, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(17, 15, Assets.tlsJharvaInterior[1], 0);
@@ -130,8 +211,20 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 15, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(27, 15, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(28, 15, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(29, 15, Assets.tlsJharvaInterior[0], 1);
-		Game.world.setTile(14, 16, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(29, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(30, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(31, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(32, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(33, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(34, 15, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(35, 15, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(8, 16, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(10, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(11, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(12, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(13, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(14, 16, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(15, 16, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(16, 16, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(17, 16, Assets.tlsJharvaInterior[1], 0);
@@ -146,8 +239,20 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 16, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(27, 16, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(28, 16, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(29, 16, Assets.tlsJharvaInterior[0], 1);
-		Game.world.setTile(14, 17, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(29, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(30, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(31, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(32, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(33, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(34, 16, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(35, 16, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(8, 17, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(10, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(11, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(12, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(13, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(14, 17, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(15, 17, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(16, 17, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(17, 17, Assets.tlsJharvaInterior[1], 0);
@@ -162,14 +267,26 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 17, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(27, 17, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(28, 17, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(29, 17, Assets.tlsJharvaInterior[0], 1);
-		Game.world.setTile(14, 18, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(29, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(30, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(31, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(32, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(33, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(34, 17, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(35, 17, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(8, 18, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(10, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(11, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(12, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(13, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(14, 18, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(15, 18, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(16, 18, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(17, 18, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(18, 18, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(19, 18, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(20, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(19, 18, Assets.tlsJharvaInterior[54], 0);
+		Game.world.setTile(20, 18, Assets.tlsJharvaInterior[55], 0);
 		Game.world.setTile(21, 18, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(22, 18, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(23, 18, Assets.tlsJharvaInterior[1], 0);
@@ -178,7 +295,19 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 18, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(27, 18, Assets.tlsJharvaInterior[1], 0);
 		Game.world.setTile(28, 18, Assets.tlsJharvaInterior[1], 0);
-		Game.world.setTile(29, 18, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(29, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(30, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(31, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(32, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(33, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(34, 18, Assets.tlsJharvaInterior[1], 0);
+		Game.world.setTile(35, 18, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(9, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(10, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(11, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(12, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(13, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(14, 19, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(15, 19, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(16, 19, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(17, 19, Assets.tlsJharvaInterior[0], 1);
@@ -193,10 +322,25 @@ public class JvLaboratoryMain
 		Game.world.setTile(26, 19, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(27, 19, Assets.tlsJharvaInterior[0], 1);
 		Game.world.setTile(28, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(29, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(30, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(31, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(32, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(33, 19, Assets.tlsJharvaInterior[0], 1);
+		Game.world.setTile(34, 19, Assets.tlsJharvaInterior[0], 1);
+		
+		// NPCs
+		/*NpcCreatureEntity entHofmann = new NpcCreatureEntity();
+		entHofmann.setImageIdle(Assets.npcHofmann[10],"N");
+		entHofmann.setImageIdle(Assets.npcHofmann[7],"E");
+		entHofmann.setImageIdle(Assets.npcHofmann[1],"S");
+		entHofmann.setImageIdle(Assets.npcHofmann[4],"W");
+		entHofmann.setPosition(22, 12);
+		entHofmann.setDirection("S");
+		Game.world.setNpc(entHofmann);*/
 		
 		// Portals
-		//Game.world.setPortal("Collide", 24, 10, "JvPlayerBedroom", 25, 11, "S");
-		Game.world.setPortal("Collide", 21, 19, "JvExterior", 74, 37, "S", 29, 32);
-		Game.world.setPortal("Collide", 22, 19, "JvExterior", 74, 37, "S", 29, 32);
+		Game.world.setPortal("Collide", 19, 19, "JvExterior", 74, 37, "S", 53, 37);
+		Game.world.setPortal("Collide", 20, 19, "JvExterior", 74, 37, "S", 53, 37);
 	}
 }
