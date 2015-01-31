@@ -21,8 +21,6 @@ public class TitleState extends State
 	
 	public void tick()
 	{
-		Game.display.frame.requestFocus();
-		
 		// Cursor
 		cursorAnimTick+=1;
 		if(cursorAnimTick==15){cursorAnimMove = 2;}

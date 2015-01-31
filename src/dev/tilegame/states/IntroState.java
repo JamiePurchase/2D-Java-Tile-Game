@@ -38,7 +38,7 @@ public class IntroState extends State
 	
 	public void tickKeyIntro()
 	{
-		if(Keyboard.getKeyPressed()=="any")
+		if(Keyboard.getKeyPressed()!="none")
 		{
 			Keyboard.setKeyDone();
 			State.setStateChange("Title");
@@ -47,7 +47,7 @@ public class IntroState extends State
 	
 	public void tickKeyMessage()
 	{
-		if(Keyboard.getKeyPressed()=="any")
+		if(Keyboard.getKeyPressed()!="none")
 		{
 			Keyboard.setKeyDone();
 			introAdvance = true;

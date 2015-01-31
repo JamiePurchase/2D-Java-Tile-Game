@@ -19,7 +19,6 @@ public class Keyboard implements KeyListener
 
     public void keyPressed(KeyEvent e)
     {
-    	keyPressed = "none";
         //System.out.println("Key pressed: " + e.getKeyChar());
         if(e.getKeyCode() == KeyEvent.VK_ENTER){keyPressed = "Enter";}
         if(e.getKeyCode() == KeyEvent.VK_SPACE){keyPressed = "Space";}
@@ -29,9 +28,6 @@ public class Keyboard implements KeyListener
         if(e.getKeyCode() == KeyEvent.VK_LEFT){keyPressed = "Left";}
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){keyPressed = "Right";}
         if(e.getKeyCode() == KeyEvent.VK_D){keyPressed = "D";}
-        
-        // This handles 'press any key' events
-        if(keyPressed!="none"){keyPressed = "any";}
     }
 
     public void keyReleased(KeyEvent e)
