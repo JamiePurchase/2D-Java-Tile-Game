@@ -21,7 +21,7 @@ public class Conversation
 	
 	public Conversation()
 	{
-		
+		pieceActive = 0;
 	}
 	
 	public void advance()
@@ -43,6 +43,27 @@ public class Conversation
 		{
 			Game.conversationActive = false;
 		}
+	}
+	
+	/*public void pieceAddSpeech(String speaker, String dialogue1, String dialogue2, String dialogue3)
+	{
+		pieceCount += 1;
+		pieceDialogue[pieceCount][1] = dialogue1;
+		pieceDialogue[pieceCount][2] = dialogue2;
+		pieceDialogue[pieceCount][3] = dialogue3;
+		pieceEvent[pieceCount] = "Standard";
+		pieceType[pieceCount] = "Standard";
+		pieceSpeaker[pieceCount] = speaker;
+	}*/
+	
+	public void pieceAddStandard(String dialogue1, String dialogue2, String dialogue3)
+	{
+		pieceCount += 1;
+		pieceDialogue[pieceCount][1] = dialogue1;
+		pieceDialogue[pieceCount][2] = dialogue2;
+		pieceDialogue[pieceCount][3] = dialogue3;
+		pieceEvent[pieceCount] = "Standard";
+		pieceType[pieceCount] = "Standard";
 	}
 	
 	public void render(Graphics g)

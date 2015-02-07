@@ -17,22 +17,9 @@ public class Scenery
 	{
 		if(ref=="BedRest")
 		{
-			// Debug
-			System.out.println("Conversation started");
-			
 			Conversation newConversation = new Conversation();
-			newConversation.pieceEvent[1] = "Standard";
-			newConversation.pieceType[1] = "Standard";
-			newConversation.pieceDialogue[1][1] = "There's nothing like your own warm, cozy bed...";
-			newConversation.pieceDialogue[1][2] = "You could rest here for a while.";
-			newConversation.pieceDialogue[1][3] = "";
-			newConversation.pieceEvent[2] = "Standard";
-			newConversation.pieceType[2] = "Standard";
-			newConversation.pieceDialogue[2][1] = "Rest";
-			newConversation.pieceDialogue[2][2] = "No";
-			newConversation.pieceDialogue[2][3] = "";
-			newConversation.pieceCount = 2;
-			newConversation.pieceActive = 0;
+			newConversation.pieceAddStandard("There's nothing like your own warm, cozy bed...","You could rest here for a while.","");
+			// Note: make a yes/no piece so the player can choose to rest
 			newConversation.advance();
 			Game.conversationStart(newConversation);
 		}
@@ -77,6 +64,14 @@ public class Scenery
 			Game.world.setTimerSceneryRemove(57, 10, 60);
 			Game.world.setTimerSceneryRemove(58, 10, 60);
 			Game.world.setTimerSceneryRemove(59, 10, 60);
+		}
+		if(ref=="JvJobBoard")
+		{
+			Conversation newConversation = new Conversation();
+			newConversation.pieceAddStandard("Jharva Temple Notice Board","There's nothing of interest at the moment...","");
+			// Note: start some quests here
+			newConversation.advance();
+			Game.conversationStart(newConversation);
 		}
 	}
 }
