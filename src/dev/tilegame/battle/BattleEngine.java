@@ -2,6 +2,8 @@ package dev.tilegame.battle;
 
 import java.awt.image.BufferedImage;
 
+import dev.tilegame.Game;
+
 public class BattleEngine
 {
 	// Background
@@ -31,6 +33,32 @@ public class BattleEngine
 		unitEnemyCount += 1;
 		unitEnemy[unitEnemyCount] = unit;
 		return unitEnemyCount;
+	}
+	
+	public int getUnitAllyCountActive()
+	{
+		int count = 0;
+		for(int ally=1;ally<=Game.battleEngine.unitAllyCount;ally+=1)
+		{
+			if(Game.battleEngine.unitAlly[ally].statusActive==true)
+			{
+				count += 1;
+			}
+		}
+		return count;
+	}
+	
+	public int getUnitEnemyCountActive()
+	{
+		int count = 0;
+		for(int enemy=1;enemy<=Game.battleEngine.unitEnemyCount;enemy+=1)
+		{
+			if(Game.battleEngine.unitEnemy[enemy].statusActive==true)
+			{
+				count += 1;
+			}
+		}
+		return count;
 	}
 	
 	public UnitAlly getUnitAlly(int pos)

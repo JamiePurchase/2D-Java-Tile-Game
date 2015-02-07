@@ -2,32 +2,18 @@ package dev.tilegame.battle;
 
 import java.awt.image.BufferedImage;
 
-public class UnitEnemy
+public class UnitEnemy extends Unit
 {
-	// Details
-	public String infoName;
+	// Rewards
+	public int rewardExp;
+	public int rewardCoin;
 	
-	// Stats
-	public int statHealth;
-	
-	// Anim
-	public BufferedImage[] animSheet;
-	public int animSheetIdle = 1;
-	
-	// Action
-	public String actionStance;
-	public int actionCharge;
+	// Loot
+	//public Item? 
 	
 	public UnitEnemy(String name)
 	{
-		infoName = name;
-	}
-	
-	public BufferedImage getAnim(String stance)
-	{
-		//if(stance=="Idle"){return animSheet[0];}
-		//if(stance=="KO"){return animSheet[29];}
-		return animSheet[0];
+		unitName = name;
 	}
 
 }

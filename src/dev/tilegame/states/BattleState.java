@@ -9,6 +9,9 @@ import java.awt.Graphics;
 
 public class BattleState extends State
 {
+	// State
+	private String battleState = "Idle";
+	
 	// Tick
 	private boolean tickCharge = true;
 	
@@ -26,6 +29,10 @@ public class BattleState extends State
 	private boolean actionDamageActive = false;
 	private int actionDamageTick = 0;
 	private int actionDamageFrame = 0;
+	
+	// Victory
+	
+	// Defeat
 	
 	public BattleState()
 	{
@@ -144,16 +151,56 @@ public class BattleState extends State
 		g.drawImage(Game.battleEngine.unitEnemy[enemy].getAnim("Idle"), 200, 200, null);
 	}
 	
+	public void setBattleState(String state)
+	{
+		if(state=="Action")
+		{
+			tickCharge = false;
+			actionActive = true;
+			actionTick = 0;
+			actionFrame = 1;
+		}
+		if(state=="Idle")
+		{
+			tickCharge = true;
+		}
+		if(state=="Defeat")
+		{
+			battleState = "Defeat";
+		}
+		if(state=="Victory")
+		{
+			battleState = "Victory";
+		}
+	}
+	
 	public void tick()
 	{
-		if(tickCharge==true)
+		// Check that each force still has active units
+		tickForceActive(1);
+		tickForceActive(2);
+		
+		// Battle advances
+		if(battleState=="Idle")
 		{
-			tickForceCharge(1);
-			tickForceCharge(2);
+			// Units prepare for their next action
+			if(tickCharge==true)
+			{
+				tickForceCharge(1);
+				tickForceCharge(2);
+			}
+			
+			// Command Menu
+			if(menuNow==true){tickKeyEvents();}
 		}
-		if(actionActive==true){tickAction();}
-		if(actionDamageActive==true){tickActionDamage();}
-		if(menuNow==true){tickKeyEvents();}
+		
+		// Action is being performed
+		if(battleState=="Action")
+		{
+			// Temp
+			if(actionActive==true){tickAction();}
+			if(actionDamageActive==true){tickActionDamage();}
+		}
 	}
 	
 	public void tickAction()
@@ -189,12 +236,34 @@ public class BattleState extends State
 			
 			// Temp
 			if(actionDamageFrame>5)
-			{
+			{				
 				actionDamageActive = false;
 				actionDamageTick = 0;
 				actionDamageFrame = 0;
+
+				// Temp
+				Game.battleEngine.unitEnemy[1].inflictDamage(27);
+				
 				tickCharge = true;
 				Game.battleEngine.unitAlly[1].actionCharge = 300;
+			}
+		}
+	}
+	
+	public void tickForceActive(int force)
+	{
+		if(force==1)
+		{
+			if(Game.battleEngine.getUnitAllyCountActive()<1)
+			{
+				setBattleState("Defeat");
+			}
+		}
+		if(force==2)
+		{
+			if(Game.battleEngine.getUnitEnemyCountActive()<1)
+			{
+				setBattleState("Victory");
 			}
 		}
 	}
@@ -247,13 +316,8 @@ public class BattleState extends State
 			Keyboard.setKeyDone();
 			if(menuPos==1)
 			{
-				// Temp
 				menuCommands();
-				tickCharge = false;
-				actionActive = true;
-				actionTick = 0;
-				actionFrame = 1;
-				System.out.println("Attack");
+				setBattleState("Action");
 			}
 		}
 	}

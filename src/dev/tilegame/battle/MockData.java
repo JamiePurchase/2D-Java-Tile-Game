@@ -20,7 +20,9 @@ public class MockData
 	public static void loadForceAllies()
 	{
 		UnitAlly ally1 = new UnitAlly("Jamie");
-		ally1.statHealth = 1000;
+		ally1.statHealthNow = 1000;
+		ally1.statHealthMax = 1000;
+		ally1.statFrenzyNow = 0;
 		ally1.animSheet = Tileset.getTileset("/battle/character2/battleSheet.png", 6, 6, 160, 160);
 		ally1.actionStance = "Charge";
 		ally1.actionCharge = 300;
@@ -33,8 +35,9 @@ public class MockData
 	public static void loadForceEnemies()
 	{
 		UnitEnemy enemy1 = new UnitEnemy("Boar");
-		enemy1.statHealth = 500;
-		enemy1.animSheet = Tileset.getTileset("/battle/boar/boar01.png", 1, 1, 100, 100);
+		enemy1.statHealthNow = 500;
+		enemy1.statHealthMax = 500;
+		enemy1.animSheet = Tileset.getTileset("/battle/boar/boar01.png", 6, 6, 100, 100);
 		enemy1.actionStance = "Charge";
 		enemy1.actionCharge = 200;
 		Game.battleEngine.addUnitEnemy(enemy1);
