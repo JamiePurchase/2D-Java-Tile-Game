@@ -1,5 +1,6 @@
 package dev.tilegame;
 import dev.tilegame.audio.AudioPlayer;
+import dev.tilegame.battle.BattleEngine;
 import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
@@ -86,6 +87,9 @@ public class Game extends JPanel implements Runnable
 	public static MessagePrompt messageObjectPrompt;
 	public static MessageSpeech messageObjectSpeech;
 	public static MessageTutorial messageObjectTutorial;
+	
+	// Battle
+	public static BattleEngine battleEngine;
 
 	public Game(String title, int width, int height, String append)
 	{
@@ -118,7 +122,7 @@ public class Game extends JPanel implements Runnable
 		if(development==true){State.setState(stateDebug);}
 		
 		// Quickstart
-		if(quickstart==true){quickstart();}
+		else if(quickstart==true){quickstart();}
 		
 		// Introduction
 		else

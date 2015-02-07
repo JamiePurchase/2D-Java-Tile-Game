@@ -11,6 +11,11 @@ public class Tileset
 	
 	public static BufferedImage[] getTileset(String file, int width, int height)
 	{
+		return getTileset(file, width, height, 32 ,32);
+	}
+	
+	public static BufferedImage[] getTileset(String file, int width, int height, int tileW, int tileH)
+	{
 		int tileTotal = width * height;
 		Spritesheet sheet = new Spritesheet(ImageLoader.loadImage(file));
 		BufferedImage[] tileset = new BufferedImage[tileTotal];
@@ -18,9 +23,9 @@ public class Tileset
 		int posY = 1;
 		for(int tile=0;tile<tileTotal;tile+=1)
 		{
-			int cropX = 32 * posX - 32;
-			int cropY = 32 * posY - 32;
-			tileset[tile] = sheet.crop(cropX, cropY, 32, 32);
+			int cropX = tileW * posX - tileW;
+			int cropY = tileH * posY - tileH;
+			tileset[tile] = sheet.crop(cropX, cropY, tileW, tileH);
 			posX+=1;
 			if(posX>width)
 			{

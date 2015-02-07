@@ -4,26 +4,47 @@ import java.awt.image.BufferedImage;
 
 public class BattleEngine
 {
+	// Background
 	private BufferedImage backgroundImage;
-	private BattleUnit[][] forceUnit;
-	private int[] forceUnitCount;
+	
+	// Allies
+	public UnitAlly[] unitAlly = new UnitAlly[4];
+	public int unitAllyCount = 0;
+	
+	// Enemies
+	public UnitEnemy[] unitEnemy = new UnitEnemy[4];
+	public int unitEnemyCount = 0;
+	
+	// Anim Sheets
+	public BattleSheets bash;
 	
 	public BattleEngine()
 	{
-		forceUnitCount[1] = 0;
-		forceUnitCount[2] = 0;
+		bash = new BattleSheets();
 	}
 	
-	public void addUnit(BattleUnit unit, int force)
+	public int addUnitAlly(UnitAlly unit)
 	{
-		int pos = forceUnitCount[force] + 1;
-		forceUnit[force][pos] = unit;
-		forceUnitCount[force] = pos;
+		unitAllyCount += 1;
+		unitAlly[unitAllyCount] = unit;		
+		return unitAllyCount;
 	}
 	
-	public BattleUnit getUnit(int force, int pos)
+	public int addUnitEnemy(UnitEnemy unit)
 	{
-		return forceUnit[force][pos];
+		unitEnemyCount += 1;
+		unitEnemy[unitEnemyCount] = unit;
+		return unitEnemyCount;
+	}
+	
+	public UnitAlly getUnitAlly(int pos)
+	{
+		return unitAlly[pos];
+	}
+
+	public UnitEnemy getUnitEnemy(int pos)
+	{
+		return unitEnemy[pos];
 	}
 	
 	public void setBackgroundImage(BufferedImage background)
