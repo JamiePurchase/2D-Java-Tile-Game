@@ -9,10 +9,23 @@ import java.awt.Graphics;
 
 public class BattleState extends State
 {
+	// Tick
+	private boolean tickCharge = true;
+	
+	// Command Menu
 	private boolean menuNow = false;
 	private int menuAlly = 0;
 	private int menuPos = 0;
 	private int menuMax = 0;
+	
+	// Action
+	private boolean actionActive = false;
+	private int actionTick = 0;
+	private int actionFrame = 0;
+	private int actionFrameMax = 5;
+	private boolean actionDamageActive = false;
+	private int actionDamageTick = 0;
+	private int actionDamageFrame = 0;
 	
 	public BattleState()
 	{
@@ -28,6 +41,8 @@ public class BattleState extends State
 	{
 		menuNow = true;
 		menuAlly = ally;
+		menuPos = 1;
+		menuMax = 1;
 	}
 	
 	public void render(Graphics g)
@@ -36,12 +51,23 @@ public class BattleState extends State
 		renderForce(g, 1);
 		renderForce(g, 2);
 		renderStats(g);
+		if(actionDamageActive==true){renderActionDamage(g);}
 		if(menuNow==true){renderMenu(g);}
+	}
+	
+	public void renderActionDamage(Graphics g)
+	{
+		// Temp
+		String damageString = "27";
+		int damagePosX = 200;
+		int damagePosY = 185 - (actionDamageFrame * 5);
+		
+		Drawing.drawStringShadow(g, damageString, damagePosX, damagePosY, 1, Color.GRAY);
 	}
 	
 	public void renderBackground(Graphics g)
 	{
-		g.drawImage(Assets.battleBackground,  0, 0, null);
+		g.drawImage(Game.battleEngine.bkgImage, 0, 0, null);
 	}
 	
 	public void renderMenu(Graphics g)
@@ -104,25 +130,76 @@ public class BattleState extends State
 		
 	public void renderForceAlly(Graphics g, int ally)
 	{
-		g.drawImage(Assets.battleCharacter2Idle, 1000, 200, null);
+		// Temp
+		if(actionActive==true)
+		{
+			// Note: check if the action requires the combat animation
+			g.drawImage(Game.battleEngine.unitAlly[ally].getAnim("Combat", actionFrame), 1000, 200, null);
+		}
+		else{g.drawImage(Game.battleEngine.unitAlly[ally].getAnim("Idle"), 1000, 200, null);}
 	}
 	
 	public void renderForceEnemy(Graphics g, int enemy)
 	{
-		g.drawImage(Assets.battleBoarIdle, 200, 200, null);
+		g.drawImage(Game.battleEngine.unitEnemy[enemy].getAnim("Idle"), 200, 200, null);
 	}
 	
 	public void tick()
 	{
-		tickForce(1);
-		tickForce(2);
-		if(menuNow==true)
+		if(tickCharge==true)
 		{
-			tickKeyEvents();
+			tickForceCharge(1);
+			tickForceCharge(2);
+		}
+		if(actionActive==true){tickAction();}
+		if(actionDamageActive==true){tickActionDamage();}
+		if(menuNow==true){tickKeyEvents();}
+	}
+	
+	public void tickAction()
+	{
+		// Temp
+		actionTick += 1;
+		if(actionTick>=10)
+		{
+			actionFrame += 1;
+			actionTick = 0;
+			
+			// Temp
+			if(actionFrame>actionFrameMax)
+			{
+				actionActive = false;
+				actionTick = 0;
+				actionFrame = 0;
+				actionDamageActive = true;
+				actionDamageTick = 0;
+				actionDamageFrame = 0;
+			}
+		}
+	}
+		
+	public void tickActionDamage()
+	{
+		// Temp
+		actionDamageTick += 1;
+		if(actionDamageTick>=10)
+		{
+			actionDamageFrame += 1;
+			actionDamageTick = 0;
+			
+			// Temp
+			if(actionDamageFrame>5)
+			{
+				actionDamageActive = false;
+				actionDamageTick = 0;
+				actionDamageFrame = 0;
+				tickCharge = true;
+				Game.battleEngine.unitAlly[1].actionCharge = 300;
+			}
 		}
 	}
 	
-	public void tickForce(int force)
+	public void tickForceCharge(int force)
 	{
 		if(force==1)
 		{
@@ -138,8 +215,8 @@ public class BattleState extends State
 					}
 					
 					// Debug
-					String debug = "Ally #" + ally + " is charging (" + Game.battleEngine.unitAlly[ally].actionCharge + ")";
-					System.out.println(debug);
+					/*String debug = "Ally #" + ally + " is charging (" + Game.battleEngine.unitAlly[ally].actionCharge + ")";
+					System.out.println(debug);*/
 				}
 			}
 		}
@@ -157,8 +234,8 @@ public class BattleState extends State
 				}
 				
 				// Debug
-				String debug = "Enemy #" + enemy + " is charging (" + Game.battleEngine.unitEnemy[enemy].actionCharge + ")";
-				System.out.println(debug);
+				/*String debug = "Enemy #" + enemy + " is charging (" + Game.battleEngine.unitEnemy[enemy].actionCharge + ")";
+				System.out.println(debug);*/
 			}
 		}
 	}
@@ -170,8 +247,13 @@ public class BattleState extends State
 			Keyboard.setKeyDone();
 			if(menuPos==1)
 			{
-				// Do stuff
+				// Temp
 				menuCommands();
+				tickCharge = false;
+				actionActive = true;
+				actionTick = 0;
+				actionFrame = 1;
+				System.out.println("Attack");
 			}
 		}
 	}

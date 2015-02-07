@@ -53,11 +53,6 @@ public class Assets
 	public static BufferedImage itemMushroom1, itemChest1;
 	public static BufferedImage itemGarnet1, itemGarnet2;
 	
-	// Test
-	public static BufferedImage battleBackground;
-	public static BufferedImage battleCharacter2Idle;
-	public static BufferedImage battleBoarIdle;
-	
 	// Textures
 	public static BufferedImage txtGrass, txtFence1L, txtFence1M, txtFence1MS, txtFence1R;
 	public static BufferedImage txtTree1a, txtTree1b, txtTree1c, txtTree2a, txtTree2b;
@@ -269,9 +264,6 @@ public class Assets
 		// Garnet Images
 		itemGarnet1 = sheetGarnet.crop(0, 0, 32, 32);
 		itemGarnet2 = sheetGarnet.crop(32, 0, 32, 32);
-		
-		// Test
-		initSpritesBattle();
 	}
 	
 	public static void initSpritesPlayer()
@@ -333,13 +325,6 @@ public class Assets
 		npcAnnaE = sheetAnna.crop(32, 64, 32, 32);
 		npcAnnaS = sheetAnna.crop(32, 0, 32, 32);
 		npcAnnaW = sheetAnna.crop(32, 32, 32, 32);
-	}
-	
-	public static void initSpritesBattle()
-	{
-		battleBackground = ImageLoader.loadImage("/battle/backgrounds/test1.png");
-		battleCharacter2Idle = ImageLoader.loadImage("/battle/character2/Idle.png");
-		battleBoarIdle = ImageLoader.loadImage("/battle/boar/Idle.png");
 	}
 	
 	public static void initTextures()

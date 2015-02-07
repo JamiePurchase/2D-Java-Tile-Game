@@ -11,7 +11,8 @@ public class UnitEnemy
 	public int statHealth;
 	
 	// Anim
-	public BufferedImage animIdle;
+	public BufferedImage[] animSheet;
+	public int animSheetIdle = 1;
 	
 	// Action
 	public String actionStance;
@@ -20,6 +21,13 @@ public class UnitEnemy
 	public UnitEnemy(String name)
 	{
 		infoName = name;
+	}
+	
+	public BufferedImage getAnim(String stance)
+	{
+		//if(stance=="Idle"){return animSheet[0];}
+		//if(stance=="KO"){return animSheet[29];}
+		return animSheet[0];
 	}
 
 }

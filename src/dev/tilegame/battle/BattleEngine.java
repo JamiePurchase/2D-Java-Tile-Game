@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 public class BattleEngine
 {
 	// Background
-	private BufferedImage backgroundImage;
+	public BufferedImage bkgImage;
 	
 	// Allies
 	public UnitAlly[] unitAlly = new UnitAlly[4];
@@ -15,12 +15,8 @@ public class BattleEngine
 	public UnitEnemy[] unitEnemy = new UnitEnemy[4];
 	public int unitEnemyCount = 0;
 	
-	// Anim Sheets
-	public BattleSheets bash;
-	
 	public BattleEngine()
 	{
-		bash = new BattleSheets();
 	}
 	
 	public int addUnitAlly(UnitAlly unit)
@@ -45,10 +41,5 @@ public class BattleEngine
 	public UnitEnemy getUnitEnemy(int pos)
 	{
 		return unitEnemy[pos];
-	}
-	
-	public void setBackgroundImage(BufferedImage background)
-	{
-		backgroundImage = background;
 	}
 }
