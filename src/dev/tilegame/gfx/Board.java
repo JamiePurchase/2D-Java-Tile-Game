@@ -371,18 +371,29 @@ public class Board
 
 		// Temp
 		int hour = Game.getClock("Hour");
-		String debug = "No lighting";
-		if(hour<=6)
+		int min = Game.getClock("Minute");
+		float opacity = 0.00f;
+		String debug = "Day: 0.00";
+		if(hour<3 || hour>=21)
 		{
-			float opacity = (float) (0.78 - (0.13 * hour));
-			Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, opacity);
-			debug = "Hour: " + hour + "- opacity: " + opacity;
+			Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, 0.75f);
+			debug = "Night: 0.75f";
 		}
-		if(hour>=18)
+		if(hour>=3 && hour<6)
 		{
-			float opacity = (float) (0.00 + (0.13 * (hour - 18)));
+			float minutes = ((hour - 3) * 60) + min;
+			float percent = (minutes / 180) * 100; 
+			opacity = (float) (0.75 - (0.0075 * percent));
 			Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, opacity);
-			debug = "Hour: " + hour + "- opacity: " + opacity;
+			debug = "Morning: " + opacity;
+		}
+		if(hour>=18 && hour<21)
+		{
+			float minutes = ((hour - 18) * 60) + min;
+			float percent = (minutes / 180) * 100; 
+			opacity = (float) (0.0075 * percent);
+			Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, opacity);
+			debug = "Evening: " + opacity;
 		}
 		System.out.println(debug);
 	}

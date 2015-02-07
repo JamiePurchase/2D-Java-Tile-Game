@@ -347,7 +347,7 @@ public class Game extends JPanel implements Runnable
 		{
 			clockHour += 1;
 			clockMinute = 0;
-			if(clockHour>24)
+			if(clockHour>=24)
 			{
 				clockDay += 1;
 				clockHour = 0;
