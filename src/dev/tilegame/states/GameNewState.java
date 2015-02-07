@@ -42,11 +42,18 @@ public class GameNewState extends State
 		Game.world.setGridOffset(29, 33);*/
 		
 		// Temp (Jharva Village North Gate)
-		Game.world.getData("JvExterior");
+		/*Game.world.getData("JvExterior");
 		Assets.entPlayer.setPositionX(58);
 		Assets.entPlayer.setPositionY(13);
 		Game.world.setGridScroll(true);
-		Game.world.setGridOffset(37, 2);
+		Game.world.setGridOffset(37, 2);*/
+		
+		// Temp (Jharva Village Bridge)
+		Game.world.getData("JvExterior");
+		Assets.entPlayer.setPositionX(34);
+		Assets.entPlayer.setPositionY(25);
+		Game.world.setGridScroll(true);
+		Game.world.setGridOffset(13, 14);
 		
 		// Temp (Python City Centre)
 		/*Game.world.getData("PyExterior");

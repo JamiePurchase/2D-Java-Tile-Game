@@ -251,6 +251,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			if(getDirection()=="S"){drawY += offset;}
 			if(getDirection()=="W"){drawX -= offset;}
 		}
+		drawY -= Game.world.getElevation(getPositionX(), getPositionY());
 		g.drawImage(drawImage, drawX, drawY, null);
 		
 		// Debug

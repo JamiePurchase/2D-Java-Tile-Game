@@ -92,6 +92,12 @@ public class Board
 	public static BoardScenery[] sceneryObject = new BoardScenery[50];
 	public static String[] sceneryFile = new String[50];
 	
+	// Elevation
+	private static int elevationCount = 0;
+	private static int[] elevationPosX = new int[50];
+	private static int[] elevationPosY = new int[50];
+	private static int[] elevationPosZ = new int[50];
+	
 	// Treasure
 	private static int treasureCount = 0;
 	private static int[] treasureFind = new int[10];
@@ -111,6 +117,18 @@ public class Board
 		if(name=="JvPlayerHouse"){JvPlayerHouse boardLoader = new JvPlayerHouse();}
 		if(name=="JvGooseberryManor"){JvGooseberryManor boardLoader = new JvGooseberryManor();}
 		if(name=="PyExterior"){PyExterior boardLoader = new PyExterior();}
+	}
+	
+	public static int getElevation(int x, int y)
+	{
+		for(int e=1;e<=Game.world.elevationCount;e+=1)
+		{
+			if(Game.world.elevationPosX[e]==x && Game.world.elevationPosY[e]==y)
+			{
+				return Game.world.elevationPosZ[e];
+			}
+		}
+		return 0;
 	}
 	
 	public static int getGridEdgeE()
@@ -461,6 +479,14 @@ public class Board
 	{
 		bkgHasImage = true;
 		bkgImage = image;
+	}
+	
+	public static void setElevation(int posX, int posY, int posZ)
+	{
+		elevationCount += 1;
+		elevationPosX[elevationCount] = posX;
+		elevationPosY[elevationCount] = posY;
+		elevationPosZ[elevationCount] = posZ;
 	}
 	
 	public static void setGridHeight(int height)
