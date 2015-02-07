@@ -18,10 +18,10 @@ public abstract class Unit
 	public int animHigh;
 	public BufferedImage[] animSheet;
 	public int animSheetIdle = 1;
-	public int animSheetCombat = 5;
-	public int animSheetDefend = 4;
-	public int animSheetDeath = 5;
-	public int animSheetMystic = 3;
+	public int animSheetCombat = 1;
+	public int animSheetDefend = 1;
+	public int animSheetDeath = 1;
+	public int animSheetMystic = 1;
 	
 	// Status
 	public boolean statusActive = true;
@@ -31,12 +31,19 @@ public abstract class Unit
 	// Action
 	public String actionStance;
 	public int actionCharge;
-	public Action[] action = new Action[50];
+	public int actionChargeDelay;
+	public Action[] actionObject = new Action[50];
 	public int actionCount = 0;
 	
 	public Unit()
 	{
 		
+	}
+	
+	public void actionAdd(Action object)
+	{
+		actionCount += 1;
+		actionObject[actionCount] = object;
 	}
 	
 	public BufferedImage getAnim(String stance)

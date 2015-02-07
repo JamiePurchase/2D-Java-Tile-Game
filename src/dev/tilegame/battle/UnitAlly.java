@@ -17,11 +17,11 @@ public class UnitAlly extends Unit
 	public int rankExpRequired;
 	
 	// Commands
-	public BattleCommand[] commandMenu = new BattleCommand[4];
+	public BattleCommand[] commandMenu = new BattleCommand[5];
 	
 	// Frenzy
-	public int BattleActionFrenzyCount = 0;
-	public ActionFrenzy[] frenzyTechnique = new ActionFrenzy[10];
+	public int frenzyTechCount = 0;
+	public ActionFrenzy[] frenzyTechObject = new ActionFrenzy[10];
 	
 	public UnitAlly(String name)
 	{

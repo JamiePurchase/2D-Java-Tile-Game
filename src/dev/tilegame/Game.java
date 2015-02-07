@@ -30,6 +30,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.swing.JPanel;
 
@@ -95,6 +96,15 @@ public class Game extends JPanel implements Runnable
 	// Conversation
 	public static boolean conversationActive = false;
 	public static Conversation conversationObject;
+	
+	// Clock
+	public static boolean clockActive = true;
+	public static int clockTick = 0;
+	private static int clockDay;
+	private static int clockMonth;
+	private static int clockYear;
+	private static int clockHour;
+	private static int clockMinute;
 
 	public Game(String title, int width, int height, String append)
 	{
@@ -116,6 +126,72 @@ public class Game extends JPanel implements Runnable
 	{
 		conversationActive = true;
 		conversationObject = object;
+	}
+	
+	public static int getClock(String element)
+	{
+		if(element=="Day"){return clockDay;}
+		if(element=="Month"){return clockMonth;}
+		if(element=="Year"){return clockYear;}
+		if(element=="Hour"){return clockHour;}
+		if(element=="Minute"){return clockMinute;}
+		return 0;
+	}
+	
+	public String getClockDayAsString()
+	{
+		switch (clockDay)
+		{
+			case 1:
+				return "Monday";
+			case 2:
+				return "Tuesday";
+			case 3:
+				return "Wednesday";
+			case 4:
+				return "Thursday";
+			case 5:
+				return "Friday";
+			case 6:
+				return "Saturday";
+			case 7:
+				return "Sunday";
+			default:
+				return "Error";
+		}
+	}
+	
+	public String getClockMonthAsString()
+	{
+		switch (clockMonth)
+		{
+			case 1:
+				return "January";
+			case 2:
+				return "February";
+			case 3:
+				return "March";
+			case 4:
+				return "April";
+			case 5:
+				return "May";
+			case 6:
+				return "June";
+			case 7:
+				return "July";
+			case 8:
+				return "August";
+			case 9:
+				return "September";
+			case 10:
+				return "October";
+			case 11:
+				return "November";
+			case 12:
+				return "December";
+		default:
+			return "Error";
+		}
 	}
 	
 	private void init()
@@ -173,6 +249,8 @@ public class Game extends JPanel implements Runnable
 	private void initWorld()
 	{
 		world = new Board();
+		//setClock(1, 1, 1, 6, 0);
+		setClock(1, 1, 1, 16, 0);
 	}
 	
 	private void render()
@@ -246,6 +324,55 @@ public class Game extends JPanel implements Runnable
 		String file_name = "C:/Users/Jamie/Documents/My Workshop/Autumn Park/Datafiles/Data.txt";
 		WriteFile data = new WriteFile(file_name, false);
 		data.writeToFile("Hello world");
+	}
+	
+	public static void setClock(int day, int month, int year, int hour, int minute)
+	{
+		clockDay = day;
+		clockMonth = month;
+		clockYear =year;
+		clockHour = hour;
+		clockMinute = minute;
+	}
+	
+	public static void setClockActive(boolean active)
+	{
+		clockActive = active;
+	}
+	
+	public static void setClockAdvance()
+	{
+		clockMinute += 1;
+		if(clockMinute>60)
+		{
+			clockHour += 1;
+			clockMinute = 0;
+			if(clockHour>24)
+			{
+				clockDay += 1;
+				clockHour = 0;
+
+				// Maximum days in month
+				int dayMax = 0;
+				if (clockMonth == 4 || clockMonth == 6 || clockMonth == 9 || clockMonth == 11){dayMax = 30;}
+				else 
+				{
+					// Ignoring leap years for now
+					if (clockMonth == 2){dayMax = 29;}
+					else{dayMax = 31;}
+				}
+				if(clockDay>dayMax)
+				{
+					clockMonth += 1;
+					clockDay = 1;
+					if(clockMonth>12)
+					{
+						clockYear += 1;
+						clockMonth = 1;
+					}
+				}
+			}
+		}
 	}
 	
 	public static void setMessage(MessagePrompt message)

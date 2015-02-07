@@ -113,7 +113,39 @@ public class BattleState extends State
 		int drawY = (50 * ally) + 550;
 		Drawing.drawStringShadow(g, "Character 1", 750, drawY, 1, Color.GRAY);
 		Drawing.drawStringShadow(g, "1000", 950, drawY, 1, Color.GRAY);
-		Drawing.drawStringShadow(g, "525", 1100, drawY, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, "525", 1100, drawY, 1, Color.GRAY);	
+		renderStatsAllyHealth(g, ally);
+		renderStatsAllyCharge(g, ally);
+	}
+	
+	public void renderStatsAllyHealth(Graphics g, int ally)
+	{
+		float healthNow = Game.battleEngine.unitAlly[ally].statHealthNow;
+		float healthMax = Game.battleEngine.unitAlly[ally].statHealthMax;
+		float percent = (healthNow / healthMax) * 100;
+		int width = (int) (percent * 3);
+		g.setColor(Color.BLACK);
+		g.fillRect(799, 649, 302, 27);
+		g.setColor(Color.RED);
+		g.fillRect(800, 650, width, 25);
+	}
+
+	public void renderStatsAllyCharge(Graphics g, int ally)
+	{
+		float chargeNow = Game.battleEngine.unitAlly[ally].actionCharge;
+		float chargeMax = Game.battleEngine.unitAlly[ally].actionChargeDelay;
+		float percent = (chargeNow / chargeMax) * 100;
+		int width = (int) (300 - (percent * 3));
+		g.setColor(Color.BLACK);
+		g.fillRect(799, 699, 302, 27);
+		g.setColor(Color.RED);
+		g.fillRect(800, 700, width, 25);
+		
+		// Debug
+		/*String debug1 = "Charge time remaining = " + Game.battleEngine.unitAlly[ally].actionCharge + " / " + Game.battleEngine.unitAlly[ally].actionChargeDelay;
+		String debug2 = "This is " + percent + "% and creates a width of " + width;
+		System.out.println(debug1);
+		System.out.println(debug2);*/
 	}
 	
 	public void renderForce(Graphics g, int force)

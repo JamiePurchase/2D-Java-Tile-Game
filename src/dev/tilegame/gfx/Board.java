@@ -64,7 +64,7 @@ public class Board
 	public BufferedImage[] timerTileTransformImage = new BufferedImage[50];
 	
 	// Lighting
-	private static boolean lightingActive = false;
+	private static boolean lightingActive = true;
 	private static String lightingStyle;
 	
 	// NPCs
@@ -327,6 +327,10 @@ public class Board
 		if(Game.messageActive==true){renderMessage(g);}
 		if(Game.conversationActive==true){Game.conversationObject.render(g);}
 		
+		// Temp
+		//if(Game.development==true){renderClock(g);}
+		renderClock(g);
+		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
 		//g.drawImage(Assets.npcAnnaS, 256, 184, null);
 	}
@@ -340,10 +344,47 @@ public class Board
 		// Note: Should the background image be larger than the screen when the board is?
 	}
 	
-	public void renderLighting(Graphics g)
+	public void renderClock(Graphics g)
 	{
-		if(lightingStyle=="Afternoon"){Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, 0.25f);}
-		if(lightingStyle=="Night"){Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, 0.75f);}
+		g.setColor(Color.BLACK);
+		g.fillRect(1197, 21, 150, 30);
+		g.fillRect(1198, 22, 150, 30);
+		g.setColor(Color.WHITE);
+		g.fillRect(1196, 20, 150, 30);
+		g.setColor(Color.BLACK);
+		g.drawRect(1196, 20, 150, 30);
+		g.drawRect(1197, 21, 148, 28);
+		g.setColor(Color.BLACK);
+		g.setFont(Assets.fontDebugStandard);
+		String clock = "";
+		if(Game.getClock("Hour")<10){clock += "0";}
+		clock += Game.getClock("Hour") + ":";
+		if(Game.getClock("Minute")<10){clock += "0";}
+		clock += Game.getClock("Minute");
+		g.drawString(clock, 1230, 45);
+	}
+	
+	public void renderLighting(Graphics g)
+	{		
+		/*if(lightingStyle=="Afternoon"){Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, 0.25f);}
+		if(lightingStyle=="Night"){Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, 0.75f);}*/
+
+		// Temp
+		int hour = Game.getClock("Hour");
+		String debug = "No lighting";
+		if(hour<=6)
+		{
+			float opacity = (float) (0.78 - (0.13 * hour));
+			Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, opacity);
+			debug = "Hour: " + hour + "- opacity: " + opacity;
+		}
+		if(hour>=18)
+		{
+			float opacity = (float) (0.00 + (0.13 * (hour - 18)));
+			Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, opacity);
+			debug = "Hour: " + hour + "- opacity: " + opacity;
+		}
+		System.out.println(debug);
 	}
 	
 	public void renderMessage(Graphics g)
@@ -686,6 +727,9 @@ public class Board
 	
 	public void tick()
 	{
+		// Clock
+		if(Game.clockActive==true){tickClock();}
+		
 		// Conversation
 		if(Game.conversationActive==true)
 		{
@@ -715,6 +759,17 @@ public class Board
 		
 		// Player
 		Assets.entPlayer.tick();
+	}
+	
+	public void tickClock()
+	{
+		Game.clockTick += 1;
+		//if(Game.clockTick>=600)
+		if(Game.clockTick>=2)
+		{
+			Game.setClockAdvance();
+			Game.clockTick = 0;
+		}
 	}
 	
 	public void tickTimers()
