@@ -34,7 +34,7 @@ public class Assets
 	public static BufferedImage uiCharacterBkg, uiCharacterOpt1, uiCharacterOpt1a, uiCharacterOpt2;
 	public static BufferedImage uiCharacterOpt2a, uiCharacterOpt3, uiCharacterOpt3a;
 	public static BufferedImage uiEditorCursor1, uiEditorGrid;
-	public static BufferedImage uiCalloutE, uiCalloutQ;
+	public static BufferedImage uiCalloutE, uiCalloutPS, uiCalloutQ;
 
 	// Sprites
 	public static BufferedImage charPlayer1N1, charPlayer1N2, charPlayer1N3;
@@ -67,7 +67,7 @@ public class Assets
 	public static BufferedImage txtTree7aT, txtTree7aB, txtTree7bT, txtTree7bB;
 	
 	// Tilesets
-	public static BufferedImage[] tlsJharvaVillage, tlsJharvaInterior;
+	public static BufferedImage[] tlsJharvaVillage, tlsJharvaInterior, tlsJharvaSigns;
 	public static BufferedImage[] tlsFenceWooden;
 	public static BufferedImage[] tlsPythonCity;
 	
@@ -148,6 +148,7 @@ public class Assets
 	public static void initInterfaceCallouts()
 	{
 		uiCalloutE = ImageLoader.loadImage("/interface/calloutE.png");
+		uiCalloutPS = ImageLoader.loadImage("/interface/calloutPS.png");
 		uiCalloutQ = ImageLoader.loadImage("/interface/calloutQ.png");
 	}
 	
@@ -381,8 +382,9 @@ public class Assets
 	
 	public static void initTilesets()
 	{
-		tlsFenceWooden = Tileset.getTileset("/textures/FenceWooden.png", 12, 4);
+		tlsFenceWooden = Tileset.getTileset("/textures/FenceWooden.png", 12, 7);
 		tlsJharvaInterior = Tileset.getTileset("/textures/JharvaInterior.png", 8, 7);
+		tlsJharvaSigns = Tileset.getTileset("/textures/JharvaSigns.png", 4, 2);
 		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 13);
 		tlsPythonCity = Tileset.getTileset("/textures/PythonCity.png", 8, 11);
 	}

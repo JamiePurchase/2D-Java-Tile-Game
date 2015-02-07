@@ -24,6 +24,17 @@ public class PlayerCreatureEntity extends CreatureEntity
 		
 	}
 	
+	public int getAdjacentPortal(String direction)
+	{
+		int posX = getPositionX();
+		int posY = getPositionY();
+		if(direction=="N"){posY-=1;}
+		if(direction=="E"){posX+=1;}
+		if(direction=="W"){posX-=1;}
+		if(direction=="S"){posY+=1;}
+		return Game.world.getTilePortal(posX, posY);
+	}
+	
 	public String getFacingEntity()
 	{
 		return Game.world.getTileEntity(getFacingTileX(), getFacingTileY());
@@ -32,6 +43,11 @@ public class PlayerCreatureEntity extends CreatureEntity
 	public int getFacingEntityID()
 	{
 		return Game.world.getTileEntityID(getFacingTileX(), getFacingTileY());
+	}
+	
+	public int getFacingPortal()
+	{
+		return Game.world.getTilePortal(getFacingTileX(), getFacingTileY());
 	}
 	
 	public int getFacingTileX()
@@ -183,7 +199,32 @@ public class PlayerCreatureEntity extends CreatureEntity
 	
 	public void renderCallout(Graphics g)
 	{
+		// Scenery
 		if(getFacingEntity()=="Scenery"){renderCalloutQ(g);}
+		
+		// Portal
+		if(getAdjacentPortal("N")>1){renderCalloutP(g, "N");}
+		if(getAdjacentPortal("E")>1){renderCalloutP(g, "E");}
+		if(getAdjacentPortal("W")>1){renderCalloutP(g, "W");}
+		if(getAdjacentPortal("S")>1){renderCalloutP(g, "S");}
+	}
+	
+	public void renderCalloutP(Graphics g, String direction)
+	{
+		BufferedImage drawImage = Assets.uiCalloutPS;
+		// Note: create multiple portal callouts for different directions
+		//if(getDirection()=="E"){drawImage = Assets.uiCalloutPE;}
+		int drawX = ((getPositionX() - Game.world.getGridOffsetX()) * 32) - 11;
+		int drawY = ((getPositionY() - Game.world.getGridOffsetY()) * 32) - 16;
+		if(direction=="N"){drawY-=32;}
+		if(direction=="E"){drawX+=32;}
+		if(direction=="W"){drawX-=32;}
+		if(direction=="S"){drawY+=32;}
+		if(calloutFrame==1){drawX-=2;}
+		if(calloutFrame==2 || calloutFrame==8){drawX-=1;}
+		if(calloutFrame==4 || calloutFrame==6){drawX+=1;}
+		if(calloutFrame==5){drawX+=2;}
+		g.drawImage(drawImage, drawX, drawY, null);
 	}
 	
 	public void renderCalloutQ(Graphics g)

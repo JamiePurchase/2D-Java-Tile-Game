@@ -16,6 +16,9 @@ public class Scenery
 	{
 		if(ref=="JvGateWooden")
 		{
+			// Disable Actions
+			Game.world.setListenKey(false, 60);
+			
 			// Frame 1
 			Game.world.setTimerTileTransform(57, 9, 15, Assets.tlsFenceWooden[33], 1);
 			Game.world.setTimerTileTransform(58, 9, 15, Assets.tlsFenceWooden[34], 1);
@@ -47,6 +50,11 @@ public class Scenery
 			Game.world.setTimerTileTransform(57, 10, 60, Assets.tlsFenceWooden[15], 0);
 			Game.world.setTimerTileTransform(58, 10, 60, Assets.tlsFenceWooden[16], 0);
 			Game.world.setTimerTileTransform(59, 10, 60, Assets.tlsFenceWooden[17], 0);
+			
+			// Remove Scenery
+			Game.world.setTimerSceneryRemove(57, 10, 60);
+			Game.world.setTimerSceneryRemove(58, 10, 60);
+			Game.world.setTimerSceneryRemove(59, 10, 60);
 		}
 	}
 }

@@ -33,6 +33,10 @@ public class Board
 	private static int gridOffsetX = 0;
 	private static int gridOffsetY = 0;
 	
+	// Listeners
+	private static boolean listenKey = true;
+	private static int listenKeyTick = 0;
+	
 	// Background
 	private static boolean bkgHasImage = false;
 	private static BufferedImage bkgImage;
@@ -43,7 +47,14 @@ public class Board
 	private static String[ ][ ] tileEntity = new String[101][81];
 	private static int[ ][ ] tileEntityID = new int[101][81];
 	
-	// Timers
+	// Timer (scenery remove)
+	public int timerSceneryRemoveCount;
+	public boolean[] timerSceneryRemoveActive = new boolean[50];
+	public int[] timerSceneryRemoveTicks = new int[50];
+	public int[] timerSceneryRemoveX = new int[50];
+	public int[] timerSceneryRemoveY = new int[50];
+
+	// Timer (tile transform)
 	public int timerTileTransformCount;
 	public boolean[] timerTileTransformActive = new boolean[50];
 	public int[] timerTileTransformTicks = new int[50];
@@ -172,6 +183,11 @@ public class Board
 		return gridWidth;
 	}
 	
+	public static boolean getListenKey()
+	{
+		return listenKey;
+	}
+	
 	public static String getLocation()
 	{
 		return locationName;
@@ -214,9 +230,28 @@ public class Board
 		return tileImage[x][y];
 	}
 	
-	public static int getTreasureCount()
+	public static int getTilePortal(int x, int y)
 	{
-		return treasureCount;
+		for(int p=1;p<=Game.world.portalCount;p+=1)
+		{
+			if(Game.world.portalPosX[p]==x && Game.world.portalPosY[p]==y)
+			{
+				return p;
+			}
+		}
+		return 0;
+	}
+	
+	public static int getTileScenery(int x, int y)
+	{
+		for(int s=1;s<=Game.world.sceneryCount;s+=1)
+		{
+			if(Game.world.sceneryPosX[s]==x && Game.world.sceneryPosY[s]==y)
+			{
+				return s;
+			}
+		}
+		return 0;
 	}
 	
 	public static int getTileType(int x, int y)
@@ -224,47 +259,43 @@ public class Board
 		return tileType[x][y];
 	}
 	
-	public void tick()
+	public static int getTreasureCount()
 	{
-		// Board Scrolling
-		if(gridScrollAction==true)
-		{
-			gridScrollTick+=1;
-			int gridScrollTickMax = 10;
-			if(Assets.entPlayer.getWalkSpeed()==2){gridScrollTickMax = 5;}
-			if(gridScrollTick>=gridScrollTickMax)
-			{
-				gridScrollFrame+=1;
-				if(gridScrollFrame==4)
-				{
-					gridScrollAction = false;
-					Game.world.gridScrollDirection = "";
-					Game.world.gridScrollFrame = 0;
-				}
-			}
-		}
-		
-		// Timers
-		tickTimers();
-		
-		// Player
-		Assets.entPlayer.tick();
+		return treasureCount;
 	}
 	
-	public void tickTimers()
+	public static boolean removeScenery(int x, int y)
 	{
-		for(int x=1;x<=Game.world.timerTileTransformCount;x+=1)
+		// Check if there is a piece of scenery at this location
+		int scnID = getTileScenery(x, y);
+		int scnOld;
+		if(scnID>0)
 		{
-			if(Game.world.timerTileTransformActive[x]==true)
+			// Shift all scenery objects up the list
+			for(scnOld=scnID+1;scnOld<Game.world.sceneryCount;scnOld+=1)
 			{
-				Game.world.timerTileTransformTicks[x]-=1;
-				if(Game.world.timerTileTransformTicks[x]<1)
-				{
-					Game.world.setTile(Game.world.timerTileTransformX[x], Game.world.timerTileTransformY[x], Game.world.timerTileTransformImage[x], Game.world.timerTileTransformType[x]);
-					Game.world.timerTileTransformActive[x] = false;
-				}
+				int scnNew = scnOld - 1;
+				sceneryPosX[scnNew] = sceneryPosX[scnOld];
+				sceneryPosY[scnNew] = sceneryPosY[scnOld];
+				sceneryObject[scnNew] = sceneryObject[scnOld];
+				int scnNewX = sceneryPosX[scnNew];
+				int scnNewY = sceneryPosY[scnNew];
+				tileEntityID[scnNewX][scnNewY] = scnNew;
 			}
+			// Clear the final scenery object
+			scnOld = Game.world.sceneryCount;
+			int scnOldX = sceneryPosX[scnOld];
+			int scnOldY = sceneryPosY[scnOld];
+			tileEntity[scnOldX][scnOldY] = "None";
+			tileEntityID[scnOldX][scnOldY] = 0;
+			sceneryPosX[scnOld] = 0;
+			sceneryPosY[scnOld] = 0;
+			sceneryFile[scnOld] = "";
+			// Set the new count
+			Game.world.sceneryCount = scnOld - 1;
+			return true;
 		}
+		return false;
 	}
 	
 	public void render(Graphics g)
@@ -487,6 +518,17 @@ public class Board
 		gridWidth = width;
 	}
 	
+	public static void setListenKey(boolean enable)
+	{
+		listenKey = enable;
+	}
+	
+	public static void setListenKey(boolean enable, int tick)
+	{
+		listenKey = enable;
+		listenKeyTick = tick;
+	}
+	
 	public static void setLocation(String location)
 	{
 		locationName = location;
@@ -573,6 +615,16 @@ public class Board
 		tileType[x][y] = type;
 	}
 	
+	public int setTimerSceneryRemove(int x, int y, int ticks)
+	{
+		timerSceneryRemoveCount+=1;
+		timerSceneryRemoveActive[timerSceneryRemoveCount] = true;
+		timerSceneryRemoveTicks[timerSceneryRemoveCount] = ticks;
+		timerSceneryRemoveX[timerSceneryRemoveCount] = x;
+		timerSceneryRemoveY[timerSceneryRemoveCount] = y;
+		return timerSceneryRemoveCount;
+	}
+	
 	public int setTimerTileTransform(int x, int y, int ticks, BufferedImage image, int type)
 	{
 		timerTileTransformCount+=1;
@@ -603,6 +655,81 @@ public class Board
 		tileEntity[posX][posY] = "None";
 		tileEntityID[posX][posY] = 0;
 		Game.backpackTreasure += 1;
+	}
+	
+	public void tick()
+	{
+		// Board Scrolling
+		if(gridScrollAction==true)
+		{
+			gridScrollTick+=1;
+			int gridScrollTickMax = 10;
+			if(Assets.entPlayer.getWalkSpeed()==2){gridScrollTickMax = 5;}
+			if(gridScrollTick>=gridScrollTickMax)
+			{
+				gridScrollFrame+=1;
+				if(gridScrollFrame==4)
+				{
+					gridScrollAction = false;
+					Game.world.gridScrollDirection = "";
+					Game.world.gridScrollFrame = 0;
+				}
+			}
+		}
+		
+		// Timers
+		tickTimers();
+		
+		// Player
+		Assets.entPlayer.tick();
+	}
+	
+	public void tickTimers()
+	{
+		if(listenKeyTick>0){tickTimersListen();}
+		tickTimersSceneryRemove();
+		tickTimersTileTransform();
+	}
+	
+	public void tickTimersListen()
+	{
+		listenKeyTick-=1;
+		if(listenKeyTick==0)
+		{
+			listenKey = true;
+		}
+	}
+	
+	public void tickTimersSceneryRemove()
+	{
+		for(int x=1;x<=Game.world.timerSceneryRemoveCount;x+=1)
+		{
+			if(Game.world.timerSceneryRemoveActive[x]==true)
+			{
+				Game.world.timerSceneryRemoveTicks[x]-=1;
+				if(Game.world.timerSceneryRemoveTicks[x]<1)
+				{
+					Game.world.removeScenery(Game.world.timerSceneryRemoveX[x], Game.world.timerSceneryRemoveX[x]);
+					Game.world.timerSceneryRemoveActive[x] = false;
+				}
+			}
+		}
+	}
+	
+	public void tickTimersTileTransform()
+	{
+		for(int x=1;x<=Game.world.timerTileTransformCount;x+=1)
+		{
+			if(Game.world.timerTileTransformActive[x]==true)
+			{
+				Game.world.timerTileTransformTicks[x]-=1;
+				if(Game.world.timerTileTransformTicks[x]<1)
+				{
+					Game.world.setTile(Game.world.timerTileTransformX[x], Game.world.timerTileTransformY[x], Game.world.timerTileTransformImage[x], Game.world.timerTileTransformType[x]);
+					Game.world.timerTileTransformActive[x] = false;
+				}
+			}
+		}
 	}
 	
 	public static void tileInit(String fill, int type)
