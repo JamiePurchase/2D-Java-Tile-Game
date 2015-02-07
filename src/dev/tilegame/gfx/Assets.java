@@ -367,10 +367,10 @@ public class Assets
 	
 	public static void initTilesets()
 	{
-		tlsFenceWooden = Tileset.getTileset("/textures/FenceWooden.png", 12, 7);
+		tlsFenceWooden = Tileset.getTileset("/textures/FenceWooden.png", 12, 11);
 		tlsJharvaInterior = Tileset.getTileset("/textures/JharvaInterior.png", 8, 7);
 		tlsJharvaSigns = Tileset.getTileset("/textures/JharvaSigns.png", 4, 2);
-		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 13);
+		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 17);
 		tlsPythonCity = Tileset.getTileset("/textures/PythonCity.png", 8, 11);
 	}
 

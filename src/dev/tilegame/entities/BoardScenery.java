@@ -3,7 +3,7 @@ package dev.tilegame.entities;
 import java.awt.image.BufferedImage;
 
 import dev.tilegame.dialogue.talkHofmann;
-import dev.tilegame.scenery.scnJvGateWooden;
+//import dev.tilegame.scenery.scnJvGateWooden;
 
 public class BoardScenery
 {
@@ -18,7 +18,7 @@ public class BoardScenery
 	public static int animFrameTick;
 	
 	// Interact
-	public scnJvGateWooden script;
+	//public scnJvGateWooden script;
 	
 	public BoardScenery(int x, int y)
 	{
