@@ -3,6 +3,7 @@ package dev.tilegame.scenery;
 import java.awt.image.BufferedImage;
 
 import dev.tilegame.Game;
+import dev.tilegame.dialogue.Conversation;
 import dev.tilegame.gfx.Assets;
 
 public class Scenery
@@ -14,6 +15,27 @@ public class Scenery
 	
 	public void interact(String ref)
 	{
+		if(ref=="BedRest")
+		{
+			// Debug
+			System.out.println("Conversation started");
+			
+			Conversation newConversation = new Conversation();
+			newConversation.pieceEvent[1] = "Standard";
+			newConversation.pieceType[1] = "Standard";
+			newConversation.pieceDialogue[1][1] = "There's nothing like your own warm, cozy bed...";
+			newConversation.pieceDialogue[1][2] = "You could rest here for a while.";
+			newConversation.pieceDialogue[1][3] = "";
+			newConversation.pieceEvent[2] = "Standard";
+			newConversation.pieceType[2] = "Standard";
+			newConversation.pieceDialogue[2][1] = "Rest";
+			newConversation.pieceDialogue[2][2] = "No";
+			newConversation.pieceDialogue[2][3] = "";
+			newConversation.pieceCount = 2;
+			newConversation.pieceActive = 0;
+			newConversation.advance();
+			Game.conversationStart(newConversation);
+		}
 		if(ref=="JvGateWooden")
 		{
 			// Disable Actions

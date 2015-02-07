@@ -325,6 +325,7 @@ public class Board
 		renderNPCs(g);
 		renderTreasure(g);
 		if(Game.messageActive==true){renderMessage(g);}
+		if(Game.conversationActive==true){Game.conversationObject.render(g);}
 		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
 		//g.drawImage(Assets.npcAnnaS, 256, 184, null);
@@ -685,6 +686,12 @@ public class Board
 	
 	public void tick()
 	{
+		// Conversation
+		if(Game.conversationActive==true)
+		{
+			Game.conversationObject.tick();
+		}
+		
 		// Board Scrolling
 		if(gridScrollAction==true)
 		{

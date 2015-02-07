@@ -1,6 +1,7 @@
 package dev.tilegame;
 import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.battle.BattleEngine;
+import dev.tilegame.dialogue.Conversation;
 import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
@@ -90,6 +91,10 @@ public class Game extends JPanel implements Runnable
 	
 	// Battle
 	public static BattleEngine battleEngine;
+	
+	// Conversation
+	public static boolean conversationActive = false;
+	public static Conversation conversationObject;
 
 	public Game(String title, int width, int height, String append)
 	{
@@ -105,6 +110,12 @@ public class Game extends JPanel implements Runnable
 	public static void boardChange(String board)
 	{
 		boardChange = board;
+	}
+	
+	public static void conversationStart(Conversation object)
+	{
+		conversationActive = true;
+		conversationObject = object;
 	}
 	
 	private void init()
