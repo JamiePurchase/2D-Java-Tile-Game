@@ -17,6 +17,9 @@ public class BattleEngine
 	public UnitEnemy[] unitEnemy = new UnitEnemy[4];
 	public int unitEnemyCount = 0;
 	
+	// Action
+	public Action battleAction;
+	
 	public BattleEngine()
 	{
 	}

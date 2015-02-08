@@ -3,9 +3,11 @@ import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Drawing;
+import dev.tilegame.gfx.ImageLoader;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class TitleState extends State
 {
@@ -13,6 +15,7 @@ public class TitleState extends State
 	private int menuMax = 5;
 	private int cursorAnimTick = 0;
 	private int cursorAnimMove = 0;
+	private int mapAnimTick = 0;
 	
 	public TitleState()
 	{
@@ -21,6 +24,9 @@ public class TitleState extends State
 	
 	public void tick()
 	{
+		// Map Anim
+		mapAnimTick -= 1;
+		
 		// Cursor
 		cursorAnimTick+=1;
 		if(cursorAnimTick==15){cursorAnimMove = 2;}
@@ -90,8 +96,13 @@ public class TitleState extends State
 	
 	public void render(Graphics g)
 	{
-		renderBackground(g);
-		renderOptions(g);
+		// Test
+		//renderBackground(g);
+		//renderOptions(g);
+		
+		g.drawImage(ImageLoader.loadImage("/title/map.png"), mapAnimTick, 0, null);
+		g.drawImage(ImageLoader.loadImage("/title/logo.png"), 286, 100, null);
+		//Drawing.drawImageOpaque(g, ImageLoader.loadImage("/title/logo.png"), 200, 100, 0.50f);
 	}
 	
 	public void renderBackground(Graphics g)

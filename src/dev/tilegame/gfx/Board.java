@@ -395,7 +395,7 @@ public class Board
 			Drawing.drawImageOpaque(g, Assets.lightBlack, 0, 0, opacity);
 			debug = "Evening: " + opacity;
 		}
-		System.out.println(debug);
+		//System.out.println(debug);
 	}
 	
 	public void renderMessage(Graphics g)
@@ -545,6 +545,24 @@ public class Board
 	public static void setGridHeight(int height)
 	{
 		gridHeight = height;
+	}
+	
+	public static void setGridOffset()
+	{
+		if(gridWidth<=42 && gridHeight<=23){gridScroll=false;}
+		else
+		{
+			gridScroll = true;
+			int offsetMaxX = gridWidth - 42;
+			int offsetX = Assets.entPlayer.getPositionX() - 21;
+			if(offsetX<0){offsetX=0;}
+			if(offsetX>offsetMaxX){offsetX=offsetMaxX;}
+			int offsetMaxY = gridHeight - 23;
+			int offsetY = Assets.entPlayer.getPositionY() - 12;
+			if(offsetY<0){offsetY=0;}
+			if(offsetY>offsetMaxY){offsetY=offsetMaxY;}
+			setGridOffset(offsetX,offsetY);
+		}
 	}
 	
 	public static void setGridOffset(int x, int y)
@@ -774,9 +792,13 @@ public class Board
 	
 	public void tickClock()
 	{
+		// How fast minutes go by
+		int tickMinute = 600;
+		if(Game.accelerateTime==true){tickMinute=2;}
+		
+		// Advance time
 		Game.clockTick += 1;
-		//if(Game.clockTick>=600)
-		if(Game.clockTick>=2)
+		if(Game.clockTick>=tickMinute)
 		{
 			Game.setClockAdvance();
 			Game.clockTick = 0;

@@ -367,7 +367,7 @@ public class Assets
 	
 	public static void initTilesets()
 	{
-		tlsBridgeWooden = Tileset.getTileset("/textures/BridgeWooden.png", 12, 4);
+		tlsBridgeWooden = Tileset.getTileset("/textures/BridgeWooden.png", 12, 8);
 		tlsFenceWooden = Tileset.getTileset("/textures/FenceWooden.png", 12, 11);
 		tlsJharvaInterior = Tileset.getTileset("/textures/JharvaInterior.png", 8, 7);
 		tlsJharvaSigns = Tileset.getTileset("/textures/JharvaSigns.png", 4, 2);

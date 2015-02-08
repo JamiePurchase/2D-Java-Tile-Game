@@ -21,7 +21,7 @@ public class BattleState extends State
 	private int menuPos = 0;
 	private int menuMax = 0;
 	
-	// Action
+	// Action (these shouldn't be necessary once the action object is working)
 	private boolean actionActive = false;
 	private int actionTick = 0;
 	private int actionFrame = 0;
@@ -33,6 +33,8 @@ public class BattleState extends State
 	// Victory
 	
 	// Defeat
+	
+	//==========================> CLASS
 	
 	public BattleState()
 	{
@@ -49,14 +51,16 @@ public class BattleState extends State
 		menuNow = true;
 		menuAlly = ally;
 		menuPos = 1;
-		menuMax = 1;
+		menuMax = 4;
+		// Note: need to get these values from elsewhere
 	}
+	
+	//==========================> RENDER: MAIN
 	
 	public void render(Graphics g)
 	{
 		renderBackground(g);
-		renderForce(g, 1);
-		renderForce(g, 2);
+		renderForce(g);
 		renderStats(g);
 		if(actionDamageActive==true){renderActionDamage(g);}
 		if(menuNow==true){renderMenu(g);}
@@ -76,6 +80,63 @@ public class BattleState extends State
 	{
 		g.drawImage(Game.battleEngine.bkgImage, 0, 0, null);
 	}
+	
+	//==========================> RENDER: FORCES
+	
+	public void renderForce(Graphics g)
+	{
+		// Allies
+		for(int ally=1;ally<=Game.battleEngine.unitAllyCount;ally+=1)
+		{
+			if(battleState=="Action")
+			{
+				// Temp
+				if(actionActive==true)
+				{
+					// Note: check if the action requires the combat animation
+					g.drawImage(Game.battleEngine.unitAlly[ally].getAnim("Combat", actionFrame), 1000, 200, null);
+					//renderForceAlly(g, ally, Game.battleEngine.battleAction.unitAllyStance[ally][Game.battleEngine.battleAction.piece], unitAllyFrame[ally][piece]);
+					// Note: there needs to be a single, global reference to which piece of the action we are currently on
+				}
+				renderForceAlly(g, ally);
+			}
+			else
+			{
+				renderForceAlly(g, ally);
+			}
+			// Note: Should we specify a stance? Should the system automatically look at status effects, SOS and the like?
+		}
+		// Enemies
+		for(int enemy=1;enemy<=Game.battleEngine.unitEnemyCount;enemy+=1)
+		{
+			renderForceEnemy(g, enemy);
+		}
+	}
+	
+	public void renderForceAlly(Graphics g, int ally)
+	{
+		if(Game.battleEngine.unitAlly[ally].statusKO==true){renderForceAlly(g, ally, "Death", 1);}
+		// Note: there should be many other variations (eg: poison, stone, frenzy, etc...)
+		else{renderForceAlly(g, ally, "Idle", 1);}
+	}
+
+	public void renderForceAlly(Graphics g, int ally, String stance, int frame)
+	{
+		g.drawImage(Game.battleEngine.unitAlly[ally].getAnim(stance), Game.battleEngine.unitAlly[ally].animPosX, Game.battleEngine.unitAlly[ally].animPosY, null);
+	}
+	
+	public void renderForceEnemy(Graphics g, int enemy)
+	{
+		if(Game.battleEngine.unitEnemy[enemy].statusKO==true){renderForceEnemy(g, enemy, "Death", 1);}
+		else{renderForceEnemy(g, enemy, "Idle", 1);}
+	}
+	
+	public void renderForceEnemy(Graphics g, int enemy, String stance, int frame)
+	{
+		g.drawImage(Game.battleEngine.unitEnemy[enemy].getAnim(stance), Game.battleEngine.unitEnemy[enemy].animPosX, Game.battleEngine.unitEnemy[enemy].animPosY, null);
+	}
+	
+	//==========================> RENDER: MENU
 	
 	public void renderMenu(Graphics g)
 	{
@@ -100,7 +161,15 @@ public class BattleState extends State
 		Drawing.drawStringShadow(g, "Combat", 100, 600, 1, Color.GRAY);
 		Drawing.drawStringShadow(g, "Mystic", 100, 650, 1, Color.GRAY);
 		Drawing.drawStringShadow(g, "Item", 100, 700, 1, Color.GRAY);
+		
+		// Cursor (temporary)
+		int cursorY = (50 * menuPos) + 500;
+		g.setColor(Color.WHITE);
+		g.setFont(Assets.fontStandard);
+		g.drawString(">", 75, cursorY);
 	}
+	
+	//==========================> RENDER: STATS
 	
 	public void renderStats(Graphics g)
 	{
@@ -148,41 +217,6 @@ public class BattleState extends State
 		System.out.println(debug2);*/
 	}
 	
-	public void renderForce(Graphics g, int force)
-	{
-		if(force==1)
-		{
-			for(int ally=1;ally<=Game.battleEngine.unitAllyCount;ally+=1)
-			{
-				renderForceAlly(g, ally);
-				// Note: Should we specify a stance? Should the system automatically look at status effects, SOS and the like?
-			}
-		}
-		if(force==2)
-		{
-			for(int enemy=1;enemy<=Game.battleEngine.unitEnemyCount;enemy+=1)
-			{
-				renderForceEnemy(g, enemy);
-			}
-		}
-	}
-		
-	public void renderForceAlly(Graphics g, int ally)
-	{
-		// Temp
-		if(actionActive==true)
-		{
-			// Note: check if the action requires the combat animation
-			g.drawImage(Game.battleEngine.unitAlly[ally].getAnim("Combat", actionFrame), 1000, 200, null);
-		}
-		else{g.drawImage(Game.battleEngine.unitAlly[ally].getAnim("Idle"), 1000, 200, null);}
-	}
-	
-	public void renderForceEnemy(Graphics g, int enemy)
-	{
-		g.drawImage(Game.battleEngine.unitEnemy[enemy].getAnim("Idle"), 200, 200, null);
-	}
-	
 	public void setBattleState(String state)
 	{
 		if(state=="Action")
@@ -206,37 +240,36 @@ public class BattleState extends State
 		}
 	}
 	
+	//==========================> TICK: MAIN
+	
 	public void tick()
 	{
 		// Check that each force still has active units
-		tickForceActive(1);
-		tickForceActive(2);
+		if(Game.battleEngine.getUnitAllyCountActive()<1){setBattleState("Defeat");}
+		if(Game.battleEngine.getUnitEnemyCountActive()<1){setBattleState("Victory");}
 		
 		// Battle advances
-		if(battleState=="Idle")
-		{
-			// Units prepare for their next action
-			if(tickCharge==true)
-			{
-				tickForceCharge(1);
-				tickForceCharge(2);
-			}
-			
-			// Command Menu
-			if(menuNow==true){tickKeyEvents();}
-		}
+		if(battleState=="Idle"){tickIdle();}
 		
 		// Action is being performed
-		if(battleState=="Action")
-		{
-			// Temp
-			if(actionActive==true){tickAction();}
-			if(actionDamageActive==true){tickActionDamage();}
-		}
+		if(battleState=="Action"){tickAction();}
+		
+		// Victory Screen
+		if(battleState=="Victory"){tickVictory();}
+		
+		// Defeat Screen
+		if(battleState=="Defeat"){tickDefeat();}
 	}
+	
+	//==========================> TICK: ACTION
 	
 	public void tickAction()
 	{
+		// Temp
+		if(actionActive==true){}
+		if(actionDamageActive==true){tickActionDamage();}
+		
+		
 		// Temp
 		actionTick += 1;
 		if(actionTick>=10)
@@ -282,76 +315,91 @@ public class BattleState extends State
 		}
 	}
 	
-	public void tickForceActive(int force)
+	//==========================> TICK: DEFEAT
+	
+	public void tickDefeat()
 	{
-		if(force==1)
-		{
-			if(Game.battleEngine.getUnitAllyCountActive()<1)
-			{
-				setBattleState("Defeat");
-			}
-		}
-		if(force==2)
-		{
-			if(Game.battleEngine.getUnitEnemyCountActive()<1)
-			{
-				setBattleState("Victory");
-			}
-		}
+		
 	}
 	
-	public void tickForceCharge(int force)
+	//==========================> TICK: IDLE
+	
+	public void tickIdle()
 	{
-		if(force==1)
+		// Units prepare for their next action
+		if(tickCharge==true){tickIdleCharge();}
+		
+		// Command Menu
+		if(menuNow==true){tickIdleMenu();}
+	}
+	
+	public void tickIdleCharge()
+	{
+		// Allies
+		for(int ally=1;ally<=Game.battleEngine.unitAllyCount;ally+=1)
 		{
-			for(int ally=1;ally<=Game.battleEngine.unitAllyCount;ally+=1)
+			if(Game.battleEngine.unitAlly[ally].actionStance=="Charge")
 			{
-				if(Game.battleEngine.unitAlly[ally].actionStance=="Charge")
+				Game.battleEngine.unitAlly[ally].actionCharge-=1;
+				if(Game.battleEngine.unitAlly[ally].actionCharge==0)
 				{
-					Game.battleEngine.unitAlly[ally].actionCharge-=1;
-					if(Game.battleEngine.unitAlly[ally].actionCharge==0)
-					{
-						Game.battleEngine.unitAlly[ally].actionStance="Idle";
-						menuCommands(ally);
-					}
-					
-					// Debug
-					/*String debug = "Ally #" + ally + " is charging (" + Game.battleEngine.unitAlly[ally].actionCharge + ")";
-					System.out.println(debug);*/
-				}
-			}
-		}
-		if(force==2)
-		{
-			for(int enemy=1;enemy<=Game.battleEngine.unitEnemyCount;enemy+=1)
-			{
-				if(Game.battleEngine.unitEnemy[enemy].actionStance=="Charge")
-				{
-					Game.battleEngine.unitEnemy[enemy].actionCharge-=1;
-					if(Game.battleEngine.unitEnemy[enemy].actionCharge==0)
-					{
-						Game.battleEngine.unitEnemy[enemy].actionStance="Idle";
-					}
+					Game.battleEngine.unitAlly[ally].actionStance="Idle";
+					menuCommands(ally);
 				}
 				
 				// Debug
-				/*String debug = "Enemy #" + enemy + " is charging (" + Game.battleEngine.unitEnemy[enemy].actionCharge + ")";
+				/*String debug = "Ally #" + ally + " is charging (" + Game.battleEngine.unitAlly[ally].actionCharge + ")";
 				System.out.println(debug);*/
 			}
 		}
+		
+		// Enemies
+		for(int enemy=1;enemy<=Game.battleEngine.unitEnemyCount;enemy+=1)
+		{
+			if(Game.battleEngine.unitEnemy[enemy].actionStance=="Charge")
+			{
+				Game.battleEngine.unitEnemy[enemy].actionCharge-=1;
+				if(Game.battleEngine.unitEnemy[enemy].actionCharge==0)
+				{
+					Game.battleEngine.unitEnemy[enemy].actionStance="Idle";
+				}
+			}
+			
+			// Debug
+			/*String debug = "Enemy #" + enemy + " is charging (" + Game.battleEngine.unitEnemy[enemy].actionCharge + ")";
+			System.out.println(debug);*/
+		}
 	}
 	
-	public void tickKeyEvents()
+	public void tickIdleMenu()
 	{
 		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
 		{
 			Keyboard.setKeyDone();
+			// Note: lots of work to do here - when any option is selected, the details should already exist as a BattleCommand object
 			if(menuPos==1)
 			{
 				menuCommands();
 				setBattleState("Action");
 			}
 		}
+		if(Keyboard.getKeyPressed()=="Up" && menuPos>1)
+		{
+			Keyboard.setKeyDone();
+			menuPos -= 1;
+		}
+		if(Keyboard.getKeyPressed()=="Down" && menuPos<menuMax)
+		{
+			Keyboard.setKeyDone();
+			menuPos += 1;
+		}
+	}
+	
+	//==========================> TICK: VICTORY
+	
+	public void tickVictory()
+	{
+		
 	}
 
 }

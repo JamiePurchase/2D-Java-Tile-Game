@@ -53,6 +53,7 @@ public class Game extends JPanel implements Runnable
 	public static String stateChange = "none";
 	
 	// Development Features
+	public static boolean accelerateTime = false;
 	public static boolean development = false;
 	public static boolean quickstart = false;
 	

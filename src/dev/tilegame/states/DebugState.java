@@ -15,7 +15,7 @@ public class DebugState extends State
 {
 	private String menuRef = "Main";
 	private int menuPos = 1;
-	private int menuMax = 5;
+	private int menuMax = 6;
 	private int menuGamePos = 1;
 	private int menuGameMax = 3;
 	
@@ -46,6 +46,16 @@ public class DebugState extends State
 			Game.world.setGridOffset(0, 0);
 			Assets.entPlayer.setWalkSpeed(2);
 		}
+		if(preset==3)
+		{
+			Game.world.getData("JvExterior");
+			Assets.entPlayer.setPositionX(34);
+			Assets.entPlayer.setPositionY(25);
+			Game.world.setGridScroll(true);
+			Game.world.setGridOffset();
+			Assets.entPlayer.setWalkSpeed(2);
+			Game.accelerateTime = true;
+		}
 	}
 	
 	public void actionTestBattle()
@@ -56,8 +66,7 @@ public class DebugState extends State
 	
 	public void tick()
 	{
-		tickMenuMain();
-		//if(menuRef=="Main"){tickMenuMain();}
+		if(menuRef=="Main"){tickMenuMain();}
 		if(menuRef=="Game"){tickMenuGame();}
 	}
 	
@@ -107,6 +116,10 @@ public class DebugState extends State
 				State.setStateChange("Menu");
 			}
 			if(menuPos==5)
+			{
+				actionGame(3);
+			}
+			if(menuPos==6)
 			{
 				State.setStateChange("Title");
 			}
@@ -186,6 +199,7 @@ public class DebugState extends State
 		g.drawString("Board Editor", 100, 130);
 		g.drawString("Battle System", 100, 160);
 		g.drawString("Pause Menu", 100, 190);
-		g.drawString("Close", 100, 220);
+		g.drawString("Day / Night Test", 100, 220);
+		g.drawString("Close", 100, 250);
 	}
 }
