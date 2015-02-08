@@ -15,7 +15,7 @@ public class DebugState extends State
 {
 	private String menuRef = "Main";
 	private int menuPos = 1;
-	private int menuMax = 6;
+	private int menuMax = 7;
 	private int menuGamePos = 1;
 	private int menuGameMax = 3;
 	
@@ -121,6 +121,10 @@ public class DebugState extends State
 			}
 			if(menuPos==6)
 			{
+				State.setStateChange("Shop");
+			}
+			if(menuPos==7)
+			{
 				State.setStateChange("Title");
 			}
 		}
@@ -200,6 +204,7 @@ public class DebugState extends State
 		g.drawString("Battle System", 100, 160);
 		g.drawString("Pause Menu", 100, 190);
 		g.drawString("Day / Night Test", 100, 220);
-		g.drawString("Close", 100, 250);
+		g.drawString("Shop", 100, 250);
+		g.drawString("Close", 100, 280);
 	}
 }

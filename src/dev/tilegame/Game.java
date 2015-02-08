@@ -19,6 +19,7 @@ import dev.tilegame.states.GameState;
 import dev.tilegame.states.IntroState;
 import dev.tilegame.states.MenuState;
 import dev.tilegame.states.OptionsState;
+import dev.tilegame.states.ShopState;
 import dev.tilegame.states.TitleState;
 import dev.tilegame.states.TutorialState;
 import dev.tilegame.datafiles.FileManager;
@@ -77,7 +78,7 @@ public class Game extends JPanel implements Runnable
 	
 	// States
 	private State stateAbout, stateCharacter, stateIntro, stateOptions, stateTitle, stateTutorial;
-	private State stateGame, stateGameNew, stateMenu;
+	private State stateGame, stateGameNew, stateMenu, stateShop;
 	private State stateBattle;
 	private State stateDebug;
 	
@@ -240,6 +241,7 @@ public class Game extends JPanel implements Runnable
 		stateIntro = new IntroState();
 		stateMenu = new MenuState();
 		stateOptions = new OptionsState();
+		stateShop = new ShopState();
 		stateTitle = new TitleState();
 		stateTutorial = new TutorialState();
 		
@@ -451,6 +453,12 @@ public class Game extends JPanel implements Runnable
 		if(State.getStateChange() == "Options")
 		{
 			State.setState(stateOptions);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
+		if(State.getStateChange() == "Shop")
+		{
+			State.setState(stateShop);
 			State.setStateChange("");
 			Keyboard.setKeyDone();
 		}

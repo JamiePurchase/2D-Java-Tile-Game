@@ -101,7 +101,7 @@ public class TitleState extends State
 		//renderOptions(g);
 		
 		g.drawImage(ImageLoader.loadImage("/title/map.png"), mapAnimTick, 0, null);
-		g.drawImage(ImageLoader.loadImage("/title/logo.png"), 286, 100, null);
+		g.drawImage(ImageLoader.loadImage("/title/logo.png"), 286, 20, null);
 		//Drawing.drawImageOpaque(g, ImageLoader.loadImage("/title/logo.png"), 200, 100, 0.50f);
 	}
 	
