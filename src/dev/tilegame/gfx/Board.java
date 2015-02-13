@@ -330,6 +330,7 @@ public class Board
 		// Temp
 		//if(Game.development==true){renderClock(g);}
 		renderClock(g);
+		renderDevInfo(g);
 		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
 		//g.drawImage(Assets.npcAnnaS, 256, 184, null);
@@ -362,6 +363,34 @@ public class Board
 		if(Game.getClock("Minute")<10){clock += "0";}
 		clock += Game.getClock("Minute");
 		g.drawString(clock, 1230, 45);
+	}
+	
+	public void renderDevInfo(Graphics g)
+	{
+		g.setColor(Color.BLACK);
+		g.fillRect(1097, 71, 250, 180);
+		g.fillRect(1098, 72, 250, 180);
+		g.setColor(Color.WHITE);
+		g.fillRect(1096, 70, 250, 180);
+		g.setColor(Color.BLACK);
+		g.drawRect(1096, 70, 250, 180);
+		g.drawRect(1097, 71, 248, 178);
+		g.setColor(Color.BLACK);
+		g.setFont(Assets.fontDebugMini);
+		g.drawString("POS:", 1110, 123);
+		g.drawString("ELV:", 1110, 153);
+		g.drawString("POR:", 1110, 183);
+		g.drawString("ENT:", 1110, 213);
+		g.setFont(Assets.fontDebugStandard);
+		g.drawString("Development Info", 1110, 95);
+		String posXY = "" + Assets.entPlayer.getPositionX() + " x " + Assets.entPlayer.getPositionY();
+		String posZ = "" + getElevation(Assets.entPlayer.getPositionX(), Assets.entPlayer.getPositionY());
+		String portal = "none";
+		String entity = "none";
+		g.drawString(posXY, 1170, 125);
+		g.drawString(posZ, 1170, 155);
+		g.drawString(portal, 1170, 185);
+		g.drawString(entity, 1170, 215);
 	}
 	
 	public void renderLighting(Graphics g)

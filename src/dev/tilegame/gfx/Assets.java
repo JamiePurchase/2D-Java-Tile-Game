@@ -62,7 +62,7 @@ public class Assets
 	public static BufferedImage txtTree7aT, txtTree7aB, txtTree7bT, txtTree7bB;
 	
 	// Tilesets
-	public static BufferedImage[] tlsJharvaVillage, tlsJharvaInterior, tlsJharvaSigns, tlsJharvaTemple;
+	public static BufferedImage[] tlsJharvaVillage, tlsJharvaVillage2, tlsJharvaInterior, tlsJharvaSigns, tlsJharvaTemple;
 	public static BufferedImage[] tlsBridgeWooden, tlsFenceWooden;
 	public static BufferedImage[] tlsPythonCity;
 	
@@ -72,7 +72,7 @@ public class Assets
 	// Fonts
 	public static Font fontStandard, fontStandardBold, fontStandardUnderline;
 	public static Font fontInfoCount, fontReduced;
-	public static Font fontDebugTitle, fontDebugStandard;
+	public static Font fontDebugBold, fontDebugMini, fontDebugStandard, fontDebugTitle;
 	public static Font fontEditorMenu, fontEditorMenuBold, fontEditorMenuInfo, fontEditorMenuTitle;
 	
 	// Lighting
@@ -228,17 +228,19 @@ public class Assets
 	
 	public static void initFonts()
 	{
-		fontStandard = new Font("MV Boli", Font.PLAIN, 26);
-		fontStandardBold = new Font("MV Boli", Font.BOLD, 26);
-		fontStandardUnderline = new Font("MV Boli", Font.PLAIN, 26);
-		fontInfoCount = new Font("Times New Roman", Font.BOLD, 36);
-		fontReduced = new Font("MV Boli", Font.PLAIN, 20);
-		fontDebugTitle = new Font("MV Boli", Font.BOLD, 32);
+		fontDebugBold = new Font("MV Boli", Font.BOLD, 26);
+		fontDebugMini = new Font("MV Boli", Font.BOLD, 20);
 		fontDebugStandard = new Font("MV Boli", Font.PLAIN, 26);
+		fontDebugTitle = new Font("MV Boli", Font.BOLD, 32);
 		fontEditorMenu = new Font("Arial", Font.PLAIN, 18);
 		fontEditorMenuBold = new Font("Arial", Font.BOLD, 18);
 		fontEditorMenuInfo = new Font("Arial", Font.ITALIC, 18);
 		fontEditorMenuTitle = new Font("Arial", Font.BOLD, 18);
+		fontInfoCount = new Font("Times New Roman", Font.BOLD, 36);
+		fontReduced = new Font("MV Boli", Font.PLAIN, 20);
+		fontStandard = new Font("MV Boli", Font.PLAIN, 26);
+		fontStandardBold = new Font("MV Boli", Font.BOLD, 26);
+		fontStandardUnderline = new Font("MV Boli", Font.PLAIN, 26);
 	}
 	
 	public static void initLighting()
@@ -373,6 +375,7 @@ public class Assets
 		tlsJharvaSigns = Tileset.getTileset("/textures/JharvaSigns.png", 4, 2);
 		tlsJharvaTemple = Tileset.getTileset("/textures/JharvaTemple.png", 7, 7);
 		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 22);
+		tlsJharvaVillage2 = Tileset.getTileset("/textures/JharvaVillage2.png", 8, 8);
 		tlsPythonCity = Tileset.getTileset("/textures/PythonCity.png", 8, 11);
 	}
 

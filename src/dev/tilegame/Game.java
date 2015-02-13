@@ -1,4 +1,5 @@
 package dev.tilegame;
+import dev.tilegame.audio.AudioManager;
 import dev.tilegame.audio.AudioPlayer;
 import dev.tilegame.battle.BattleEngine;
 import dev.tilegame.dialogue.Conversation;
@@ -60,7 +61,9 @@ public class Game extends JPanel implements Runnable
 	
 	// Session
 	public static Session session;
-	public static boolean audio = true;
+	
+	// Audio
+	public static AudioManager audio;
 	
 	// Board Object
 	public static Board world;
@@ -216,19 +219,14 @@ public class Game extends JPanel implements Runnable
 		// Introduction
 		else
 		{
-			AudioPlayer.play("music1");
+			audio.playMusic("music1");
 			State.setState(stateIntro);
 		}
 	}
 	
 	private void initAudio()
 	{
-		AudioPlayer.init();
-		AudioPlayer.load("/music/bgm1.wav", "music1");
-		AudioPlayer.load("/music/bgm2.wav", "music2");
-		AudioPlayer.load("/sounds/collectGarnet.wav", "Garnet");
-		AudioPlayer.load("/sounds/collectMushroom.wav", "Mushroom");
-		AudioPlayer.load("/sounds/collectTreasure.wav", "Treasure");
+		audio = new AudioManager();
 	}
 
 	private void initStates()
@@ -413,6 +411,9 @@ public class Game extends JPanel implements Runnable
 	
 	private void tick()
 	{
+		// Audio
+		audio.tick();
+
 		// Change state
 		if(State.getStateChange() == "About")
 		{

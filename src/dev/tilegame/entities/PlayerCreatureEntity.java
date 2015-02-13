@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 
 public class PlayerCreatureEntity extends CreatureEntity
 {
@@ -250,6 +251,7 @@ public class PlayerCreatureEntity extends CreatureEntity
 			if(getDirection()=="E"){drawX += offset;}
 			if(getDirection()=="S"){drawY += offset;}
 			if(getDirection()=="W"){drawX -= offset;}
+			renderPlayerFootstep();
 		}
 		drawY -= Game.world.getElevation(getPositionX(), getPositionY());
 		g.drawImage(drawImage, drawX, drawY, null);
@@ -261,6 +263,16 @@ public class PlayerCreatureEntity extends CreatureEntity
 		System.out.println(debug1);
 		System.out.println(debug2);
 		System.out.println(debug3);*/
+	}
+	
+	public void renderPlayerFootstep()
+	{
+		// Note: Create an array of footstep types for the board (file and number of variations)
+		// Note: Use the file string and append a random int from the number of variations)
+		Random rn = new Random();
+		int rand = rn.nextInt(1) + 1;
+		String file = "sfxFootstepGrass" + rand;
+		Game.audio.playSound(file);
 	}
 	
 	public void setBoardNew(String newBoard, int newX, int newY, String newDirection, int offsetX, int offsetY)
