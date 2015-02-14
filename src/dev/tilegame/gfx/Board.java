@@ -1,6 +1,5 @@
 package dev.tilegame.gfx;
 import dev.tilegame.Game;
-import dev.tilegame.audio.AudioFootstep;
 import dev.tilegame.datafiles.WriteFile;
 import dev.tilegame.entities.BoardNpc;
 import dev.tilegame.entities.BoardScenery;
@@ -140,21 +139,8 @@ public class Board
 
 	public static String getFootstep(int x, int y)
 	{
-		int id = Game.audio.getFootstepID(footstepFile[x][y]);
-		if(id>0)
-		{
-			AudioFootstep footstep = Game.audio.getFootstep(id);
-			int rand = Game.random.nextInt(footstep.variations) + 1;
-			
-			// Debug
-			String debug3 = "Found " + footstep.file + " with " + footstep.variations + " variations";
-			String debug4 = "File: " + "sfxFootstep" + footstep.file + rand;
-			System.out.println(debug3);
-			System.out.println(debug4);
-			
-			return "sfxFootstep" + footstep.file + rand;
-		}
-		return "error";
+		int rand = Game.random.nextInt(Game.audio.getFootstepVariations(footstepFile[x][y])) + 1;
+		return "sfxFootstep" + footstepFile[x][y] + rand;
 	}
 	
 	public static int getGridEdgeE()

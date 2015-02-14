@@ -3,8 +3,7 @@ package dev.tilegame.audio;
 public class AudioManager
 {
 	private static boolean active = true;
-	private static AudioFootstep[] footsteps = new AudioFootstep[20]; 
-	private static int footstepsCount = 0;
+	private static AudioFootsteps footstepVariations;
 	private static boolean musicActive = false;
 	private static String musicFile;
 	private static boolean soundActive = false;
@@ -20,31 +19,11 @@ public class AudioManager
 		initSounds();
 	}
 	
-	public void addFootstep(String file, int variations)
+	public int getFootstepVariations(String file)
 	{
-		footsteps[footstepsCount] = new AudioFootstep(file, variations);		
-		footstepsCount += 1;
+		return footstepVariations.getVariations(file);
 	}
-	
-	public AudioFootstep getFootstep(int id)
-	{
-		return footsteps[id];
-	}
-	
-	public int getFootstepID(String file)
-	{
-		for(int n = 1;n<=footstepsCount;n+=1)
-		{
-			if(footsteps[n].file==file){return n;}
-		}
-		return 0;
-	}
-	
-	public int getFootstepCount()
-	{
-		return footstepsCount;
-	}
-	
+
 	public boolean getMusicActive()
 	{
 		return musicActive;
@@ -57,15 +36,11 @@ public class AudioManager
 	
 	public void initFootsteps()
 	{
-		addFootstep("Grass",2);
-		addFootstep("Wood",2);
-		
-		// Debug
-		for(int n = 1;n<=footstepsCount;n+=1)
-		{
-			String debug = "Footstep #" + n + " = " + footsteps[n].file;
-			System.out.println(debug);
-		}
+		footstepVariations = new AudioFootsteps();
+		AudioPlayer.load("/sounds/footstepGrass1.wav", "sfxFootstepGrass1");
+		AudioPlayer.load("/sounds/footstepGrass2.wav", "sfxFootstepGrass2");
+		AudioPlayer.load("/sounds/footstepWood1.wav", "sfxFootstepWood1");
+		AudioPlayer.load("/sounds/footstepWood2.wav", "sfxFootstepWood2");
 	}
 	
 	public void initMusic()
