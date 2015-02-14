@@ -367,14 +367,39 @@ public class JvExterior
 		Game.world.setTile(47, 45, Assets.tlsJharvaVillage[43], 1);
 		Game.world.setTile(48, 45, Assets.tlsJharvaVillage[43], 1);
 		Game.world.setTile(49, 45, Assets.tlsJharvaVillage[47], 1);
+		Game.world.setTile(22, 50, Assets.tlsJharvaVillage[1], 1);
+		Game.world.setTile(23, 50, Assets.tlsJharvaVillage[2], 1);
+		Game.world.setTile(24, 50, Assets.tlsJharvaVillage[2], 1);
+		Game.world.setTile(25, 50, Assets.tlsJharvaVillage[2], 1);
+		Game.world.setTile(26, 50, Assets.tlsJharvaVillage[2], 1);
+		Game.world.setTile(27, 50, Assets.tlsJharvaVillage[7], 1);
+		Game.world.setTile(22, 51, Assets.tlsJharvaVillage[17], 1);
+		Game.world.setTile(23, 51, Assets.tlsJharvaVillage[18], 1);
+		Game.world.setTile(24, 51, Assets.tlsJharvaVillage[18], 1);
+		Game.world.setTile(25, 51, Assets.tlsJharvaVillage[18], 1);
+		Game.world.setTile(26, 51, Assets.tlsJharvaVillage[18], 1);
+		Game.world.setTile(27, 51, Assets.tlsJharvaVillage[23], 1);
+		Game.world.setTile(54, 52, Assets.tlsJharvaVillage[23], 1);
 		Game.world.setTile(51, 51, Assets.tlsJharvaVillage[1], 1);
 		Game.world.setTile(52, 51, Assets.tlsJharvaVillage[2], 1);
 		Game.world.setTile(53, 51, Assets.tlsJharvaVillage[2], 1);
 		Game.world.setTile(54, 51, Assets.tlsJharvaVillage[7], 1);
+		Game.world.setTile(22, 52, Assets.tlsJharvaVillage[25], 1);
+		Game.world.setTile(23, 52, Assets.tlsJharvaVillage[27], 1);
+		Game.world.setTile(24, 52, Assets.tlsJharvaSigns[2], 1);
+		Game.world.setTile(25, 52, Assets.tlsJharvaSigns[3], 1);
+		Game.world.setTile(26, 52, Assets.tlsJharvaVillage[27], 1);
+		Game.world.setTile(27, 52, Assets.tlsJharvaVillage[31], 1);
 		Game.world.setTile(51, 52, Assets.tlsJharvaVillage[17], 1);
 		Game.world.setTile(52, 52, Assets.tlsJharvaVillage[18], 1);
 		Game.world.setTile(53, 52, Assets.tlsJharvaVillage[18], 1);
 		Game.world.setTile(54, 52, Assets.tlsJharvaVillage[23], 1);
+		Game.world.setTile(22, 53, Assets.tlsJharvaVillage[33], 1);
+		Game.world.setTile(23, 53, Assets.tlsJharvaVillage[34], 1);
+		Game.world.setTile(24, 53, Assets.tlsJharvaVillage[35], 1);
+		Game.world.setTile(25, 53, Assets.tlsJharvaVillage[34], 1);
+		Game.world.setTile(26, 53, Assets.tlsJharvaVillage[34], 1);
+		Game.world.setTile(27, 53, Assets.tlsJharvaVillage[39], 1);
 		Game.world.setTile(51, 53, Assets.tlsJharvaVillage[25], 1);
 		Game.world.setTile(52, 53, Assets.tlsJharvaSigns[4], 1);
 		Game.world.setTile(53, 53, Assets.tlsJharvaSigns[5], 1);
@@ -530,6 +555,7 @@ public class JvExterior
 		// Portals
 		Game.world.setPortal("Interact", 50, 42, "JvPlayerHouse", 21, 18, "N");
 		Game.world.setPortal("Interact", 74, 36, "JvLaboratoryMain", 19, 18, "N");
+		Game.world.setPortal("Interact", 24, 53, "JvBlacksmith", 21, 18, "N");
 		Game.world.setPortal("Interact", 52, 54, "JvPotionShop", 21, 18, "N");
 		
 		// Elevation (north bridge)

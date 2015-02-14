@@ -49,11 +49,17 @@ public class GameNewState extends State
 		Game.world.setGridOffset(29, 33);*/
 		
 		// Temp (Jharva Laboratory)
-		Game.world.getData("JvExterior");
+		/*Game.world.getData("JvExterior");
 		Assets.entPlayer.setPosition(71, 38);
 		Game.world.setGridScroll(true);
+		Game.world.setGridOffset();*/
+		
+		// Temp (Jharva Village Blacksmith)
+		Game.world.getData("JvExterior");
+		Assets.entPlayer.setPosition(24, 55);
+		Game.world.setGridScroll(true);
 		Game.world.setGridOffset();
-		Assets.entPlayer.setWalkSpeed(5);
+		Assets.entPlayer.setWalkSpeed(10);
 		
 		// Temp (Jharva Village North Gate)
 		/*Game.world.getData("JvExterior");
