@@ -376,6 +376,8 @@ public class JvExterior
 		Game.world.setTile(37, 55, Assets.tlsJharvaVillage[145], 1);
 		Game.world.setTile(38, 55, Assets.tlsJharvaVillage[145], 1);
 		Game.world.setTile(39, 55, Assets.tlsJharvaVillage[146], 1);
+		Game.world.setTile(48, 55, Assets.tlsJharvaVillage2[65], 1);
+		Game.world.setTile(49, 55, Assets.tlsJharvaVillage2[66], 1);
 		Game.world.setTile(52, 55, Assets.tlsJharvaVillage2[30], 0);
 		Game.world.setTile(32, 56, Assets.tlsBridgeWooden[50], 0);
 		Game.world.setTile(33, 56, Assets.tlsBridgeWooden[51], 0);
@@ -393,7 +395,9 @@ public class JvExterior
 		Game.world.setTile(45, 56, Assets.tlsJharvaVillage2[4], 0);
 		Game.world.setTile(46, 56, Assets.tlsJharvaVillage2[5], 0);
 		Game.world.setTile(47, 56, Assets.tlsJharvaVillage2[6], 0);
-		Game.world.setTile(48, 56, Assets.tlsJharvaVillage2[7], 0);
+		Game.world.setTile(48, 56, Assets.tlsJharvaVillage2[72], 0);
+		Game.world.setTile(49, 56, Assets.tlsJharvaVillage2[74], 1);
+		Game.world.setTile(50, 56, Assets.tlsJharvaVillage2[75], 1);
 		Game.world.setTile(51, 56, Assets.tlsJharvaVillage[47], 1);
 		Game.world.setTile(52, 56, Assets.tlsJharvaVillage2[38], 0);
 		Game.world.setTile(53, 56, Assets.tlsJharvaVillage[42], 1);

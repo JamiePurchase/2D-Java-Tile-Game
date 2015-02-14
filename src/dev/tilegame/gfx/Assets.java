@@ -377,7 +377,7 @@ public class Assets
 		tlsJharvaSigns = Tileset.getTileset("/textures/JharvaSigns.png", 4, 2);
 		tlsJharvaTemple = Tileset.getTileset("/textures/JharvaTemple.png", 7, 7);
 		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 22);
-		tlsJharvaVillage2 = Tileset.getTileset("/textures/JharvaVillage2.png", 8, 8);
+		tlsJharvaVillage2 = Tileset.getTileset("/textures/JharvaVillage2.png", 8, 10);
 		tlsPythonCity = Tileset.getTileset("/textures/PythonCity.png", 8, 11);
 	}
 

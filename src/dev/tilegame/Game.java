@@ -6,6 +6,7 @@ import dev.tilegame.dialogue.Conversation;
 import dev.tilegame.display.Display;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
+import dev.tilegame.gfx.BoardCinematic;
 import dev.tilegame.message.MessagePrompt;
 import dev.tilegame.message.MessageSpeech;
 import dev.tilegame.message.MessageStandard;
@@ -535,6 +536,20 @@ public class Game extends JPanel implements Runnable
 	{
 		Game.playerClass = "Spellweaver";
 		State.setState(stateGameNew);
+		
+		// Temp
+		/*BoardCinematic newCinematic = new BoardCinematic();
+		newCinematic.setOffsetPos(1, 1);
+		newCinematic.setOffsetMove(1, 1, 10);
+		newCinematic.renderPlayer = false;
+		newCinematic.renderNPCs = false;
+		newCinematic.setLogoFrames(5, 400);
+		newCinematic.setLogoImage("JharvaVillage");
+		newCinematic.setLogoPosition(393, 319);
+		newCinematic.logoActive = true;
+		newCinematic.setTickMax(600);
+		Game.world.setCinematicObject(newCinematic);
+		Game.world.setCinematicActive(true);*/
 	}
 
 }

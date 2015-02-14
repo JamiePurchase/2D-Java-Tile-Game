@@ -35,6 +35,10 @@ public class Board
 	private static int gridOffsetX = 0;
 	private static int gridOffsetY = 0;
 	
+	// Cinematic
+	private static boolean cinematicActive = false;
+	private static BoardCinematic cinematicObject;
+	
 	// Listeners
 	private static boolean listenKey = true;
 	private static int listenKeyTick = 0;
@@ -339,6 +343,9 @@ public class Board
 		if(Game.messageActive==true){renderMessage(g);}
 		if(Game.conversationActive==true){Game.conversationObject.render(g);}
 		
+		// Cinematic
+		if(cinematicActive==true){cinematicObject.render(g);}
+		
 		// Temp
 		//if(Game.development==true){renderClock(g);}
 		renderClock(g);
@@ -451,7 +458,16 @@ public class Board
 	}
 	
 	public void renderNPCs(Graphics g)
-	{		
+	{
+		if(cinematicActive==true)
+		{
+			if(cinematicObject.renderNPCs==true){renderNPCsAll(g);}
+		}
+		else{renderNPCsAll(g);}
+	}
+	
+	public void renderNPCsAll(Graphics g)
+	{
 		for(int x=1;x<=Game.world.npcCount;x+=1)
 		{
 			// Note: Is the entity idle? What about actions?
@@ -467,7 +483,11 @@ public class Board
 	
 	public void renderPlayer(Graphics g)
 	{
-		Assets.entPlayer.render(g);
+		if(cinematicActive==true)
+		{
+			if(cinematicObject.renderPlayer==true){Assets.entPlayer.render(g);}
+		}
+		else{Assets.entPlayer.render(g);}
 	}
 	
 	public void renderTile(Graphics g, int x, int y)
@@ -544,6 +564,11 @@ public class Board
 				// Note: New method is to draw exactly 42 x 23 tiles, using the offset values to pick which tiles to use
 				int tileX = x + gridOffsetX;
 				int tileY = y + gridOffsetY;
+				if(cinematicActive==true)
+				{
+					tileX = x + cinematicObject.getOffsetPosX();
+					tileY = y + cinematicObject.getOffsetPosY();
+				}
 				renderTileAt(g, tileX, tileY, x, y);
 			}
 		}
@@ -576,6 +601,16 @@ public class Board
 	{
 		bkgHasImage = true;
 		bkgImage = image;
+	}
+	
+	public static void setCinematicActive(boolean active)
+	{
+		cinematicActive = active;
+	}
+	
+	public static void setCinematicObject(BoardCinematic newObject)
+	{
+		cinematicObject = newObject;
 	}
 	
 	public static void setElevation(int posX, int posY, int posZ)
@@ -818,6 +853,9 @@ public class Board
 	{
 		// Clock
 		if(Game.clockActive==true){tickClock();}
+		
+		// Cinematic
+		if(cinematicActive==true){cinematicObject.tick();}
 		
 		// Conversation
 		if(Game.conversationActive==true)

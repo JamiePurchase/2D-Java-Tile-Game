@@ -4,6 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Drawing
 {
@@ -63,5 +67,26 @@ public class Drawing
 		/*g.setFont(Assets.fontStandardUnderline);
 		String character = "" + text.charAt(1);
 		g.drawString(character, x, y);*/
+	}
+	
+	public static Color getColorRGB(int r, int g, int b)
+	{
+		float hsb[] = Color.RGBtoHSB(185,122,87,null);
+		return Color.getHSBColor(hsb[0], hsb[1], hsb[2]);
+	}
+	
+	public static BufferedImage getImage(String filepath)
+	{
+		filepath = "C:/Eclipse/Workspace/TileGame/res/" + filepath;
+		BufferedImage image = null;
+		try
+		{
+			image = ImageIO.read(new File(filepath));
+		}
+		catch (IOException e)
+		{
+			System.out.println(e);
+		}
+		return image;
 	}
 }

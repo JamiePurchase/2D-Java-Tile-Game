@@ -11,10 +11,14 @@ import java.awt.image.BufferedImage;
 
 public class TitleState extends State
 {
-	private int menuPos = 1;
-	private int menuMax = 5;
 	private int cursorAnimTick = 0;
 	private int cursorAnimMove = 0;
+	private int glowAnimFrame = 1;
+	private boolean glowAnimGrow = true;
+	private int glowAnimTick = 0;
+	private boolean menuActive = false;
+	private int menuPos;
+	private int menuMax;
 	private int mapAnimTick = 0;
 	
 	public TitleState()
@@ -24,10 +28,65 @@ public class TitleState extends State
 	
 	public void tick()
 	{
-		// Map Anim
-		mapAnimTick -= 1;
+		// Background Map
+		tickMap();
 		
-		// Cursor
+		// Menu Options
+		if(menuActive==true){tickMenu();}
+		
+		// Press any key
+		else{tickGlow();}
+	}
+
+	public void tickGlow()
+	{
+		tickGlowAnim();
+		tickGlowKey();
+	}
+	
+	public void tickGlowAnim()
+	{
+		glowAnimTick += 1;
+		if(glowAnimTick<2)
+		{
+			glowAnimTick = 0;
+			if(glowAnimGrow==true)
+			{
+				glowAnimFrame += 1;
+				if(glowAnimFrame==5){glowAnimGrow=false;}
+			}
+			else
+			{
+				glowAnimFrame -= 1;
+				if(glowAnimFrame==1){glowAnimGrow=true;}
+			}
+		}
+	}
+	
+	public void tickGlowKey()
+	{
+		if(Keyboard.getKeyPressed()!="none")
+		{
+			Keyboard.setKeyDone();
+			menuActive = true;
+			menuPos = 1;
+			menuMax = 5;
+		}
+	}
+	
+	public void tickMap()
+	{
+		mapAnimTick -= 1;
+	}
+	
+	public void tickMenu()
+	{
+		tickMenuCursor();
+		tickMenuKey();
+	}
+	
+	public void tickMenuCursor()
+	{
 		cursorAnimTick+=1;
 		if(cursorAnimTick==15){cursorAnimMove = 2;}
 		if(cursorAnimTick==30){cursorAnimMove = 3;}
@@ -41,8 +100,10 @@ public class TitleState extends State
 			cursorAnimMove = 1;
 			cursorAnimTick = 0;
 		}
-		
-		// Key Events
+	}
+	
+	public void tickMenuKey()
+	{
 		if(Keyboard.getKeyPressed()=="Space" || Keyboard.getKeyPressed()=="Enter")
 		{
 			Keyboard.setKeyDone();
@@ -100,14 +161,38 @@ public class TitleState extends State
 		//renderBackground(g);
 		//renderOptions(g);
 		
-		g.drawImage(ImageLoader.loadImage("/title/map.png"), mapAnimTick, 0, null);
+		renderMap(g);
 		g.drawImage(ImageLoader.loadImage("/title/logo.png"), 286, 20, null);
 		//Drawing.drawImageOpaque(g, ImageLoader.loadImage("/title/logo.png"), 200, 100, 0.50f);
+		
+		// Menu Options
+		if(menuActive==true){renderMenu(g);}
+		
+		// Press any key
+		else{renderGlow(g);}
 	}
 	
 	public void renderBackground(Graphics g)
 	{
 		g.drawImage(Assets.uiTitleBkg,  0, 0, null);
+	}
+	
+	public void renderGlow(Graphics g)
+	{
+		String image = "/title/any" + glowAnimFrame + ".png";
+		g.drawImage(ImageLoader.loadImage(image), 533, 620, null);
+	}
+	
+	public void renderMap(Graphics g)
+	{
+		int drawX = mapAnimTick * 2 - 400;
+		g.drawImage(ImageLoader.loadImage("/title/map.png"), drawX, 0, null);
+	}
+	
+	public void renderMenu(Graphics g)
+	{
+		//renderOptions(g);
+		g.drawImage(ImageLoader.loadImage("/title/button.png"), 400, 650, null);
 	}
 	
 	public void renderOptions(Graphics g)
