@@ -519,10 +519,13 @@ public class JvExterior
 		Game.world.setScenery(18, 41, "JvJobBoard");
 		
 		// Scenery (potion shop sign)
-		Game.world.setScenery(54, 56, "JvSignShopPotion");
+		//Game.world.setScenery(54, 56, "JvSignShopPotion");
 		
 		int id = Game.world.setScenery(new BoardScenery(57, 10));
 		//Game.world.sceneryObject[id].script = new scnJvGateWooden();
+		
+		// Signs
+		Game.world.setSign(54, 56, "Trusted Tonics","You can rely on us for quality potions and a good stock of alchemical ingredients.");
 		
 		// Portals
 		Game.world.setPortal("Interact", 50, 42, "JvPlayerHouse", 21, 18, "N");

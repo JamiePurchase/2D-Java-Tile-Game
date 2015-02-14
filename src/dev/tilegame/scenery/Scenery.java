@@ -73,12 +73,5 @@ public class Scenery
 			newConversation.advance();
 			Game.conversationStart(newConversation);
 		}
-		if(ref=="JvSignShopPotion")
-		{
-			Conversation newConversation = new Conversation();
-			newConversation.pieceAddStandard("This is a sign","","");
-			newConversation.advance();
-			Game.conversationStart(newConversation);
-		}
 	}
 }

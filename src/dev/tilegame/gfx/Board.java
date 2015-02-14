@@ -98,6 +98,13 @@ public class Board
 	public static BoardScenery[] sceneryObject = new BoardScenery[50];
 	public static String[] sceneryFile = new String[50];
 	
+	// Signs
+	private static int signCount = 0;
+	private static int[] signPosX = new int[50];
+	private static int[] signPosY = new int[50];
+	private static String[] signHeader = new String[50];
+	private static String[] signText = new String[50];
+	
 	// Elevation
 	private static int elevationCount = 0;
 	private static int[] elevationPosX = new int[50];
@@ -788,6 +795,15 @@ public class Board
 		tileEntity[object.positionX][object.positionY] = "Scenery";
 		tileEntityID[object.positionX][object.positionY] = sceneryCount;
 		return sceneryCount;
+	}
+	
+	public static void setSign(int posX, int posY, String header, String text)
+	{
+		signCount += 1;
+		signPosX[signCount] = posX;
+		signPosY[signCount] = posY;
+		signHeader[signCount] = header;
+		signText[signCount] = text;
 	}
 	
 	public static void setTile(int x, int y, String image, int type)

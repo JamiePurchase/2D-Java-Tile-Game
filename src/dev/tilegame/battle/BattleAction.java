@@ -3,18 +3,29 @@ package dev.tilegame.battle;
 public class BattleAction
 {
 	// Action
-	private boolean actionActive;
-	private int actionTick;
-	private int actionFrame;
-	private int actionFrameMax;
+	public boolean actionActive;
+	public int actionTick;
+	public int actionFrame;
+	public int actionFrameMax;
 	
-	// 
+	// Source
+	public String sourceForce;
+	public int sourceUnit;
+	
+	// Target
+	public String targetType;
+	public int targetCount;
+	public String[] targetForce;
+	public int[] targetUnit;
+	public int[] targetDamage;
 	
 	// Damage
-	private boolean damageInflict;
-	private int damageType;
-	private int damageFrame;
-	private int damageTotal;
+	public boolean damageInflict;
+	public boolean damageRender;
+	public String damageType;
+	public int damageFrameCount;
+	public int damageFrameStart;
+	public boolean damageReflect;
 
 	public BattleAction()
 	{
@@ -22,25 +33,56 @@ public class BattleAction
 		actionTick = 0;
 		actionFrame = 0;
 		actionFrameMax = 0;
-		actionSourceForce = 0;
-		actionSourceUnit = 0;
 		
 		targetType = "Single";
 		targetCount = 0;
-		
-		actionDamageFrame = 0;
-		actionDamageTotal = 0;
-		actionDamageType = "Melee";
 	}
 	
-	public void damageSet(String type)
+	public void actionStart()
 	{
-		// Note: This will need to be turned into an array at somepoint, to accomodate for multiple potential targets
+		actionActive = true;
 	}
 	
-	public void targetAdd(String force, int unit)
+	public void setDamage(String type)
+	{
+		// Note: Be aware that there is an array of targets (damage can be different for each)
+		damageFrameStart = 0;
+		damageType = "Melee";
+	}
+	
+	public void setSource(String force, int unit)
+	{
+		sourceForce = force;
+		sourceUnit = unit;
+	}
+	
+	public void setTarget(String force, int unit)
 	{
 		targetCount += 1;
-		
+		targetForce[targetCount] = force;
+		targetUnit[targetCount] = unit;
+	}
+	
+	public void tick()
+	{
+		actionTick += 1;
+		if(actionTick>=10)
+		{
+			actionTick = 0;
+			actionFrame += 1;
+
+			// Damage
+			if(actionFrame==damageFrameStart)
+			{
+				damageRender = true;
+				damageFrameCount = 0;
+			}
+			
+			// Done
+			if(actionFrame>=actionFrameMax)
+			{
+				actionActive = false;
+			}
+		}
 	}
 }

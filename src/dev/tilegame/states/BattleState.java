@@ -77,21 +77,30 @@ public class BattleState extends State
 		renderBackground(g);
 		renderForce(g);
 		renderStats(g);
-		if(menuNow==true){renderMenu(g);}
+		if(action.actionActive==true)
+		{
+			if(action.damageRender==true){renderActionDamage(g);}
+		}
+		else
+		{
+			if(menuNow==true){renderMenu(g);}
+		}
 		
 		// Development Info
 		//renderDevInfo(g);
 	}
 	
-	/*public void renderActionDamage(Graphics g)
+	public void renderActionDamage(Graphics g)
 	{
-		// Temp
-		String damageString = "27";
-		int damagePosX = 200;
-		int damagePosY = 185 - (actionDamageFrame * 5);
-		
-		Drawing.drawStringShadow(g, damageString, damagePosX, damagePosY, 1, Color.GRAY);
-	}*/
+		for(int x=1;x<=action.targetCount;x+=1)
+		{
+			// Note: Use the x and y of the target unit
+			String drawDamage = "" + action.targetDamage[x];
+			int drawPosX = 200;
+			int drawPosY = 185 - (action.damageFrameCount * 5);			
+			Drawing.drawStringShadow(g, drawDamage, drawPosX, drawPosY, 1, Color.GRAY);
+		}
+	}
 	
 	public void renderBackground(Graphics g)
 	{
@@ -286,7 +295,7 @@ public class BattleState extends State
 			tickStance();
 			
 			// Temp
-			actionDamageFrame
+			//actionDamageFrame
 		}
 		
 		// Victory Screen
@@ -397,12 +406,8 @@ public class BattleState extends State
 		Game.battleEngine.unitAlly[1].stanceTickMax = 20;
 		Game.battleEngine.unitAlly[1].stanceType = "Combat";
 		
-		// Temp
-		actionTick = 0;
-		actionFrame = 1;
-		actionFrame
-		actionDamageFrame = 6;
-		actionDamageTotal = 27;
+		action = new BattleAction();
+		// Note: Set action data here
 	}
 	
 	//==========================> TICK: STANCE

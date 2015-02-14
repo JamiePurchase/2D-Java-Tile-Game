@@ -2,6 +2,7 @@ package dev.tilegame.entities;
 import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
 import dev.tilegame.audio.AudioPlayer;
+import dev.tilegame.dialogue.Conversation;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Board;
 import dev.tilegame.message.MessageStandard;
@@ -200,8 +201,8 @@ public class PlayerCreatureEntity extends CreatureEntity
 	
 	public void renderCallout(Graphics g)
 	{
-		// Scenery
-		if(getFacingEntity()=="Scenery"){renderCalloutBubble(g, Assets.uiCalloutQ);}
+		// Scenery and Signs
+		if(getFacingEntity()=="Scenery" || getFacingEntity()=="Sign"){renderCalloutBubble(g, Assets.uiCalloutQ);}
 		
 		// Portal
 		renderCalloutPortal(g, "N");
@@ -360,6 +361,13 @@ public class PlayerCreatureEntity extends CreatureEntity
 			// Debug
 			/*String debug1 = "Interacted with scenery at " + getFacingTileX() + ", " + getFacingTileY();
 			System.out.println(debug1);*/
+		}
+		if(Game.world.getTileEntity(getFacingTileX(),getFacingTileY())=="Sign")
+		{
+			/*Conversation newConversation = new Conversation();
+			newConversation.pieceAddSign();
+			newConversation.advance();
+			Game.conversationStart(newConversation);*/
 		}
 	}
 	
