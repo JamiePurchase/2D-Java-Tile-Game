@@ -51,6 +51,12 @@ public class MockData
 		
 		// Note: We need to put this/these battle allies into the main engine
 		// Note: Player should have Assets.battleCharacter2Idle for the idle anim
+		
+		// Temp
+		Game.battleEngine.unitAlly[1].stanceFrame = 1;
+		Game.battleEngine.unitAlly[1].stanceFrameMax = 1;
+		Game.battleEngine.unitAlly[1].stanceTick = 0;
+		Game.battleEngine.unitAlly[1].stanceType = "Idle";
 	}
 	
 	public static void loadForceEnemies()

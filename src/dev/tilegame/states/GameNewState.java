@@ -5,6 +5,7 @@ import dev.tilegame.Keyboard;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.inventory.Inventory;
 import dev.tilegame.journal.Journal;
+import dev.tilegame.quests.Quest;
 import dev.tilegame.quests.QuestLog;
 
 import java.awt.Color;
@@ -20,6 +21,12 @@ public class GameNewState extends State
 	}
 	
 	public void init()
+	{
+		initBoard();
+		initQuests();
+	}
+	
+	public void initBoard()
 	{
 		// Session
 		Session newSession = new Session();
@@ -41,6 +48,13 @@ public class GameNewState extends State
 		Game.world.setGridScroll(true);
 		Game.world.setGridOffset(29, 33);*/
 		
+		// Temp (Jharva Laboratory)
+		Game.world.getData("JvExterior");
+		Assets.entPlayer.setPosition(71, 38);
+		Game.world.setGridScroll(true);
+		Game.world.setGridOffset();
+		Assets.entPlayer.setWalkSpeed(5);
+		
 		// Temp (Jharva Village North Gate)
 		/*Game.world.getData("JvExterior");
 		Assets.entPlayer.setPositionX(58);
@@ -56,12 +70,11 @@ public class GameNewState extends State
 		Game.world.setGridOffset();*/
 		
 		// Temp (Jharva Village South Bridge)
-		Game.world.getData("JvExterior");
+		/*Game.world.getData("JvExterior");
 		Assets.entPlayer.setPositionX(41);
 		Assets.entPlayer.setPositionY(57);
 		Game.world.setGridScroll(true);
-		Game.world.setGridOffset();
-		Assets.entPlayer.setWalkSpeed(3);
+		Game.world.setGridOffset();*/
 		
 		// Temp (Python City Centre)
 		/*Game.world.getData("PyExterior");
@@ -93,12 +106,20 @@ public class GameNewState extends State
 		Session.setJournal(newJournal);
 		
 		// Quest Log
+		
+		// Done
+		setupDone = 1;
+	}
+	
+	public void initQuests()
+	{
 		QuestLog newQuestLog = new QuestLog();
 		newQuestLog.init();
 		Session.setQuestLog(newQuestLog);
 		
-		// Done
-		setupDone = 1;
+		// Temp
+		/*Quest newQuest = new Quest("Main", "Welcome to Jharva Village");
+		newQuest.setStageObjective(1, "Talk to Professor Hoffman");*/
 	}
 	
 	public void tick()

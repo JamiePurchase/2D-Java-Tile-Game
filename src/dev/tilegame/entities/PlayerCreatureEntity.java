@@ -389,9 +389,19 @@ public class PlayerCreatureEntity extends CreatureEntity
 	}
 	
 	public void tickKeyEvents()
-	{
+	{		
+		// Temp
+		if(Keyboard.getKeyPressed()=="D")
+		{
+			Keyboard.setKeyDone();
+			State.setStateChange("DevMenu");
+		}
+		
+		// Chat
 		if(Game.chat==true){tickKeyEventsChat();}
 		else if(Game.messageActive==true){tickKeyEventsMessage();}
+		
+		// Standard
 		else{tickKeyEventsStandard();}
 	}
 	

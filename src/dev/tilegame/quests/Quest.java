@@ -2,22 +2,48 @@ package dev.tilegame.quests;
 
 public class Quest
 {
-	public String name;
-	public int stage;
+	// Details
+	private String infoName;
+	private String infoType;
 	
-	public Quest(String newName)
+	// Stages
+	private int stageActive;
+	private String[] stageObjective;
+	
+	public Quest(String type, String name)
 	{
-		name = newName;
-		stage = 0;
+		infoName = name;
+		infoType = type;
+		stageActive = 0;
 	}
 	
 	public String getName()
 	{
-		return name;
+		return infoName;
 	}
 	
 	public int getStage()
 	{
-		return stage;
+		return stageActive;
+	}
+	
+	public String getStageObjective(int stage)
+	{
+		return stageObjective[stage];
+	}
+	
+	public String getType()
+	{
+		return infoType;
+	}
+	
+	public void setStage(int stage)
+	{
+		stageActive = stage;
+	}
+	
+	public void setStageObjective(int stage, String objective)
+	{
+		stageObjective[stage] = objective;
 	}
 }

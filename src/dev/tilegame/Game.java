@@ -12,6 +12,7 @@ import dev.tilegame.message.MessageSpeech;
 import dev.tilegame.message.MessageStandard;
 import dev.tilegame.message.MessageTutorial;
 import dev.tilegame.states.DebugState;
+import dev.tilegame.states.StateDevMenu;
 import dev.tilegame.states.GameNewState;
 import dev.tilegame.states.State;
 import dev.tilegame.states.AboutState;
@@ -85,7 +86,7 @@ public class Game extends JPanel implements Runnable
 	private State stateAbout, stateCharacter, stateIntro, stateOptions, stateTitle, stateTutorial;
 	private State stateGame, stateGameNew, stateMenu, stateShop;
 	private State stateBattle;
-	private State stateDebug;
+	private State stateDebug, stateDevMenu;
 	
 	// Messages
 	public static boolean messageActive = false;
@@ -242,6 +243,7 @@ public class Game extends JPanel implements Runnable
 		stateAbout = new AboutState();
 		stateCharacter = new CharacterState();
 		stateDebug = new DebugState();
+		stateDevMenu = new StateDevMenu();
 		stateGame = new GameState();
 		stateGameNew = new GameNewState();
 		stateIntro = new IntroState();
@@ -438,6 +440,12 @@ public class Game extends JPanel implements Runnable
 		if(State.getStateChange() == "Debug")
 		{
 			State.setState(stateDebug);
+			State.setStateChange("");
+			Keyboard.setKeyDone();
+		}
+		if(State.getStateChange() == "DevMenu")
+		{
+			State.setState(stateDevMenu,true);
 			State.setStateChange("");
 			Keyboard.setKeyDone();
 		}

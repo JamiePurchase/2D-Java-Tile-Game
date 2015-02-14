@@ -23,6 +23,13 @@ public abstract class Unit
 	public int animSheetDeath = 1;
 	public int animSheetMystic = 1;
 	
+	// Stance
+	public String stanceType = "Idle";
+	public int stanceTick;
+	public int stanceTickMax;
+	public int stanceFrame;
+	public int stanceFrameMax;
+	
 	// Status
 	public boolean statusActive = true;
 	public boolean statusKO = false;
@@ -34,6 +41,12 @@ public abstract class Unit
 	public int actionChargeDelay;
 	public Action[] actionObject = new Action[50];
 	public int actionCount = 0;
+	
+	// Temp
+	public boolean tempActionActive = false;
+	public String tempActionStance;
+	public int tempActionFrame;
+	public int tempActionTick = 0;
 	
 	public Unit()
 	{

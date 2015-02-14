@@ -63,7 +63,7 @@ public class Assets
 	public static BufferedImage txtTree7aT, txtTree7aB, txtTree7bT, txtTree7bB;
 	
 	// Tilesets
-	public static BufferedImage[] tlsJharvaVillage, tlsJharvaVillage2, tlsJharvaInterior, tlsJharvaSigns, tlsJharvaTemple;
+	public static BufferedImage[] tlsJharvaVillage, tlsJharvaVillage2, tlsJharvaVillage3, tlsJharvaInterior, tlsJharvaSigns, tlsJharvaTemple;
 	public static BufferedImage[] tlsBridgeWooden, tlsFenceWooden;
 	public static BufferedImage[] tlsPythonCity;
 	
@@ -378,6 +378,7 @@ public class Assets
 		tlsJharvaTemple = Tileset.getTileset("/textures/JharvaTemple.png", 7, 7);
 		tlsJharvaVillage = Tileset.getTileset("/textures/JharvaVillage.png", 8, 22);
 		tlsJharvaVillage2 = Tileset.getTileset("/textures/JharvaVillage2.png", 8, 10);
+		tlsJharvaVillage3 = Tileset.getTileset("/textures/JharvaVillage3.png", 8, 5);
 		tlsPythonCity = Tileset.getTileset("/textures/PythonCity.png", 8, 11);
 	}
 

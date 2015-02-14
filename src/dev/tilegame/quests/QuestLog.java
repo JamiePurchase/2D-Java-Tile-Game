@@ -12,8 +12,8 @@ public class QuestLog
 	
 	public void init()
 	{
-		Quest tutorial = new Quest("Tutorial");
-		addQuest(tutorial);
+		//Quest tutorial = new Quest("Tutorial");
+		//addQuest(tutorial);
 	}
 	
 	public void addQuest(Quest newQuest)
