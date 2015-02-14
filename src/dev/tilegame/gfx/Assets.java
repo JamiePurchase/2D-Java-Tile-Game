@@ -14,6 +14,7 @@ public class Assets
 	// NPCs
 	public static BufferedImage[] npcAnna;
 	public static BufferedImage[] npcHofmann;
+	public static BufferedImage[] npcMerchantF1;
 	
 	// Harvest
 	public static HarvestNatureEntity entGarnet;
@@ -318,6 +319,7 @@ public class Assets
 	{
 		// Tilesets
 		npcHofmann = Tileset.getTileset("/sprites/npcHofmann.png", 3, 4);
+		npcMerchantF1 = Tileset.getTileset("/sprites/npcMerchantF1.png", 3, 4);
 
 		// NPC Sheet (old)
 		Spritesheet sheetAnna = new Spritesheet(ImageLoader.loadImage("/sprites/npcAnna.png"));

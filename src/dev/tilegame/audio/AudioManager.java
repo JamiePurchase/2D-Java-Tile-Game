@@ -3,6 +3,8 @@ package dev.tilegame.audio;
 public class AudioManager
 {
 	private static boolean active = true;
+	private static AudioFootstep[] footsteps = new AudioFootstep[20]; 
+	private static int footstepsCount = 0;
 	private static boolean musicActive = false;
 	private static String musicFile;
 	private static boolean soundActive = false;
@@ -13,8 +15,34 @@ public class AudioManager
 	public AudioManager()
 	{
 		AudioPlayer.init();
+		initFootsteps();
 		initMusic();
 		initSounds();
+	}
+	
+	public void addFootstep(String file, int variations)
+	{
+		footsteps[footstepsCount] = new AudioFootstep(file, variations);		
+		footstepsCount += 1;
+	}
+	
+	public AudioFootstep getFootstep(int id)
+	{
+		return footsteps[id];
+	}
+	
+	public int getFootstepID(String file)
+	{
+		for(int n = 1;n<=footstepsCount;n+=1)
+		{
+			if(footsteps[n].file==file){return n;}
+		}
+		return 0;
+	}
+	
+	public int getFootstepCount()
+	{
+		return footstepsCount;
 	}
 	
 	public boolean getMusicActive()
@@ -27,6 +55,19 @@ public class AudioManager
 		return soundActive;
 	}
 	
+	public void initFootsteps()
+	{
+		addFootstep("Grass",2);
+		addFootstep("Wood",2);
+		
+		// Debug
+		for(int n = 1;n<=footstepsCount;n+=1)
+		{
+			String debug = "Footstep #" + n + " = " + footsteps[n].file;
+			System.out.println(debug);
+		}
+	}
+	
 	public void initMusic()
 	{
 		AudioPlayer.load("/music/bgm1.wav", "music1");
@@ -35,13 +76,10 @@ public class AudioManager
 	
 	public void initSounds()
 	{
+		// Note: Do we need these?
 		AudioPlayer.load("/sounds/collectGarnet.wav", "Garnet");
 		AudioPlayer.load("/sounds/collectMushroom.wav", "Mushroom");
 		AudioPlayer.load("/sounds/collectTreasure.wav", "Treasure");
-		AudioPlayer.load("/sounds/footstepGrass1.wav", "sfxFootstepGrass1");
-		AudioPlayer.load("/sounds/footstepGrass2.wav", "sfxFootstepGrass2");
-		AudioPlayer.load("/sounds/footstepWood1.wav", "sfxFootstepWood1");
-		AudioPlayer.load("/sounds/footstepWood2.wav", "sfxFootstepWood2");
 	}
 	
 	public void playMusic(String music)
@@ -75,7 +113,7 @@ public class AudioManager
 	
 	public void stopSound()
 	{
-		AudioPlayer.stop(soundFile);
+		//AudioPlayer.stop(soundFile);
 		soundActive = false;
 		soundFile = "";
 	}
@@ -85,7 +123,7 @@ public class AudioManager
 		if(getSoundActive())
 		{
 			soundTick += 1;
-			//if(soundTick>2){stopSound();}
+			//if(soundTick>1){stopSound();}
 		}
 	}
 }

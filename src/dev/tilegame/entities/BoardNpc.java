@@ -47,5 +47,13 @@ public class BoardNpc
 		if(direction=="S"){imageIdleS = image;}
 		if(direction=="W"){imageIdleW = image;}
 	}
+	
+	public void setImageIdleAuto(BufferedImage[] tileset)
+	{
+		imageIdleE = tileset[7];
+		imageIdleN = tileset[10];
+		imageIdleS = tileset[1];
+		imageIdleW = tileset[4];
+	}
 
 }

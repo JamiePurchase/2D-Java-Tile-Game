@@ -201,16 +201,34 @@ public class PlayerCreatureEntity extends CreatureEntity
 	public void renderCallout(Graphics g)
 	{
 		// Scenery
-		if(getFacingEntity()=="Scenery"){renderCalloutQ(g);}
+		if(getFacingEntity()=="Scenery"){renderCalloutBubble(g, Assets.uiCalloutQ);}
 		
 		// Portal
-		if(getAdjacentPortal("N")>1){renderCalloutP(g, "N");}
-		if(getAdjacentPortal("E")>1){renderCalloutP(g, "E");}
-		if(getAdjacentPortal("W")>1){renderCalloutP(g, "W");}
-		if(getAdjacentPortal("S")>1){renderCalloutP(g, "S");}
+		renderCalloutPortal(g, "N");
+		renderCalloutPortal(g, "E");
+		renderCalloutPortal(g, "S");
+		renderCalloutPortal(g, "W");
 	}
 	
-	public void renderCalloutP(Graphics g, String direction)
+	public void renderCalloutBubble(Graphics g, BufferedImage callout)
+	{
+		int drawX = ((getPositionX() - Game.world.getGridOffsetX()) * 32) - 11;
+		int drawY = ((getPositionY() - Game.world.getGridOffsetY()) * 32) - 54;
+		if(calloutFrame==1){drawX-=2;}
+		if(calloutFrame==2 || calloutFrame==8){drawX-=1;}
+		if(calloutFrame==4 || calloutFrame==6){drawX+=1;}
+		if(calloutFrame==5){drawX+=2;}
+		g.drawImage(callout, drawX, drawY, null);
+	}
+	
+	public void renderCalloutPortal(Graphics g, String direction)
+	{
+		int id = getAdjacentPortal(direction);
+		if(Game.world.portalType[id]=="Collide"){renderCalloutPortalArrow(g, direction);}
+		if(Game.world.portalType[id]=="Interact" && getDirection()==direction){renderCalloutBubble(g, Assets.uiCalloutE);}
+	}
+	
+	public void renderCalloutPortalArrow(Graphics g, String direction)
 	{
 		BufferedImage drawImage = Assets.uiCalloutPS;
 		// Note: create multiple portal callouts for different directions
@@ -228,22 +246,13 @@ public class PlayerCreatureEntity extends CreatureEntity
 		g.drawImage(drawImage, drawX, drawY, null);
 	}
 	
-	public void renderCalloutQ(Graphics g)
-	{
-		int drawX = ((getPositionX() - Game.world.getGridOffsetX()) * 32) - 11;
-		int drawY = ((getPositionY() - Game.world.getGridOffsetY()) * 32) - 54;
-		if(calloutFrame==1){drawX-=2;}
-		if(calloutFrame==2 || calloutFrame==8){drawX-=1;}
-		if(calloutFrame==4 || calloutFrame==6){drawX+=1;}
-		if(calloutFrame==5){drawX+=2;}
-		g.drawImage(Assets.uiCalloutQ, drawX, drawY, null);
-	}
-	
 	public void renderPlayer(Graphics g)
 	{
 		BufferedImage drawImage = getImage();
 		int drawX = ((getPositionX() - Game.world.getGridOffsetX()) * 32) - 21;
 		int drawY = ((getPositionY() - Game.world.getGridOffsetY()) * 32) - 16;
+		
+		// Actions
 		if(getAction()=="Walk")
 		{
 			int offset = getWalkFrame() * 8;
@@ -251,28 +260,26 @@ public class PlayerCreatureEntity extends CreatureEntity
 			if(getDirection()=="E"){drawX += offset;}
 			if(getDirection()=="S"){drawY += offset;}
 			if(getDirection()=="W"){drawX -= offset;}
-			renderPlayerFootstep();
+			renderPlayerFootstepPlay();
 		}
+		else{renderPlayerFootstepStop();}
+		
+		// Draw Image
 		drawY -= Game.world.getElevation(getPositionX(), getPositionY());
 		g.drawImage(drawImage, drawX, drawY, null);
-		
-		// Debug
-		/*String debug1 = "Player location: " + getPositionX() + ", " + getPositionY();
-		String debug2 = "Grid Offset: " + Game.world.getGridOffsetX() + ", " + Game.world.getGridOffsetY();
-		String debug3 = "Draw Coords = " + drawX + ", " + drawY;
-		System.out.println(debug1);
-		System.out.println(debug2);
-		System.out.println(debug3);*/
 	}
 	
-	public void renderPlayerFootstep()
+	public void renderPlayerFootstepPlay()
 	{
-		// Note: Create an array of footstep types for the board (file and number of variations)
-		// Note: Use the file string and append a random int from the number of variations)
-		Random rn = new Random();
-		int rand = rn.nextInt(1) + 1;
-		String file = "sfxFootstepGrass" + rand;
-		Game.audio.playSound(file);
+		if(Game.audio.getSoundActive()==false)
+		{
+			Game.audio.playSound(Game.world.getFootstep(getFacingTileX(), getFacingTileY()));
+		}
+	}
+	
+	public void renderPlayerFootstepStop()
+	{
+		Game.audio.stopSound();
 	}
 	
 	public void setBoardNew(String newBoard, int newX, int newY, String newDirection, int offsetX, int offsetY)

@@ -1,5 +1,6 @@
 package dev.tilegame.gfx;
 import dev.tilegame.Game;
+import dev.tilegame.audio.AudioFootstep;
 import dev.tilegame.datafiles.WriteFile;
 import dev.tilegame.entities.BoardNpc;
 import dev.tilegame.entities.BoardScenery;
@@ -9,12 +10,14 @@ import dev.tilegame.world.JvGooseberryManor;
 import dev.tilegame.world.JvLaboratoryMain;
 import dev.tilegame.world.JvPlayerBedroom;
 import dev.tilegame.world.JvPlayerHouse;
+import dev.tilegame.world.JvPotionShop;
 import dev.tilegame.world.PyExterior;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 public class Board
 {
@@ -98,6 +101,9 @@ public class Board
 	private static int[] elevationPosY = new int[50];
 	private static int[] elevationPosZ = new int[50];
 	
+	// Footsteps
+	private static String[][] footstepFile = new String[101][81];
+	
 	// Treasure
 	private static int treasureCount = 0;
 	private static int[] treasureFind = new int[10];
@@ -112,10 +118,11 @@ public class Board
 	public static void getData(String name)
 	{
 		if(name=="JvExterior"){JvExterior boardLoader = new JvExterior();}
+		if(name=="JvGooseberryManor"){JvGooseberryManor boardLoader = new JvGooseberryManor();}
 		if(name=="JvLaboratoryMain"){JvLaboratoryMain boardLoader = new JvLaboratoryMain();}
 		if(name=="JvPlayerBedroom"){JvPlayerBedroom boardLoader = new JvPlayerBedroom();}
 		if(name=="JvPlayerHouse"){JvPlayerHouse boardLoader = new JvPlayerHouse();}
-		if(name=="JvGooseberryManor"){JvGooseberryManor boardLoader = new JvGooseberryManor();}
+		if(name=="JvPotionShop"){JvPotionShop boardLoader = new JvPotionShop();}
 		if(name=="PyExterior"){PyExterior boardLoader = new PyExterior();}
 	}
 	
@@ -129,6 +136,25 @@ public class Board
 			}
 		}
 		return 0;
+	}
+
+	public static String getFootstep(int x, int y)
+	{
+		int id = Game.audio.getFootstepID(footstepFile[x][y]);
+		if(id>0)
+		{
+			AudioFootstep footstep = Game.audio.getFootstep(id);
+			int rand = Game.random.nextInt(footstep.variations) + 1;
+			
+			// Debug
+			String debug3 = "Found " + footstep.file + " with " + footstep.variations + " variations";
+			String debug4 = "File: " + "sfxFootstep" + footstep.file + rand;
+			System.out.println(debug3);
+			System.out.println(debug4);
+			
+			return "sfxFootstep" + footstep.file + rand;
+		}
+		return "error";
 	}
 	
 	public static int getGridEdgeE()
@@ -377,20 +403,23 @@ public class Board
 		g.drawRect(1097, 71, 248, 178);
 		g.setColor(Color.BLACK);
 		g.setFont(Assets.fontDebugMini);
-		g.drawString("POS:", 1110, 123);
-		g.drawString("ELV:", 1110, 153);
-		g.drawString("POR:", 1110, 183);
-		g.drawString("ENT:", 1110, 213);
+		g.drawString("OFS:", 1110, 123);
+		g.drawString("POS:", 1110, 153);
+		g.drawString("ELV:", 1110, 183);
+		g.drawString("POR:", 1110, 213);
+		g.drawString("ENT:", 1110, 243);
 		g.setFont(Assets.fontDebugStandard);
 		g.drawString("Development Info", 1110, 95);
-		String posXY = "" + Assets.entPlayer.getPositionX() + " x " + Assets.entPlayer.getPositionY();
+		String offset = "" + Game.world.getGridOffsetX() + ", " + Game.world.getGridOffsetY();
+		String posXY = "" + Assets.entPlayer.getPositionX() + ", " + Assets.entPlayer.getPositionY();
 		String posZ = "" + getElevation(Assets.entPlayer.getPositionX(), Assets.entPlayer.getPositionY());
 		String portal = "none";
 		String entity = "none";
-		g.drawString(posXY, 1170, 125);
-		g.drawString(posZ, 1170, 155);
-		g.drawString(portal, 1170, 185);
-		g.drawString(entity, 1170, 215);
+		g.drawString(offset, 1170, 125);
+		g.drawString(posXY, 1170, 155);
+		g.drawString(posZ, 1170, 185);
+		g.drawString(portal, 1170, 215);
+		g.drawString(entity, 1170, 245);
 	}
 	
 	public void renderLighting(Graphics g)
@@ -569,6 +598,22 @@ public class Board
 		elevationPosX[elevationCount] = posX;
 		elevationPosY[elevationCount] = posY;
 		elevationPosZ[elevationCount] = posZ;
+	}
+	
+	public static void setFootstep(int posX, int posY, String file)
+	{
+		footstepFile[posX][posY] = file;
+	}
+	
+	public static void setFootstepInit(String file)
+	{
+		for(int x=1;x<=gridWidth;x+=1)
+		{
+			for(int y=1;y<=gridHeight;y+=1)
+			{
+				footstepFile[x][y] = file;
+			}
+		}
 	}
 	
 	public static void setGridHeight(int height)

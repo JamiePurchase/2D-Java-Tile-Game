@@ -6,7 +6,6 @@ import dev.tilegame.entities.BoardNpc;
 import dev.tilegame.entities.BoardScenery;
 import dev.tilegame.entities.NpcCreatureEntity;
 import dev.tilegame.gfx.Assets;
-//import dev.tilegame.scenery.scnJvGateWooden;
 
 public class JvExterior
 {
@@ -470,6 +469,22 @@ public class JvExterior
 		Game.world.setTile(44, 60, Assets.tlsJharvaVillage2[21], 0);
 		Game.world.setTile(45, 60, Assets.tlsJharvaVillage2[22], 0);
 		Game.world.setTile(46, 60, Assets.tlsJharvaVillage2[23], 0);
+		Game.world.setTile(47, 60, Assets.tlsJharvaVillage2[33], 0);
+		Game.world.setTile(48, 60, Assets.tlsJharvaVillage2[32], 0);
+		Game.world.setTile(49, 60, Assets.tlsJharvaVillage2[32], 0);
+		Game.world.setTile(50, 60, Assets.tlsJharvaVillage2[33], 0);
+		Game.world.setTile(51, 60, Assets.tlsJharvaVillage2[32], 0);
+		Game.world.setTile(52, 60, Assets.tlsJharvaVillage2[33], 0);
+		Game.world.setTile(53, 60, Assets.tlsJharvaVillage2[32], 0);
+		
+		// Footsteps
+		Game.world.setFootstepInit("Grass");
+		Game.world.setFootstep(34, 57, "Wood");
+		Game.world.setFootstep(35, 57, "Wood");
+		Game.world.setFootstep(36, 57, "Wood");
+		Game.world.setFootstep(37, 57, "Wood");
+		Game.world.setFootstep(38, 57, "Wood");
+		Game.world.setFootstep(39, 57, "Wood");
 		
 		// Scenery (north gate)
 		Game.world.setScenery(57, 10, "JvGateWooden");
@@ -489,6 +504,7 @@ public class JvExterior
 		// Portals
 		Game.world.setPortal("Interact", 50, 42, "JvPlayerHouse", 21, 18, "N");
 		Game.world.setPortal("Interact", 74, 36, "JvLaboratoryMain", 19, 18, "N");
+		Game.world.setPortal("Interact", 52, 54, "JvPotionShop", 21, 18, "N");
 		
 		// Elevation (north bridge)
 		Game.world.setElevation(27, 25, 14);

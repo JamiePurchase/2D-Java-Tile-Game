@@ -33,6 +33,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Random;
 
 import javax.swing.JPanel;
 
@@ -110,12 +111,18 @@ public class Game extends JPanel implements Runnable
 	private static int clockYear;
 	private static int clockHour;
 	private static int clockMinute;
+	
+	// Random Generator
+	public static Random random;
 
 	public Game(String title, int width, int height, String append)
 	{
 		this.title = title;
 		this.width = width;
 		this.height = height;
+		
+		// Random Generator
+		random = new Random();
 		
 		// Append development features
 		if(append=="dev1"){this.development = true;}
