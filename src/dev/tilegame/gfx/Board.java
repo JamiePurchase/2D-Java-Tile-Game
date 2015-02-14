@@ -347,6 +347,9 @@ public class Board
 		renderPlayer(g);
 		renderNPCs(g);
 		renderTreasure(g);
+		// Note: Create an object for settings that the player can modify
+		//if(Game.settings.clockRender==true){renderClock(g);}
+		renderClock(g);
 		if(Game.messageActive==true){renderMessage(g);}
 		if(Game.conversationActive==true){Game.conversationObject.render(g);}
 		
@@ -354,9 +357,7 @@ public class Board
 		if(cinematicActive==true){cinematicObject.render(g);}
 		
 		// Temp
-		//if(Game.development==true){renderClock(g);}
-		renderClock(g);
-		renderDevInfo(g);
+		if(Game.devBoardInfo==true){renderDevInfo(g);}
 		
 		// Test (should loop through all NPCs and draw those that are on the visible area of the board
 		//g.drawImage(Assets.npcAnnaS, 256, 184, null);
@@ -512,78 +513,112 @@ public class Board
 	
 	public void renderTileAt(Graphics g, int tileX, int tileY, int posX, int posY)
 	{
-		renderTileAt(g, tileX, tileY, posX, posY, "", 0);
+		renderTileAt(g, tileX, tileY, posX, posY, "");
 	}
 	
-	public void renderTileAt(Graphics g, int tileX, int tileY, int posX, int posY, String scrollDirection, int scrollFrame)
+	public void renderTileAt(Graphics g, int tileX, int tileY, int posX, int posY, String scrollDirection)
 	{
+		// Temp
+		/*float scrollTick = (float) Game.testTickCount;
+		float scrollPercent = (Game.testTickCount / 43) * 100;
+		float scrollFrame = (32 / 100) * scrollPercent;*/
+		
+		// Temp
+		int scrollFrame = 0;
+		
+		// Debug
+		if(gridScrollAction==true)
+		{
+			/*String debug1 = "Ticks = " + Game.testTickCount + " / " + scrollPercent + "% of 43";
+			String debug2 = "which is " + scrollFrame + "% of 32";
+			System.out.println(debug1);
+			System.out.println(debug2);*/
+		
+			// Temp
+			if(Game.testTickCount>=5){scrollFrame += 4;}
+			if(Game.testTickCount>=10){scrollFrame += 4;}
+			if(Game.testTickCount>=15){scrollFrame += 4;}
+			if(Game.testTickCount>=20){scrollFrame += 4;}
+			if(Game.testTickCount>=25){scrollFrame += 4;}
+			if(Game.testTickCount>=30){scrollFrame += 4;}
+			if(Game.testTickCount>=35){scrollFrame += 4;}
+			if(Game.testTickCount>=40){scrollFrame += 4;}
+
+			String debug1 = "scrollFrame = " + scrollFrame;
+			System.out.println(debug1);
+		}
+		
 		int drawX = (posX * 32) - 21;
-		int drawY = (posY * 32) - 16;
-		if(scrollDirection=="N"){drawY-=(scrollFrame*8);}
-		if(scrollDirection=="E"){drawX+=(scrollFrame*8);}
-		if(scrollDirection=="S"){drawY+=(scrollFrame*8);}
-		if(scrollDirection=="W"){drawX-=(scrollFrame*8);}
+		int drawY = (posY * 32) - 12;
+		if(scrollDirection=="N"){drawY-=scrollFrame;}
+		if(scrollDirection=="E"){drawX+=scrollFrame;}
+		if(scrollDirection=="S"){drawY+=scrollFrame;}
+		if(scrollDirection=="W"){drawX-=scrollFrame;}
 		g.drawImage(tileImage[tileX][tileY], drawX, drawY, null);
 		
 		// Debug
-		/*String debug1 = "renderTileAt(g, " + tileX + ", " + tileY + ", " + posX + ", " + posY + ",)";
-		String debug2 = "drawX = " + drawX + " and drawY = " + drawY + " and image = " + tileImage[tileX][tileY];
-		System.out.println(debug1);
-		System.out.println(debug2);*/
+		/*String debug1 = "scrollFrame = " + scrollFrame;
+		System.out.println(debug1);*/
 	}
 	
 	public void renderTiles(Graphics g)
 	{
-		// Note: this should scroll the board smoothly when the player walks
-		/*if(gridScrollAction==true){renderTilesScrolling(g);}
-		else{renderTilesStandard(g);}*/
+		// Defaults for standard drawing
+		int gridCols = 42;
+		int gridRows = 23;
+		int gridOffX = gridOffsetX;
+		int gridOffY = gridOffsetY;
 		
-		// Note: for now we are using the basic method
-		renderTilesStandard(g);
-	}
-	
-	public void renderTilesScrolling(Graphics g)
-	{
-		for(int x=1;x<=43;x+=1)
+		// Adjustments for movement
+		if(gridScrollAction==true)
 		{
-			for(int y=1;y<=24;y+=1)
+			if(gridScrollDirection=="N")
 			{
-				int tileX = x + gridOffsetX;
-				int tileY = y + gridOffsetY;
-				if(gridScrollDirection=="N"){tileY-=1;}
-				if(gridScrollDirection=="E"){tileX+=1;}
-				if(gridScrollDirection=="S"){tileY+=1;}
-				if(gridScrollDirection=="W"){tileX-=1;}
-				renderTileAt(g, tileX, tileY, x, y, gridScrollDirection, gridScrollFrame);
+				gridRows += 1;
+				gridOffY -= 1;
+			}
+			if(gridScrollDirection=="E")
+			{
+				gridCols += 1;
+				gridOffX += 1;
+			}
+			if(gridScrollDirection=="S")
+			{
+				gridRows += 1;
+				gridOffY += 1;
+			}
+			if(gridScrollDirection=="W")
+			{
+				gridCols += 1;
+				gridOffX -= 1;
 			}
 		}
-	}
-	
-	public void renderTilesStandard(Graphics g)
-	{
-		for(int x=1;x<=42;x+=1)
+
+		// Draw all tiles that are on the screen
+		for(int x=1;x<=gridCols;x+=1)
 		{
-			for(int y=1;y<=23;y+=1)
+			for(int y=1;y<=gridRows;y+=1)
 			{
-				// Note: Old method was to loop through all tiles (using gridWidth and gridHeight) and draw some
-				//if(getOnScreen(x, y)==true){renderTile(g, x, y);}
-				
-				// Note: New method is to draw exactly 42 x 23 tiles, using the offset values to pick which tiles to use
-				int tileX = x + gridOffsetX;
-				int tileY = y + gridOffsetY;
+				int tileX = x + gridOffX;
+				int tileY = y + gridOffY;
 				if(cinematicActive==true)
 				{
 					tileX = x + cinematicObject.getOffsetPosX();
 					tileY = y + cinematicObject.getOffsetPosY();
 				}
-				renderTileAt(g, tileX, tileY, x, y);
+				if(gridScrollAction==true){renderTileAt(g, tileX, tileY, x, y, gridScrollDirection);}
+				else{renderTileAt(g, tileX, tileY, x, y);}
 			}
 		}
 		
-		// Debug
-		/*renderTileAt(g, 1, 1, 1, 1);
-		String debug1 = "gridOffsetX = " + gridOffsetX + " and gridOffsetY = " + gridOffsetY;
-		System.out.println(debug1);*/
+		// Redraw the border to tidy edges
+		//if(gridScrollAction==true)
+		//{
+			g.drawImage(Assets.uiGameBorderW, 0, 0, null);
+			g.drawImage(Assets.uiGameBorderE, 1355, 0, null);
+			g.drawImage(Assets.uiGameBorderN2, 0, 0, null);
+			g.drawImage(Assets.uiGameBorderS2, 0, 736, null);
+		//}
 	}
 	
 	public static void renderTreasure(Graphics g)
@@ -908,7 +943,7 @@ public class Board
 	{
 		// How fast minutes go by
 		int tickMinute = 600;
-		if(Game.accelerateTime==true){tickMinute=2;}
+		if(Game.devAccelerateTime==true){tickMinute=2;}
 		
 		// Advance time
 		Game.clockTick += 1;

@@ -29,7 +29,8 @@ public class Assets
 	public static BufferedImage uiTitleOpt3, uiTitleOpt3a, uiTitleOpt4, uiTitleOpt4a, uiTitleOpt5, uiTitleOpt5a;
 	public static BufferedImage uiOptDone, uiOptDoneA;
 	public static BufferedImage uiOptionsBkg, uiTutorialBkg, uiAboutBkg;
-	public static BufferedImage uiGameInfo1, uiGameBorder;
+	public static BufferedImage uiGameInfo1, uiGameBorder, uiGameBorderN2, uiGameBorderS2;
+	public static BufferedImage uiGameBorderN, uiGameBorderE, uiGameBorderW, uiGameBorderS;
 	public static BufferedImage[] uiGameInfoCount = new BufferedImage[10];
 	public static BufferedImage uiMenuBkg;
 	public static BufferedImage uiCharacterBkg, uiCharacterOpt1, uiCharacterOpt1a, uiCharacterOpt2;
@@ -73,7 +74,7 @@ public class Assets
 	// Fonts
 	public static Font fontStandard, fontStandardBold, fontStandardUnderline;
 	public static Font fontInfoCount, fontReduced;
-	public static Font fontDebugBold, fontDebugMini, fontDebugStandard, fontDebugTitle;
+	public static Font fontDebugBold, fontDebugMini, fontDebugStandard, fontDebugTitle, fontDebugValue;
 	public static Font fontEditorMenu, fontEditorMenuBold, fontEditorMenuInfo, fontEditorMenuTitle;
 	
 	// Lighting
@@ -175,6 +176,12 @@ public class Assets
 	{
 		uiGameInfo1 = ImageLoader.loadImage("/interface/gameInfo1.png");
 		uiGameBorder = ImageLoader.loadImage("/interface/gameBorder.png");
+		uiGameBorderN = ImageLoader.loadImage("/interface/gameBorderN.png");
+		uiGameBorderN2 = ImageLoader.loadImage("/interface/gameBorderN2.png");
+		uiGameBorderE = ImageLoader.loadImage("/interface/gameBorderE.png");
+		uiGameBorderS = ImageLoader.loadImage("/interface/gameBorderS.png");
+		uiGameBorderS2 = ImageLoader.loadImage("/interface/gameBorderS2.png");
+		uiGameBorderW = ImageLoader.loadImage("/interface/gameBorderW.png");
 		Spritesheet sheetInfoCount = new Spritesheet(ImageLoader.loadImage("/interface/gameInfoCount.png"));
 		uiGameInfoCount[0] = sheetInfoCount.crop(0, 0, 36, 36);
 		uiGameInfoCount[1] = sheetInfoCount.crop(36, 0, 36, 36);
@@ -233,6 +240,7 @@ public class Assets
 		fontDebugMini = new Font("MV Boli", Font.BOLD, 20);
 		fontDebugStandard = new Font("MV Boli", Font.PLAIN, 26);
 		fontDebugTitle = new Font("MV Boli", Font.BOLD, 32);
+		fontDebugValue = new Font("Arial", Font.BOLD, 22);
 		fontEditorMenu = new Font("Arial", Font.PLAIN, 18);
 		fontEditorMenuBold = new Font("Arial", Font.BOLD, 18);
 		fontEditorMenuInfo = new Font("Arial", Font.ITALIC, 18);

@@ -29,7 +29,7 @@ public class StateDevMenu extends State
 		menuOption[1][1] = "Board Info";
 		menuOption[1][2] = "Walk Speed";
 		menuOption[1][3] = "???";
-		menuOption[1][4] = "???";
+		menuOption[1][4] = "Back";
 		menuMax[1] = 4;
 	}
 	
@@ -55,28 +55,15 @@ public class StateDevMenu extends State
 	
 	public void tickKey()
 	{
-		if(menuRef==0){tickKeyMain();}
-	}
-	
-	public void tickKeyMain()
-	{
 		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
 		{
-			Keyboard.setKeyDone();
-			if(menuPos[0]==1)
-			{
-				menuRef = 1;
-			}
-			if(menuPos[0]==4)
-			{
-				State.setStateChange("Game");
-			}
+			if(menuRef==0){tickKeyMain();}
+			if(menuRef==1){tickKeySettings();}
 		}
 		if(Keyboard.getKeyPressed()=="Escape")
 		{
 			Keyboard.setKeyDone();
-			State.setStateChange("Title");
-			// Note: Consider setting a variable to say where we came from and return there (ie: title or game)
+			State.setStateChange("Game");
 		}
 		if(Keyboard.getKeyPressed()=="Up" && menuPos[menuRef]>1)
 		{
@@ -87,6 +74,55 @@ public class StateDevMenu extends State
 		{
 			Keyboard.setKeyDone();
 			menuPos[menuRef]+=1;
+		}
+		if(Keyboard.getKeyPressed()=="Left" && menuRef==1){tickKeySettings();}
+		if(Keyboard.getKeyPressed()=="Right" && menuRef==1){tickKeySettings();}
+	}
+	
+	public void tickKeyMain()
+	{
+		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
+		{
+			Keyboard.setKeyDone();
+			if(menuPos[0]==1){menuRef = 1;}
+			if(menuPos[0]==4){State.setStateChange("Game");}
+		}
+	}
+	
+	public void tickKeySettings()
+	{
+		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
+		{
+			Keyboard.setKeyDone();
+			if(menuPos[0]==4){menuRef = 0;}
+		}
+		if(Keyboard.getKeyPressed()=="Left")
+		{
+			Keyboard.setKeyDone();
+			if(menuPos[menuRef]==1)
+			{
+				if(Game.devBoardInfo==true){Game.devBoardInfo = false;}
+				else{Game.devBoardInfo = true;}
+			}
+			if(menuPos[menuRef]==2)
+			{
+				int newSpeed = Assets.entPlayer.getWalkSpeed() - 1;
+				if(newSpeed>=1){Assets.entPlayer.setWalkSpeed(newSpeed);}
+			}
+		}
+		if(Keyboard.getKeyPressed()=="Right")
+		{
+			Keyboard.setKeyDone();
+			if(menuPos[menuRef]==1)
+			{
+				if(Game.devBoardInfo==true){Game.devBoardInfo = false;}
+				else{Game.devBoardInfo = true;}
+			}
+			if(menuPos[menuRef]==2)
+			{
+				int newSpeed = Assets.entPlayer.getWalkSpeed() + 1;
+				if(newSpeed<20){Assets.entPlayer.setWalkSpeed(newSpeed);}
+			}
 		}
 	}
 	
@@ -106,17 +142,18 @@ public class StateDevMenu extends State
 	{
 		renderMenuOptions(g);
 		renderMenuCursor(g);
+		if(menuRef==1){renderMenuSettings(g);}
 	}
 	
 	public void renderMenuCursor(Graphics g)
 	{
 		int cursorPosX = 0;
 		int cursorPosY = 0;
-		if(menuRef==0)
-		{
+		//if(menuRef==0)
+		//{
 			cursorPosX = 75;
 			cursorPosY = 30 * menuPos[menuRef] + 70;
-		}
+		//}
 		g.setColor(Color.GREEN);
 		g.setFont(Assets.fontDebugStandard);
 		g.drawString(">", cursorPosX, cursorPosY);
@@ -135,5 +172,16 @@ public class StateDevMenu extends State
 			int drawY = (opt * 30) + 70;
 			g.drawString(menuOption[menuRef][opt], drawX, drawY);
 		}
+	}
+	
+	public void renderMenuSettings(Graphics g)
+	{
+		String valueBoardInfo = "DISABLED";
+		if(Game.devBoardInfo==true){valueBoardInfo = "ENABLED";}
+		String valueWalkSpeed = "" + Assets.entPlayer.getWalkSpeed();
+		g.setColor(Color.GREEN);
+		g.setFont(Assets.fontDebugValue);
+		g.drawString(valueBoardInfo, 400, 100);
+		g.drawString(valueWalkSpeed, 400, 130);
 	}
 }

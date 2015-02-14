@@ -58,9 +58,10 @@ public class Game extends JPanel implements Runnable
 	public static String stateChange = "none";
 	
 	// Development Features
-	public static boolean accelerateTime = false;
-	public static boolean development = false;
-	public static boolean quickstart = false;
+	public static boolean devAccelerateTime = false;
+	public static boolean devBoardInfo = false;
+	public static boolean devLaunchDebug = false;
+	public static boolean devQuickstart = false;
 	
 	// Session
 	public static Session session;
@@ -116,6 +117,10 @@ public class Game extends JPanel implements Runnable
 	
 	// Random Generator
 	public static Random random;
+	
+	// Test
+	public static boolean testTickActive = false;
+	public static int testTickCount = 0;
 
 	public Game(String title, int width, int height, String append)
 	{
@@ -127,8 +132,8 @@ public class Game extends JPanel implements Runnable
 		random = new Random();
 		
 		// Append development features
-		if(append=="dev1"){this.development = true;}
-		if(append=="quickstart"){this.quickstart = true;}
+		if(append=="dev1"){this.devLaunchDebug = true;}
+		if(append=="quickstart"){this.devQuickstart = true;}
 	}
 	
 	public static void boardChange(String board)
@@ -220,10 +225,10 @@ public class Game extends JPanel implements Runnable
 		initAudio();
 		
 		// Development Menu
-		if(development==true){State.setState(stateDebug);}
+		if(devLaunchDebug==true){State.setState(stateDebug);}
 		
 		// Quickstart
-		else if(quickstart==true){quickstart();}
+		else if(devQuickstart==true){quickstart();}
 		
 		// Introduction
 		else
@@ -313,6 +318,14 @@ public class Game extends JPanel implements Runnable
 			lastTime = now;
 			if(delta >= 1)
 			{
+				// Test
+				if(testTickActive==true)
+				{
+					testTickCount += 1;
+					String debug1 = "Tick " + testTickCount;
+					System.out.println(debug1);
+				}
+				
 				tick();
 				render();
 				ticks++;

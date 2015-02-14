@@ -45,8 +45,7 @@ public abstract class CreatureEntity extends Entity
 	
 	public static int getWalkFrameTickCount(int speed)
 	{
-		if(speed==2){return 5;}
-		return 10;
+		return 11 - speed;
 	}
 	
 	public static int getWalkSpeed()
@@ -77,7 +76,8 @@ public abstract class CreatureEntity extends Entity
 	public static void setWalkFrameTick()
 	{
 		walkFrameTick = walkFrameTick + 1;
-		if(walkFrameTick>getWalkFrameTickCount(walkSpeed))
+		//if(walkFrameTick>getWalkFrameTickCount(walkSpeed))
+		if(walkFrameTick>10)
 		{
 			walkFrame = walkFrame + 1;
 			walkFrameTick = 0;

@@ -35,6 +35,16 @@ public class GameNewState extends State
 		// Initial Board
 		Assets.entPlayer.setWalkSpeed(1);
 		
+		// Temp
+		String boardName = "JvExterior";
+		int boardPosX = 24;
+		int boardPosY = 55;
+		
+		Game.world.getData(boardName);
+		Assets.entPlayer.setPosition(boardPosX, boardPosY);
+		Game.world.setGridScroll(true);
+		Game.world.setGridOffset();
+		
 		/*Game.world.getData("Board01");
 		Assets.entPlayer.setPositionX(5);
 		Assets.entPlayer.setPositionY(5);
@@ -55,11 +65,10 @@ public class GameNewState extends State
 		Game.world.setGridOffset();*/
 		
 		// Temp (Jharva Village Blacksmith)
-		Game.world.getData("JvExterior");
+		/*Game.world.getData("JvExterior");
 		Assets.entPlayer.setPosition(24, 55);
 		Game.world.setGridScroll(true);
-		Game.world.setGridOffset();
-		Assets.entPlayer.setWalkSpeed(10);
+		Game.world.setGridOffset();*/
 		
 		// Temp (Jharva Village North Gate)
 		/*Game.world.getData("JvExterior");

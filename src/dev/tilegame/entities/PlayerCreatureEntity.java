@@ -495,6 +495,10 @@ public class PlayerCreatureEntity extends CreatureEntity
 		if(Game.world.getTileType(newPosX, newPosY)==0 && Game.world.getTileEntity(newPosX, newPosY)=="None")
 		{
 			walk(direction);
+			
+			// Temp [jsp]
+			Game.testTickActive = true;
+			
 			if(Game.world.getGridScroll()==true){Game.world.setGridScrollNew(direction);}
 		}
 		if(Game.world.getTileEntity(newPosX, newPosY)=="Portal" && Game.world.portalType[Game.world.getTileEntityID(getFacingTileX(), getFacingTileY())]=="Collide")
@@ -530,6 +534,10 @@ public class PlayerCreatureEntity extends CreatureEntity
 				Assets.entPlayer.setPositionY(walkPosY);
 				Assets.entPlayer.setAction("Idle");
 				Assets.entPlayer.setWalkFrame(0);
+				
+				// Temp
+				Game.testTickActive = false;
+				Game.testTickCount = 0;
 			}
 		}
 	}

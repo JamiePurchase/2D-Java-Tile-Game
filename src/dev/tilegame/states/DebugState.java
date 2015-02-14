@@ -54,7 +54,7 @@ public class DebugState extends State
 			Game.world.setGridScroll(true);
 			Game.world.setGridOffset();
 			Assets.entPlayer.setWalkSpeed(2);
-			Game.accelerateTime = true;
+			Game.devAccelerateTime = true;
 		}
 	}
 	
