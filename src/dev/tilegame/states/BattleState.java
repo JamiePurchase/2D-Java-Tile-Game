@@ -1,6 +1,7 @@
 package dev.tilegame.states;
 import dev.tilegame.Game;
 import dev.tilegame.Keyboard;
+import dev.tilegame.battle.BattleAction;
 import dev.tilegame.gfx.Assets;
 import dev.tilegame.gfx.Drawing;
 
@@ -20,10 +21,26 @@ public class BattleState extends State
 	private int menuAlly = 0;
 	private int menuPos = 0;
 	private int menuMax = 0;
+	private String menuRef;
+	private String[] menuOption = new String[5];
+	private String[] menuTech = new String[5];
+	private String[] menuHint = new String[5];
+	
+	// Battle Action
+	private BattleAction action = new BattleAction();
 	
 	public BattleState()
 	{
 	}
+	
+	//==========================> ACTION
+	
+	public void actionNew()
+	{
+		action = new BattleAction();
+	}
+	
+	//==========================> MENU
 	
 	public void menuCommands()
 	{
@@ -37,6 +54,19 @@ public class BattleState extends State
 		menuAlly = ally;
 		menuPos = 1;
 		menuMax = 4;
+		menuRef = "Command";
+		menuOption[1] = "Attack";
+		menuTech[1] = "Attack";
+		menuHint[1] = "Strike a target with your weapon.";
+		menuOption[2] = "Sword Art";
+		menuTech[2] = "CombatArt";
+		menuHint[2] = "Physical techniques performed with your weapon.";
+		menuOption[3] = "Defend";
+		menuTech[3] = "Defend";
+		menuHint[3] = "Stand firm and anticipate incoming attacks.";
+		menuOption[4] = "Item";
+		menuTech[4] = "Item";
+		menuHint[4] = "Browse your inventory for an item to use.";
 		// Note: need to get these values from elsewhere
 	}
 	
@@ -50,7 +80,7 @@ public class BattleState extends State
 		if(menuNow==true){renderMenu(g);}
 		
 		// Development Info
-		renderDevInfo(g);
+		//renderDevInfo(g);
 	}
 	
 	/*public void renderActionDamage(Graphics g)
@@ -158,16 +188,41 @@ public class BattleState extends State
 		g.drawRect(61,511,228,208);
 		
 		// Options
-		Drawing.drawStringShadow(g, "Attack", 100, 550, 1, Color.GRAY);
-		Drawing.drawStringShadow(g, "Combat", 100, 600, 1, Color.GRAY);
-		Drawing.drawStringShadow(g, "Mystic", 100, 650, 1, Color.GRAY);
-		Drawing.drawStringShadow(g, "Item", 100, 700, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, menuOption[1], 100, 550, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, menuOption[2], 100, 600, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, menuOption[3], 100, 650, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, menuOption[4], 100, 700, 1, Color.GRAY);
 		
 		// Cursor (temporary)
 		int cursorY = (50 * menuPos) + 500;
 		g.setColor(Color.WHITE);
 		g.setFont(Assets.fontStandard);
 		g.drawString(">", 75, cursorY);
+		
+		// Menu Hint
+		if(menuHint[menuPos].length()>0){renderMenuHint(g);}
+	}
+	
+	public void renderMenuHint(Graphics g)
+	{
+		// Shadow
+		g.setColor(Color.GRAY);
+		g.fillRect(26, 26, 1316, 50);
+		g.fillRect(27, 27, 1316, 50);
+		g.fillRect(28, 28, 1316, 50);
+		g.fillRect(29, 29, 1316, 50);
+		
+		// Background
+		g.setColor(Color.BLACK);
+		g.fillRect(25, 25, 1316, 50);
+		
+		// Border
+		g.setColor(Color.WHITE);
+		g.drawRect(25, 25, 1316, 50);
+		g.drawRect(26, 26, 1314, 48);
+		
+		// Hint
+		Drawing.drawStringShadow(g, menuHint[menuPos], 65, 60, 1, Color.GRAY);
 	}
 	
 	//==========================> RENDER: STATS
@@ -229,6 +284,9 @@ public class BattleState extends State
 			if(settingForceCharge==true){tickCharge();}
 			if(menuNow==true){tickMenu();}
 			tickStance();
+			
+			// Temp
+			actionDamageFrame
 		}
 		
 		// Victory Screen
@@ -284,18 +342,9 @@ public class BattleState extends State
 		if(Keyboard.getKeyPressed()=="Enter" || Keyboard.getKeyPressed()=="Space")
 		{
 			Keyboard.setKeyDone();
-			// Note: lots of work to do here - when any option is selected, the details should already exist as a BattleCommand object
-			if(menuPos==1)
-			{
-				menuNow = false;
-				
-				// Temp
-				Game.battleEngine.unitAlly[1].stanceFrame = 1;
-				Game.battleEngine.unitAlly[1].stanceFrameMax = 5;
-				Game.battleEngine.unitAlly[1].stanceTick = 0;
-				Game.battleEngine.unitAlly[1].stanceTickMax = 20;
-				Game.battleEngine.unitAlly[1].stanceType = "Combat";
-			}
+			if(menuRef=="Command"){tickMenuCommand();}
+			if(menuRef=="Item"){tickMenuItem();}
+			if(menuRef=="Target"){tickMenuTarget();}
 		}
 		if(Keyboard.getKeyPressed()=="Up" && menuPos>1)
 		{
@@ -307,6 +356,53 @@ public class BattleState extends State
 			Keyboard.setKeyDone();
 			menuPos += 1;
 		}
+	}
+	
+	public void tickMenuCommand()
+	{
+		if(menuTech[menuPos]=="Attack")
+		{
+			// Note: Start to build-up information about the action
+			
+			menuRef = "Target";
+			menuPos = 1;
+			
+			// Temp
+			menuMax = 1;
+			menuOption[1] = "Boar";
+			menuOption[2] = "";
+			menuOption[3] = "";
+			menuOption[4] = "";
+			menuHint[1] = "";
+			menuHint[2] = "";
+			menuHint[3] = "";
+			menuHint[4] = "";
+			// Note: Write a method to clear/reset menu data
+		}
+	}
+	
+	public void tickMenuItem()
+	{
+		//
+	}
+	
+	public void tickMenuTarget()
+	{
+		// Note: Use the menuPos to determine which unit has been selected
+		
+		menuNow = false;
+		Game.battleEngine.unitAlly[1].stanceFrame = 1;
+		Game.battleEngine.unitAlly[1].stanceFrameMax = 5;
+		Game.battleEngine.unitAlly[1].stanceTick = 0;
+		Game.battleEngine.unitAlly[1].stanceTickMax = 20;
+		Game.battleEngine.unitAlly[1].stanceType = "Combat";
+		
+		// Temp
+		actionTick = 0;
+		actionFrame = 1;
+		actionFrame
+		actionDamageFrame = 6;
+		actionDamageTotal = 27;
 	}
 	
 	//==========================> TICK: STANCE
