@@ -238,44 +238,69 @@ public class BattleState extends State
 	
 	public void renderStats(Graphics g)
 	{
-		renderStatsAlly(g, 1);
-		//if();
+		for(int ally=1;ally<=Game.battleEngine.unitAllyCount;ally+=1)
+		{
+			renderStatsAlly(g, ally);
+		}
 	}
 	
 	public void renderStatsAlly(Graphics g, int ally)
 	{
-		int drawY = (50 * ally) + 550;
-		Drawing.drawStringShadow(g, "Character 1", 750, drawY, 1, Color.GRAY);
-		Drawing.drawStringShadow(g, "1000", 950, drawY, 1, Color.GRAY);
-		Drawing.drawStringShadow(g, "525", 1100, drawY, 1, Color.GRAY);	
 		renderStatsAllyHealth(g, ally);
-		renderStatsAllyCharge(g, ally);
+		if(Game.battleEngine.unitAlly[ally].actionCharge>0){renderStatsAllyCharge(g, ally);}
+		// Note: Keep the fully-charged bar on the screen for a few moments (create a timer to remove it)
+		
+		// Note: Wrap this drawTech line in an if statement (should be blank when player is idle and charged)
+		renderStatsAllyAction(g, ally);
+		
+		String drawHPN = "" + Game.battleEngine.unitAlly[ally].statHealthNow;
+		String drawHPM = "" + Game.battleEngine.unitAlly[ally].statHealthMax;
+		String drawMPN = "" + Game.battleEngine.unitAlly[ally].statMagicNow;
+		String drawMPM = "" + Game.battleEngine.unitAlly[ally].statMagicMax;
+		int drawY = (50 * ally) + 540;
+		Drawing.drawStringShadow(g, "Character 1", 770, drawY, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, drawHPN, 965, drawY, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, drawHPM, 1050, drawY, 1, Color.GRAY, Assets.fontReduced);
+		Drawing.drawStringShadow(g, drawMPN, 1175, drawY, 1, Color.GRAY);
+		Drawing.drawStringShadow(g, drawMPM, 1250, drawY, 1, Color.GRAY, Assets.fontReduced);
 	}
-	
-	public void renderStatsAllyHealth(Graphics g, int ally)
+
+	public void renderStatsAllyAction(Graphics g, int ally)
 	{
-		float healthNow = Game.battleEngine.unitAlly[ally].statHealthNow;
-		float healthMax = Game.battleEngine.unitAlly[ally].statHealthMax;
-		float percent = (healthNow / healthMax) * 100;
-		int width = (int) (percent * 3);
-		g.setColor(Color.BLACK);
-		g.fillRect(799, 649, 302, 27);
-		g.setColor(Color.RED);
-		g.fillRect(800, 650, width, 25);
+		// Temporary
+		String drawTech = "Charging";
+		if(Game.battleEngine.unitAlly[ally].actionCharge<1){drawTech = "";}
+		
+		int drawY = (50 * ally) + 540;
+		Drawing.drawStringShadow(g, drawTech, 665, drawY, 1, Color.GRAY, Assets.fontReduced);
 	}
 
 	public void renderStatsAllyCharge(Graphics g, int ally)
 	{
+		int drawY = (50 * ally) + 540;
 		float chargeNow = Game.battleEngine.unitAlly[ally].actionCharge;
 		float chargeMax = Game.battleEngine.unitAlly[ally].actionChargeDelay;
 		float percent = (chargeNow / chargeMax) * 100;
-		int width = (int) (300 - (percent * 3));
+		int width = (int) (100 - percent);
 		g.setColor(Color.BLACK);
-		g.fillRect(799, 699, 302, 27);
+		g.fillRect(649, drawY-1, 102, 10);
 		g.setColor(Color.RED);
-		g.fillRect(800, 700, width, 25);
+		g.fillRect(650, drawY, width, 8);
 	}
 	
+	public void renderStatsAllyHealth(Graphics g, int ally)
+	{
+		int drawY = (50 * ally) + 540;
+		float healthNow = Game.battleEngine.unitAlly[ally].statHealthNow;
+		float healthMax = Game.battleEngine.unitAlly[ally].statHealthMax;
+		float percent = (healthNow / healthMax) * 100;
+		int width = (int) (percent * 2);
+		g.setColor(Color.BLACK);
+		g.fillRect(949, drawY-1, 202, 10);
+		g.setColor(Color.RED);
+		g.fillRect(950, drawY, width, 8);
+	}
+
 	//==========================> TICK: MAIN
 	
 	public void tick()

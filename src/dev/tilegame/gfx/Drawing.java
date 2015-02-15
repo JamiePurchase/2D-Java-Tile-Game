@@ -1,6 +1,7 @@
 package dev.tilegame.gfx;
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -28,12 +29,17 @@ public class Drawing
 	
 	public static void drawStringShadow(Graphics g, String text, int x, int y)
 	{
-		drawStringShadow(g, text, x, y, 2, Color.BLACK);
+		drawStringShadow(g, text, x, y, 2, Color.BLACK, Assets.fontStandard);
 	}
-		
+	
 	public static void drawStringShadow(Graphics g, String text, int x, int y, int shadow, Color color)
 	{
-		g.setFont(Assets.fontStandard);
+		drawStringShadow(g, text, x, y, shadow, color, Assets.fontStandard);
+	}
+		
+	public static void drawStringShadow(Graphics g, String text, int x, int y, int shadow, Color color, Font font)
+	{
+		g.setFont(font);
 		g.setColor(color);
 		for(int n=1;n<=shadow;n+=1)
 		{
